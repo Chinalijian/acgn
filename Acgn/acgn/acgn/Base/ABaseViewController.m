@@ -67,7 +67,7 @@
     [self.navigationController.navigationBar sendSubviewToBack:imageView];
     [self.navigationController.navigationBar setBackgroundImage:imageView.image forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                     [UIColor blackColor], NSForegroundColorAttributeName,
+                                                                     color, NSForegroundColorAttributeName,
                                                                      [UIFont boldSystemFontOfSize:16], NSFontAttributeName,
                                                                      nil]];
     self.navigationController.navigationBar.shadowImage = [UIImage new];

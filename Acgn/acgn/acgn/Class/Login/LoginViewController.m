@@ -23,15 +23,31 @@
     
     self.view.backgroundColor = [UIColor yellowColor];
     
+    [self loadUI];
+}
 
-    self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height / 3)];
-    self.image.image = [UIImage imageNamed:@"image.jpeg"];
+- (void)loadUI {
     [self.view addSubview:self.image];
+    [self setupMakeLayoutSubviews];
+}
+
+- (void)setupMakeLayoutSubviews {
+    [_image mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.left.mas_equalTo(self.view).mas_offset(0);
+        make.bottom.mas_equalTo(self.view).mas_offset(-467);
+    }];
+}
+- (UIImageView *)image {
+    if (_image == nil) {
+        _image = [[UIImageView alloc] init];
+        _image.image = [UIImage imageNamed:@"image.jpeg"];
+    }
+    return _image;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
-    [self setNavigationBarTransparence:YES];
+    [self setNavigationBarTransparence:YES titleColor:[UIColor whiteColor]];
 }
 
 - (void)didReceiveMemoryWarning {
