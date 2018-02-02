@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2A704B172022C31C00476D68 /* ABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A704B162022C31C00476D68 /* ABaseViewController.m */; };
 		2A704B1C2022C37600476D68 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A704B1B2022C37600476D68 /* HomeViewController.m */; };
+		2A7CFAAC202414AF00CBE495 /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7CFAAB202414AF00CBE495 /* AccountView.m */; };
+		2A7CFAAF202415B900CBE495 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7CFAAE202415B900CBE495 /* AccountCell.m */; };
+		2A7CFAB320244B9300CBE495 /* ATools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7CFAB220244B9300CBE495 /* ATools.m */; };
 		2A89A2D42019E5880021B844 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A89A2D32019E5880021B844 /* AppDelegate.m */; };
 		2A89A2D72019E5880021B844 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A89A2D62019E5880021B844 /* ViewController.m */; };
 		2A89A2DC2019E5880021B844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A89A2DB2019E5880021B844 /* Assets.xcassets */; };
@@ -49,6 +52,13 @@
 		2A704B162022C31C00476D68 /* ABaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABaseViewController.m; sourceTree = "<group>"; };
 		2A704B1A2022C37600476D68 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		2A704B1B2022C37600476D68 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		2A7CFAAA202414AF00CBE495 /* AccountView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountView.h; sourceTree = "<group>"; };
+		2A7CFAAB202414AF00CBE495 /* AccountView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountView.m; sourceTree = "<group>"; };
+		2A7CFAAD202415B900CBE495 /* AccountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountCell.h; sourceTree = "<group>"; };
+		2A7CFAAE202415B900CBE495 /* AccountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountCell.m; sourceTree = "<group>"; };
+		2A7CFAB02024175E00CBE495 /* AEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEnums.h; sourceTree = "<group>"; };
+		2A7CFAB120244B9200CBE495 /* ATools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATools.h; sourceTree = "<group>"; };
+		2A7CFAB220244B9300CBE495 /* ATools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATools.m; sourceTree = "<group>"; };
 		2A89A2CF2019E5880021B844 /* acgn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = acgn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A89A2D22019E5880021B844 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2A89A2D32019E5880021B844 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -156,7 +166,10 @@
 		2A704B132022BF1B00476D68 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2A7CFAB120244B9200CBE495 /* ATools.h */,
+				2A7CFAB220244B9300CBE495 /* ATools.m */,
 				2ADF21C52022C4E600559427 /* ADefine.h */,
+				2A7CFAB02024175E00CBE495 /* AEnums.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -164,6 +177,7 @@
 		2A704B142022BF1B00476D68 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				2A7CFAA92024149400CBE495 /* Common */,
 				2ADF21BE2022C3D400559427 /* Login */,
 				2ADF21BD2022C3D400559427 /* Register */,
 				2A704B182022C34C00476D68 /* Home */,
@@ -190,6 +204,17 @@
 				2ADF21BB2022C3A600559427 /* UserViewController.m */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		2A7CFAA92024149400CBE495 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2A7CFAAA202414AF00CBE495 /* AccountView.h */,
+				2A7CFAAB202414AF00CBE495 /* AccountView.m */,
+				2A7CFAAD202415B900CBE495 /* AccountCell.h */,
+				2A7CFAAE202415B900CBE495 /* AccountCell.m */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		2A89A2C62019E5880021B844 = {
@@ -481,11 +506,14 @@
 				2A89A2E22019E5880021B844 /* main.m in Sources */,
 				2A89A2D42019E5880021B844 /* AppDelegate.m in Sources */,
 				2ADF21BC2022C3A600559427 /* UserViewController.m in Sources */,
+				2A7CFAAC202414AF00CBE495 /* AccountView.m in Sources */,
+				2A7CFAAF202415B900CBE495 /* AccountCell.m in Sources */,
 				2ADF21C12022C3EA00559427 /* LoginViewController.m in Sources */,
 				2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */,
 				2A704B1C2022C37600476D68 /* HomeViewController.m in Sources */,
 				2A704B172022C31C00476D68 /* ABaseViewController.m in Sources */,
 				2ADF21C82022DF1600559427 /* AttentionPeopleList.m in Sources */,
+				2A7CFAB320244B9300CBE495 /* ATools.m in Sources */,
 				2ADF21C42022C3FC00559427 /* RegisterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

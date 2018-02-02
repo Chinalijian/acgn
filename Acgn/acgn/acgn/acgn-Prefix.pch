@@ -16,6 +16,9 @@
 #import <LUNSegmentedControl.h>
 
 #import "ADefine.h"
+#import "AEnums.h"
+#import "ATools.h"
+
 #import "LoginViewController.h"
 
 
