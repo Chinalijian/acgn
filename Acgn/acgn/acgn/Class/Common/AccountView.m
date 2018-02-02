@@ -11,6 +11,8 @@
 
 @interface AccountView()
 @property (nonatomic, assign) AAccountType aType;
+@property (nonatomic, copy) NSString *buttonTitle;
+
 @property (nonatomic, strong) NSArray *titleImages;
 @property (nonatomic, strong) NSArray *placeholders;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -29,6 +31,9 @@
 @property (nonatomic, strong) UIButton *qqButton;
 @property (nonatomic, strong) UIButton *wecatButton;
 @property (nonatomic, strong) UIButton *weiboButton;
+
+@property (nonatomic, strong) UIButton *codeButton;
+
 @end
 
 @implementation AccountView
@@ -47,6 +52,7 @@
 
 - (void)initDatas {
     self.datas = [NSMutableArray array];
+    self.buttonTitle = @"确定";
     switch (self.aType) {
         case AAccountType_Login:
             self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"psd_icon", nil];
@@ -55,14 +61,20 @@
         case AAccountType_Register:
             self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"yzm_icon", @"psd_icon", nil];
             self.placeholders = [NSArray arrayWithObjects:@"请输入你的手机号码", @"请输入收到的验证码", @"请设置6-16位新密码", nil];
+            self.buttonTitle = @"下一步";
             break;
         case AAccountType_ResetPsd:
             self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"yzm_icon", nil];
             self.placeholders = [NSArray arrayWithObjects:@"请输入你的手机号码", @"请输入收到的验证码", nil];
+            self.buttonTitle = @"下一步";
             break;
         case AAccountType_SetPsd:
             self.titleImages = [NSArray arrayWithObjects:@"psd_icon", @"psd_icon", nil];
             self.placeholders = [NSArray arrayWithObjects:@"请设置6-16位新密码", @"请再次输入新密码", nil];
+            break;
+        case AAccountType_NickName:
+            self.titleImages = [NSArray arrayWithObjects:@"name_icon", nil];
+            self.placeholders = [NSArray arrayWithObjects:@"我的昵称", nil];
             break;
         default:
             break;
@@ -107,13 +119,15 @@
     //微博登录
 }
 
-#pragma mark -
+- (void)clickGetCode:(id)sender {
+    
+}
+
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark -
 #pragma mark UITableView Datasource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return TableViewCell_H;
@@ -134,7 +148,57 @@
         cell = [[AccountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accCell];
     }
     [cell configInfo:[self.datas objectAtIndex:indexPath.row]];
+    if (self.aType == AAccountType_Register || self.aType == AAccountType_ResetPsd) {
+        if (indexPath.row == 1) {
+            [cell.bgView layoutIfNeeded];
+            [self initGetCodeButton:cell.bgView];
+        }
+    }
     return cell;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (self.aType == AAccountType_NickName) {
+        UIView *oneView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.aTableView.frame.size.width, 30)];
+        oneView.backgroundColor = [UIColor whiteColor];
+        UILabel *tipLabel = [[UILabel alloc] initWithFrame:oneView.bounds];
+        [oneView addSubview:tipLabel];
+        tipLabel.text = @"系统随机分配了一个，不喜欢自己起一个";
+        tipLabel.textColor = UIColorFromRGB(0xE96A79);
+        tipLabel.font = [UIFont systemFontOfSize:12];
+        tipLabel.textAlignment = NSTextAlignmentCenter;
+        return oneView;
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (self.aType == AAccountType_NickName) {
+        return 20;
+    }
+    return 0;
+}
+
+
+#pragma make - UI init
+- (void)initGetCodeButton:(UIView *)view {
+    UIButton *codeBtn = [[UIButton alloc] init];
+    codeBtn.backgroundColor = UIColorFromRGB(0xE96A79);
+    codeBtn.layer.cornerRadius = 8;
+    [codeBtn setTitle:@"获取" forState:UIControlStateNormal];
+    [codeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [codeBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [codeBtn addTarget:self action:@selector(clickGetCode:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:codeBtn];
+    self.codeButton = codeBtn;
+    
+    [codeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(view).mas_offset((view.frame.size.height-27)/2);
+        make.right.mas_equalTo(view.mas_right).mas_offset(-10);
+        make.width.mas_equalTo(42);
+        make.height.mas_equalTo(27);
+    }];
+    
 }
 
 - (void)loadUI {
@@ -315,7 +379,7 @@
         _loginButton.layer.cornerRadius = 15;
 //        _loginButton.layer.borderColor = UIColorFromRGB(0xBAB8B9).CGColor;
 //        _loginButton.layer.borderWidth = .5;
-        [_loginButton setTitle:@"确定" forState:UIControlStateNormal];
+        [_loginButton setTitle:self.buttonTitle forState:UIControlStateNormal];
         [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_loginButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
         [_loginButton addTarget:self action:@selector(clickSure:) forControlEvents:UIControlEventTouchUpInside];

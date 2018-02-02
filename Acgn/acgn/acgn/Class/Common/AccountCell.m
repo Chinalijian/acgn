@@ -9,7 +9,7 @@
 #import "AccountCell.h"
 
 @interface AccountCell ()<UITextFieldDelegate>
-@property (nonatomic, strong) UIView *bgView;
+
 @property (nonatomic, strong) UIImageView *titleImageView;
 @property (nonatomic, strong) UITextField *contentTextField;
 @property (nonatomic, strong) AccountLocalDataModel *obje;
@@ -84,7 +84,7 @@
     [_contentTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_titleImageView).mas_offset(0);
         make.left.mas_equalTo(_titleImageView.mas_right).mas_offset(10);
-        make.right.mas_equalTo(self.bgView).mas_offset(-20);
+        make.right.mas_equalTo(self.bgView).mas_offset(-58);
         make.bottom.mas_equalTo(_titleImageView).mas_offset(0);
     }];
 }
