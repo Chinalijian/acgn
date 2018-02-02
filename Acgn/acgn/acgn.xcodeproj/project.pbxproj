@@ -32,6 +32,8 @@
 		2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF21CA20230E9C00559427 /* UImage+colorImge.m */; };
 		2ADF21CD2023139800559427 /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2ADF21CC2023139800559427 /* image.jpeg */; };
 		300DE1542024ACBA008DBCBD /* NickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1532024ACBA008DBCBD /* NickNameViewController.m */; };
+		300DE1572024D1DD008DBCBD /* UserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1562024D1DD008DBCBD /* UserView.m */; };
+		300DE15A2024D1F9008DBCBD /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1592024D1F9008DBCBD /* UserCell.m */; };
 		79407EF8AA25CCA0EAA39FE3 /* libPods-acgn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B66A192853DD68A87F7C5CED /* libPods-acgn.a */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +110,10 @@
 		2ADF21CC2023139800559427 /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
 		300DE1522024ACBA008DBCBD /* NickNameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NickNameViewController.h; sourceTree = "<group>"; };
 		300DE1532024ACBA008DBCBD /* NickNameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NickNameViewController.m; sourceTree = "<group>"; };
+		300DE1552024D1DD008DBCBD /* UserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserView.h; sourceTree = "<group>"; };
+		300DE1562024D1DD008DBCBD /* UserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserView.m; sourceTree = "<group>"; };
+		300DE1582024D1F9008DBCBD /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
+		300DE1592024D1F9008DBCBD /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		A7871710CF22D01137EF685A /* Pods-acgn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-acgn.release.xcconfig"; path = "Pods/Target Support Files/Pods-acgn/Pods-acgn.release.xcconfig"; sourceTree = "<group>"; };
 		B66A192853DD68A87F7C5CED /* libPods-acgn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-acgn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -239,6 +245,10 @@
 			children = (
 				2ADF21BA2022C3A600559427 /* UserViewController.h */,
 				2ADF21BB2022C3A600559427 /* UserViewController.m */,
+				300DE1552024D1DD008DBCBD /* UserView.h */,
+				300DE1562024D1DD008DBCBD /* UserView.m */,
+				300DE1582024D1F9008DBCBD /* UserCell.h */,
+				300DE1592024D1F9008DBCBD /* UserCell.m */,
 				2A6F15D420246C0700B55AA7 /* ResetPsdViewController.h */,
 				2A6F15D520246C0700B55AA7 /* ResetPsdViewController.m */,
 				2A6F15D7202474F400B55AA7 /* SetPsdViewController.h */,
@@ -557,6 +567,7 @@
 				2A6F15D220245CE700B55AA7 /* DMRequestModel.m in Sources */,
 				2A7CFAAF202415B900CBE495 /* AccountCell.m in Sources */,
 				2ADF21C12022C3EA00559427 /* LoginViewController.m in Sources */,
+				300DE1572024D1DD008DBCBD /* UserView.m in Sources */,
 				2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */,
 				2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */,
 				2A6F15D9202474F400B55AA7 /* SetPsdViewController.m in Sources */,
@@ -566,6 +577,7 @@
 				300DE1542024ACBA008DBCBD /* NickNameViewController.m in Sources */,
 				2A6F15D320245CE700B55AA7 /* DMHttpClient.m in Sources */,
 				2A7CFAB320244B9300CBE495 /* ATools.m in Sources */,
+				300DE15A2024D1F9008DBCBD /* UserCell.m in Sources */,
 				2ADF21C42022C3FC00559427 /* RegisterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

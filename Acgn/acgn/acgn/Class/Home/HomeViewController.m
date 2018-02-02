@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "AttentionPeopleList.h"
+#import "UserViewController.h"
 @interface HomeViewController () <AttentionPeopleListDelegate>
 @property (nonatomic, strong) AttentionPeopleList *apListView;
 @end
@@ -17,10 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setRigthBtn:CGRectMake(0, 0, 44, 44) title:@"" titileColor:nil imageName:@"user_icon" font:nil];
     [self loadUI];
 }
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+
+- (void)rightOneAction:(id)sender {
+    UserViewController *userVC = [[UserViewController alloc] init];
+    [self.navigationController pushViewController:userVC animated:YES];
 }
 
 - (void)loadUI {
