@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^BlockClickTextField)(BOOL displayKeyBoard);
+
 @interface AccountCell : UITableViewCell
-- (void)configInfo:(NSString *)imageName placeholders:(NSString *)placeholderName;
+@property (nonatomic, strong) BlockClickTextField clickTextFieldBlock;
+- (void)configInfo:(AccountLocalDataModel *)obj;
 @end

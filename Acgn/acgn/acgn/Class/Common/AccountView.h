@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AccountViewDelegate <NSObject>
+- (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array;
+- (void)clickAccountRegister:(id)sender;
+- (void)clickAccountResetPsd:(id)sender;
+- (void)clickThirdPartyQQ:(id)sender;
+- (void)clickThirdPartyWecat:(id)sender;
+- (void)clickThirdPartyWeibo:(id)sender;
+@end
+
 @interface AccountView : UIView <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *aTableView;
+@property (nonatomic, weak) id <AccountViewDelegate> delegate;
 - (id)initWithFrame:(CGRect)frame type:(AAccountType)type;
 @end

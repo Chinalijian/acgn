@@ -11,6 +11,10 @@
 @interface ATools : NSObject
 //按钮图片在上，文字再下
 + (void)setButtonContentCenter:(UIButton *)btn;
+//计算文字宽度
++(CGFloat)getContactWidth:(NSString*)contact font:(UIFont *)font height:(CGFloat)height;
+//成功提示框
++(void)showSVProgressHudCustom:(NSString *)imageName title:(NSString *)title;
 @end
 
 

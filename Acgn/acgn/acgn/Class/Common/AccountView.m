@@ -13,6 +13,7 @@
 @property (nonatomic, assign) AAccountType aType;
 @property (nonatomic, strong) NSArray *titleImages;
 @property (nonatomic, strong) NSArray *placeholders;
+@property (nonatomic, strong) NSMutableArray *datas;
 
 @property (nonatomic, strong) UIImageView *topImageView;
 @property (nonatomic, strong) UIImageView *logoImageView;
@@ -45,22 +46,38 @@
 }
 
 - (void)initDatas {
+    self.datas = [NSMutableArray array];
     switch (self.aType) {
         case AAccountType_Login:
             self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"psd_icon", nil];
             self.placeholders = [NSArray arrayWithObjects:@"请输入你的手机号码", @"请输入你的登录密码", nil];
             break;
-            
+        case AAccountType_Register:
+            self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"yzm_icon", @"psd_icon", nil];
+            self.placeholders = [NSArray arrayWithObjects:@"请输入你的手机号码", @"请输入收到的验证码", @"请设置6-16位新密码", nil];
+            break;
         default:
             break;
     }
+    for (int i = 0; i < self.titleImages.count; i++) {
+        AccountLocalDataModel *model = [[AccountLocalDataModel alloc] init];
+        model.placeholder = [self.placeholders objectAtIndex:i];
+        model.titleImage = [self.titleImages objectAtIndex:i];
+        model.content = @"";
+        [self.datas addObject:model];
+    }
 }
-- (void)clickLogin:(id)sender {
-    //登录
+- (void)clickSure:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(clickAccountSure:datas:)]) {
+        [self.delegate clickAccountSure:sender datas:self.datas];
+    }
 }
 
 - (void)clickRegister:(id)sender {
     //快速注册
+    if ([self.delegate respondsToSelector:@selector(clickAccountRegister:)]) {
+        [self.delegate clickAccountRegister:sender];
+    }
 }
 
 - (void)clickResetPsd:(id)sender {
@@ -78,6 +95,7 @@
 - (void)clickWeibo:(id)sender {
     //微博登录
 }
+
 #pragma mark -
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -95,7 +113,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
-    return self.titleImages.count;
+    return self.datas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -104,8 +122,7 @@
     if (!cell) {
         cell = [[AccountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accCell];
     }
-    [cell configInfo:[self.titleImages objectAtIndex:indexPath.row]
-        placeholders:[self.placeholders objectAtIndex:indexPath.row]];
+    [cell configInfo:[self.datas objectAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -114,9 +131,27 @@
     [self addSubview:self.aTableView];
     
     [self setupMakeTopViewSubViewsLayout];
-    [self setupMakeBottomViewSubViewsLayout];
-    
-    [self setupButtonEdgeInsetsMake];
+    [_loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_bottomView).mas_offset(15);
+        make.left.mas_equalTo(_bottomView).mas_offset(X_SPACE);
+        make.right.mas_equalTo(_bottomView).mas_offset(-X_SPACE);
+        make.height.mas_equalTo(44);
+    }];
+    if (self.aType == AAccountType_Login) {
+        [self setupMakeBottomViewSubViewsLayout];
+        [self setupButtonEdgeInsetsMake];
+    }
+
+}
+
+- (void)loadSubViewForFooter {
+    [self.bottomView addSubview:self.otherView];
+    [self.otherView addSubview:self.registerButton];
+    [self.otherView addSubview:self.resetPsdButton];
+    [self.otherView addSubview:self.thirdPartyView];
+    [self.thirdPartyView addSubview:self.qqButton];
+    [self.thirdPartyView addSubview:self.wecatButton];
+    [self.thirdPartyView addSubview:self.weiboButton];
 }
 
 - (void)setupButtonEdgeInsetsMake {
@@ -141,14 +176,6 @@
 }
 
 - (void)setupMakeBottomViewSubViewsLayout {
-
-    [_loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_bottomView).mas_offset(15);
-        make.left.mas_equalTo(_bottomView).mas_offset(X_SPACE);
-        make.right.mas_equalTo(_bottomView).mas_offset(-X_SPACE);
-        make.height.mas_equalTo(44);
-    }];
-    
     [_otherView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_loginButton.mas_bottom).mas_offset(0);
         make.left.mas_equalTo(_bottomView).mas_offset(0);
@@ -204,6 +231,7 @@
         _aTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
         _aTableView.delegate = self;
         _aTableView.dataSource = self;
+        _aTableView.scrollEnabled = NO;
         _aTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _aTableView.backgroundColor = UIColorFromRGB(0xf6f6f6);
         _aTableView.tableHeaderView = self.topImageView;
@@ -248,16 +276,15 @@
         _bottomView.backgroundColor = [UIColor whiteColor];
         
         [self.bottomView addSubview:self.loginButton];
-        [self.bottomView addSubview:self.otherView];
         
-        [self.otherView addSubview:self.registerButton];
-        [self.otherView addSubview:self.resetPsdButton];
-        
-        [self.otherView addSubview:self.thirdPartyView];
-        
-        [self.thirdPartyView addSubview:self.qqButton];
-        [self.thirdPartyView addSubview:self.wecatButton];
-        [self.thirdPartyView addSubview:self.weiboButton];
+        switch (self.aType) {
+            case AAccountType_Login:
+                [self loadSubViewForFooter];
+                break;
+            default:
+                break;
+        }
+
     }
     return _bottomView;
 }
@@ -280,7 +307,7 @@
         [_loginButton setTitle:@"确定" forState:UIControlStateNormal];
         [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_loginButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [_loginButton addTarget:self action:@selector(clickLogin:) forControlEvents:UIControlEventTouchUpInside];
+        [_loginButton addTarget:self action:@selector(clickSure:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _loginButton;
 }

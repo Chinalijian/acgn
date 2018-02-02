@@ -11,8 +11,9 @@
 
 typedef NS_ENUM(NSInteger, AAccountType) {
     AAccountType_Login       = 1, // 登录
-    AAccountType_Finish    = 2, // 已上课程
-    AAccountType_WillStart = 3, // 未上课程
+    AAccountType_Register    = 2, // 注册
+    AAccountType_ResetPsd    = 3, // 找回密码
+    AAccountType_
 };
 
 

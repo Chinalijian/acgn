@@ -8,21 +8,55 @@
 
 #import "LoginViewController.h"
 #import "AccountView.h"
-@interface LoginViewController ()
+#import "RegisterViewController.h"
+@interface LoginViewController () <AccountViewDelegate>
 @property (nonatomic, strong) AccountView *aView;
-
 @end
 
 @implementation LoginViewController
-
-#define X_SPACE 47
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"快速登录";
     self.view.backgroundColor = [UIColor whiteColor];
+    [IQKeyboardManager sharedManager].enable = YES;
     [self loadUI];
+}
+
+- (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array {
+    [self.navigationController popViewControllerAnimated:YES];
+    return;
+    
+    AccountLocalDataModel *phoneObj = [array firstObject];
+    
+    AccountLocalDataModel *psdObj = [array lastObject];
+    //登录
+    [AApiModel loginSystem:phoneObj.content psd:psdObj.content block:^(BOOL result) {
+        
+    }];
+}
+
+- (void)clickAccountRegister:(id)sender {
+    //注册
+    RegisterViewController *regVC = [[RegisterViewController alloc] init];
+    [self.navigationController pushViewController:regVC animated:YES];
+}
+
+- (void)clickAccountResetPsd:(id)sender {
+    //找回密码
+}
+
+- (void)clickThirdPartyQQ:(id)sender {
+    //qq登录
+}
+
+- (void)clickThirdPartyWecat:(id)sender {
+    //微信登录
+}
+
+- (void)clickThirdPartyWeibo:(id)sender {
+    //微博登录
 }
 
 #pragma mark -
@@ -34,6 +68,7 @@
 - (AccountView *)aView {
     if (_aView == nil) {
         _aView = [[AccountView alloc] initWithFrame:self.view.bounds type:AAccountType_Login];
+        _aView.delegate = self;
     }
     return _aView;
 }

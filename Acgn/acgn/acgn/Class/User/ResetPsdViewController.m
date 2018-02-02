@@ -1,19 +1,19 @@
 //
-//  RegisterViewController.m
+//  ResetPsdViewController.m
 //  acgn
 //
-//  Created by Ares on 2018/2/1.
+//  Created by Ares on 2018/2/2.
 //  Copyright © 2018年 Jian LI. All rights reserved.
 //
 
-#import "RegisterViewController.h"
+#import "ResetPsdViewController.h"
 #import "AccountView.h"
-@interface RegisterViewController () <AccountViewDelegate>
+@interface ResetPsdViewController ()<AccountViewDelegate>
 @property (nonatomic, strong) AccountView *aView;
 
 @end
 
-@implementation RegisterViewController
+@implementation ResetPsdViewController
 
 
 - (void)viewDidLoad {
@@ -26,9 +26,6 @@
 }
 
 - (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array {
-    AccountLocalDataModel *phoneObj = [array firstObject];
-    AccountLocalDataModel *codeObj = [array objectAtIndex:1];
-    AccountLocalDataModel *psdObj = [array lastObject];
     
 }
 
@@ -55,7 +52,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 @end

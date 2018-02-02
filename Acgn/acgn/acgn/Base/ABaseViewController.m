@@ -37,7 +37,7 @@
 
 - (void)setNavigationbar {
     if (self.navigationController.viewControllers.count > 1) {
-        [self setLeftBtn:CGRectMake(0, 0, 44, 44) title:@"<<<" titileColor:[UIColor blackColor] imageName:@"" font:[UIFont systemFontOfSize:16]];
+        [self setLeftBtn:CGRectMake(0, 0, 64, 44) title:@"" titileColor:[UIColor clearColor] imageName:@"public_back" font:[UIFont systemFontOfSize:16]];
     }
 }
 

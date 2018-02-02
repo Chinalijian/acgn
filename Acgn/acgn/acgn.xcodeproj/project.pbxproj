@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A6B1443202458CD00EA4A26 /* AccountLocalDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B1442202458CD00EA4A26 /* AccountLocalDataModel.m */; };
+		2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B144620245B9F00EA4A26 /* AApiModel.m */; };
+		2A6F15D220245CE700B55AA7 /* DMRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F15CD20245CE600B55AA7 /* DMRequestModel.m */; };
+		2A6F15D320245CE700B55AA7 /* DMHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F15D120245CE700B55AA7 /* DMHttpClient.m */; };
+		2A6F15D620246C0700B55AA7 /* ResetPsdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F15D520246C0700B55AA7 /* ResetPsdViewController.m */; };
 		2A704B172022C31C00476D68 /* ABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A704B162022C31C00476D68 /* ABaseViewController.m */; };
 		2A704B1C2022C37600476D68 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A704B1B2022C37600476D68 /* HomeViewController.m */; };
 		2A7CFAAC202414AF00CBE495 /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7CFAAB202414AF00CBE495 /* AccountView.m */; };
@@ -47,6 +52,17 @@
 
 /* Begin PBXFileReference section */
 		0D9B2E6DCABBD16AD945B837 /* Pods-acgn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-acgn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-acgn/Pods-acgn.debug.xcconfig"; sourceTree = "<group>"; };
+		2A6B1441202458CD00EA4A26 /* AccountLocalDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountLocalDataModel.h; sourceTree = "<group>"; };
+		2A6B1442202458CD00EA4A26 /* AccountLocalDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountLocalDataModel.m; sourceTree = "<group>"; };
+		2A6B144520245B9F00EA4A26 /* AApiModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AApiModel.h; sourceTree = "<group>"; };
+		2A6B144620245B9F00EA4A26 /* AApiModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AApiModel.m; sourceTree = "<group>"; };
+		2A6F15CD20245CE600B55AA7 /* DMRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMRequestModel.m; sourceTree = "<group>"; };
+		2A6F15CE20245CE700B55AA7 /* DMHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHttpClient.h; sourceTree = "<group>"; };
+		2A6F15CF20245CE700B55AA7 /* DMRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMRequestModel.h; sourceTree = "<group>"; };
+		2A6F15D020245CE700B55AA7 /* DMNetConntectDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMNetConntectDefine.h; sourceTree = "<group>"; };
+		2A6F15D120245CE700B55AA7 /* DMHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHttpClient.m; sourceTree = "<group>"; };
+		2A6F15D420246C0700B55AA7 /* ResetPsdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPsdViewController.h; sourceTree = "<group>"; };
+		2A6F15D520246C0700B55AA7 /* ResetPsdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResetPsdViewController.m; sourceTree = "<group>"; };
 		2A704B0D2022BAE900476D68 /* acgn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "acgn-Prefix.pch"; sourceTree = "<group>"; };
 		2A704B152022C31C00476D68 /* ABaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABaseViewController.h; sourceTree = "<group>"; };
 		2A704B162022C31C00476D68 /* ABaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABaseViewController.m; sourceTree = "<group>"; };
@@ -124,6 +140,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2A6B144420245B8D00EA4A26 /* ApiModel */ = {
+			isa = PBXGroup;
+			children = (
+				2A6B144520245B9F00EA4A26 /* AApiModel.h */,
+				2A6B144620245B9F00EA4A26 /* AApiModel.m */,
+			);
+			path = ApiModel;
+			sourceTree = "<group>";
+		};
 		2A704B0E2022BF1B00476D68 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +168,12 @@
 		2A704B102022BF1B00476D68 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				2A6F15CE20245CE700B55AA7 /* DMHttpClient.h */,
+				2A6F15D120245CE700B55AA7 /* DMHttpClient.m */,
+				2A6F15D020245CE700B55AA7 /* DMNetConntectDefine.h */,
+				2A6F15CF20245CE700B55AA7 /* DMRequestModel.h */,
+				2A6F15CD20245CE600B55AA7 /* DMRequestModel.m */,
+				2A6B144420245B8D00EA4A26 /* ApiModel */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -202,6 +233,8 @@
 			children = (
 				2ADF21BA2022C3A600559427 /* UserViewController.h */,
 				2ADF21BB2022C3A600559427 /* UserViewController.m */,
+				2A6F15D420246C0700B55AA7 /* ResetPsdViewController.h */,
+				2A6F15D520246C0700B55AA7 /* ResetPsdViewController.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -213,6 +246,8 @@
 				2A7CFAAB202414AF00CBE495 /* AccountView.m */,
 				2A7CFAAD202415B900CBE495 /* AccountCell.h */,
 				2A7CFAAE202415B900CBE495 /* AccountCell.m */,
+				2A6B1441202458CD00EA4A26 /* AccountLocalDataModel.h */,
+				2A6B1442202458CD00EA4A26 /* AccountLocalDataModel.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -503,16 +538,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A89A2D72019E5880021B844 /* ViewController.m in Sources */,
+				2A6B1443202458CD00EA4A26 /* AccountLocalDataModel.m in Sources */,
+				2A6F15D620246C0700B55AA7 /* ResetPsdViewController.m in Sources */,
 				2A89A2E22019E5880021B844 /* main.m in Sources */,
 				2A89A2D42019E5880021B844 /* AppDelegate.m in Sources */,
 				2ADF21BC2022C3A600559427 /* UserViewController.m in Sources */,
 				2A7CFAAC202414AF00CBE495 /* AccountView.m in Sources */,
+				2A6F15D220245CE700B55AA7 /* DMRequestModel.m in Sources */,
 				2A7CFAAF202415B900CBE495 /* AccountCell.m in Sources */,
 				2ADF21C12022C3EA00559427 /* LoginViewController.m in Sources */,
 				2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */,
+				2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */,
 				2A704B1C2022C37600476D68 /* HomeViewController.m in Sources */,
 				2A704B172022C31C00476D68 /* ABaseViewController.m in Sources */,
 				2ADF21C82022DF1600559427 /* AttentionPeopleList.m in Sources */,
+				2A6F15D320245CE700B55AA7 /* DMHttpClient.m in Sources */,
 				2A7CFAB320244B9300CBE495 /* ATools.m in Sources */,
 				2ADF21C42022C3FC00559427 /* RegisterViewController.m in Sources */,
 			);
