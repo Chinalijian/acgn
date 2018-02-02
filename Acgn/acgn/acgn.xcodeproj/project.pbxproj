@@ -12,6 +12,7 @@
 		2A6F15D220245CE700B55AA7 /* DMRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F15CD20245CE600B55AA7 /* DMRequestModel.m */; };
 		2A6F15D320245CE700B55AA7 /* DMHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F15D120245CE700B55AA7 /* DMHttpClient.m */; };
 		2A6F15D620246C0700B55AA7 /* ResetPsdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F15D520246C0700B55AA7 /* ResetPsdViewController.m */; };
+		2A6F15D9202474F400B55AA7 /* SetPsdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F15D8202474F400B55AA7 /* SetPsdViewController.m */; };
 		2A704B172022C31C00476D68 /* ABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A704B162022C31C00476D68 /* ABaseViewController.m */; };
 		2A704B1C2022C37600476D68 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A704B1B2022C37600476D68 /* HomeViewController.m */; };
 		2A7CFAAC202414AF00CBE495 /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7CFAAB202414AF00CBE495 /* AccountView.m */; };
@@ -63,6 +64,8 @@
 		2A6F15D120245CE700B55AA7 /* DMHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHttpClient.m; sourceTree = "<group>"; };
 		2A6F15D420246C0700B55AA7 /* ResetPsdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPsdViewController.h; sourceTree = "<group>"; };
 		2A6F15D520246C0700B55AA7 /* ResetPsdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResetPsdViewController.m; sourceTree = "<group>"; };
+		2A6F15D7202474F400B55AA7 /* SetPsdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetPsdViewController.h; sourceTree = "<group>"; };
+		2A6F15D8202474F400B55AA7 /* SetPsdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetPsdViewController.m; sourceTree = "<group>"; };
 		2A704B0D2022BAE900476D68 /* acgn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "acgn-Prefix.pch"; sourceTree = "<group>"; };
 		2A704B152022C31C00476D68 /* ABaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABaseViewController.h; sourceTree = "<group>"; };
 		2A704B162022C31C00476D68 /* ABaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABaseViewController.m; sourceTree = "<group>"; };
@@ -235,6 +238,8 @@
 				2ADF21BB2022C3A600559427 /* UserViewController.m */,
 				2A6F15D420246C0700B55AA7 /* ResetPsdViewController.h */,
 				2A6F15D520246C0700B55AA7 /* ResetPsdViewController.m */,
+				2A6F15D7202474F400B55AA7 /* SetPsdViewController.h */,
+				2A6F15D8202474F400B55AA7 /* SetPsdViewController.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -549,6 +554,7 @@
 				2ADF21C12022C3EA00559427 /* LoginViewController.m in Sources */,
 				2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */,
 				2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */,
+				2A6F15D9202474F400B55AA7 /* SetPsdViewController.m in Sources */,
 				2A704B1C2022C37600476D68 /* HomeViewController.m in Sources */,
 				2A704B172022C31C00476D68 /* ABaseViewController.m in Sources */,
 				2ADF21C82022DF1600559427 /* AttentionPeopleList.m in Sources */,

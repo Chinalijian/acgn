@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "AccountView.h"
 #import "RegisterViewController.h"
+#import "ResetPsdViewController.h"
 @interface LoginViewController () <AccountViewDelegate>
 @property (nonatomic, strong) AccountView *aView;
 @end
@@ -45,6 +46,8 @@
 
 - (void)clickAccountResetPsd:(id)sender {
     //找回密码
+    ResetPsdViewController *resVC = [[ResetPsdViewController alloc] init];
+    [self.navigationController pushViewController:resVC animated:YES];
 }
 
 - (void)clickThirdPartyQQ:(id)sender {

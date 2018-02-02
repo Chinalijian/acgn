@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol AccountViewDelegate <NSObject>
+@optional
 - (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array;
 - (void)clickAccountRegister:(id)sender;
 - (void)clickAccountResetPsd:(id)sender;

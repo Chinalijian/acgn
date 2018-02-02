@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, AAccountType) {
     AAccountType_Login       = 1, // 登录
     AAccountType_Register    = 2, // 注册
     AAccountType_ResetPsd    = 3, // 找回密码
-    AAccountType_
+    AAccountType_SetPsd      = 4,
 };
 
 

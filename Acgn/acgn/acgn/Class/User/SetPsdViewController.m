@@ -1,26 +1,24 @@
 //
-//  ResetPsdViewController.m
+//  SetPsdViewController.m
 //  acgn
 //
 //  Created by Ares on 2018/2/2.
 //  Copyright © 2018年 Jian LI. All rights reserved.
 //
 
-#import "ResetPsdViewController.h"
-#import "AccountView.h"
 #import "SetPsdViewController.h"
-@interface ResetPsdViewController ()<AccountViewDelegate>
+#import "AccountView.h"
+@interface SetPsdViewController ()<AccountViewDelegate>
 @property (nonatomic, strong) AccountView *aView;
 
 @end
 
-@implementation ResetPsdViewController
-
+@implementation SetPsdViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"找回密码";
+    self.title = @"密码设置";
     self.view.backgroundColor = [UIColor whiteColor];
     [IQKeyboardManager sharedManager].enable = YES;
     [self loadUI];
@@ -28,10 +26,8 @@
 
 - (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array {
     AccountLocalDataModel *phoneObj = [array firstObject];
-    AccountLocalDataModel *psdObj = [array lastObject];
     
-    SetPsdViewController *setPsdVC = [[SetPsdViewController alloc] init];
-    [self.navigationController pushViewController:setPsdVC animated:YES];
+    AccountLocalDataModel *psdObj = [array lastObject];
 }
 
 #pragma mark -
@@ -42,7 +38,7 @@
 
 - (AccountView *)aView {
     if (_aView == nil) {
-        _aView = [[AccountView alloc] initWithFrame:self.view.bounds type:AAccountType_ResetPsd];
+        _aView = [[AccountView alloc] initWithFrame:self.view.bounds type:AAccountType_SetPsd];
         _aView.delegate = self;
     }
     return _aView;

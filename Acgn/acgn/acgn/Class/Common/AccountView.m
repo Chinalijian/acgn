@@ -56,6 +56,14 @@
             self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"yzm_icon", @"psd_icon", nil];
             self.placeholders = [NSArray arrayWithObjects:@"请输入你的手机号码", @"请输入收到的验证码", @"请设置6-16位新密码", nil];
             break;
+        case AAccountType_ResetPsd:
+            self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"yzm_icon", nil];
+            self.placeholders = [NSArray arrayWithObjects:@"请输入你的手机号码", @"请输入收到的验证码", nil];
+            break;
+        case AAccountType_SetPsd:
+            self.titleImages = [NSArray arrayWithObjects:@"psd_icon", @"psd_icon", nil];
+            self.placeholders = [NSArray arrayWithObjects:@"请设置6-16位新密码", @"请再次输入新密码", nil];
+            break;
         default:
             break;
     }
@@ -82,6 +90,9 @@
 
 - (void)clickResetPsd:(id)sender {
     //忘记密码
+    if ([self.delegate respondsToSelector:@selector(clickAccountResetPsd:)]) {
+        [self.delegate clickAccountResetPsd:sender];
+    }
 }
 
 - (void)clickQQ:(id)sender {
