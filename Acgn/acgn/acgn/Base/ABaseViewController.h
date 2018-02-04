@@ -14,4 +14,5 @@
 - (void)setRigthBtn:(CGRect)frame title:(NSString *)title titileColor:(UIColor *)titleColor imageName:(NSString *)imageName font:(UIFont *)font;
 
 - (void)rightOneAction:(id)sender;
+- (void)useMethodToFindBlackLineAndHind:(BOOL)isHidden;
 @end

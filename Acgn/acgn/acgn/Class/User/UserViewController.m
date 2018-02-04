@@ -16,6 +16,7 @@
 
 @implementation UserViewController
 
+
 - (void)notificationAll {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateUserInfo:)

@@ -43,13 +43,16 @@
 
 //MARK: - 设置导航栏是否透明
 - (void)setNavigationBarTransparence:(BOOL)transparent titleColor:(UIColor *)color {
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
-        [self setEdgesForExtendedLayout:UIRectEdgeAll];
-    }
+
     if (transparent) {
-        
+        if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
+            [self setEdgesForExtendedLayout:UIRectEdgeAll];
+        }
         [[UINavigationBar appearance] setBarTintColor:[UIColor clearColor]];
     } else {
+        if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
+            [self setEdgesForExtendedLayout:UIRectEdgeAll];
+        }
         [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     }
     UIGraphicsBeginImageContextWithOptions(CGSizeMake([UIScreen mainScreen].bounds.size.width, 65), 0, [UIScreen mainScreen].scale);
@@ -70,7 +73,29 @@
                                                                      color, NSForegroundColorAttributeName,
                                                                      [UIFont boldSystemFontOfSize:16], NSFontAttributeName,
                                                                      nil]];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [self useMethodToFindBlackLineAndHind:transparent];
+}
+
+-(void)useMethodToFindBlackLineAndHind:(BOOL)isHidden
+{
+    UIImageView* blackLineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
+    //隐藏黑线（在viewWillAppear时隐藏，在viewWillDisappear时显示）
+    blackLineImageView.hidden = isHidden;
+}
+- (UIImageView *)findHairlineImageViewUnder:(UIView *)view
+{
+    if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0)
+    {
+        return (UIImageView *)view;
+    }
+    for (UIView *subview in view.subviews) {
+        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
+        if (imageView) {
+            return imageView;
+        }
+    }
+    return nil;
 }
 
 - (void)setLeftBtn:(CGRect)frame title:(NSString *)title titileColor:(UIColor *)titleColor imageName:(NSString *)imageName font:(UIFont *)font {

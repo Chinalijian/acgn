@@ -51,7 +51,6 @@
             NSInteger index = [weakSelf.navigationController.childViewControllers indexOfObject:weakSelf];
             [weakSelf.navigationController popToViewController:[weakSelf.navigationController.childViewControllers objectAtIndex:index-2] animated:YES];
         }
-        
     }];
 }
 

@@ -69,6 +69,12 @@
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     [self.navigationController pushViewController:loginVC animated:YES];
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    //[self.navigationController setNavigationBarHidden:NO];
+    //[self setNavigationBarTransparence:NO titleColor:[UIColor blackColor]];
+    [self useMethodToFindBlackLineAndHind:NO];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
