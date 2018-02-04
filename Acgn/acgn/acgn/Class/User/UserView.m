@@ -8,7 +8,7 @@
 
 #import "UserView.h"
 #import "UserCell.h"
-
+#import "LoginViewController.h"
 @interface UserView() <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -23,7 +23,6 @@
 
 @end
 
-
 @implementation UserView
 #define X_SPACE 20
 #define User_TableViewCell_H 65
@@ -33,8 +32,26 @@
     if (self) {
         [self initDatas];
         [self loadUI];
+        [self updateUserInfo];
+        [self tapGestureRecognizer];
     }
     return self;
+}
+
+- (void)updateUserInfo {
+    [self upDateTopInfo];
+}
+
+- (void)upDateTopInfo {
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        self.logoNameLabel.text = @"登录";
+        self.logoImageView.image = [UIImage imageNamed:@"public_logo"];
+        self.logoutButton.hidden = YES;
+    } else {
+        [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:[AccountInfo getUserHeadUrl]] placeholderImage:[UIImage imageNamed:@"public_logo"]];
+        self.logoNameLabel.text = [AccountInfo getUserName];
+        self.logoutButton.hidden = NO;
+    }
 }
 
 - (void)initDatas {
@@ -43,7 +60,30 @@
 }
 
 - (void)clickLogoutSure:(id)sender {
-    
+    [AccountInfo removeUserAllInfo];
+    [self upDateTopInfo];
+}
+
+//创建轻拍手势
+-(void)tapGestureRecognizer {
+    //创建手势对象
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    //轻拍次数
+    tap.numberOfTapsRequired = 1;
+    //轻拍手指个数
+    tap.numberOfTouchesRequired = 1;
+    //讲手势添加到指定的视图上
+    [_logoImageView addGestureRecognizer:tap];
+}
+
+//轻拍事件
+
+-(void)tapAction:(UITapGestureRecognizer *)tap {
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        if ([self.delegate respondsToSelector:@selector(clickTopGotoLogin)]) {
+            [self.delegate clickTopGotoLogin];
+        }
+    }
 }
 
 #pragma mark UITableView Delegate
@@ -81,7 +121,7 @@
     
     [self setupMakeTopViewSubViewsLayout];
     [_logoutButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_bottomView).mas_offset(15);
+        make.bottom.mas_equalTo(_bottomView.mas_bottom).mas_offset(0);
         make.left.mas_equalTo(_bottomView).mas_offset(X_SPACE);
         make.right.mas_equalTo(_bottomView).mas_offset(-X_SPACE);
         make.height.mas_equalTo(44);
@@ -121,6 +161,7 @@
     if (_topImageView == nil) {
         _topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.uTableView.frame.size.width, TopView_H)];
         _topImageView.image = [UIImage imageNamed:@"public_head"];
+        _topImageView.userInteractionEnabled = YES;
         [_topImageView addSubview:self.logoImageView];
         [_topImageView addSubview:self.logoNameLabel];
     }
@@ -131,6 +172,7 @@
     if (_logoImageView == nil) {
         _logoImageView = [[UIImageView alloc] init];
         _logoImageView.image = [UIImage imageNamed:@"public_logo"];
+        _logoImageView.userInteractionEnabled = YES;
     }
     return _logoImageView;
 }
@@ -138,7 +180,7 @@
 - (UILabel *)logoNameLabel {
     if (_logoNameLabel == nil) {
         _logoNameLabel = [[UILabel alloc] init];
-        _logoNameLabel.text = @"加一次元";
+        _logoNameLabel.text = @"";
         _logoNameLabel.textAlignment = NSTextAlignmentCenter;
         _logoNameLabel.textColor = [UIColor whiteColor];
         _logoNameLabel.font = [UIFont systemFontOfSize:15];
@@ -158,16 +200,19 @@
     return _bottomView;
 }
 
-- (UIButton *)loginButton {
+- (UIButton *)logoutButton {
     if (_logoutButton == nil) {
         _logoutButton = [[UIButton alloc] init];
-        _logoutButton.backgroundColor = UIColorFromRGB(0xE96A79);
+        _logoutButton.backgroundColor = UIColorFromRGB(0xFFFFFF);
         _logoutButton.layer.cornerRadius = 15;
         //        _loginButton.layer.borderColor = UIColorFromRGB(0xBAB8B9).CGColor;
         //        _loginButton.layer.borderWidth = .5;
         [_logoutButton setTitle:@"退出登录" forState:UIControlStateNormal];
-        [_logoutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_logoutButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        [_logoutButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_logoutButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
+        [_logoutButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateSelected];
+        [_logoutButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        _logoutButton.alpha = 0.6;
         [_logoutButton addTarget:self action:@selector(clickLogoutSure:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _logoutButton;

@@ -33,6 +33,8 @@
 @property (nonatomic, strong) UIButton *weiboButton;
 
 @property (nonatomic, strong) UIButton *codeButton;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) NSInteger tCount;
 
 @end
 
@@ -40,6 +42,7 @@
 #define X_SPACE 47
 #define TableViewCell_H 60
 #define TopView_H 198
+#define Time_Count 60
 - (id)initWithFrame:(CGRect)frame type:(AAccountType)type {
     self = [super initWithFrame:frame];
     if (self) {
@@ -61,7 +64,7 @@
         case AAccountType_Register:
             self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"yzm_icon", @"psd_icon", nil];
             self.placeholders = [NSArray arrayWithObjects:@"请输入你的手机号码", @"请输入收到的验证码", @"请设置6-16位新密码", nil];
-            self.buttonTitle = @"下一步";
+            //self.buttonTitle = @"下一步";
             break;
         case AAccountType_ResetPsd:
             self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"yzm_icon", nil];
@@ -87,6 +90,30 @@
         [self.datas addObject:model];
     }
 }
+
+- (void)addTimerForCode {
+    // 加1个计时器
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+}
+
+- (void)timerFired {
+    if (self.tCount != 1) {
+        self.tCount -= 1;
+        self.codeButton.enabled = NO;
+        [self.codeButton setTitle:[NSString stringWithFormat:@"%ld秒", self.tCount] forState:UIControlStateNormal];
+    } else {
+        self.codeButton.enabled = YES;
+        [self.codeButton setTitle:@"获取" forState:UIControlStateNormal];
+        [self.timer invalidate];
+    }
+}
+
+- (void)timeFailBeginFrom:(NSInteger)timeCount {
+    self.tCount = timeCount;
+    self.codeButton.enabled = NO;
+    [self addTimerForCode];
+}
+
 - (void)clickSure:(id)sender {
     if ([self.delegate respondsToSelector:@selector(clickAccountSure:datas:)]) {
         [self.delegate clickAccountSure:sender datas:self.datas];
@@ -120,7 +147,7 @@
 }
 
 - (void)clickGetCode:(id)sender {
-    
+    [self timeFailBeginFrom:Time_Count];
 }
 
 #pragma mark UITableView Delegate

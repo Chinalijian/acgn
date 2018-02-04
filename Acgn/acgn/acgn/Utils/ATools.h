@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface ATools : NSObject
++ (NSString*)MD5:(NSString*)s;
 //按钮图片在上，文字再下
 + (void)setButtonContentCenter:(UIButton *)btn;
 //计算文字宽度

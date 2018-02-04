@@ -10,10 +10,11 @@
 
 @protocol UserViewDelegate <NSObject>
 @optional
-
+- (void)clickTopGotoLogin;
 @end
 
 @interface UserView : UIView
 @property (nonatomic, strong) UITableView *uTableView;
 @property (nonatomic, weak) id <UserViewDelegate> delegate;
+- (void)updateUserInfo;
 @end

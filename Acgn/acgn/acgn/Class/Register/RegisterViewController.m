@@ -8,7 +8,6 @@
 
 #import "RegisterViewController.h"
 #import "AccountView.h"
-#import "NickNameViewController.h"
 @interface RegisterViewController () <AccountViewDelegate>
 @property (nonatomic, strong) AccountView *aView;
 
@@ -31,8 +30,6 @@
     AccountLocalDataModel *codeObj = [array objectAtIndex:1];
     AccountLocalDataModel *psdObj = [array lastObject];
     
-    NickNameViewController *nickNameVC = [[NickNameViewController alloc] init];
-    [self.navigationController pushViewController:nickNameVC animated:YES];
 }
 
 #pragma mark -

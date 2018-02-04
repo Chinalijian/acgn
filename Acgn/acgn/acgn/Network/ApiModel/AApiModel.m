@@ -11,11 +11,14 @@
 @implementation AApiModel
 //登录
 + (void)loginSystem:(NSString *)account psd:(NSString *)password block:(void(^)(BOOL result))block {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:account, @"phone", password, @"password",nil];
-    [[DMHttpClient sharedInstance] initWithUrl:@"" parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
+    
+    NSString *psdStr = [ATools MD5:password];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:account, @"phone", psdStr, @"passWord",nil];
+    [[DMHttpClient sharedInstance] initWithUrl:DM_User_Loing_Url parameters:dic method:DMHttpRequestPost dataModelClass:[UserDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             //保存数据
-            //DMLoginDataModel *model = (DMLoginDataModel *)responseObject;
+            UserDataModel *model = (UserDataModel *)responseObject;
+            [AccountInfo saveAccountInfo:model];
             block(YES);
         } else {
             block(NO);

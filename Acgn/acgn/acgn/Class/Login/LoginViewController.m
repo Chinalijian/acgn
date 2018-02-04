@@ -26,15 +26,19 @@
 }
 
 - (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array {
-    [self.navigationController popViewControllerAnimated:YES];
-    return;
-    
     AccountLocalDataModel *phoneObj = [array firstObject];
     
     AccountLocalDataModel *psdObj = [array lastObject];
     //登录
-    [AApiModel loginSystem:phoneObj.content psd:psdObj.content block:^(BOOL result) {
-        
+    WS(weakSelf);
+    [AApiModel loginSystem:@"13611077238" psd:@"123456789" block:^(BOOL result) {
+        if (result) {
+            //发送登录成功的广播
+            [[NSNotificationCenter defaultCenter] postNotificationName:DMNotification_Login_Success_Key object:nil userInfo:nil];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        } else {
+            
+        }
     }];
 }
 

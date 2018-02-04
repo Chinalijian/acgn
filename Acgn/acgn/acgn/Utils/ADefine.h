@@ -9,6 +9,9 @@
 #ifndef ADefine_h
 #define ADefine_h
 
+#pragma mark - broadcast
+//登录成功的通知
+#define DMNotification_Login_Success_Key @"Login_Success_Key"
 
 #pragma mark - Font
 

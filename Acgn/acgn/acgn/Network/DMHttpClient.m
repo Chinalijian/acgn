@@ -58,20 +58,7 @@
             return;
         }
         
-        if (!STR_IS_NIL([responseObj objectForKey:Token_Key])) { //更新token
-            [self updateTokenToLatest:[responseObj objectForKey:Token_Key]];
-        }
-        
         if ([[responseObj objectForKey:@"code"] intValue] == DMHttpResponseCodeType_Success) {
-
-            if (self.blockSuccessMsg) {
-                if ([[responseObj objectForKey:Msg_Key] isKindOfClass:[NSString class]]) {
-                    self.blockSuccessMsg([responseObj objectForKey:Msg_Key]);
-                } else {
-                    self.blockSuccessMsg(@"未知错误");
-                }
-                self.blockSuccessMsg = nil;
-            }
             
             id responseDataModel = [dataModelClass mj_objectWithKeyValues:[responseObj objectForKey:Data_Key]];
             success(responseDataModel);

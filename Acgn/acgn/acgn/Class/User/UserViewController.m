@@ -14,6 +14,12 @@
 
 @implementation UserViewController
 
+- (void)notificationAll {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUserInfo:)
+                                                 name:DMNotification_Login_Success_Key
+                                               object:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +28,16 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [IQKeyboardManager sharedManager].enable = YES;
     [self loadUI];
+    [self notificationAll];
+}
+
+- (void)updateUserInfo:(NSNotification *)notification {
+    [_userView updateUserInfo];
+}
+
+- (void)clickTopGotoLogin {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 #pragma mark -
