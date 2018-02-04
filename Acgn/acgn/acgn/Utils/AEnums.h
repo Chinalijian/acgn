@@ -15,6 +15,11 @@ typedef NS_ENUM(NSInteger, AAccountType) {
     AAccountType_ResetPsd    = 3, // 找回密码
     AAccountType_SetPsd      = 4, // 设置密码
     AAccountType_NickName    = 5, // 修改昵称
+    AAccountType_About       = 6, // 关于我们
+    AAccountType_Msg         = 7, // 我的消息
+    AAccountType_Fav         = 8, // 我的收藏
+    AAccountType_ChangePsd   = 9, // 修改密码
+    AAccountType_Edit        = 10,// 编辑资料
 };
 
 

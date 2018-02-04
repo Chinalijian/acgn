@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UserCell : UITableViewCell
-
+@property (nonatomic, strong) UILabel *rightLabel;
 - (void)configInfo:(NSString *)imageName title:(NSString *)title;
 @end

@@ -14,9 +14,7 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, strong) NSMutableArray *images;
 
-@property (nonatomic, strong) UIImageView *topImageView;
-@property (nonatomic, strong) UIImageView *logoImageView;
-@property (nonatomic, strong) UILabel *logoNameLabel;
+@property (nonatomic, strong) ComonTop *topView;
 
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIButton *logoutButton;
@@ -44,12 +42,12 @@
 
 - (void)upDateTopInfo {
     if (STR_IS_NIL([AccountInfo getUserID])) {
-        self.logoNameLabel.text = @"登录";
-        self.logoImageView.image = [UIImage imageNamed:@"public_logo"];
+        self.topView.logoNameLabel.text = @"登录";
+        self.topView.logoImageView.image = [UIImage imageNamed:@"public_logo"];
         self.logoutButton.hidden = YES;
     } else {
-        [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:[AccountInfo getUserHeadUrl]] placeholderImage:[UIImage imageNamed:@"public_logo"]];
-        self.logoNameLabel.text = [AccountInfo getUserName];
+        [self.topView.logoImageView sd_setImageWithURL:[NSURL URLWithString:[AccountInfo getUserHeadUrl]] placeholderImage:[UIImage imageNamed:@"public_logo"]];
+        self.topView.logoNameLabel.text = [AccountInfo getUserName];
         self.logoutButton.hidden = NO;
     }
 }
@@ -73,7 +71,7 @@
     //轻拍手指个数
     tap.numberOfTouchesRequired = 1;
     //讲手势添加到指定的视图上
-    [_logoImageView addGestureRecognizer:tap];
+    [_topView.logoImageView addGestureRecognizer:tap];
 }
 
 //轻拍事件
@@ -89,6 +87,25 @@
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([self.delegate respondsToSelector:@selector(goToPage:)]) {
+        switch (indexPath.row) {
+            case 0:
+                [self.delegate goToPage:AAccountType_Msg];
+                break;
+            case 1:
+                [self.delegate goToPage:AAccountType_Fav];
+                break;
+            case 2:
+                [self.delegate goToPage:AAccountType_ChangePsd];
+                break;
+            case 3:
+                [self.delegate goToPage:AAccountType_About];
+                break;
+            default:
+                break;
+        }
+    }
+
 }
 
 #pragma mark UITableView Datasource
@@ -111,6 +128,15 @@
         cell = [[UserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:userCell];
     }
     [cell configInfo:[self.images objectAtIndex:indexPath.row] title:[self.datas objectAtIndex:indexPath.row]];
+    if (indexPath.row == self.datas.count-1) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.rightLabel.hidden = NO;
+        cell.rightLabel.text = [@"V" stringByAppendingString:App_Version];
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.rightLabel.hidden = YES;
+        cell.rightLabel.text = @"";
+    }
     return cell;
 }
 
@@ -118,30 +144,15 @@
 - (void)loadUI {
     
     [self addSubview:self.uTableView];
-    
-    [self setupMakeTopViewSubViewsLayout];
     [_logoutButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(_bottomView.mas_bottom).mas_offset(0);
+        make.bottom.mas_equalTo(_bottomView.mas_bottom).mas_offset(-10);
         make.left.mas_equalTo(_bottomView).mas_offset(X_SPACE);
         make.right.mas_equalTo(_bottomView).mas_offset(-X_SPACE);
         make.height.mas_equalTo(44);
     }];
     
 }
-- (void)setupMakeTopViewSubViewsLayout {
-    [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_topImageView).mas_offset(80);
-        make.height.mas_offset(70.5);
-        make.width.mas_offset(70.5);
-        make.centerX.mas_equalTo(_topImageView);
-    }];
-    [_logoNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_logoImageView.mas_bottom).mas_offset(1);
-        make.left.mas_equalTo(_topImageView).mas_offset(0);
-        make.right.mas_equalTo(_topImageView).mas_offset(0);
-        make.bottom.mas_equalTo(_topImageView).mas_offset(-2);
-    }];
-}
+
 #pragma mark - 初始化UIKIT
 - (UITableView *)uTableView {
     if (!_uTableView) {
@@ -151,41 +162,17 @@
         //_uTableView.scrollEnabled = NO;
         _uTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _uTableView.backgroundColor = UIColorFromRGB(0xf6f6f6);
-        _uTableView.tableHeaderView = self.topImageView;
+        _uTableView.tableHeaderView = self.topView;
         _uTableView.tableFooterView = self.bottomView;
     }
     return _uTableView;
 }
 
-- (UIImageView *)topImageView {
-    if (_topImageView == nil) {
-        _topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.uTableView.frame.size.width, TopView_H)];
-        _topImageView.image = [UIImage imageNamed:@"public_head"];
-        _topImageView.userInteractionEnabled = YES;
-        [_topImageView addSubview:self.logoImageView];
-        [_topImageView addSubview:self.logoNameLabel];
+- (ComonTop *)topView {
+    if (_topView == nil) {
+        _topView = [[ComonTop alloc] initWithFrame:CGRectMake(0, 0, self.uTableView.frame.size.width, TopView_H)];
     }
-    return _topImageView;
-}
-
-- (UIImageView *)logoImageView {
-    if (_logoImageView == nil) {
-        _logoImageView = [[UIImageView alloc] init];
-        _logoImageView.image = [UIImage imageNamed:@"public_logo"];
-        _logoImageView.userInteractionEnabled = YES;
-    }
-    return _logoImageView;
-}
-
-- (UILabel *)logoNameLabel {
-    if (_logoNameLabel == nil) {
-        _logoNameLabel = [[UILabel alloc] init];
-        _logoNameLabel.text = @"";
-        _logoNameLabel.textAlignment = NSTextAlignmentCenter;
-        _logoNameLabel.textColor = [UIColor whiteColor];
-        _logoNameLabel.font = [UIFont systemFontOfSize:15];
-    }
-    return _logoNameLabel;
+    return _topView;
 }
 
 - (UIView *)bottomView {

@@ -115,6 +115,7 @@
 }
 
 - (void)clickSure:(id)sender {
+
     if ([self.delegate respondsToSelector:@selector(clickAccountSure:datas:)]) {
         [self.delegate clickAccountSure:sender datas:self.datas];
     }

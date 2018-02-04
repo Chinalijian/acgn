@@ -37,8 +37,17 @@
     self.contentTextField.placeholder = obj.placeholder;
 }
 
+- (void)textChange:(NSNotification *)notification {
+    NSLog(@"aaa = %@", self.contentTextField.text);
+    self.obje.content = self.contentTextField.text;
+}
+
+- (void)textGetFocus:(NSNotification *)notification {
+    NSLog(@"bbb = %@", self.contentTextField.text);
+}
+
 - (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    self.obje.content = textField.text;
+    //self.obje.content = textField.text;
     return YES;
 }
 
@@ -47,7 +56,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    self.obje.content = textField.text;
+    //self.obje.content = textField.text;
     //self.clickTextFieldBlock(NO);
 }
 
@@ -120,6 +129,8 @@
         _contentTextField.delegate = self;
         [_contentTextField setValue:UIColorFromRGB(0x808080) forKeyPath:@"_placeholderLabel.textColor"];
         [_contentTextField setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:_contentTextField];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textGetFocus:) name:UITextFieldTextDidBeginEditingNotification object:_contentTextField];
     }
     return _contentTextField;
 }

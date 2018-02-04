@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIImageView *titleImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *lineLabel;
+
 @end
 
 @implementation UserCell
@@ -37,6 +38,7 @@
 - (void)loadUI {
     [self addSubview:self.titleImageView];
     [self addSubview:self.titleLabel];
+    [self addSubview:self.rightLabel];
     [self addSubview:self.lineLabel];
     [self setupMakeBodyViewSubViewsLayout];
 }
@@ -55,7 +57,14 @@
         make.right.mas_equalTo(self).mas_offset(-47);
         make.bottom.mas_equalTo(_titleImageView).mas_offset(0);
     }];
-
+    
+    [_rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self).mas_offset(0);
+        make.right.mas_equalTo(self).mas_offset(-20);
+        make.bottom.mas_equalTo(self).mas_offset(0);
+        make.width.mas_equalTo(50);
+    }];
+    
     [_lineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self).mas_offset(0);
         make.left.mas_equalTo(self).mas_offset(0);
@@ -81,6 +90,16 @@
         _titleLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _titleLabel;
+}
+- (UILabel *)rightLabel {
+    if (_rightLabel == nil) {
+        _rightLabel = [[UILabel alloc] init];
+        _rightLabel.textColor = [UIColor blackColor];
+        _rightLabel.font = [UIFont systemFontOfSize:14];
+        _rightLabel.textAlignment = NSTextAlignmentRight;
+        _rightLabel.hidden = YES;
+    }
+    return _rightLabel;
 }
 
 - (UILabel *)lineLabel {

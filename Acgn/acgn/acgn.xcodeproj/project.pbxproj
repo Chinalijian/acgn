@@ -34,6 +34,10 @@
 		300DE1542024ACBA008DBCBD /* NickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1532024ACBA008DBCBD /* NickNameViewController.m */; };
 		300DE1572024D1DD008DBCBD /* UserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1562024D1DD008DBCBD /* UserView.m */; };
 		300DE15A2024D1F9008DBCBD /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1592024D1F9008DBCBD /* UserCell.m */; };
+		3048354E2026EE0C00DAAE3F /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3048354D2026EE0B00DAAE3F /* AboutViewController.m */; };
+		304835512026EE1700DAAE3F /* VersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 304835502026EE1700DAAE3F /* VersionViewController.m */; };
+		304835542026F4C000DAAE3F /* ComonTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 304835532026F4C000DAAE3F /* ComonTop.m */; };
+		3048355820273B5A00DAAE3F /* YLSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3048355720273B5A00DAAE3F /* YLSwitch.m */; };
 		309D9037202588BA002F414F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 309D9036202588BA002F414F /* libc++.tbd */; };
 		309D903A20259373002F414F /* ABaseDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903920259373002F414F /* ABaseDataModel.m */; };
 		309D903D2025943C002F414F /* UserDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903C2025943C002F414F /* UserDataModel.m */; };
@@ -119,6 +123,14 @@
 		300DE1562024D1DD008DBCBD /* UserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserView.m; sourceTree = "<group>"; };
 		300DE1582024D1F9008DBCBD /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		300DE1592024D1F9008DBCBD /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
+		3048354C2026EE0B00DAAE3F /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		3048354D2026EE0B00DAAE3F /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		3048354F2026EE1700DAAE3F /* VersionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionViewController.h; sourceTree = "<group>"; };
+		304835502026EE1700DAAE3F /* VersionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionViewController.m; sourceTree = "<group>"; };
+		304835522026F4C000DAAE3F /* ComonTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComonTop.h; sourceTree = "<group>"; };
+		304835532026F4C000DAAE3F /* ComonTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComonTop.m; sourceTree = "<group>"; };
+		3048355620273B5A00DAAE3F /* YLSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSwitch.h; sourceTree = "<group>"; };
+		3048355720273B5A00DAAE3F /* YLSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSwitch.m; sourceTree = "<group>"; };
 		309D9035202580F2002F414F /* DMServerApiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMServerApiConfig.h; sourceTree = "<group>"; };
 		309D9036202588BA002F414F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		309D903820259373002F414F /* ABaseDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABaseDataModel.h; sourceTree = "<group>"; };
@@ -211,13 +223,6 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		2A704B122022BF1B00476D68 /* Vendors */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Vendors;
-			sourceTree = "<group>";
-		};
 		2A704B132022BF1B00476D68 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +271,10 @@
 				2A6F15D520246C0700B55AA7 /* ResetPsdViewController.m */,
 				2A6F15D7202474F400B55AA7 /* SetPsdViewController.h */,
 				2A6F15D8202474F400B55AA7 /* SetPsdViewController.m */,
+				3048354C2026EE0B00DAAE3F /* AboutViewController.h */,
+				3048354D2026EE0B00DAAE3F /* AboutViewController.m */,
+				3048354F2026EE1700DAAE3F /* VersionViewController.h */,
+				304835502026EE1700DAAE3F /* VersionViewController.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -283,6 +292,8 @@
 				309D903C2025943C002F414F /* UserDataModel.m */,
 				309D903E20259747002F414F /* AccountInfo.h */,
 				309D903F20259747002F414F /* AccountInfo.m */,
+				304835522026F4C000DAAE3F /* ComonTop.h */,
+				304835532026F4C000DAAE3F /* ComonTop.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -312,13 +323,13 @@
 		2A89A2D12019E5880021B844 /* acgn */ = {
 			isa = PBXGroup;
 			children = (
+				3048355520273B5A00DAAE3F /* Vendors */,
 				309D904A20259A26002F414F /* Common */,
 				2A704B112022BF1B00476D68 /* Base */,
 				2A704B0E2022BF1B00476D68 /* Categories */,
 				2A704B142022BF1B00476D68 /* Class */,
 				2A704B102022BF1B00476D68 /* Network */,
 				2A704B132022BF1B00476D68 /* Utils */,
-				2A704B122022BF1B00476D68 /* Vendors */,
 				2A89A2D22019E5880021B844 /* AppDelegate.h */,
 				2A89A2D32019E5880021B844 /* AppDelegate.m */,
 				2A89A2D52019E5880021B844 /* ViewController.h */,
@@ -369,6 +380,15 @@
 				2ADF21C02022C3EA00559427 /* LoginViewController.m */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		3048355520273B5A00DAAE3F /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				3048355620273B5A00DAAE3F /* YLSwitch.h */,
+				3048355720273B5A00DAAE3F /* YLSwitch.m */,
+			);
+			path = Vendors;
 			sourceTree = "<group>";
 		};
 		309D904A20259A26002F414F /* Common */ = {
@@ -598,6 +618,8 @@
 				309D903D2025943C002F414F /* UserDataModel.m in Sources */,
 				2A89A2D42019E5880021B844 /* AppDelegate.m in Sources */,
 				2ADF21BC2022C3A600559427 /* UserViewController.m in Sources */,
+				304835512026EE1700DAAE3F /* VersionViewController.m in Sources */,
+				304835542026F4C000DAAE3F /* ComonTop.m in Sources */,
 				2A7CFAAC202414AF00CBE495 /* AccountView.m in Sources */,
 				2A6F15D220245CE700B55AA7 /* DMRequestModel.m in Sources */,
 				2A7CFAAF202415B900CBE495 /* AccountCell.m in Sources */,
@@ -605,10 +627,12 @@
 				309D903A20259373002F414F /* ABaseDataModel.m in Sources */,
 				300DE1572024D1DD008DBCBD /* UserView.m in Sources */,
 				309D905120259A84002F414F /* DMUserDefaults.m in Sources */,
+				3048355820273B5A00DAAE3F /* YLSwitch.m in Sources */,
 				2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */,
 				2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */,
 				2A6F15D9202474F400B55AA7 /* SetPsdViewController.m in Sources */,
 				2A704B1C2022C37600476D68 /* HomeViewController.m in Sources */,
+				3048354E2026EE0C00DAAE3F /* AboutViewController.m in Sources */,
 				309D904020259747002F414F /* AccountInfo.m in Sources */,
 				2A704B172022C31C00476D68 /* ABaseViewController.m in Sources */,
 				2ADF21C82022DF1600559427 /* AttentionPeopleList.m in Sources */,

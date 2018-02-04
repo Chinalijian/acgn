@@ -8,6 +8,7 @@
 
 #import "UserViewController.h"
 #import "UserView.h"
+#import "AboutViewController.h"
 @interface UserViewController () <UserViewDelegate>
 @property (nonatomic, strong) UserView *userView;
 @end
@@ -38,6 +39,27 @@
 - (void)clickTopGotoLogin {
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         [self.navigationController pushViewController:loginVC animated:YES];
+}
+
+- (void)goToPage:(AAccountType)type {
+    switch (type) {
+        case AAccountType_Msg:
+            
+            break;
+        case AAccountType_Fav:
+            
+            break;
+        case AAccountType_ChangePsd:
+           
+            break;
+        case AAccountType_About: {
+            AboutViewController *usVC = [[AboutViewController alloc] init];
+            [self.navigationController pushViewController:usVC animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark -

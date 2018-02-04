@@ -9,7 +9,8 @@
 #import "HomeViewController.h"
 #import "AttentionPeopleList.h"
 #import "UserViewController.h"
-@interface HomeViewController () <AttentionPeopleListDelegate>
+#import "YLSwitch.h"
+@interface HomeViewController () <AttentionPeopleListDelegate,YLSwitchDelegate>
 @property (nonatomic, strong) AttentionPeopleList *apListView;
 @end
 
@@ -28,13 +29,37 @@
 }
 
 - (void)loadUI {
+    
+    YLSwitch *mySwitch = [[YLSwitch alloc] initWithFrame:CGRectMake(0, 0, 128, 30)];
+    mySwitch.tag = 1;
+    mySwitch.isSelectedIndex = 0;
+    mySwitch.delegate = self;
+    mySwitch.leftTitle = @"关注";
+    mySwitch.rightTitle = @"广场";
+    self.navigationItem.titleView  = mySwitch;
+    
     [self.view addSubview:self.apListView];
+}
+#pragma mark -- YLSwitchDelegate
+
+- (void)switchState:(UIView *)view leftTitle:(NSString *)title {
+    if (view.tag == 1) {
+        NSLog(@"导航栏switch");
+    }
+    NSLog(@"%@",title);
+}
+
+- (void)switchState:(UIView *)view rightTitle:(NSString *)title {
+    if (view.tag == 1) {
+        NSLog(@"导航栏switch");
+    }
+    NSLog(@"%@",title);
 }
 
 -(AttentionPeopleList *)apListView{
     if (_apListView == nil) {
         _apListView = [[AttentionPeopleList alloc] initWithFrame:CGRectMake(0, 0, DMScreenWidth, DMScreenHeight-DMNavigationBarHeight) delegate:self];
-        _apListView.backgroundColor = [UIColor redColor];
+        _apListView.backgroundColor = [UIColor whiteColor];
     }
     return _apListView;
 }

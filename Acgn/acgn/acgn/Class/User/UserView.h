@@ -11,6 +11,7 @@
 @protocol UserViewDelegate <NSObject>
 @optional
 - (void)clickTopGotoLogin;
+- (void)goToPage:(AAccountType)type;
 @end
 
 @interface UserView : UIView
