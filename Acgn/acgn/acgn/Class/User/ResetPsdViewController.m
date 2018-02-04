@@ -28,10 +28,46 @@
 
 - (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array {
     AccountLocalDataModel *phoneObj = [array firstObject];
-    AccountLocalDataModel *psdObj = [array lastObject];
-    
-    SetPsdViewController *setPsdVC = [[SetPsdViewController alloc] init];
-    [self.navigationController pushViewController:setPsdVC animated:YES];
+    AccountLocalDataModel *codeObj = [array lastObject];
+    if (STR_IS_NIL(phoneObj.content)) {
+        [ATools showSVProgressHudCustom:@"" title:@"请输入手机号码"];
+        return;
+    }
+    if (STR_IS_NIL(codeObj.content)) {
+        [ATools showSVProgressHudCustom:@"" title:@"请填写验证码"];
+        return;
+    }
+    if (phoneObj.content.length != 11) {
+        [ATools showSVProgressHudCustom:@"" title:@"请输入正确的手机号码"];
+        return;
+    }
+    WS(weakSelf);
+    [AApiModel getFindCodeConfirmSystem:phoneObj.content code:codeObj.content block:^(BOOL result) {
+        if (result) {
+            SetPsdViewController *setPsdVC = [[SetPsdViewController alloc] init];
+            [weakSelf.navigationController pushViewController:setPsdVC animated:YES];
+        } else {
+            
+        }
+    }];
+}
+
+- (void)clickGetCode:(id)sender obj:(AccountLocalDataModel *)obj {
+    //WS(weakSelf);
+    if (STR_IS_NIL(obj.content)) {
+        return;
+    }
+    if (obj.content.length != 11) {
+        [ATools showSVProgressHudCustom:@"" title:@"请输入正确的手机号码"];
+        return;
+    }
+    [AApiModel getFindCodeForPsdSystem:obj.content block:^(BOOL result) {
+        if (result) {
+            
+        } else {
+            
+        }
+    }];
 }
 
 #pragma mark -

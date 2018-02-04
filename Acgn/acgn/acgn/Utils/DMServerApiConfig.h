@@ -27,15 +27,20 @@
 
 #define DM_Url      DM_Local_Url
 
-//配置
-#define DM_Init_SetConfig_Url           [DM_Url stringByAppendingFormat:@"init/getConfig"]
-
 //登录
 #define DM_User_Loing_Url               [DM_Url stringByAppendingFormat:@"user/login"]
-//退出登录
-#define DM_User_Logout_Url              [DM_Url stringByAppendingFormat:@"user/logout"]
-//检测登录
-#define DM_User_Check_Login_Url         [DM_Url stringByAppendingFormat:@"userCenter/checkLogin"]
+//注册
+#define DM_User_Register_Url            [DM_Url stringByAppendingFormat:@"user/register"]
+//注册获取验证码
+#define DM_Register_Code_Url            [DM_Url stringByAppendingFormat:@"user/getVerCode"]
+//找回密码验证码
+#define DM_Find_Psd_Code_Url            [DM_Url stringByAppendingFormat:@"user/findByVerCode"]
+//找回密码验证码校验
+#define DM_Confirm_Code_Url             [DM_Url stringByAppendingFormat:@"user/confirmCode"]
+//确认找回密码
+#define DM_FindPassWord_Url             [DM_Url stringByAppendingFormat:@"user/findPassWord"]
+
+
 //老师课程列表
 #define DM_User_Tcourse_List_Url        [DM_Url stringByAppendingFormat:@"lesson/tcourseList"]
 //个人课程列表

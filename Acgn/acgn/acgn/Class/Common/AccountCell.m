@@ -27,6 +27,10 @@
     return self;
 }
 
+- (void)textSwitchSecure:(BOOL)s {
+    self.contentTextField.secureTextEntry = s;
+}
+
 - (void)configInfo:(AccountLocalDataModel *)obj {
     self.obje = obj;
     self.titleImageView.image = [UIImage imageNamed:obj.titleImage];

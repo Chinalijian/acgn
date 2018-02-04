@@ -16,6 +16,8 @@
 - (void)clickThirdPartyQQ:(id)sender;
 - (void)clickThirdPartyWecat:(id)sender;
 - (void)clickThirdPartyWeibo:(id)sender;
+- (void)clickGetCode:(id)sender obj:(AccountLocalDataModel *)obj;
+
 @end
 
 @interface AccountView : UIView <UITableViewDataSource, UITableViewDelegate>

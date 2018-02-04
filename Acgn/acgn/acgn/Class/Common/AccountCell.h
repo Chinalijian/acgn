@@ -14,4 +14,5 @@ typedef void (^BlockClickTextField)(BOOL displayKeyBoard);
 @property (nonatomic, strong) BlockClickTextField clickTextFieldBlock;
 @property (nonatomic, strong) UIView *bgView;
 - (void)configInfo:(AccountLocalDataModel *)obj;
+- (void)textSwitchSecure:(BOOL)s;
 @end

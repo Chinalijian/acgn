@@ -8,6 +8,7 @@
 
 #import "SetPsdViewController.h"
 #import "AccountView.h"
+#import "LoginViewController.h"
 @interface SetPsdViewController ()<AccountViewDelegate>
 @property (nonatomic, strong) AccountView *aView;
 
@@ -25,9 +26,30 @@
 }
 
 - (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array {
-    AccountLocalDataModel *phoneObj = [array firstObject];
-    
+    AccountLocalDataModel *psdObj0 = [array firstObject];
     AccountLocalDataModel *psdObj = [array lastObject];
+    if (STR_IS_NIL(psdObj0.content)) {
+        [ATools showSVProgressHudCustom:@"" title:@"请填写密码"];
+        return;
+    }
+    if (STR_IS_NIL(psdObj.content)) {
+        [ATools showSVProgressHudCustom:@"" title:@"请填写密码"];
+        return;
+    }
+    if (![psdObj0.content isEqualToString:psdObj.content]) {
+        [ATools showSVProgressHudCustom:@"" title:@"两次密码不一致"];
+        return;
+    }
+    if (psdObj0.content.length < 6 || psdObj0.content.length > 16) {
+        [ATools showSVProgressHudCustom:@"" title:@"密码长度为6-16位"];
+        return;
+    }
+    
+    WS(weakSelf);
+    [AApiModel getFindPsdForUserSystem:psdObj0.content block:^(BOOL result) {
+        NSInteger index = [weakSelf.navigationController.childViewControllers indexOfObject:weakSelf];
+        [weakSelf.navigationController popToViewController:[weakSelf.navigationController.childViewControllers objectAtIndex:index-2] animated:YES];
+    }];
 }
 
 #pragma mark -

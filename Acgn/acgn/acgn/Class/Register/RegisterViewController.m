@@ -30,6 +30,53 @@
     AccountLocalDataModel *codeObj = [array objectAtIndex:1];
     AccountLocalDataModel *psdObj = [array lastObject];
     
+    if (STR_IS_NIL(phoneObj.content)) {
+        [ATools showSVProgressHudCustom:@"" title:@"请填写号码"];
+        return;
+    }
+    if (STR_IS_NIL(codeObj.content)) {
+        [ATools showSVProgressHudCustom:@"" title:@"请填写验证码"];
+        return;
+    }
+    if (STR_IS_NIL(psdObj.content)) {
+        [ATools showSVProgressHudCustom:@"" title:@"请填写密码"];
+        return;
+    }
+    if (phoneObj.content.length != 11) {
+        [ATools showSVProgressHudCustom:@"" title:@"请输入正确的手机号码"];
+        return;
+    }
+    if (psdObj.content.length < 6 || psdObj.content.length > 16) {
+        [ATools showSVProgressHudCustom:@"" title:@"密码长度为6-16位"];
+        return;
+    }
+    WS(weakSelf);
+    [AApiModel registerSystem:phoneObj.content psd:psdObj.content code:codeObj.content block:^(BOOL result) {
+        if (result) {
+            NSInteger index = [weakSelf.navigationController.childViewControllers indexOfObject:weakSelf];
+            [weakSelf.navigationController popToViewController:[weakSelf.navigationController.childViewControllers objectAtIndex:index-2] animated:YES];
+        }
+    }];
+    
+}
+
+- (void)clickGetCode:(id)sender obj:(AccountLocalDataModel *)obj {
+    //WS(weakSelf);
+    if (STR_IS_NIL(obj.content)) {
+        [ATools showSVProgressHudCustom:@"" title:@"请输入手机号码"];
+        return;
+    }
+    if (obj.content.length != 11) {
+        [ATools showSVProgressHudCustom:@"" title:@"请输入正确的手机号码"];
+        return;
+    }
+    [AApiModel getCodeForRegisterSystem:obj.content block:^(BOOL result) {
+        if (result) {
+        
+        } else {
+            
+        }
+    }];
 }
 
 #pragma mark -

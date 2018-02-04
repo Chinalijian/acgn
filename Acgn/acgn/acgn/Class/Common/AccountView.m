@@ -147,6 +147,9 @@
 }
 
 - (void)clickGetCode:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(clickGetCode:obj:)]) {
+        [self.delegate clickGetCode:sender obj:[self.datas firstObject]];
+    }
     [self timeFailBeginFrom:Time_Count];
 }
 
@@ -175,6 +178,15 @@
         cell = [[AccountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accCell];
     }
     [cell configInfo:[self.datas objectAtIndex:indexPath.row]];
+    if (self.aType == AAccountType_Login) {
+        if (indexPath.row == 1) {
+            [cell textSwitchSecure:YES];
+        } else {
+            [cell textSwitchSecure:NO];
+        }
+    } else {
+        [cell textSwitchSecure:NO];
+    }
     if (self.aType == AAccountType_Register || self.aType == AAccountType_ResetPsd) {
         if (indexPath.row == 1) {
             [cell.bgView layoutIfNeeded];

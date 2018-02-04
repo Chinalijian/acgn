@@ -27,11 +27,22 @@
 
 - (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array {
     AccountLocalDataModel *phoneObj = [array firstObject];
-    
     AccountLocalDataModel *psdObj = [array lastObject];
+    if (STR_IS_NIL(phoneObj.content)) {
+        [ATools showSVProgressHudCustom:@"" title:@"请输入手机号码"];
+        return;
+    }
+    if (STR_IS_NIL(psdObj.content)) {
+        [ATools showSVProgressHudCustom:@"" title:@"请输入密码"];
+        return;
+    }
+    if (phoneObj.content.length != 11) {
+        [ATools showSVProgressHudCustom:@"" title:@"请输入正确的手机号码"];
+        return;
+    }
     //登录
     WS(weakSelf);
-    [AApiModel loginSystem:@"13611077238" psd:@"123456789" block:^(BOOL result) {
+    [AApiModel loginSystem:phoneObj.content psd:psdObj.content block:^(BOOL result) {
         if (result) {
             //发送登录成功的广播
             [[NSNotificationCenter defaultCenter] postNotificationName:DMNotification_Login_Success_Key object:nil userInfo:nil];
