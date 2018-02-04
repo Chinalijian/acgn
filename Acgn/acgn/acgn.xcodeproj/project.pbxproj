@@ -38,6 +38,7 @@
 		304835512026EE1700DAAE3F /* VersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 304835502026EE1700DAAE3F /* VersionViewController.m */; };
 		304835542026F4C000DAAE3F /* ComonTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 304835532026F4C000DAAE3F /* ComonTop.m */; };
 		3048355820273B5A00DAAE3F /* YLSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3048355720273B5A00DAAE3F /* YLSwitch.m */; };
+		3048355B20278A9500DAAE3F /* ModifyPsdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3048355A20278A9500DAAE3F /* ModifyPsdViewController.m */; };
 		309D9037202588BA002F414F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 309D9036202588BA002F414F /* libc++.tbd */; };
 		309D903A20259373002F414F /* ABaseDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903920259373002F414F /* ABaseDataModel.m */; };
 		309D903D2025943C002F414F /* UserDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903C2025943C002F414F /* UserDataModel.m */; };
@@ -131,6 +132,8 @@
 		304835532026F4C000DAAE3F /* ComonTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComonTop.m; sourceTree = "<group>"; };
 		3048355620273B5A00DAAE3F /* YLSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSwitch.h; sourceTree = "<group>"; };
 		3048355720273B5A00DAAE3F /* YLSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSwitch.m; sourceTree = "<group>"; };
+		3048355920278A9500DAAE3F /* ModifyPsdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyPsdViewController.h; sourceTree = "<group>"; };
+		3048355A20278A9500DAAE3F /* ModifyPsdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyPsdViewController.m; sourceTree = "<group>"; };
 		309D9035202580F2002F414F /* DMServerApiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMServerApiConfig.h; sourceTree = "<group>"; };
 		309D9036202588BA002F414F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		309D903820259373002F414F /* ABaseDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABaseDataModel.h; sourceTree = "<group>"; };
@@ -275,6 +278,8 @@
 				3048354D2026EE0B00DAAE3F /* AboutViewController.m */,
 				3048354F2026EE1700DAAE3F /* VersionViewController.h */,
 				304835502026EE1700DAAE3F /* VersionViewController.m */,
+				3048355920278A9500DAAE3F /* ModifyPsdViewController.h */,
+				3048355A20278A9500DAAE3F /* ModifyPsdViewController.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -623,6 +628,7 @@
 				2A7CFAAC202414AF00CBE495 /* AccountView.m in Sources */,
 				2A6F15D220245CE700B55AA7 /* DMRequestModel.m in Sources */,
 				2A7CFAAF202415B900CBE495 /* AccountCell.m in Sources */,
+				3048355B20278A9500DAAE3F /* ModifyPsdViewController.m in Sources */,
 				2ADF21C12022C3EA00559427 /* LoginViewController.m in Sources */,
 				309D903A20259373002F414F /* ABaseDataModel.m in Sources */,
 				300DE1572024D1DD008DBCBD /* UserView.m in Sources */,

@@ -20,5 +20,9 @@
 //获取找回密码验证码
 + (void)getFindCodeConfirmSystem:(NSString *)phone code:(NSString *)code block:(void(^)(BOOL result))block;
 //确认找回密码
-+ (void)getFindPsdForUserSystem:(NSString *)psd block:(void(^)(BOOL result))block;
++ (void)getFindPsdForUserSystem:(NSString *)psd phone:(NSString *)phone block:(void(^)(BOOL result))block;
+
+//修改密码
++ (void)modifyPsdForUser:(NSString *)psd latestPsd:(NSString *)latestPsd block:(void(^)(BOOL result))block;
+
 @end

@@ -45,6 +45,7 @@
     [AApiModel getFindCodeConfirmSystem:phoneObj.content code:codeObj.content block:^(BOOL result) {
         if (result) {
             SetPsdViewController *setPsdVC = [[SetPsdViewController alloc] init];
+            setPsdVC.phoneStr = phoneObj.content;
             [weakSelf.navigationController pushViewController:setPsdVC animated:YES];
         } else {
             

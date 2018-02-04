@@ -9,5 +9,5 @@
 #import "ABaseViewController.h"
 
 @interface SetPsdViewController : ABaseViewController
-
+@property (nonatomic, strong) NSString *phoneStr;
 @end

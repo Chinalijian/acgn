@@ -84,8 +84,9 @@
     }];
 }
 //确认找回密码
-+ (void)getFindPsdForUserSystem:(NSString *)psd block:(void(^)(BOOL result))block {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:psd, @"passWord", [AccountInfo getUserID], @"uId",nil];
++ (void)getFindPsdForUserSystem:(NSString *)psd phone:(NSString *)phone block:(void(^)(BOOL result))block {
+    NSString *psdStr = [ATools MD5:psd];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:psdStr, @"passWord", phone, @"phone",nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_FindPassWord_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             block(YES);
@@ -97,5 +98,21 @@
     }];
     
 }
+//修改密码
++ (void)modifyPsdForUser:(NSString *)psd latestPsd:(NSString *)latestPsd block:(void(^)(BOOL result))block {
+    NSString *phone = [AccountInfo getUserPhone];
+    NSString *psdStr = [ATools MD5:psd];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:phone, @"phone", psdStr, @"passWord", latestPsd, @"newPassWord",nil];
+    [[DMHttpClient sharedInstance] initWithUrl:DM_Modify_Psd_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
+        if (!OBJ_IS_NIL(responseObject)) {
+            block(YES);
+        } else {
+            block(NO);
+        }
+    } failure:^(NSError *error) {
+        block (NO);
+    }];
+}
+
 
 @end

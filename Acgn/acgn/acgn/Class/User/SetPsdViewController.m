@@ -46,9 +46,12 @@
     }
     
     WS(weakSelf);
-    [AApiModel getFindPsdForUserSystem:psdObj0.content block:^(BOOL result) {
-        NSInteger index = [weakSelf.navigationController.childViewControllers indexOfObject:weakSelf];
-        [weakSelf.navigationController popToViewController:[weakSelf.navigationController.childViewControllers objectAtIndex:index-2] animated:YES];
+    [AApiModel getFindPsdForUserSystem:psdObj0.content phone:self.phoneStr block:^(BOOL result) {
+        if (result) {
+            NSInteger index = [weakSelf.navigationController.childViewControllers indexOfObject:weakSelf];
+            [weakSelf.navigationController popToViewController:[weakSelf.navigationController.childViewControllers objectAtIndex:index-2] animated:YES];
+        }
+        
     }];
 }
 

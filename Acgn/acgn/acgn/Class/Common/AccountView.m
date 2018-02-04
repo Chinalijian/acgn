@@ -79,6 +79,10 @@
             self.titleImages = [NSArray arrayWithObjects:@"name_icon", nil];
             self.placeholders = [NSArray arrayWithObjects:@"我的昵称", nil];
             break;
+        case AAccountType_ChangePsd:
+            self.titleImages = [NSArray arrayWithObjects:@"psd_icon", @"psd_icon", @"psd_icon", nil];
+            self.placeholders = [NSArray arrayWithObjects:@"请输入当前密码", @"请设置6-16位新密码", @"请再次输入新密码", nil];
+            break;
         default:
             break;
     }

@@ -9,6 +9,7 @@
 #import "UserViewController.h"
 #import "UserView.h"
 #import "AboutViewController.h"
+#import "ModifyPsdViewController.h"
 @interface UserViewController () <UserViewDelegate>
 @property (nonatomic, strong) UserView *userView;
 @end
@@ -49,9 +50,11 @@
         case AAccountType_Fav:
             
             break;
-        case AAccountType_ChangePsd:
-           
+        case AAccountType_ChangePsd: {
+            ModifyPsdViewController *modifyPsdVC = [[ModifyPsdViewController alloc] init];
+            [self.navigationController pushViewController:modifyPsdVC animated:YES];
             break;
+        }
         case AAccountType_About: {
             AboutViewController *usVC = [[AboutViewController alloc] init];
             [self.navigationController pushViewController:usVC animated:YES];

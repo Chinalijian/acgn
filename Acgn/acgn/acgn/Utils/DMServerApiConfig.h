@@ -40,6 +40,8 @@
 //确认找回密码
 #define DM_FindPassWord_Url             [DM_Url stringByAppendingFormat:@"user/findPassWord"]
 
+//修改密码
+#define DM_Modify_Psd_Url               [DM_Url stringByAppendingFormat:@"user/updatePassword"]
 
 //老师课程列表
 #define DM_User_Tcourse_List_Url        [DM_Url stringByAppendingFormat:@"lesson/tcourseList"]
