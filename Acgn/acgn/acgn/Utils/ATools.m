@@ -66,8 +66,8 @@
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
     [SVProgressHUD setMinimumDismissTimeInterval:1];
     [SVProgressHUD setMaximumDismissTimeInterval:2];
-//    [SVProgressHUD setForegroundColor:DMColorWithRGBA(254, 254, 254, 1)]; //字体颜色
-//    [SVProgressHUD setBackgroundColor:DMColorWithRGBA(0, 0, 0, 0.6)];//背景颜色
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]]; //字体颜色
+    [SVProgressHUD setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];//背景颜色
     [SVProgressHUD setCornerRadius:5];
     
     if (!STR_IS_NIL(imageName)) {
