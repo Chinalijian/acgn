@@ -286,6 +286,8 @@
 				300DE1562024D1DD008DBCBD /* UserView.m */,
 				300DE1582024D1F9008DBCBD /* UserCell.h */,
 				300DE1592024D1F9008DBCBD /* UserCell.m */,
+				300DE1522024ACBA008DBCBD /* NickNameViewController.h */,
+				300DE1532024ACBA008DBCBD /* NickNameViewController.m */,
 				2A6F15D420246C0700B55AA7 /* ResetPsdViewController.h */,
 				2A6F15D520246C0700B55AA7 /* ResetPsdViewController.m */,
 				2A6F15D7202474F400B55AA7 /* SetPsdViewController.h */,
@@ -391,8 +393,6 @@
 			children = (
 				2ADF21C22022C3FC00559427 /* RegisterViewController.h */,
 				2ADF21C32022C3FC00559427 /* RegisterViewController.m */,
-				300DE1522024ACBA008DBCBD /* NickNameViewController.h */,
-				300DE1532024ACBA008DBCBD /* NickNameViewController.m */,
 			);
 			path = Register;
 			sourceTree = "<group>";

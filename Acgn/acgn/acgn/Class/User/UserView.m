@@ -81,6 +81,10 @@
         if ([self.delegate respondsToSelector:@selector(clickTopGotoLogin)]) {
             [self.delegate clickTopGotoLogin];
         }
+    } else {
+        if ([self.delegate respondsToSelector:@selector(clickTopGotoNikeNamePage)]) {
+            [self.delegate clickTopGotoNikeNamePage];
+        }
     }
 }
 

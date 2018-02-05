@@ -86,7 +86,8 @@
 //确认找回密码
 + (void)getFindPsdForUserSystem:(NSString *)psd phone:(NSString *)phone block:(void(^)(BOOL result))block {
     NSString *psdStr = [ATools MD5:psd];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:psdStr, @"passWord", phone, @"phone",nil];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:psdStr, @"password", phone, @"phone",nil];
+    NSLog(@"参数 = %@", dic);
     [[DMHttpClient sharedInstance] initWithUrl:DM_FindPassWord_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             block(YES);
@@ -100,9 +101,10 @@
 }
 //修改密码
 + (void)modifyPsdForUser:(NSString *)psd latestPsd:(NSString *)latestPsd block:(void(^)(BOOL result))block {
-    NSString *phone = [AccountInfo getUserPhone];
+    NSString *uID = [AccountInfo getUserID];
     NSString *psdStr = [ATools MD5:psd];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:phone, @"phone", psdStr, @"passWord", latestPsd, @"newPassWord",nil];
+    NSString *latestPsdStr = [ATools MD5:latestPsd];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:uID, @"uId", psdStr, @"password", latestPsdStr, @"newPassWord",nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_Modify_Psd_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             block(YES);
@@ -113,6 +115,21 @@
         block (NO);
     }];
 }
-
+//修改昵称
++ (void)modifyNickNameForUser:(NSString *)nickName block:(void(^)(BOOL result))block {
+    NSString *uID = [AccountInfo getUserID];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:uID, @"uid", nickName, @"userName", nil];
+    [[DMHttpClient sharedInstance] initWithUrl:DM_Modify_NickName_Url parameters:dic method:DMHttpRequestPost dataModelClass:[UserDataModel class] isMustToken:NO success:^(id responseObject) {
+        if (!OBJ_IS_NIL(responseObject)) {
+            UserDataModel *model = (UserDataModel *)responseObject;
+            [AccountInfo saveUserName:model.userName];
+            block(YES);
+        } else {
+            block(NO);
+        }
+    } failure:^(NSError *error) {
+        block (NO);
+    }];
+}
 
 @end

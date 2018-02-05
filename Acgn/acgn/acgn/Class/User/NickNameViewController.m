@@ -25,7 +25,12 @@
 }
 
 - (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array {
-
+    AccountLocalDataModel *obj = [array firstObject];
+    [AApiModel modifyNickNameForUser:obj.content block:^(BOOL result) {
+        if (result) {
+            [ATools showSVProgressHudCustom:@"" title:@"修改成功"];
+        }
+    }];
 }
 
 #pragma mark -

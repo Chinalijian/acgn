@@ -21,8 +21,9 @@
 + (void)getFindCodeConfirmSystem:(NSString *)phone code:(NSString *)code block:(void(^)(BOOL result))block;
 //确认找回密码
 + (void)getFindPsdForUserSystem:(NSString *)psd phone:(NSString *)phone block:(void(^)(BOOL result))block;
-
 //修改密码
 + (void)modifyPsdForUser:(NSString *)psd latestPsd:(NSString *)latestPsd block:(void(^)(BOOL result))block;
+//修改昵称
++ (void)modifyNickNameForUser:(NSString *)nickName block:(void(^)(BOOL result))block;
 
 @end

@@ -35,6 +35,7 @@
     self.obje = obj;
     self.titleImageView.image = [UIImage imageNamed:obj.titleImage];
     self.contentTextField.placeholder = obj.placeholder;
+    self.contentTextField.text = obj.content;
 }
 
 - (void)textChange:(NSNotification *)notification {

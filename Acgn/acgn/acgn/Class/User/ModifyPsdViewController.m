@@ -43,7 +43,7 @@
     WS(weakSelf);
     [AApiModel modifyPsdForUser:psdObj.content latestPsd:latestPsdObj1.content block:^(BOOL result) {
         if (result) {
-            
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         } else {
             
         }

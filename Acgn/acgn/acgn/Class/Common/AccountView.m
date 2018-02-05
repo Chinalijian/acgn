@@ -56,6 +56,7 @@
 - (void)initDatas {
     self.datas = [NSMutableArray array];
     self.buttonTitle = @"确定";
+    NSString *content = @"";
     switch (self.aType) {
         case AAccountType_Login:
             self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"psd_icon", nil];
@@ -78,6 +79,7 @@
         case AAccountType_NickName:
             self.titleImages = [NSArray arrayWithObjects:@"name_icon", nil];
             self.placeholders = [NSArray arrayWithObjects:@"我的昵称", nil];
+            content = [AccountInfo getUserName];
             break;
         case AAccountType_ChangePsd:
             self.titleImages = [NSArray arrayWithObjects:@"psd_icon", @"psd_icon", @"psd_icon", nil];
@@ -90,7 +92,7 @@
         AccountLocalDataModel *model = [[AccountLocalDataModel alloc] init];
         model.placeholder = [self.placeholders objectAtIndex:i];
         model.titleImage = [self.titleImages objectAtIndex:i];
-        model.content = @"";
+        model.content = content;
         [self.datas addObject:model];
     }
 }
@@ -182,16 +184,21 @@
     if (!cell) {
         cell = [[AccountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accCell];
     }
+    
     [cell configInfo:[self.datas objectAtIndex:indexPath.row]];
+    
     if (self.aType == AAccountType_Login) {
         if (indexPath.row == 1) {
             [cell textSwitchSecure:YES];
         } else {
             [cell textSwitchSecure:NO];
         }
+    } else if (self.aType == AAccountType_SetPsd || self.aType == AAccountType_ChangePsd) {
+        [cell textSwitchSecure:YES];
     } else {
         [cell textSwitchSecure:NO];
     }
+    
     if (self.aType == AAccountType_Register || self.aType == AAccountType_ResetPsd) {
         if (indexPath.row == 1) {
             [cell.bgView layoutIfNeeded];

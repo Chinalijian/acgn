@@ -9,6 +9,7 @@
 #import "ResetPsdViewController.h"
 #import "AccountView.h"
 #import "SetPsdViewController.h"
+
 @interface ResetPsdViewController ()<AccountViewDelegate>
 @property (nonatomic, strong) AccountView *aView;
 

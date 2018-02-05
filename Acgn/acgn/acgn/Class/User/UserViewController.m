@@ -10,6 +10,8 @@
 #import "UserView.h"
 #import "AboutViewController.h"
 #import "ModifyPsdViewController.h"
+#import "NickNameViewController.h"
+
 @interface UserViewController () <UserViewDelegate>
 @property (nonatomic, strong) UserView *userView;
 @end
@@ -31,7 +33,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [IQKeyboardManager sharedManager].enable = YES;
     [self loadUI];
-    [self notificationAll];
+    //[self notificationAll];
 }
 
 - (void)updateUserInfo:(NSNotification *)notification {
@@ -39,8 +41,13 @@
 }
 
 - (void)clickTopGotoLogin {
-        LoginViewController *loginVC = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:loginVC animated:YES];
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:loginVC animated:YES];
+}
+
+- (void)clickTopGotoNikeNamePage {
+    NickNameViewController *nickNameVC = [[NickNameViewController alloc] init];
+    [self.navigationController pushViewController:nickNameVC animated:YES];
 }
 
 - (void)goToPage:(AAccountType)type {
@@ -83,6 +90,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
     [self setNavigationBarTransparence:YES titleColor:[UIColor whiteColor]];
+    [_userView updateUserInfo];
 }
 
 - (void)didReceiveMemoryWarning {
