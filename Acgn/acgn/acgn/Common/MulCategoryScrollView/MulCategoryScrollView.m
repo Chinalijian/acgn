@@ -52,6 +52,7 @@
 //滚动过程中获取当前索引
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     int index = ([scrollView contentOffset].x+scrollView.frame.size.width/2)/scrollView.frame.size.width;
+    NSLog(@"当前索引 = %d", index);
 //    if (index>=0 && index<[_segmentTitleArray count]) {
 //        self.segmentView.index = index;
 //        if ([self indexChanged:index]) {
@@ -60,7 +61,7 @@
 //    }
 }
 
-- (BOOL)indexChanged:(int)index{
+- (BOOL)indexChanged:(int)index {
     if (lastIndex !=index) {
         lastIndex = index;
         return YES;

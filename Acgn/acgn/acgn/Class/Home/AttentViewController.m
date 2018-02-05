@@ -7,9 +7,9 @@
 //
 
 #import "AttentViewController.h"
-
-@interface AttentViewController ()
-
+#import "AttentionPeopleList.h"
+@interface AttentViewController () <AttentionPeopleListDelegate>
+@property (nonatomic, strong) AttentionPeopleList *apListView;
 @end
 
 @implementation AttentViewController
@@ -18,6 +18,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:self.apListView];
+}
+
+- (void)clickAttentButton:(id)sender {
+    //判断是否登录，没登录去登录页面，登录的话去首页
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:loginVC animated:YES];
+}
+
+-(AttentionPeopleList *)apListView{
+    if (_apListView == nil) {
+        _apListView = [[AttentionPeopleList alloc] initWithFrame:CGRectMake(0, 0, DMScreenWidth, DMScreenHeight-DMNavigationBarHeight) delegate:self];
+        _apListView.backgroundColor = [UIColor whiteColor];
+    }
+    return _apListView;
 }
 
 - (void)didReceiveMemoryWarning {

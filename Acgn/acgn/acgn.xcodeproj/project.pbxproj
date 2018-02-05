@@ -50,6 +50,9 @@
 		309D903D2025943C002F414F /* UserDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903C2025943C002F414F /* UserDataModel.m */; };
 		309D904020259747002F414F /* AccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903F20259747002F414F /* AccountInfo.m */; };
 		309D905120259A84002F414F /* DMUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D905020259A84002F414F /* DMUserDefaults.m */; };
+		30FD391A2028BA3700F26185 /* PeopleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FD39192028BA3700F26185 /* PeopleListCell.m */; };
+		30FD391D2028C77500F26185 /* PeopleSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FD391C2028C77500F26185 /* PeopleSubView.m */; };
+		30FD39232028D0E000F26185 /* PeopleListDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FD39222028D0E000F26185 /* PeopleListDataModel.m */; };
 		79407EF8AA25CCA0EAA39FE3 /* libPods-acgn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B66A192853DD68A87F7C5CED /* libPods-acgn.a */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +165,12 @@
 		309D903F20259747002F414F /* AccountInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountInfo.m; sourceTree = "<group>"; };
 		309D904F20259A84002F414F /* DMUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMUserDefaults.h; sourceTree = "<group>"; };
 		309D905020259A84002F414F /* DMUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMUserDefaults.m; sourceTree = "<group>"; };
+		30FD39182028BA3700F26185 /* PeopleListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleListCell.h; sourceTree = "<group>"; };
+		30FD39192028BA3700F26185 /* PeopleListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleListCell.m; sourceTree = "<group>"; };
+		30FD391B2028C77500F26185 /* PeopleSubView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleSubView.h; sourceTree = "<group>"; };
+		30FD391C2028C77500F26185 /* PeopleSubView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleSubView.m; sourceTree = "<group>"; };
+		30FD39212028D0E000F26185 /* PeopleListDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleListDataModel.h; sourceTree = "<group>"; };
+		30FD39222028D0E000F26185 /* PeopleListDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleListDataModel.m; sourceTree = "<group>"; };
 		A7871710CF22D01137EF685A /* Pods-acgn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-acgn.release.xcconfig"; path = "Pods/Target Support Files/Pods-acgn/Pods-acgn.release.xcconfig"; sourceTree = "<group>"; };
 		B66A192853DD68A87F7C5CED /* libPods-acgn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-acgn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -284,12 +293,18 @@
 				2A704B1B2022C37600476D68 /* HomeViewController.m */,
 				2ADF21C62022DF1600559427 /* AttentionPeopleList.h */,
 				2ADF21C72022DF1600559427 /* AttentionPeopleList.m */,
+				30FD39182028BA3700F26185 /* PeopleListCell.h */,
+				30FD39192028BA3700F26185 /* PeopleListCell.m */,
+				30FD391B2028C77500F26185 /* PeopleSubView.h */,
+				30FD391C2028C77500F26185 /* PeopleSubView.m */,
 				3048356220279F5F00DAAE3F /* AttentViewController.h */,
 				3048356320279F5F00DAAE3F /* AttentViewController.m */,
 				3048356520279FA000DAAE3F /* SquareViewController.h */,
 				3048356620279FA000DAAE3F /* SquareViewController.m */,
 				2A65145F2028571C00737DEF /* ContentBaseViewController.h */,
 				2A6514602028571C00737DEF /* ContentBaseViewController.m */,
+				30FD39212028D0E000F26185 /* PeopleListDataModel.h */,
+				30FD39222028D0E000F26185 /* PeopleListDataModel.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -672,10 +687,13 @@
 				2A6514612028571C00737DEF /* ContentBaseViewController.m in Sources */,
 				309D903A20259373002F414F /* ABaseDataModel.m in Sources */,
 				300DE1572024D1DD008DBCBD /* UserView.m in Sources */,
+				30FD391D2028C77500F26185 /* PeopleSubView.m in Sources */,
 				309D905120259A84002F414F /* DMUserDefaults.m in Sources */,
+				30FD39232028D0E000F26185 /* PeopleListDataModel.m in Sources */,
 				3048355820273B5A00DAAE3F /* YLSwitch.m in Sources */,
 				2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */,
 				2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */,
+				30FD391A2028BA3700F26185 /* PeopleListCell.m in Sources */,
 				3048356120279F3B00DAAE3F /* MyFavViewController.m in Sources */,
 				2A6F15D9202474F400B55AA7 /* SetPsdViewController.m in Sources */,
 				2A704B1C2022C37600476D68 /* HomeViewController.m in Sources */,

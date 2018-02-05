@@ -12,8 +12,9 @@
 - (void)clickAttentButton:(id)sender;
 @end
 
-@interface AttentionPeopleList : UIView
+@interface AttentionPeopleList : UIView<UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) UITableView *aTableView;
 @property (nonatomic, weak) id <AttentionPeopleListDelegate>delegate;
-@property (nonatomic, strong) NSArray *datas;
+@property (nonatomic, strong) NSMutableArray *datas;
 - (id)initWithFrame:(CGRect)frame delegate:(id<AttentionPeopleListDelegate>) delegate;
 @end

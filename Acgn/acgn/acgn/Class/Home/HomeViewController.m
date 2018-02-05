@@ -12,8 +12,8 @@
 #import "YLSwitch.h"
 #import "ContentBaseViewController.h"
 #import "MulCategoryScrollView.h"
-@interface HomeViewController () <AttentionPeopleListDelegate,YLSwitchDelegate>
-@property (nonatomic, strong) AttentionPeopleList *apListView;
+@interface HomeViewController () <YLSwitchDelegate>
+
 @property (nonatomic, strong) NSMutableArray *categoryCtrNameArray;
 @property (nonatomic, strong) NSMutableArray *categoryCtrArray;
 @end
@@ -42,7 +42,7 @@
     mySwitch.leftTitle = @"关注";
     mySwitch.rightTitle = @"广场";
     self.navigationItem.titleView  = mySwitch;
-    [self.view addSubview:self.apListView];
+
     
     [self addMulCategoryScrollView];
 }
@@ -78,19 +78,6 @@
     [self.view addSubview:mulCSV];
 }
 
--(AttentionPeopleList *)apListView{
-    if (_apListView == nil) {
-        _apListView = [[AttentionPeopleList alloc] initWithFrame:CGRectMake(0, 0, DMScreenWidth, DMScreenHeight-DMNavigationBarHeight) delegate:self];
-        _apListView.backgroundColor = [UIColor whiteColor];
-    }
-    return _apListView;
-}
-
-- (void)clickAttentButton:(id)sender {
-    //判断是否登录，没登录去登录页面，登录的话去首页
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
-    [self.navigationController pushViewController:loginVC animated:YES];
-}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
     //[self.navigationController setNavigationBarHidden:NO];
