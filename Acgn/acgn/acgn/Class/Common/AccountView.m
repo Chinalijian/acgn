@@ -97,6 +97,14 @@
     }
 }
 
+- (void)updateHeadUrlAndNickName {
+    if (self.aType == AAccountType_NickName) {
+        [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:[AccountInfo getUserHeadUrl]]
+                              placeholderImage:[UIImage imageNamed:@"public_logo"]];
+        self.logoNameLabel.text = [AccountInfo getUserName];
+    }
+}
+
 - (void)addTimerForCode {
     // 加1个计时器
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
@@ -158,6 +166,12 @@
         [self.delegate clickGetCode:sender obj:[self.datas firstObject]];
     }
     [self timeFailBeginFrom:Time_Count];
+}
+
+- (void)clickCamera:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(clickCameraForUser:)]) {
+        [self.delegate clickCameraForUser:sender];
+    }
 }
 
 #pragma mark UITableView Delegate
@@ -230,7 +244,6 @@
     return 0;
 }
 
-
 #pragma make - UI init
 - (void)initGetCodeButton:(UIView *)view {
     UIButton *codeBtn = [[UIButton alloc] init];
@@ -252,6 +265,37 @@
     
 }
 
+- (void)initUpdateHeadImageUrl {
+    
+    UIView *cameraBgView = [[UIView alloc] init];
+    cameraBgView.backgroundColor = [UIColor blackColor];
+    cameraBgView.alpha = .5;
+    [_topImageView addSubview:cameraBgView];
+    
+    UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cameraButton setImage:[UIImage imageNamed:@"camera_icon"] forState:UIControlStateNormal];
+    [cameraButton addTarget:self action:@selector(clickCamera:) forControlEvents:UIControlEventTouchUpInside];
+    [_topImageView addSubview:cameraButton];
+    
+    [cameraBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_topImageView).mas_offset(80);
+        make.height.mas_offset(70.5);
+        make.width.mas_offset(70.5);
+        make.centerX.mas_equalTo(_topImageView);
+    }];
+    [cameraButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_topImageView).mas_offset(80);
+        make.height.mas_offset(70.5);
+        make.width.mas_offset(70.5);
+        make.centerX.mas_equalTo(_topImageView);
+    }];
+    
+    [cameraBgView layoutIfNeeded];
+    cameraBgView.layer.cornerRadius = cameraBgView.frame.size.height/2;
+    cameraBgView.layer.borderColor =  [UIColor redColor].CGColor;//UIColorFromRGB(0xE96A79).CGColor;
+    cameraBgView.layer.borderWidth = 1;
+}
+
 - (void)loadUI {
     
     [self addSubview:self.aTableView];
@@ -266,8 +310,12 @@
     if (self.aType == AAccountType_Login) {
         [self setupMakeBottomViewSubViewsLayout];
         [self setupButtonEdgeInsetsMake];
+    } else if (self.aType == AAccountType_NickName) {
+         [_logoImageView layoutIfNeeded];
+        _logoImageView.layer.cornerRadius = _logoImageView.frame.size.height/2;
+        _logoNameLabel.text = [AccountInfo getUserName];
+        [self initUpdateHeadImageUrl];
     }
-
 }
 
 - (void)loadSubViewForFooter {

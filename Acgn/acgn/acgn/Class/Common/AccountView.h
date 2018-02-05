@@ -17,11 +17,15 @@
 - (void)clickThirdPartyWecat:(id)sender;
 - (void)clickThirdPartyWeibo:(id)sender;
 - (void)clickGetCode:(id)sender obj:(AccountLocalDataModel *)obj;
-
+- (void)clickCameraForUser:(id)sender;
 @end
 
 @interface AccountView : UIView <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *aTableView;
 @property (nonatomic, weak) id <AccountViewDelegate> delegate;
 - (id)initWithFrame:(CGRect)frame type:(AAccountType)type;
+
+//update headUrl or nickName
+- (void)updateHeadUrlAndNickName;
+
 @end

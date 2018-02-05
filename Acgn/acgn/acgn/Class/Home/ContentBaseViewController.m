@@ -1,23 +1,22 @@
 //
-//  AttentViewController.m
+//  ContentBaseViewController.m
 //  acgn
 //
-//  Created by lijian on 2018/2/5.
+//  Created by Ares on 2018/2/5.
 //  Copyright © 2018年 Jian LI. All rights reserved.
 //
 
-#import "AttentViewController.h"
+#import "ContentBaseViewController.h"
 
-@interface AttentViewController ()
+@interface ContentBaseViewController ()
 
 @end
 
-@implementation AttentViewController
+@implementation ContentBaseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor greenColor];
 }
 
 - (void)didReceiveMemoryWarning {

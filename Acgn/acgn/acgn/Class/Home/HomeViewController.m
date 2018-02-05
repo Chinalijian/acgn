@@ -10,12 +10,17 @@
 #import "AttentionPeopleList.h"
 #import "UserViewController.h"
 #import "YLSwitch.h"
+#import "ContentBaseViewController.h"
+#import "MulCategoryScrollView.h"
 @interface HomeViewController () <AttentionPeopleListDelegate,YLSwitchDelegate>
 @property (nonatomic, strong) AttentionPeopleList *apListView;
+@property (nonatomic, strong) NSMutableArray *categoryCtrNameArray;
+@property (nonatomic, strong) NSMutableArray *categoryCtrArray;
 @end
 
 @implementation HomeViewController
-
+#define H_AttentVC        @"AttentViewController"
+#define H_SquareVC        @"SquareViewController"
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -37,11 +42,11 @@
     mySwitch.leftTitle = @"关注";
     mySwitch.rightTitle = @"广场";
     self.navigationItem.titleView  = mySwitch;
-    
     [self.view addSubview:self.apListView];
+    
+    [self addMulCategoryScrollView];
 }
 #pragma mark -- YLSwitchDelegate
-
 - (void)switchState:(UIView *)view leftTitle:(NSString *)title {
     if (view.tag == 1) {
         NSLog(@"导航栏switch");
@@ -54,6 +59,23 @@
         NSLog(@"导航栏switch");
     }
     NSLog(@"%@",title);
+}
+
+- (void)addMulCategoryScrollView {
+    self.categoryCtrNameArray = [NSMutableArray arrayWithObjects:H_AttentVC, H_SquareVC, nil];
+    self.categoryCtrArray = [NSMutableArray array];
+    NSMutableArray *viewsArray = [NSMutableArray array];
+    for (int i = 0; i<[self.categoryCtrNameArray count]; i++) {
+        ContentBaseViewController *ctr = [[NSClassFromString([self.categoryCtrNameArray objectAtIndex:i]) alloc] init];
+        [self.categoryCtrArray addObject:ctr];
+        [viewsArray addObject:ctr.view];
+        [self addChildViewController:ctr];
+    }
+    CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, DMScreenHeight-64);
+    __weak typeof(self)bsel = self;
+    MulCategoryScrollView *mulCSV = [[MulCategoryScrollView alloc] initWithFrame:rect andViews:viewsArray andIndexBlock:^(NSInteger index,id obj) {
+    }];
+    [self.view addSubview:mulCSV];
 }
 
 -(AttentionPeopleList *)apListView{

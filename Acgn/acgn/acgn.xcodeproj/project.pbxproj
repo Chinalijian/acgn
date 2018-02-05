@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A65145E20284B7D00737DEF /* MulCategoryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */; };
+		2A6514612028571C00737DEF /* ContentBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6514602028571C00737DEF /* ContentBaseViewController.m */; };
 		2A6B1443202458CD00EA4A26 /* AccountLocalDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B1442202458CD00EA4A26 /* AccountLocalDataModel.m */; };
 		2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B144620245B9F00EA4A26 /* AApiModel.m */; };
 		2A6F15D220245CE700B55AA7 /* DMRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F15CD20245CE600B55AA7 /* DMRequestModel.m */; };
@@ -70,6 +72,10 @@
 
 /* Begin PBXFileReference section */
 		0D9B2E6DCABBD16AD945B837 /* Pods-acgn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-acgn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-acgn/Pods-acgn.debug.xcconfig"; sourceTree = "<group>"; };
+		2A65145A20284B7D00737DEF /* MulCategoryScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulCategoryScrollView.h; sourceTree = "<group>"; };
+		2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulCategoryScrollView.m; sourceTree = "<group>"; };
+		2A65145F2028571C00737DEF /* ContentBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBaseViewController.h; sourceTree = "<group>"; };
+		2A6514602028571C00737DEF /* ContentBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentBaseViewController.m; sourceTree = "<group>"; };
 		2A6B1441202458CD00EA4A26 /* AccountLocalDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountLocalDataModel.h; sourceTree = "<group>"; };
 		2A6B1442202458CD00EA4A26 /* AccountLocalDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountLocalDataModel.m; sourceTree = "<group>"; };
 		2A6B144520245B9F00EA4A26 /* AApiModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AApiModel.h; sourceTree = "<group>"; };
@@ -196,6 +202,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2A65145820284B7D00737DEF /* MulCategoryScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				2A65145A20284B7D00737DEF /* MulCategoryScrollView.h */,
+				2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */,
+			);
+			path = MulCategoryScrollView;
+			sourceTree = "<group>";
+		};
 		2A6B144420245B8D00EA4A26 /* ApiModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +288,8 @@
 				3048356320279F5F00DAAE3F /* AttentViewController.m */,
 				3048356520279FA000DAAE3F /* SquareViewController.h */,
 				3048356620279FA000DAAE3F /* SquareViewController.m */,
+				2A65145F2028571C00737DEF /* ContentBaseViewController.h */,
+				2A6514602028571C00737DEF /* ContentBaseViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -419,6 +436,7 @@
 		309D904A20259A26002F414F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2A65145820284B7D00737DEF /* MulCategoryScrollView */,
 				309D904B20259A26002F414F /* DMUserDefaults */,
 			);
 			path = Common;
@@ -651,6 +669,7 @@
 				2A7CFAAF202415B900CBE495 /* AccountCell.m in Sources */,
 				3048355B20278A9500DAAE3F /* ModifyPsdViewController.m in Sources */,
 				2ADF21C12022C3EA00559427 /* LoginViewController.m in Sources */,
+				2A6514612028571C00737DEF /* ContentBaseViewController.m in Sources */,
 				309D903A20259373002F414F /* ABaseDataModel.m in Sources */,
 				300DE1572024D1DD008DBCBD /* UserView.m in Sources */,
 				309D905120259A84002F414F /* DMUserDefaults.m in Sources */,
@@ -671,6 +690,7 @@
 				300DE15A2024D1F9008DBCBD /* UserCell.m in Sources */,
 				2ADF21C42022C3FC00559427 /* RegisterViewController.m in Sources */,
 				3048356720279FA000DAAE3F /* SquareViewController.m in Sources */,
+				2A65145E20284B7D00737DEF /* MulCategoryScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

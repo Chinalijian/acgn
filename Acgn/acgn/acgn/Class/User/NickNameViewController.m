@@ -26,11 +26,18 @@
 
 - (void)clickAccountSure:(id)sender datas:(NSMutableArray *)array {
     AccountLocalDataModel *obj = [array firstObject];
+    WS(weakSelf);
     [AApiModel modifyNickNameForUser:obj.content block:^(BOOL result) {
         if (result) {
+            [weakSelf.aView updateHeadUrlAndNickName];
             [ATools showSVProgressHudCustom:@"" title:@"修改成功"];
         }
     }];
+}
+
+- (void)clickCameraForUser:(id)sender {
+    
+    [self.aView updateHeadUrlAndNickName];
 }
 
 #pragma mark -

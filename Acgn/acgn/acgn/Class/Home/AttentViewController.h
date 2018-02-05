@@ -6,8 +6,8 @@
 //  Copyright © 2018年 Jian LI. All rights reserved.
 //
 
-#import "ABaseViewController.h"
+#import "ContentBaseViewController.h"
 
-@interface AttentViewController : ABaseViewController
+@interface AttentViewController : ContentBaseViewController
 
 @end
