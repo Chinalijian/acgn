@@ -17,4 +17,5 @@
 @property (nonatomic, weak) id <AttentionPeopleListDelegate>delegate;
 @property (nonatomic, strong) NSMutableArray *datas;
 - (id)initWithFrame:(CGRect)frame delegate:(id<AttentionPeopleListDelegate>) delegate;
+- (void)updateList:(NSMutableArray *)array;
 @end

@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "PeopleListDataModel.h"
+#import "PeopleSubView.h"
 #define People_List_Cell_H 316
 @interface PeopleListCell : UITableViewCell
+@property (nonatomic, strong) PeopleSubView *leftView;
+@property (nonatomic, strong) PeopleSubView *rightView;
 - (void)configPeopleInfo:(PeopleDataModel *)objL objRight:(PeopleDataModel *)objR;
 @end

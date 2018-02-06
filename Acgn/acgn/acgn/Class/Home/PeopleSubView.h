@@ -15,4 +15,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *fansLabel;
 @property (nonatomic, strong) UIImageView *selectedImageView;
+
+@property (nonatomic, strong) UIButton *selectedBtn;
+
 @end

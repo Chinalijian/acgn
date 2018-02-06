@@ -25,5 +25,6 @@
 + (void)modifyPsdForUser:(NSString *)psd latestPsd:(NSString *)latestPsd block:(void(^)(BOOL result))block;
 //修改昵称
 + (void)modifyNickNameForUser:(NSString *)nickName block:(void(^)(BOOL result))block;
-
+//获取首页角色列表
++ (void)getRoleListForHome:(NSString *)lastID block:(void(^)(BOOL result, NSArray *array))block;
 @end

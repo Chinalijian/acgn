@@ -25,6 +25,7 @@
     [self addSubview:self.fansLabel];
     [self addSubview:self.selectedImageView];
     [self addSubview:self.lineLabel];
+    [self addSubview:self.selectedBtn];
     [self setupMakeTopViewSubViewsLayout];
 }
 
@@ -71,6 +72,13 @@
         make.width.mas_offset(30);
         make.height.mas_offset(30);
         make.centerX.mas_equalTo(self);
+    }];
+    
+    [self.selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_peopleImageView).mas_offset(0);
+        make.left.mas_equalTo(self).mas_offset(0);
+        make.right.mas_equalTo(self).mas_offset(0);
+        make.bottom.mas_equalTo(self.selectedImageView.mas_bottom).mas_offset(0);
     }];
 }
 
@@ -131,6 +139,14 @@
         _selectedImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _selectedImageView;
+}
+
+- (UIButton *)selectedBtn {
+    if (_selectedBtn == nil) {
+        _selectedBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _selectedBtn.backgroundColor = [UIColor clearColor];
+    }
+    return _selectedBtn;
 }
 
 

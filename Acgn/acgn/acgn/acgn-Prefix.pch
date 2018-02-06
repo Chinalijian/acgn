@@ -24,6 +24,8 @@
 #import "ADefine.h"
 #import "AEnums.h"
 
+#import "PeopleListDataModel.h"
+
 #import "AApiModel.h"
 
 #import "ComonTop.h"

@@ -43,6 +43,8 @@
 #define DM_Modify_Psd_Url               [DM_Url stringByAppendingFormat:@"user/updatePassword"]
 //修改昵称
 #define DM_Modify_NickName_Url          [DM_Url stringByAppendingFormat:@"user/updateUserName"]
+//首页角色列表
+#define DM_Role_List_Url                [DM_Url stringByAppendingFormat:@"role/roleList"]
 
 //老师课程列表
 #define DM_User_Tcourse_List_Url        [DM_Url stringByAppendingFormat:@"lesson/tcourseList"]

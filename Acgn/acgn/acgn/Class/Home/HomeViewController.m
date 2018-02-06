@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSMutableArray *categoryCtrNameArray;
 @property (nonatomic, strong) NSMutableArray *categoryCtrArray;
+
 @end
 
 @implementation HomeViewController
@@ -32,6 +33,7 @@
     UserViewController *userVC = [[UserViewController alloc] init];
     [self.navigationController pushViewController:userVC animated:YES];
 }
+
 
 - (void)loadUI {
     

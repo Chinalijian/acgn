@@ -18,41 +18,56 @@
 @property (nonatomic, strong) UILabel *smallTitleLabel;
 
 @end
-//http://img.ui.cn/data/file/5/0/0/1574005.png
-//http://img.ui.cn/data/file/8/0/0/1574008.png
-//http://img.ui.cn/data/file/7/0/0/1574007.png
-//http://img.ui.cn/data/file/1/8/9/1573981.png
-//http://img.ui.cn/data/file/1/7/9/1573971.png
+
 @implementation AttentionPeopleList
+
+- (void)testData {
+    NSArray *array = [NSArray arrayWithObjects:
+                      @"http://img.ui.cn/data/file/5/0/0/1574005.png",
+                      @"http://img.ui.cn/data/file/8/0/0/1574008.png",
+                      @"http://img.ui.cn/data/file/7/0/0/1574007.png",
+                      @"http://img.ui.cn/data/file/1/8/9/1573981.png",
+                      @"http://img.ui.cn/data/file/1/7/9/1573971.png", nil];
+    for (int i = 0; i < array.count; i ++) {
+        PeopleDataModel *obj = [[PeopleDataModel alloc] init];
+        obj.imageUrl = [array objectAtIndex:i];
+        obj.userName = [NSString stringWithFormat:@"东方红叶%d", i];
+        obj.fansNum = [NSString stringWithFormat:@"%d", i+100];
+        obj.source = [NSString stringWithFormat:@"中国%d", i];
+        [self.datas addObject:obj];
+    }
+
+}
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<AttentionPeopleListDelegate>) delegate {
     self = [super initWithFrame:frame];
     if (self) {
         self.delegate = delegate;
         self.datas = [NSMutableArray array];
-        NSArray *array = [NSArray arrayWithObjects:
-                          @"http://img.ui.cn/data/file/5/0/0/1574005.png",
-                          @"http://img.ui.cn/data/file/8/0/0/1574008.png",
-                          @"http://img.ui.cn/data/file/7/0/0/1574007.png",
-                          @"http://img.ui.cn/data/file/1/8/9/1573981.png",
-                          @"http://img.ui.cn/data/file/1/7/9/1573971.png", nil];
-        for (int i = 0; i < array.count; i ++) {
-            PeopleDataModel *obj = [[PeopleDataModel alloc] init];
-            obj.imageUrl = [array objectAtIndex:i];
-            obj.userName = [NSString stringWithFormat:@"东方红叶%d", i];
-            obj.fansNum = [NSString stringWithFormat:@"%d", i+100];
-            obj.source = [NSString stringWithFormat:@"中国%d", i];
-            [self.datas addObject:obj];
-        }
+        //[self testData];
         [self loadUI];
     }
     return self;
+}
+
+- (void)updateList:(NSMutableArray *)array {
+    self.datas = array;
+    [self.aTableView reloadData];
 }
 
 - (void)clickAttentButton:(id)sender {
     if ([self.delegate respondsToSelector:@selector(clickAttentButton:)]) {
         [self.delegate clickAttentButton:sender];
     }
+}
+
+- (void)clickSelectedPeople:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    if (btn.tag < self.datas.count) {
+        PeopleDataModel *obj = [self.datas objectAtIndex:btn.tag];
+        obj.isSelected = !obj.isSelected;
+    }
+    [self.aTableView reloadData];
 }
 
 #pragma mark UITableView Delegate
@@ -78,9 +93,13 @@
     PeopleListCell *cell = [tableView dequeueReusableCellWithIdentifier:peopleCell];
     if (!cell) {
         cell = [[PeopleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:peopleCell];
+        [cell.leftView.selectedBtn addTarget:self action:@selector(clickSelectedPeople:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.rightView.selectedBtn addTarget:self action:@selector(clickSelectedPeople:) forControlEvents:UIControlEventTouchUpInside];
     }
    
     if (self.datas.count > 0) {
+        cell.leftView.selectedBtn.tag = indexPath.row*2;
+        cell.rightView.selectedBtn.tag = indexPath.row*2+1;
         if (indexPath.row < self.datas.count/2+self.datas.count%2) {
             if (self.datas.count%2 != 0 && indexPath.row == self.datas.count/2) {
                 //奇数

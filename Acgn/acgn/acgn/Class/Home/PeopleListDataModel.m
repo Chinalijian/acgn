@@ -9,13 +9,19 @@
 #import "PeopleListDataModel.h"
 
 @implementation PeopleDataModel
-
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _isSelected = YES;
+    }
+    return self;
+}
 @end
 
 @implementation PeopleListDataModel
 +(NSDictionary *)mj_objectClassInArray {
     return @{
-             @"data" : @"DMCourseDatasModel"
+             @"data" : @"PeopleDataModel"
              };
 }
 @end

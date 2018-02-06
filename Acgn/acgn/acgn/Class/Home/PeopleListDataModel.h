@@ -18,10 +18,14 @@
 @property (nonatomic, copy) NSString * identity;
 @property (nonatomic, copy) NSString * birthday;
 @property (nonatomic, copy) NSString * hight;
-@property (nonatomic, copy) NSString * hasFollow;
 @property (nonatomic, copy) NSString * fansNum;
 @property (nonatomic, copy) NSString * postList;
 @property (nonatomic, copy) NSString * userName;
+@property (nonatomic, copy) NSString * hasFollow;
+
+//本地字段
+@property (nonatomic, assign) BOOL isSelected;
+
 @end
 
 @interface PeopleListDataModel : NSObject

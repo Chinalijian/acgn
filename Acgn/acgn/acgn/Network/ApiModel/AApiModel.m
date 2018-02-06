@@ -8,6 +8,7 @@
 
 #import "AApiModel.h"
 #import "DMHttpClient.h"
+
 @implementation AApiModel
 //登录
 + (void)loginSystem:(NSString *)account psd:(NSString *)password block:(void(^)(BOOL result))block {
@@ -131,5 +132,18 @@
         block (NO);
     }];
 }
-
+//获取首页角色列表
++ (void)getRoleListForHome:(NSString *)lastID block:(void(^)(BOOL result, NSArray *array))block {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"", @"lastId", @"20", @"rowPage", nil];
+    [[DMHttpClient sharedInstance] initWithUrl:DM_Role_List_Url parameters:dic method:DMHttpRequestPost dataModelClass:[PeopleListDataModel class] isMustToken:NO success:^(id responseObject) {
+        if (!OBJ_IS_NIL(responseObject)) {
+            PeopleListDataModel *model = (PeopleListDataModel *)responseObject;
+            block(YES, model.data);
+        } else {
+            block(NO, nil);
+        }
+    } failure:^(NSError *error) {
+        block (NO, nil);
+    }];
+}
 @end
