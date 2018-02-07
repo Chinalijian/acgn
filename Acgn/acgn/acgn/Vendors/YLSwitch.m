@@ -168,31 +168,50 @@
 #pragma mark -- 左右两侧点击事件
 
 - (void)leftButton:(UIButton *)button {
+    [self moveToLeft];
+    [self.delegate switchState:self leftTitle:_leftTitles != nil?_leftTitles:self.leftButton.titleLabel.text];
+}
+
+- (void)rightButton:(UIButton *)button {
+    [self moveToRight];
+    [self.delegate switchState:self rightTitle:_rightTitles != nil?_rightTitles:self.rightButton.titleLabel.text];
+}
+
+- (void)moveToLeft {
     _isSelectedIndex = 0;
     //向左
     [self.thumbView setTitle:_leftTitles != nil ? _leftTitles : self.leftButton.titleLabel.text forState:UIControlStateNormal];
     [UIView animateWithDuration:0.3 animations:^{
         self.thumbView.frame = CGRectMake(1, 1, CGRectGetWidth(self.frame) / 2 - 1, CGRectGetHeight(self.frame) - 2);
-
+        
     } completion:^(BOOL finished) {
-
+        
     }];
-    [self.delegate switchState:self leftTitle:_leftTitles != nil?_leftTitles:self.leftButton.titleLabel.text];
-
 }
 
-- (void)rightButton:(UIButton *)button {
+- (void)moveToRight {
     _isSelectedIndex = 1;
     //向右
     [self.thumbView setTitle:_rightTitles != nil?_rightTitles:self.rightButton.titleLabel.text forState:UIControlStateNormal];
     [UIView animateWithDuration:0.3 animations:^{
         self.thumbView.frame = CGRectMake(CGRectGetWidth(self.frame) / 2 -1 + 1, 1, CGRectGetWidth(self.frame) / 2 - 1, CGRectGetHeight(self.frame) - 2);
-
+        
     } completion:^(BOOL finished) {
-
+        
     }];
-
-    [self.delegate switchState:self rightTitle:_rightTitles != nil?_rightTitles:self.rightButton.titleLabel.text];
-
+    
 }
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+

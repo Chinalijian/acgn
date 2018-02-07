@@ -7,6 +7,8 @@
 //
 #import <UIKit/UIKit.h>
 
+typedef void (^MulCategoryIndexChangeBlock)(int);
+
 @interface MulCategoryScrollView : UIView<UIScrollViewDelegate>{
     int lastIndex;
 }
@@ -15,11 +17,10 @@
 @property(nonatomic,strong)UIScrollView *viewScroll;
 
 @property(nonatomic,strong)UIViewController *parentCtr;
-//
-//@property(nonatomic,copy)CBlock_getIndexAndObj indexChangeBlock;
-//
-//- (void)setIndexChangeBlock:(CBlock_getIndexAndObj)aIndexChangeBlock;
 
-- (instancetype)initWithFrame:(CGRect)frame andViews:(NSArray *)views andIndexBlock:(void(^)(NSInteger index,id obj))indexChangeBlock;
+@property(nonatomic,copy)MulCategoryIndexChangeBlock indexChangeBlock;
+- (void)setIndexChangeBlock:(MulCategoryIndexChangeBlock)aIndexChangeBlock;
+- (void)clickIndex:(int)index;
+- (instancetype)initWithFrame:(CGRect)frame andViews:(NSArray *)views andIndexBlock:(void(^)(int index))indexChangeBlock;
 
 @end

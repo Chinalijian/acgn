@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) NSMutableArray *categoryCtrNameArray;
 @property (nonatomic, strong) NSMutableArray *categoryCtrArray;
+@property (nonatomic, strong) MulCategoryScrollView *mulCSV;
+@property (nonatomic, strong) YLSwitch *mySwitch;
 
 @end
 
@@ -37,21 +39,21 @@
 
 - (void)loadUI {
     
-    YLSwitch *mySwitch = [[YLSwitch alloc] initWithFrame:CGRectMake(0, 0, 128, 30)];
-    mySwitch.tag = 1;
-    mySwitch.isSelectedIndex = 0;
-    mySwitch.delegate = self;
-    mySwitch.leftTitle = @"关注";
-    mySwitch.rightTitle = @"广场";
-    self.navigationItem.titleView  = mySwitch;
+    self.mySwitch = [[YLSwitch alloc] initWithFrame:CGRectMake(0, 0, 128, 30)];
+    self.mySwitch.tag = 1;
+    self.mySwitch.isSelectedIndex = 0;
+    self.mySwitch.delegate = self;
+    self.mySwitch.leftTitle = @"关注";
+    self.mySwitch.rightTitle = @"广场";
+    self.navigationItem.titleView  = self.mySwitch;
 
-    
     [self addMulCategoryScrollView];
 }
 #pragma mark -- YLSwitchDelegate
 - (void)switchState:(UIView *)view leftTitle:(NSString *)title {
     if (view.tag == 1) {
         NSLog(@"导航栏switch");
+        [self.mulCSV clickIndex:0];
     }
     NSLog(@"%@",title);
 }
@@ -59,6 +61,7 @@
 - (void)switchState:(UIView *)view rightTitle:(NSString *)title {
     if (view.tag == 1) {
         NSLog(@"导航栏switch");
+        [self.mulCSV clickIndex:1];
     }
     NSLog(@"%@",title);
 }
@@ -75,9 +78,15 @@
     }
     CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, DMScreenHeight-64);
     __weak typeof(self)bsel = self;
-    MulCategoryScrollView *mulCSV = [[MulCategoryScrollView alloc] initWithFrame:rect andViews:viewsArray andIndexBlock:^(NSInteger index,id obj) {
+    self.mulCSV = [[MulCategoryScrollView alloc] initWithFrame:rect andViews:viewsArray andIndexBlock:^(int index) {
+        NSLog(@"滑动进来了");
+        if (index == 0) {
+            [bsel.mySwitch moveToLeft];
+        } else if (index == 1) {
+            [bsel.mySwitch moveToRight];
+        }
     }];
-    [self.view addSubview:mulCSV];
+    [self.view addSubview:self.mulCSV];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -148,6 +148,11 @@
 - (void)loadUI {
     
     [self addSubview:self.uTableView];
+    // 新API：`@available(iOS 11.0, *)` 可用来判断系统版本
+    if ( @available(iOS 11.0, *) ) {
+        self.uTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+   
     [_logoutButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(_bottomView.mas_bottom).mas_offset(-10);
         make.left.mas_equalTo(_bottomView).mas_offset(X_SPACE);

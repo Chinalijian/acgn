@@ -34,6 +34,9 @@
 
 @property (nonatomic,assign) NSInteger isSelectedIndex;
 
+- (void)moveToLeft;
+- (void)moveToRight;
+
 //注：  多个YLSwitch代理方法请使用tag进行调用区分
 
 @end

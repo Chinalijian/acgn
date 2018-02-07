@@ -37,7 +37,7 @@
 }
 
 - (void)requestAttentPeoples {
-    
+    //添加关注请求接口
 }
 
 - (void)clickAttentButton:(id)sender {

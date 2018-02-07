@@ -50,6 +50,8 @@
 		309D903D2025943C002F414F /* UserDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903C2025943C002F414F /* UserDataModel.m */; };
 		309D904020259747002F414F /* AccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903F20259747002F414F /* AccountInfo.m */; };
 		309D905120259A84002F414F /* DMUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D905020259A84002F414F /* DMUserDefaults.m */; };
+		30EAFE53202B62E1004C75C6 /* ContentCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EAFE52202B62E1004C75C6 /* ContentCom.m */; };
+		30EAFE56202B705A004C75C6 /* ImageCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EAFE55202B705A004C75C6 /* ImageCom.m */; };
 		30FD391A2028BA3700F26185 /* PeopleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FD39192028BA3700F26185 /* PeopleListCell.m */; };
 		30FD391D2028C77500F26185 /* PeopleSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FD391C2028C77500F26185 /* PeopleSubView.m */; };
 		30FD39232028D0E000F26185 /* PeopleListDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FD39222028D0E000F26185 /* PeopleListDataModel.m */; };
@@ -165,6 +167,10 @@
 		309D903F20259747002F414F /* AccountInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountInfo.m; sourceTree = "<group>"; };
 		309D904F20259A84002F414F /* DMUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMUserDefaults.h; sourceTree = "<group>"; };
 		309D905020259A84002F414F /* DMUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMUserDefaults.m; sourceTree = "<group>"; };
+		30EAFE51202B62E1004C75C6 /* ContentCom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentCom.h; sourceTree = "<group>"; };
+		30EAFE52202B62E1004C75C6 /* ContentCom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentCom.m; sourceTree = "<group>"; };
+		30EAFE54202B7059004C75C6 /* ImageCom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCom.h; sourceTree = "<group>"; };
+		30EAFE55202B705A004C75C6 /* ImageCom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCom.m; sourceTree = "<group>"; };
 		30FD39182028BA3700F26185 /* PeopleListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleListCell.h; sourceTree = "<group>"; };
 		30FD39192028BA3700F26185 /* PeopleListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleListCell.m; sourceTree = "<group>"; };
 		30FD391B2028C77500F26185 /* PeopleSubView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleSubView.h; sourceTree = "<group>"; };
@@ -341,6 +347,7 @@
 		2A7CFAA92024149400CBE495 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				30EAFE50202B62CB004C75C6 /* ContentCom */,
 				2A7CFAAA202414AF00CBE495 /* AccountView.h */,
 				2A7CFAAB202414AF00CBE495 /* AccountView.m */,
 				2A7CFAAD202415B900CBE495 /* AccountCell.h */,
@@ -464,6 +471,17 @@
 				309D905020259A84002F414F /* DMUserDefaults.m */,
 			);
 			path = DMUserDefaults;
+			sourceTree = "<group>";
+		};
+		30EAFE50202B62CB004C75C6 /* ContentCom */ = {
+			isa = PBXGroup;
+			children = (
+				30EAFE51202B62E1004C75C6 /* ContentCom.h */,
+				30EAFE52202B62E1004C75C6 /* ContentCom.m */,
+				30EAFE54202B7059004C75C6 /* ImageCom.h */,
+				30EAFE55202B705A004C75C6 /* ImageCom.m */,
+			);
+			path = ContentCom;
 			sourceTree = "<group>";
 		};
 		8C926F8328F11DFD7CFF7B94 /* Pods */ = {
@@ -686,6 +704,7 @@
 				2ADF21C12022C3EA00559427 /* LoginViewController.m in Sources */,
 				2A6514612028571C00737DEF /* ContentBaseViewController.m in Sources */,
 				309D903A20259373002F414F /* ABaseDataModel.m in Sources */,
+				30EAFE56202B705A004C75C6 /* ImageCom.m in Sources */,
 				300DE1572024D1DD008DBCBD /* UserView.m in Sources */,
 				30FD391D2028C77500F26185 /* PeopleSubView.m in Sources */,
 				309D905120259A84002F414F /* DMUserDefaults.m in Sources */,
@@ -703,6 +722,7 @@
 				2ADF21C82022DF1600559427 /* AttentionPeopleList.m in Sources */,
 				300DE1542024ACBA008DBCBD /* NickNameViewController.m in Sources */,
 				2A6F15D320245CE700B55AA7 /* DMHttpClient.m in Sources */,
+				30EAFE53202B62E1004C75C6 /* ContentCom.m in Sources */,
 				3048355E20279F2E00DAAE3F /* MyMsgViewController.m in Sources */,
 				2A7CFAB320244B9300CBE495 /* ATools.m in Sources */,
 				300DE15A2024D1F9008DBCBD /* UserCell.m in Sources */,

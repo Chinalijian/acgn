@@ -90,7 +90,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
     [self setNavigationBarTransparence:YES titleColor:[UIColor whiteColor]];
-    [_userView updateUserInfo];
+    //[_userView updateUserInfo];
 }
 
 - (void)didReceiveMemoryWarning {

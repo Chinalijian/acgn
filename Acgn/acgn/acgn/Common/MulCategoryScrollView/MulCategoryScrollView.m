@@ -8,20 +8,21 @@
 #import "MulCategoryScrollView.h"
 
 @implementation MulCategoryScrollView
-//- (void)setIndexChangeBlock:(CBlock_getIndexAndObj)aIndexChangeBlock{
-//    _indexChangeBlock = [aIndexChangeBlock copy];
-//}
 
-- (instancetype)initWithFrame:(CGRect)frame andViews:(NSArray *)views andIndexBlock:(void(^)(NSInteger index,id obj))indexChangeBlock{
+- (void)setIndexChangeBlock:(MulCategoryIndexChangeBlock)aIndexChangeBlock {
+    _indexChangeBlock = [aIndexChangeBlock copy];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame andViews:(NSArray *)views andIndexBlock:(void(^)(int index))indexChangeBlock {
     self = [super initWithFrame:frame];
     if (self) {
         lastIndex = 0;
         self.svVeiws = views;
-//        self.indexChangeBlock = indexChangeBlock;
+        self.indexChangeBlock = indexChangeBlock;
         [self initViewScroll];
-//        if (_indexChangeBlock) {
-//            _indexChangeBlock(0,nil);
-//        }
+        if (_indexChangeBlock) {
+            _indexChangeBlock(0);
+        }
     }
     return self;
 }
@@ -50,15 +51,14 @@
 
 #pragma mark- scrollView
 //滚动过程中获取当前索引
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     int index = ([scrollView contentOffset].x+scrollView.frame.size.width/2)/scrollView.frame.size.width;
     NSLog(@"当前索引 = %d", index);
-//    if (index>=0 && index<[_segmentTitleArray count]) {
-//        self.segmentView.index = index;
-//        if ([self indexChanged:index]) {
-//            [self callBackWithIndex:index];
-//        }
-//    }
+    if (index>=0 && index<[_svVeiws count]) {
+        if ([self indexChanged:index]) {
+            [self callBackWithIndex:index];
+        }
+    }
 }
 
 - (BOOL)indexChanged:(int)index {
@@ -69,14 +69,14 @@
     return NO;
 }
 
-- (void)callBackWithIndex:(int)index{
-//    if (_indexChangeBlock) {
-//        _indexChangeBlock(index,nil);
-//    }
+- (void)callBackWithIndex:(int)index {
+    if (_indexChangeBlock) {
+        _indexChangeBlock(index);
+    }
 }
 
 //click
-- (void)clickIndex:(int)index{
+- (void)clickIndex:(int)index {
     if ([self indexChanged:index]) {
         [self callBackWithIndex:index];
     }
