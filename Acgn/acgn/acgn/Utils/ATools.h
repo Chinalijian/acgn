@@ -16,6 +16,9 @@
 +(CGFloat)getContactWidth:(NSString*)contact font:(UIFont *)font height:(CGFloat)height;
 //成功提示框
 +(void)showSVProgressHudCustom:(NSString *)imageName title:(NSString *)title;
+
++ (CGFloat)setViewFrameYForIPhoneX:(CGFloat)y;
++ (CGFloat)setViewFrameBottomForIPhoneX:(CGFloat)b;
 @end
 
 

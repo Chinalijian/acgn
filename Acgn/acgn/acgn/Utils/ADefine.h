@@ -45,6 +45,8 @@ blue:(((rgbValue) & 0xFF))/255.f alpha:1.0]
 #define DMIPhoneXOffset 44
 #define DMScaleWidth(w) (DMScreenWidth * w / 667)
 #define DMScaleHeight(h) (DMScreenHeight * h / 375)
+#define IS_IPHONE_X           (IS_IPHONE && SCREEN_MAX_LENGTH == 812.0)
+
 
 #pragma mark - Log
 #ifdef DEBUG

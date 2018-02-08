@@ -179,14 +179,15 @@
 
 - (ComonTop *)topView {
     if (_topView == nil) {
-        _topView = [[ComonTop alloc] initWithFrame:CGRectMake(0, 0, self.uTableView.frame.size.width, TopView_H)];
+        _topView = [[ComonTop alloc] initWithFrame:CGRectMake(0, 0, self.uTableView.frame.size.width, [ATools setViewFrameYForIPhoneX:TopView_H])];
     }
     return _topView;
 }
 
 - (UIView *)bottomView {
     if (_bottomView == nil) {
-        CGFloat bottomH = self.uTableView.frame.size.height-User_TableViewCell_H*self.datas.count-TopView_H;
+        CGFloat bSpace = [ATools setViewFrameBottomForIPhoneX:TopView_H];
+        CGFloat bottomH = self.uTableView.frame.size.height-User_TableViewCell_H*self.datas.count-bSpace;
         _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.uTableView.frame.size.width, bottomH)];
         _bottomView.backgroundColor = [UIColor whiteColor];
         

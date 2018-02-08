@@ -24,7 +24,7 @@
 
 - (void)setupMakeTopViewSubViewsLayout {
     [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_topImageView).mas_offset(80);
+        make.top.mas_equalTo(_topImageView).mas_offset([ATools setViewFrameYForIPhoneX:80]);
         make.height.mas_offset(70.5);
         make.width.mas_offset(70.5);
         make.centerX.mas_equalTo(_topImageView);

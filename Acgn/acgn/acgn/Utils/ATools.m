@@ -96,7 +96,42 @@
     }
     [SVProgressHUD showImage:[UIImage imageNamed:imageName] status:title];
 }
+
++ (CGFloat)setViewFrameYForIPhoneX:(CGFloat)y {
+    CGFloat H = y;
+    if (IS_IPHONE_X) {
+        H = H + 20;
+    }
+    return H;
+}
++ (CGFloat)setViewFrameBottomForIPhoneX:(CGFloat)b {
+    CGFloat B = b;
+    if (IS_IPHONE_X) {
+        B = B + 44;
+    }
+    return B;
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

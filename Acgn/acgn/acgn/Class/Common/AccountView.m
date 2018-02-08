@@ -278,13 +278,13 @@
     [_topImageView addSubview:cameraButton];
     
     [cameraBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_topImageView).mas_offset(80);
+        make.top.mas_equalTo(_topImageView).mas_offset([ATools setViewFrameYForIPhoneX:80]);
         make.height.mas_offset(70.5);
         make.width.mas_offset(70.5);
         make.centerX.mas_equalTo(_topImageView);
     }];
     [cameraButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_topImageView).mas_offset(80);
+        make.top.mas_equalTo(_topImageView).mas_offset([ATools setViewFrameYForIPhoneX:80]);
         make.height.mas_offset(70.5);
         make.width.mas_offset(70.5);
         make.centerX.mas_equalTo(_topImageView);
@@ -312,6 +312,7 @@
         [self setupButtonEdgeInsetsMake];
     } else if (self.aType == AAccountType_NickName) {
          [_logoImageView layoutIfNeeded];
+        _logoImageView.clipsToBounds = YES;
         _logoImageView.layer.cornerRadius = _logoImageView.frame.size.height/2;
         _logoNameLabel.text = [AccountInfo getUserName];
         [self initUpdateHeadImageUrl];
@@ -336,7 +337,7 @@
 
 - (void)setupMakeTopViewSubViewsLayout {
     [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_topImageView).mas_offset(80);
+        make.top.mas_equalTo(_topImageView).mas_offset([ATools setViewFrameYForIPhoneX:80]);
         make.height.mas_offset(70.5);
         make.width.mas_offset(70.5);
         make.centerX.mas_equalTo(_topImageView);
@@ -416,7 +417,11 @@
 
 - (UIImageView *)topImageView {
     if (_topImageView == nil) {
-        _topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.aTableView.frame.size.width, TopView_H)];
+        CGFloat H = TopView_H;
+        if (IS_IPHONE_X) {
+            H = TopView_H + 20;
+        }
+        _topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.aTableView.frame.size.width, H)];
         _topImageView.image = [UIImage imageNamed:@"public_head"];
         [_topImageView addSubview:self.logoImageView];
         [_topImageView addSubview:self.logoNameLabel];

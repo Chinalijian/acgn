@@ -142,7 +142,7 @@
         make.left.mas_equalTo(self).mas_offset(94/2);
         make.right.mas_equalTo(self).mas_offset(-94/2);
         make.centerX.mas_equalTo(self);
-        make.bottom.mas_equalTo(self).mas_offset(-15);
+        make.bottom.mas_equalTo(self).mas_offset(-([ATools setViewFrameBottomForIPhoneX:15]));
         make.height.mas_equalTo(44);
     }];
 }
