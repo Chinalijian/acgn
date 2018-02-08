@@ -45,53 +45,50 @@
 #define DM_Modify_NickName_Url          [DM_Url stringByAppendingFormat:@"user/updateUserName"]
 //首页角色列表
 #define DM_Role_List_Url                [DM_Url stringByAppendingFormat:@"role/roleList"]
+//首页关注列表
+#define DM_FollowHome_Url               [DM_Url stringByAppendingFormat:@"post/isFollowHome"]
+//首页广场
+#define DM_HomePost_Url                 [DM_Url stringByAppendingFormat:@"post/homePost"]
+//动态详情
+#define DM_GetPostDetails_Url           [DM_Url stringByAppendingFormat:@"post/getPostDetils"]
+//动态详情评论列表
+#define DM_GetPostComment_List_Url      [DM_Url stringByAppendingFormat:@"post/getPostComment"]
 
-//老师课程列表
-#define DM_User_Tcourse_List_Url        [DM_Url stringByAppendingFormat:@"lesson/tcourseList"]
-//个人课程列表
-#define DM_User_Scourse_List_Url        [DM_Url stringByAppendingFormat:@"lesson/scourseList"]
+//个人详情里 人物发的帖子列表
+#define DM_GetRoleDetails_List_Url      [DM_Url stringByAppendingFormat:@"role/roleDetails"]
+//个人详情人物信息
+#define DM_GetRoleInfoDetails_Url       [DM_Url stringByAppendingFormat:@"role/getRoleInfo"]
+//吐槽中心/二级评论详情
+#define DM_GetCommentDetails_Url        [DM_Url stringByAppendingFormat:@"post/getCommentDetails"]
+//收藏
+#define DM_Add_Collection_Url           [DM_Url stringByAppendingFormat:@"user/post/addCollection"]
+//取消收藏
+#define DM_Del_Collection_Url           [DM_Url stringByAppendingFormat:@"user/post/delCollection"]
+//点赞-帖子
+#define DM_Add_Fabulous_Url             [DM_Url stringByAppendingFormat:@"post/addFabulous"]
+//取消点赞-帖子
+#define DM_Del_Fabulous_Url             [DM_Url stringByAppendingFormat:@"post/delFabulous"]
+//点赞-评论
+#define DM_Add_Praise_Url               [DM_Url stringByAppendingFormat:@"comment/addPraise"]
+//取消点赞-评论
+#define DM_Del_Praise_Url               [DM_Url stringByAppendingFormat:@"comment/delPraise"]
+//发表评论
+#define DM_Add_Comment_Url              [DM_Url stringByAppendingFormat:@"post/addComment"]
+//添加关注
+#define DM_Add_Follow_Url               [DM_Url stringByAppendingFormat:@"user/addFollow"]
+//取消关注
+#define DM_Del_Follow_Url               [DM_Url stringByAppendingFormat:@"user/delFollow"]
+//吐槽我的
+#define DM_ReplyMe_Url                  [DM_Url stringByAppendingFormat:@"user/news/replyMe"]
+//我吐槽的
+#define DM_MySend_Url                   [DM_Url stringByAppendingFormat:@"user/news/mySend"]
+//是否有未读消息
+#define DM_HasNoRead_Msg_Url            [DM_Url stringByAppendingFormat:@"user/news/hasNoRead"]
+//收藏列表
+#define DM_CollectionList_Url           [DM_Url stringByAppendingFormat:@"user/post/collectionList"]
+//获取用户信息
+#define DM_Get_User_Info_Url            [DM_Url stringByAppendingFormat:@"user/getUserInfo"]
 
-//个人主页学生
-#define DM_User_Scourse_Index_Url       [DM_Url stringByAppendingFormat:@"lesson/scourseIndex"]
-//个人主页老师
-#define DM_User_Tcourse_Index_Url       [DM_Url stringByAppendingFormat:@"lesson/tcourseIndex"]
-
-//学生进入课堂
-#define DM_Student_Access_Url           [DM_Url stringByAppendingFormat:@"lesson/studentAccess"]
-//老师进入课堂
-#define DM_Teacher_Access_Url           [DM_Url stringByAppendingFormat:@"lesson/teacherAccess"]
-
-//获取课件列表
-#define DM_Attachment_FileList_Url      [DM_Url stringByAppendingFormat:@"Attachment/getList"]
-//课件上传
-#define DM_User_Attachment_Upload_Url   [DM_Url stringByAppendingFormat:@"attachment/upload"]
-//删除课件
-#define DM_Attachment_fileMove_Url      [DM_Url stringByAppendingFormat:@"Attachment/move"]
-
-//客服
-#define DM_Customer_Url                 [DM_Url stringByAppendingFormat:@"customer/index"]
-
-//点播视频
-#define DM_Video_Replay_Url             [DM_Url stringByAppendingFormat:@"lesson/replay"]
-
-//获取问题列表学生
-#define DM_Student_Question_List_Url    [DM_Url stringByAppendingFormat:@"survey/squestionList"]
-//获取问题列表老师
-#define DM_Teacher_Question_List_Url    [DM_Url stringByAppendingFormat:@"survey/tquestionList"]
-//提交答案学生
-#define DM_Submit_Student_Answer_Url    [DM_Url stringByAppendingFormat:@"survey/submitStudent"]
-//提交答案老师
-#define DM_Submit_Teacher_Answer_Url    [DM_Url stringByAppendingFormat:@"survey/submitTeacher"]
-//获取老师评语
-#define DM_Survey_TeacherSurvey_Url     [DM_Url stringByAppendingFormat:@"survey/teacherSurvey"]
-
-//获取百度云配置信息
-#define DM_Cloud_Config_Url             [DM_Url stringByAppendingFormat:@"Attachment/getUploadConf"]
-//百度云上传成功后的通知
-#define DM_Cloud_Upload_Success_Url     [DM_Url stringByAppendingFormat:@"Attachment/uploadSuccess"]
-
-//声网用户状态
-#define DM_AgoraUserStatus_Log_Url      [DM_Url stringByAppendingFormat:@"log/agoraLog"]
 
 
 #endif /* DMServerApiConfig_h */

@@ -9,6 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface ABaseDataModel : NSObject
-@property (nonatomic, copy) NSString *code;
-@property (nonatomic, copy) NSString *msg;
+
 @end
