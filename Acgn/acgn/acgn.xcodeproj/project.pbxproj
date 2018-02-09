@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2A65145E20284B7D00737DEF /* MulCategoryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */; };
 		2A6514612028571C00737DEF /* ContentBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6514602028571C00737DEF /* ContentBaseViewController.m */; };
+		2A684789202C3B1E00D189D5 /* ContentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A684788202C3B1E00D189D5 /* ContentListView.m */; };
+		2A68478C202C3C5F00D189D5 /* ContentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A68478B202C3C5F00D189D5 /* ContentListCell.m */; };
+		2A68478F202C555D00D189D5 /* CommintSecondView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A68478E202C555D00D189D5 /* CommintSecondView.m */; };
 		2A6B1443202458CD00EA4A26 /* AccountLocalDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B1442202458CD00EA4A26 /* AccountLocalDataModel.m */; };
 		2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B144620245B9F00EA4A26 /* AApiModel.m */; };
 		2A6F15D220245CE700B55AA7 /* DMRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F15CD20245CE600B55AA7 /* DMRequestModel.m */; };
@@ -81,6 +84,12 @@
 		2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulCategoryScrollView.m; sourceTree = "<group>"; };
 		2A65145F2028571C00737DEF /* ContentBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBaseViewController.h; sourceTree = "<group>"; };
 		2A6514602028571C00737DEF /* ContentBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentBaseViewController.m; sourceTree = "<group>"; };
+		2A684787202C3B1E00D189D5 /* ContentListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentListView.h; sourceTree = "<group>"; };
+		2A684788202C3B1E00D189D5 /* ContentListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentListView.m; sourceTree = "<group>"; };
+		2A68478A202C3C5F00D189D5 /* ContentListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentListCell.h; sourceTree = "<group>"; };
+		2A68478B202C3C5F00D189D5 /* ContentListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentListCell.m; sourceTree = "<group>"; };
+		2A68478D202C555D00D189D5 /* CommintSecondView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommintSecondView.h; sourceTree = "<group>"; };
+		2A68478E202C555D00D189D5 /* CommintSecondView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommintSecondView.m; sourceTree = "<group>"; };
 		2A6B1441202458CD00EA4A26 /* AccountLocalDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountLocalDataModel.h; sourceTree = "<group>"; };
 		2A6B1442202458CD00EA4A26 /* AccountLocalDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountLocalDataModel.m; sourceTree = "<group>"; };
 		2A6B144520245B9F00EA4A26 /* AApiModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AApiModel.h; sourceTree = "<group>"; };
@@ -476,6 +485,12 @@
 		30EAFE50202B62CB004C75C6 /* ContentCom */ = {
 			isa = PBXGroup;
 			children = (
+				2A684787202C3B1E00D189D5 /* ContentListView.h */,
+				2A684788202C3B1E00D189D5 /* ContentListView.m */,
+				2A68478A202C3C5F00D189D5 /* ContentListCell.h */,
+				2A68478B202C3C5F00D189D5 /* ContentListCell.m */,
+				2A68478D202C555D00D189D5 /* CommintSecondView.h */,
+				2A68478E202C555D00D189D5 /* CommintSecondView.m */,
 				30EAFE51202B62E1004C75C6 /* ContentCom.h */,
 				30EAFE52202B62E1004C75C6 /* ContentCom.m */,
 				30EAFE54202B7059004C75C6 /* ImageCom.h */,
@@ -711,9 +726,12 @@
 				30FD39232028D0E000F26185 /* PeopleListDataModel.m in Sources */,
 				3048355820273B5A00DAAE3F /* YLSwitch.m in Sources */,
 				2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */,
+				2A68478F202C555D00D189D5 /* CommintSecondView.m in Sources */,
 				2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */,
 				30FD391A2028BA3700F26185 /* PeopleListCell.m in Sources */,
+				2A684789202C3B1E00D189D5 /* ContentListView.m in Sources */,
 				3048356120279F3B00DAAE3F /* MyFavViewController.m in Sources */,
+				2A68478C202C3C5F00D189D5 /* ContentListCell.m in Sources */,
 				2A6F15D9202474F400B55AA7 /* SetPsdViewController.m in Sources */,
 				2A704B1C2022C37600476D68 /* HomeViewController.m in Sources */,
 				3048354E2026EE0C00DAAE3F /* AboutViewController.m in Sources */,

@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ImageCom.h"
-@interface ContentCom : UIView
-@property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UILabel *fromLabel;
-@property (nonatomic, strong) UILabel *contentLabel;
-@property (nonatomic, strong) ImageCom *imageComView;
+
+@interface ContentCom : UITableViewHeaderFooterView
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
+                        frame:(CGRect)frame;
+- (CGFloat)getConstHeight:(CGFloat)contentH imageHeight:(CGFloat)imageH;
 @end
