@@ -63,26 +63,8 @@
     if (!OBJ_IS_NIL(data)) {
         if (data.commentList.count > 0) {
             DynamicCommentListData *dynamicObj = [data.commentList objectAtIndex:indexPath.row];
-            if (!OBJ_IS_NIL(dynamicObj)) {
-                CGFloat commitH = [ATools getHeightByWidth:Info_Width title:dynamicObj.commentContext font:Commit_Font];
-                CGFloat commitSecond = 0;
-                NSInteger count =dynamicObj.secondView.count;
-                if (count > 0) {
-                    CGFloat commitListH = 30;//
-                    if (count > 3) {
-                        commitListH = commitListH + 28;
-                    }
-                    for (DynamicCommentSecondData *seObj in dynamicObj.secondView) {
-                        NSString *content = [NSString stringWithFormat:@"%@@%@:%@",seObj.userName,seObj.otherName,seObj.commentContext];
-                        CGFloat h = [ATools getHeightByWidth:Info_Width-SecondView_LeftRight_SPace*2 title:content font:Commit_Font];
-                        commitListH = commitListH + h;
-                    }
-                    commitSecond = commitListH;
-                }
-                
-                CGFloat heightRow = Content_List_Cell_H + commitH + commitSecond;
-                return heightRow;
-            }
+            CGFloat H = [ContentListCell getCellMaxHeightAndUpdate:dynamicObj];
+            return H;
         }
     }
     return 0;
@@ -148,23 +130,53 @@
     if(infoV==nil) {
         infoV = [[ContentCom alloc]
                  initWithReuseIdentifier:cc
-                 frame:CGRectMake(0, 0, self.aTableView.frame.size.width, 35)];
+                 frame:CGRectMake(0, 0, self.aTableView.frame.size.width, 0)];
+    }
+    [self modfiyBackgroudColor:infoV index:section];
+    if (section < self.datas.count) {
+        DynamicListData *data = [self.datas objectAtIndex:section];
+        [infoV configInfo:data];
     }
     return infoV;
+//    UIView *infoV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.aTableView.frame.size.width, 35)];
+//    [self modfiyBackgroudColor:infoV index:section];
+//    return infoV;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 35;
+    if (section < self.datas.count) {
+        DynamicListData *data = [self.datas objectAtIndex:section];
+        if(!OBJ_IS_NIL(data)) {
+            return [ContentCom getContentCommonCellHeight:data];
+        }
+    }
+    return 0;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *infoV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.aTableView.frame.size.width, 5)];
+    UIView *infoV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.aTableView.frame.size.width, 0.000001)];
     infoV.backgroundColor = [UIColor whiteColor];
     return infoV;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 5;
+    return 0.000001;
+}
+
+- (void)modfiyBackgroudColor:(ContentCom *)view index:(NSInteger)index {
+    switch (index%3) {
+        case 0:
+            view.contentView.backgroundColor = Head_Blue_Color;
+            break;
+        case 1:
+            view.contentView.backgroundColor = Head_Yellow_Color;
+            break;
+        case 2:
+            view.contentView.backgroundColor = Head_Red_Color;
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)loadUI {

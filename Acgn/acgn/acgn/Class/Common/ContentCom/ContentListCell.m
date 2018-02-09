@@ -13,7 +13,9 @@
 @property (nonatomic, strong) UIImageView *headImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *commitLabel;
+
 @property (nonatomic, strong) CommintSecondView *secondView;
+
 
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIButton *praiseLabel;
@@ -33,27 +35,60 @@
     return self;
 }
 
+- (void)cleanSubViewInfo {
+    self.headImageView.image = nil;
+    self.nameLabel.text = @"";
+    self.commitLabel.text = @"";
+    self.timeLabel.text = @"";
+    [self.praiseLabel setTitle:@"" forState:UIControlStateNormal];
+    [self.secondView cleanAllSubLabel];
+}
+
 - (void)configDynamicObj:(DynamicCommentListData *)obj {
+    [self cleanSubViewInfo];
     if (!OBJ_IS_NIL(obj)) {
         [self.headImageView sd_setImageWithURL:[NSURL URLWithString:obj.avatar] placeholderImage:PlaceholderImage];
         self.nameLabel.text = obj.userName;
         self.commitLabel.text = obj.commentContext;
         self.timeLabel.text = obj.commentTime;
         [self.praiseLabel setTitle:obj.praiseNum forState:UIControlStateNormal];
-    } else {
-        self.headImageView.image = nil;
-        self.nameLabel.text = @"";
-        self.commitLabel.text = @"";
-        self.timeLabel.text = @"";
-        [self.praiseLabel setTitle:@"" forState:UIControlStateNormal];
+        if (obj.secondView.count > 0) {
+            NSInteger count = obj.secondView.count;
+            [self.secondView hiddenLabel:count];
+            if (count == 1) {
+                DynamicCommentSecondData *csData = [obj.secondView firstObject];
+                [self setSecondViewFirstInfo:csData];
+            } else if (count == 2) {
+                DynamicCommentSecondData *csData1 = [obj.secondView firstObject];
+                [self setSecondViewFirstInfo:csData1];
+                DynamicCommentSecondData *csData2 = [obj.secondView lastObject];
+                [self setSecondViewSecondInfo:csData2];
+            } else {
+                DynamicCommentSecondData *csData1 = [obj.secondView firstObject];
+                [self setSecondViewFirstInfo:csData1];
+                DynamicCommentSecondData *csData2 = [obj.secondView objectAtIndex:1];
+                [self setSecondViewSecondInfo:csData2];
+                DynamicCommentSecondData *csData3 = [obj.secondView objectAtIndex:2];
+                [self setSecondViewThirdInfo:csData3];
+            }
+        }
+        CGFloat commitH = [ContentListCell getCommitContentMaxHeight:obj];
+        CGFloat secondH = [ContentListCell getSecondViewMaxHeight:obj];
+        [self upDateCellLayout:commitH secondHeight:secondH];
+        [self updateCommitContentFrame:commitH];
+        [self updateSecondCommitViewFrame:secondH];
+        [self layoutIfNeeded];
     }
-    
-    CGFloat commitH = [self getCommitContentMaxHeight:obj];
-    CGFloat secondH = [self getSecondViewMaxHeight:obj];
-    [self upDateCellLayout:commitH secondHeight:secondH];
-    [self updateCommitContentFrame:commitH];
-    [self updateSecondCommitViewFrame:secondH];
-    
+}
+
+- (void)setSecondViewFirstInfo:(DynamicCommentSecondData *)csData {
+     [self.secondView setContentForFirstLabel:csData.userName otherName:csData.otherName content:csData.commentContext];
+}
+- (void)setSecondViewSecondInfo:(DynamicCommentSecondData *)csData {
+    [self.secondView setContentForSecondLabel:csData.userName otherName:csData.otherName content:csData.commentContext];
+}
+- (void)setSecondViewThirdInfo:(DynamicCommentSecondData *)csData {
+    [self.secondView setContentForThirdLabel:csData.userName otherName:csData.otherName content:csData.commentContext];
 }
 
 - (void)upDateCellLayout:(CGFloat)commitH secondHeight:(CGFloat)secondH {
@@ -79,29 +114,31 @@
     }];
 }
 
-- (CGFloat)getCellMaxHeightAndUpdate:(DynamicCommentListData *)dynamicObj {
++ (CGFloat)getCellMaxHeightAndUpdate:(DynamicCommentListData *)dynamicObj {
     CGFloat commitH = [self getCommitContentMaxHeight:dynamicObj];
     CGFloat secondH = [self getSecondViewMaxHeight:dynamicObj];
     CGFloat heightRow = Content_List_Cell_H + commitH + secondH;
     return heightRow;
 }
 
-- (CGFloat)getCommitContentMaxHeight:(DynamicCommentListData *)dynamicObj {
++ (CGFloat)getCommitContentMaxHeight:(DynamicCommentListData *)dynamicObj {
     if (OBJ_IS_NIL(dynamicObj)) {
         return 0;
     }
     return [ATools getHeightByWidth:Info_Width title:dynamicObj.commentContext font:Commit_Font];
 }
 
-- (CGFloat)getSecondViewMaxHeight:(DynamicCommentListData *)dynamicObj {
++ (CGFloat)getSecondViewMaxHeight:(DynamicCommentListData *)dynamicObj {
   
     if (!OBJ_IS_NIL(dynamicObj)) {
         CGFloat commitSecond = 0;
         NSInteger count = dynamicObj.secondView.count;
         if (count > 0) {
-            CGFloat commitListH = 30;//
+            CGFloat commitListH = 0;//
             if (count > 3) {
-                commitListH = commitListH + 28;
+                commitListH = 15*4 + 28;
+            } else {
+                commitListH = 15 * (count+1);
             }
             for (int i = 0; i < count; i++) {
                 DynamicCommentSecondData *seObj = [dynamicObj.secondView objectAtIndex:i];
@@ -172,6 +209,8 @@
 - (CommintSecondView *)secondView {
     if (_secondView == nil) {
         _secondView = [[CommintSecondView alloc] init];
+        _secondView.backgroundColor = UIColorFromRGB(0xF2F2F2);
+        [_secondView createCommitLabel:Info_Width];
     }
     return _secondView;
 }
@@ -219,6 +258,8 @@
         _headImageView = [[UIImageView alloc] init];
         _headImageView.clipsToBounds = YES;
         _headImageView.layer.cornerRadius = Head_Image_WH/2;
+        _headImageView.layer.borderColor = UIColorFromRGB(0xE96A79).CGColor;//UIColorFromRGB(0xE96A79).CGColor;
+        _headImageView.layer.borderWidth = 1;
     }
     return _headImageView;
 }

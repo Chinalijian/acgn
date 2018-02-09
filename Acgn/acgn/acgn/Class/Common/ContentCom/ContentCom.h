@@ -12,5 +12,6 @@
 @interface ContentCom : UITableViewHeaderFooterView
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
                         frame:(CGRect)frame;
-- (CGFloat)getConstHeight:(CGFloat)contentH imageHeight:(CGFloat)imageH;
+- (void)configInfo:(DynamicListData *)obj;
++ (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj;
 @end

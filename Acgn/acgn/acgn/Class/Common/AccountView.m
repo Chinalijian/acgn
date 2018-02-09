@@ -292,7 +292,7 @@
     
     [cameraBgView layoutIfNeeded];
     cameraBgView.layer.cornerRadius = cameraBgView.frame.size.height/2;
-    cameraBgView.layer.borderColor =  [UIColor redColor].CGColor;//UIColorFromRGB(0xE96A79).CGColor;
+    cameraBgView.layer.borderColor = UIColorFromRGB(0xE96A79).CGColor;//UIColorFromRGB(0xE96A79).CGColor;
     cameraBgView.layer.borderWidth = 1;
 }
 

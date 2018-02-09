@@ -23,6 +23,21 @@
 
 //获取Label的高度，根据文字
 + (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont*)font;
++ (NSMutableAttributedString *)colerString:(NSString *)sourceStr allStr:(NSString *)allStr color:(UIColor *)color font:(UIFont *)font;
+/**
+ *  改变行间距
+ */
++ (void)changeLineSpaceForLabel:(UILabel *)label WithSpace:(float)space;
+
+/**
+ *  改变字间距
+ */
++ (void)changeWordSpaceForLabel:(UILabel *)label WithSpace:(float)space;
+
+/**
+ *  改变行间距和字间距
+ */
++ (void)changeSpaceForLabel:(UILabel *)label withLineSpace:(float)lineSpace WordSpace:(float)wordSpace;
 
 
 @end

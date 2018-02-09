@@ -83,7 +83,9 @@ blue:(((rgbValue) & 0xFF))/255.f alpha:1.0]
 #define OBJ_IS_NIL(s) (s==nil || [s isKindOfClass:[NSNull class]])
 #define STR_IS_NIL(key) (([@"<null>" isEqualToString:(key)] || [@"" isEqualToString:(key)] || key == nil || [key isKindOfClass:[NSNull class]]) ? 1: 0)
 
-
-
+//headColor
+#define Head_Blue_Color     UIColorFromRGB(0x75D2FD)
+#define Head_Yellow_Color   UIColorFromRGB(0xFFE430)
+#define Head_Red_Color      UIColorFromRGB(0xF2C2ED)
 
 #endif /* ADefine_h */
