@@ -10,6 +10,7 @@
 
 @protocol AttentionPeopleListDelegate <NSObject>
 - (void)clickAttentButton:(id)sender;
+- (void)clickSelectedPeople:(BOOL)follow roleId:(NSString *)roleId;
 @end
 
 @interface AttentionPeopleList : UIView<UITableViewDataSource, UITableViewDelegate>

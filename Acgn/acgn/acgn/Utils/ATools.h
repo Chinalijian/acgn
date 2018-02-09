@@ -17,8 +17,14 @@
 //成功提示框
 +(void)showSVProgressHudCustom:(NSString *)imageName title:(NSString *)title;
 
+//适配iPhone X 顶部与顶部的间距
 + (CGFloat)setViewFrameYForIPhoneX:(CGFloat)y;
 + (CGFloat)setViewFrameBottomForIPhoneX:(CGFloat)b;
+
+//获取Label的高度，根据文字
++ (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont*)font;
+
+
 @end
 
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//列表中二级评论View
 @interface CommintSecondView : UIView
 
 @end

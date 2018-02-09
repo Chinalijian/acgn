@@ -66,6 +66,9 @@
     if (btn.tag < self.datas.count) {
         PeopleDataModel *obj = [self.datas objectAtIndex:btn.tag];
         obj.isSelected = !obj.isSelected;
+        if ([self.delegate respondsToSelector:@selector(clickSelectedPeople:roleId:)]) {
+            [self.delegate clickSelectedPeople:obj.isSelected roleId:obj.roleId];
+        }
     }
     [self.aTableView reloadData];
 }

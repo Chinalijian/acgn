@@ -27,7 +27,7 @@
 @end
 
 @implementation ContentCom
-
+#define Space_Left_X 16
 #define Space_Y 16
 #define Label_Space_Y 8.5
 
@@ -80,13 +80,13 @@
 }
 
 - (void)setupTopContentLayout {
-    CGFloat space_x = 16;
+
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self).mas_offset(Space_Y);
         make.centerX.mas_equalTo(self);
         make.height.mas_offset(Name_Label_H);
-        make.left.mas_equalTo(self).mas_offset(space_x);
-        make.right.mas_equalTo(self).mas_offset(-space_x);
+        make.left.mas_equalTo(self).mas_offset(Space_Left_X);
+        make.right.mas_equalTo(self).mas_offset(-Space_Left_X);
     }];
     [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.nameLabel.mas_bottom).mas_offset(Label_Space_Y);
@@ -105,7 +105,7 @@
     [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.fromLabel.mas_bottom).mas_offset(Content_Label_Space_Y);
         make.left.mas_equalTo(self.fromLabel).mas_offset(0);
-        make.right.mas_equalTo(self.timeLabel).mas_offset((DMScreenWidth-space_x)/2);
+        make.right.mas_equalTo(self.timeLabel).mas_offset((DMScreenWidth-Space_Left_X)/2);
         make.height.mas_offset(72);
     }];
     

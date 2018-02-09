@@ -47,6 +47,8 @@ blue:(((rgbValue) & 0xFF))/255.f alpha:1.0]
 #define DMScaleHeight(h) (DMScreenHeight * h / 375)
 #define IS_IPHONE_X           (IS_IPHONE && SCREEN_MAX_LENGTH == 812.0)
 
+#define PlaceholderImage [UIImage imageNamed:@"public_logo"]
+#define Commit_Font  [UIFont systemFontOfSize:13]
 
 #pragma mark - Log
 #ifdef DEBUG

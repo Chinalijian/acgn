@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ImageCom.h"
-
+//列表头的通用控件View
 @interface ContentCom : UITableViewHeaderFooterView
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
                         frame:(CGRect)frame;

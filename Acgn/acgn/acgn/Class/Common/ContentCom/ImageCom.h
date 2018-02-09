@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+//列表图片/视频的View
 @interface ImageCom : UIView
 
 @end

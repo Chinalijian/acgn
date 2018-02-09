@@ -58,6 +58,36 @@
     [self.aTableView reloadData];
 }
 
+- (CGFloat)getCellMaxHeight:(NSIndexPath *)indexPath {
+    DynamicListData *data = [self.datas objectAtIndex:indexPath.section];
+    if (!OBJ_IS_NIL(data)) {
+        if (data.commentList.count > 0) {
+            DynamicCommentListData *dynamicObj = [data.commentList objectAtIndex:indexPath.row];
+            if (!OBJ_IS_NIL(dynamicObj)) {
+                CGFloat commitH = [ATools getHeightByWidth:Info_Width title:dynamicObj.commentContext font:Commit_Font];
+                CGFloat commitSecond = 0;
+                NSInteger count =dynamicObj.secondView.count;
+                if (count > 0) {
+                    CGFloat commitListH = 30;//
+                    if (count > 3) {
+                        commitListH = commitListH + 28;
+                    }
+                    for (DynamicCommentSecondData *seObj in dynamicObj.secondView) {
+                        NSString *content = [NSString stringWithFormat:@"%@@%@:%@",seObj.userName,seObj.otherName,seObj.commentContext];
+                        CGFloat h = [ATools getHeightByWidth:Info_Width-SecondView_LeftRight_SPace*2 title:content font:Commit_Font];
+                        commitListH = commitListH + h;
+                    }
+                    commitSecond = commitListH;
+                }
+                
+                CGFloat heightRow = Content_List_Cell_H + commitH + commitSecond;
+                return heightRow;
+            }
+        }
+    }
+    return 0;
+}
+
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -68,15 +98,27 @@
 
 #pragma mark UITableView Datasource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
+    if (indexPath.section < self.datas.count) {
+        CGFloat H = [self getCellMaxHeight:indexPath];
+        return H;
+    }
+    return 0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.datas.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
-    return self.datas.count/2+self.datas.count%2;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section < self.datas.count) {
+        DynamicListData *data = [self.datas objectAtIndex:section];
+        if (!OBJ_IS_NIL(data)) {
+            if (data.commentList.count > 0) {
+                return data.commentList.count;
+            }
+        }
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -87,7 +129,13 @@
     }
     
     if (self.datas.count > 0) {
-
+        DynamicListData *data = [self.datas objectAtIndex:indexPath.section];
+        if (!OBJ_IS_NIL(data)) {
+            if (data.commentList.count > 0) {
+                DynamicCommentListData *dynamicObj = [data.commentList objectAtIndex:indexPath.row];
+                [cell configDynamicObj:dynamicObj];
+            }
+        }
     }
     
     return cell;
@@ -130,7 +178,7 @@
         _aTableView.delegate = self;
         _aTableView.dataSource = self;
         //_aTableView.scrollEnabled = NO;
-        _aTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _aTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _aTableView.backgroundColor = [UIColor whiteColor];//UIColorFromRGB(0xf6f6f6);
 
         
