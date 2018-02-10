@@ -199,10 +199,10 @@
         make.height.mas_offset(Bottom_Area_H/2);
     }];
     [self.praiseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.mas_right).offset(-Left_Space_X);
+        make.right.mas_equalTo(self.mas_right).offset(-10);
         make.bottom.mas_equalTo(self.mas_bottom).offset(0);
         make.width.mas_offset(Bottom_Area_H);
-        make.height.mas_offset(Bottom_Area_H);
+        make.height.mas_offset(32);
     }];
 }
 
@@ -217,6 +217,10 @@
 - (UIButton *)praiseLabel {
     if (_praiseLabel == nil) {
         _praiseLabel = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_praiseLabel setTitleColor:UIColorFromRGB(0x939393) forState:UIControlStateNormal];
+        [_praiseLabel setImage:[UIImage imageNamed:@"praise_grey_icon"] forState:UIControlStateNormal];
+        [_praiseLabel.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        _praiseLabel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     }
     return _praiseLabel;
 }

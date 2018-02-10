@@ -134,7 +134,7 @@
 }
 //获取首页角色列表
 + (void)getRoleListForHome:(NSString *)lastID block:(void(^)(BOOL result, NSArray *array))block {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"", @"lastId", @"20", @"rowPage", nil];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:lastID, @"lastId", @"20", @"rowPage", nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_Role_List_Url parameters:dic method:DMHttpRequestPost dataModelClass:[PeopleListDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             PeopleListDataModel *model = (PeopleListDataModel *)responseObject;

@@ -49,7 +49,15 @@
 }
 
 - (void)configImageCom:(NSArray *)array height:(CGFloat)height {
-    NSLog(@"进来了 = %@", array);
+    
+    if (![array isKindOfClass:[NSArray class]] || OBJ_IS_NIL(array) || array.count == 0) {
+        NSLog(@"进来了 = %@", array);
+        self.smallImageView.frame = CGRectZero;
+        self.bigImageView.frame = CGRectZero;
+        self.smallImageView.hidden = YES;
+        self.bigImageView.hidden = YES;
+        return;
+    }
     self.smallImageView.frame = CGRectMake(0, 0, self.smallImageView.frame.size.width, height);
     
     NSInteger imageCount = [array count];
@@ -94,18 +102,21 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 __typeof(&*weakImageView) strongImageView = weakImageView;
                 if (strongImageView) {
-                    if (image.size.width >= image.size.height) {
-                        //横着的长方形或者正方形
-                        CGFloat viewH = (image.size.height)/(image.size.width)*(weakSelf.bWidth);
-                        strongImageView.frame = CGRectMake(0, 0, weakSelf.bWidth, viewH);
-                    } else {
-                        //竖着的长方形
-                        CGFloat viewW = (image.size.width)/(image.size.height)*(weakSelf.bHeight);
-                        strongImageView.frame = CGRectMake(0, 0, viewW, weakSelf.bHeight);
+                    if (image != nil) {
+                        if (image.size.width >= image.size.height) {
+                            //横着的长方形或者正方形
+                            CGFloat viewH = (image.size.height)/(image.size.width)*(weakSelf.bWidth);
+                            strongImageView.frame = CGRectMake(0, 0, weakSelf.bWidth, viewH);
+                        } else {
+                            //竖着的长方形
+                            CGFloat viewW = (image.size.width)/(image.size.height)*(weakSelf.bHeight);
+                            strongImageView.frame = CGRectMake(0, 0, viewW, weakSelf.bHeight);
+                        }
+                        NSLog(@"dddd = %f", strongImageView.frame.size.height);
+                        strongImageView.image = image;
+                        [strongImageView setNeedsLayout];
                     }
                     
-                    strongImageView.image = image;
-                    [strongImageView setNeedsLayout];
                 }
             });
         });
@@ -150,6 +161,8 @@
         }
         UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(XX, YY, _sWidth, _sHeight)];
         imageV.tag = 1000+i;
+        imageV.clipsToBounds = YES;
+        imageV.contentMode = UIViewContentModeScaleAspectFill;
         [self.smallImageView addSubview:imageV];
     }
 }

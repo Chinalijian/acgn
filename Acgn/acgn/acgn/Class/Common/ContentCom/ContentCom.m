@@ -235,6 +235,13 @@
         make.left.mas_equalTo(self.comButton.mas_right).mas_offset(0);
         make.width.mas_offset(width);
     }];
+    
+    [_favButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.praButton).mas_offset(0);
+        make.top.mas_equalTo(self.praButton).mas_offset(0);
+        make.right.mas_equalTo(self.alphaView.mas_right).mas_offset(-5);
+        make.width.mas_offset(width);
+    }];
 }
 
 - (UILabel *)nameLabel {
@@ -309,6 +316,9 @@
         _attButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_attButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_attButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [_attButton setImage:[UIImage imageNamed:@"look_img_white"] forState:UIControlStateNormal];
+        _attButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    
     }
     return _attButton;
 }
@@ -317,6 +327,8 @@
         _comButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_comButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_comButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [_comButton setImage:[UIImage imageNamed:@"comment_img_white"] forState:UIControlStateNormal];
+        _comButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     return _comButton;
 }
@@ -325,6 +337,8 @@
         _praButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_praButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_praButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [_praButton setImage:[UIImage imageNamed:@"praise_white_icon"] forState:UIControlStateNormal];
+        _praButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     return _praButton;
 }
@@ -342,6 +356,8 @@
 - (UIButton *)favButton {
     if (_favButton == nil) {
         _favButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_favButton setImage:[UIImage imageNamed:@"collection_white"] forState:UIControlStateNormal];
+        _favButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     }
     return _favButton;
 }

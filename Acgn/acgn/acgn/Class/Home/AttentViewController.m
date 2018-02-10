@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.attentListDatas = [NSMutableArray array];
     self.lastID = @"-1";
     [self.view addSubview:self.contentListView];
@@ -36,24 +36,61 @@
         self.noFollowIDs = [NSMutableArray array];//不关注的roleID列表
         self.lastPeopleID = @"-1";
         [self.view addSubview:self.apListView];
-        [self getRoleListData];
+        [self addRefreshLoadMore:self.apListView.aTableView];
     } else {
-        [self attentDynamicList];
+        [self addRefreshLoadMore:self.contentListView.aTableView];
     }
+}
+
+- (void)addRefreshLoadMore:(UITableView *)tableView {
+    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
+    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+    [tableView.mj_header beginRefreshing];
+}
+
+- (void)endRefreshing:(UITableView *)tableView {
+    [tableView.mj_footer endRefreshing];
+    [tableView.mj_header endRefreshing];
+}
+
+- (void)refresh {
+    if (!STR_IS_NIL([AccountInfo getUserID])) {
+        self.lastID = @"-1";
+        [self attentDynamicList];
+        return;
+    }
+    self.lastPeopleID = @"-1";
+    [self getRoleListData];
+    
+}
+
+- (void)loadMore {
+    
+    if (!STR_IS_NIL([AccountInfo getUserID])) {
+        [self attentDynamicList];
+        return;
+    }
+    [self getRoleListData];
 }
 
 - (void)getRoleListData {
     WS(weakSelf);
     [AApiModel getRoleListForHome:self.lastPeopleID block:^(BOOL result, NSArray *array) {
         if (result) {
-            if (weakSelf.lastPeopleID.intValue > -1) {
-                [weakSelf.roleListDatas addObjectsFromArray:array];
-            } else {
-                [weakSelf.roleListDatas removeAllObjects];
-                [weakSelf.roleListDatas addObjectsFromArray:array];
+            if (array.count > 0) {
+                if (weakSelf.lastPeopleID.intValue > -1) {
+                    [weakSelf.roleListDatas addObjectsFromArray:array];
+                } else {
+                    [weakSelf.roleListDatas removeAllObjects];
+                    [weakSelf.roleListDatas addObjectsFromArray:array];
+                }
+                [weakSelf.apListView updateList:weakSelf.roleListDatas];
+                
+                PeopleDataModel *model = [array lastObject];
+                weakSelf.lastPeopleID = model.roleId;
             }
-            [weakSelf.apListView updateList:weakSelf.roleListDatas];
         }
+        [weakSelf endRefreshing:weakSelf.apListView.aTableView];
     }];
 }
 
@@ -70,8 +107,9 @@
     //添加关注请求接口
     [AApiModel addFollowForUser:arrayRoleIDs block:^(BOOL result) {
         if (result) {
-            [weakSelf attentDynamicList];
+            //[weakSelf attentDynamicList];
             [weakSelf removePeopleListView];
+            [weakSelf addRefreshLoadMore:weakSelf.contentListView.aTableView];
         } else { }
     }];
 }
@@ -95,14 +133,21 @@
     WS(weakSelf);
     [AApiModel getHomeAttentList:self.lastID block:^(BOOL result, NSArray *array) {
         if (result) {
-            if (weakSelf.lastID.intValue > -1) {
-                [weakSelf.attentListDatas addObjectsFromArray:array];
+            if (array.count > 0) {
+                if (weakSelf.lastID.intValue > -1) {
+                    [weakSelf.attentListDatas addObjectsFromArray:array];
+                } else {
+                    [weakSelf.attentListDatas removeAllObjects];
+                    [weakSelf.attentListDatas addObjectsFromArray:array];
+                }
+                [weakSelf updataAttentList:weakSelf.attentListDatas];
+                DynamicListData *model = [array lastObject];
+                weakSelf.lastID = model.postId;
             } else {
-                [weakSelf.attentListDatas removeAllObjects];
-                [weakSelf.attentListDatas addObjectsFromArray:array];
+               // [weakSelf.contentListView.aTableView.mj_footer endRefreshingWithNoMoreData];
             }
-            [weakSelf updataAttentList:weakSelf.attentListDatas];
         }
+        [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
     }];
 }
 
@@ -140,7 +185,7 @@
     if (_contentListView == nil) {
         _contentListView = [[ContentListView alloc] initWithFrame:
                             CGRectMake(0, 0, DMScreenWidth, DMScreenHeight-DMNavigationBarHeight) delegate:self];
-        _apListView.backgroundColor = [UIColor redColor];
+        _contentListView.backgroundColor = [UIColor whiteColor];
     }
     return _contentListView;
 }
