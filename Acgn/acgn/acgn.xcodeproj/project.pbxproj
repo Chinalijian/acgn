@@ -39,6 +39,7 @@
 		300DE1542024ACBA008DBCBD /* NickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1532024ACBA008DBCBD /* NickNameViewController.m */; };
 		300DE1572024D1DD008DBCBD /* UserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1562024D1DD008DBCBD /* UserView.m */; };
 		300DE15A2024D1F9008DBCBD /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1592024D1F9008DBCBD /* UserCell.m */; };
+		302350B1202F59DE0018FB95 /* DynamicDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302350B0202F59DD0018FB95 /* DynamicDetailsViewController.m */; };
 		3048354E2026EE0C00DAAE3F /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3048354D2026EE0B00DAAE3F /* AboutViewController.m */; };
 		304835512026EE1700DAAE3F /* VersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 304835502026EE1700DAAE3F /* VersionViewController.m */; };
 		304835542026F4C000DAAE3F /* ComonTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 304835532026F4C000DAAE3F /* ComonTop.m */; };
@@ -53,6 +54,7 @@
 		309D903D2025943C002F414F /* UserDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903C2025943C002F414F /* UserDataModel.m */; };
 		309D904020259747002F414F /* AccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903F20259747002F414F /* AccountInfo.m */; };
 		309D905120259A84002F414F /* DMUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D905020259A84002F414F /* DMUserDefaults.m */; };
+		30C586F6202F753A00CB1EC0 /* PeopleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C586F5202F753A00CB1EC0 /* PeopleDetailsViewController.m */; };
 		30EAFE53202B62E1004C75C6 /* ContentCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EAFE52202B62E1004C75C6 /* ContentCom.m */; };
 		30EAFE56202B705A004C75C6 /* ImageCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EAFE55202B705A004C75C6 /* ImageCom.m */; };
 		30F6FE88202C9D6800EB96A8 /* DynamicData.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F6FE87202C9D6800EB96A8 /* DynamicData.m */; };
@@ -152,6 +154,8 @@
 		300DE1562024D1DD008DBCBD /* UserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserView.m; sourceTree = "<group>"; };
 		300DE1582024D1F9008DBCBD /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		300DE1592024D1F9008DBCBD /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
+		302350AF202F59DD0018FB95 /* DynamicDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicDetailsViewController.h; sourceTree = "<group>"; };
+		302350B0202F59DD0018FB95 /* DynamicDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynamicDetailsViewController.m; sourceTree = "<group>"; };
 		3048354C2026EE0B00DAAE3F /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		3048354D2026EE0B00DAAE3F /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		3048354F2026EE1700DAAE3F /* VersionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionViewController.h; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 		309D903F20259747002F414F /* AccountInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountInfo.m; sourceTree = "<group>"; };
 		309D904F20259A84002F414F /* DMUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMUserDefaults.h; sourceTree = "<group>"; };
 		309D905020259A84002F414F /* DMUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMUserDefaults.m; sourceTree = "<group>"; };
+		30C586F4202F753A00CB1EC0 /* PeopleDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleDetailsViewController.h; sourceTree = "<group>"; };
+		30C586F5202F753A00CB1EC0 /* PeopleDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleDetailsViewController.m; sourceTree = "<group>"; };
 		30EAFE51202B62E1004C75C6 /* ContentCom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentCom.h; sourceTree = "<group>"; };
 		30EAFE52202B62E1004C75C6 /* ContentCom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentCom.m; sourceTree = "<group>"; };
 		30EAFE54202B7059004C75C6 /* ImageCom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCom.h; sourceTree = "<group>"; };
@@ -523,6 +529,10 @@
 			children = (
 				30F6FE8A202CB5EE00EB96A8 /* RoleDetailsDataModel.h */,
 				30F6FE8B202CB5EE00EB96A8 /* RoleDetailsDataModel.m */,
+				302350AF202F59DD0018FB95 /* DynamicDetailsViewController.h */,
+				302350B0202F59DD0018FB95 /* DynamicDetailsViewController.m */,
+				30C586F4202F753A00CB1EC0 /* PeopleDetailsViewController.h */,
+				30C586F5202F753A00CB1EC0 /* PeopleDetailsViewController.m */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -737,8 +747,10 @@
 				309D903D2025943C002F414F /* UserDataModel.m in Sources */,
 				2A89A2D42019E5880021B844 /* AppDelegate.m in Sources */,
 				2ADF21BC2022C3A600559427 /* UserViewController.m in Sources */,
+				30C586F6202F753A00CB1EC0 /* PeopleDetailsViewController.m in Sources */,
 				304835512026EE1700DAAE3F /* VersionViewController.m in Sources */,
 				3048356420279F5F00DAAE3F /* AttentViewController.m in Sources */,
+				302350B1202F59DE0018FB95 /* DynamicDetailsViewController.m in Sources */,
 				304835542026F4C000DAAE3F /* ComonTop.m in Sources */,
 				2A7CFAAC202414AF00CBE495 /* AccountView.m in Sources */,
 				2A6F15D220245CE700B55AA7 /* DMRequestModel.m in Sources */,

@@ -31,6 +31,7 @@
 #import "PeopleListDataModel.h"
 #import "DynamicData.h"
 
+#import "PeopleDetailsViewController.h"
 #import "RoleDetailsDataModel.h"
 
 
@@ -43,6 +44,7 @@
 #import "LoginViewController.h"
 #import "AccountLocalDataModel.h"
 #import "AccountInfo.h"
+#import "DynamicDetailsViewController.h"
 
 
 #endif /* acgn_Prefix_pch */

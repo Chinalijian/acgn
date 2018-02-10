@@ -10,6 +10,7 @@
 
 @protocol ContentListDelegate <NSObject>
 - (void)clickSelectRowAtIndexPath:(id)obj;
+- (void)clickPeopleHead:(NSString *)roleID;
 @end
 
 @interface ContentListView : UIView

@@ -9,7 +9,7 @@
 #import "ContentListView.h"
 #import "ContentListCell.h"
 #import "ContentCom.h"
-@interface ContentListView() <UITableViewDelegate, UITableViewDataSource>
+@interface ContentListView() <UITableViewDelegate, UITableViewDataSource, ContentComDelegate>
 
 @end
 
@@ -70,11 +70,22 @@
     return 0;
 }
 
+- (void)clickSelectPeopleImage:(NSString *)roleId {
+    if (!STR_IS_NIL(roleId)) {
+        if ([self.delegate respondsToSelector:@selector(clickPeopleHead:)]) {
+            [self.delegate clickPeopleHead:roleId];
+        }
+    }
+}
+
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.delegate respondsToSelector:@selector(clickSelectRowAtIndexPath:)]) {
-        [self.delegate clickSelectRowAtIndexPath:nil];
+        if (indexPath.section < self.datas.count) {
+            DynamicListData *data = [self.datas objectAtIndex:indexPath.section];
+            [self.delegate clickSelectRowAtIndexPath:data];
+        }
     }
 }
 
@@ -132,15 +143,13 @@
                  initWithReuseIdentifier:cc
                  frame:CGRectMake(0, 0, self.aTableView.frame.size.width, 0)];
     }
+    infoV.delegate = self;
     [self modfiyBackgroudColor:infoV index:section];
     if (section < self.datas.count) {
         DynamicListData *data = [self.datas objectAtIndex:section];
         [infoV configInfo:data];
     }
     return infoV;
-//    UIView *infoV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.aTableView.frame.size.width, 35)];
-//    [self modfiyBackgroudColor:infoV index:section];
-//    return infoV;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

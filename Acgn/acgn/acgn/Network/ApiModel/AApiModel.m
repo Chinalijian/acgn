@@ -198,7 +198,8 @@
 //获取动态评论列表
 + (void)getPostCommentListData:(NSString *)postId lastId:(NSString *)lastId block:(void(^)(BOOL result, NSArray *array))block {
     NSString *userID = [AccountInfo getUserID];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:postId, @"postId", lastId, @"lastId", userID, @"uId", nil];
+    NSLog(@"POST ID = %@",lastId);
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:postId, @"postId", lastId, @"lastId", userID, @"uId", @"10", @"rowPage", nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_GetPostComment_List_Url parameters:dic method:DMHttpRequestPost dataModelClass:[DynamicDetailsCommentData class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             DynamicDetailsCommentData *model = (DynamicDetailsCommentData *)responseObject;

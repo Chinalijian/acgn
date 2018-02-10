@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "ImageCom.h"
+
+
+@protocol ContentComDelegate <NSObject>
+- (void)clickSelectPeopleImage:(NSString *)roleId;
+@end
+
+
 //列表头的通用控件View
 @interface ContentCom : UITableViewHeaderFooterView
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
                         frame:(CGRect)frame;
+@property (nonatomic, weak) id <ContentComDelegate> delegate;
 - (void)configInfo:(DynamicListData *)obj;
 + (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj;
 @end

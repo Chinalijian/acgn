@@ -9,7 +9,7 @@
 #import "ContentCom.h"
 
 @interface ContentCom()
-
+@property (nonatomic, strong) DynamicListData *dynamicObj;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *fromLabel;
@@ -98,6 +98,13 @@
     return [ATools getHeightByWidth:Content_Label_Widht title:obj.postContext font:Commit_Font];
 }
 
+
+- (void)tapAction:(UITapGestureRecognizer *)tap {
+    if ([self.delegate respondsToSelector:@selector(clickSelectPeopleImage:)]) {
+        [self.delegate clickSelectPeopleImage:self.dynamicObj.roleId];
+    }
+}
+
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
                         frame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -106,8 +113,9 @@
     }
     return self;
 }
+
 - (void)configInfo:(DynamicListData *)obj {
-    
+    self.dynamicObj = obj;
     self.nameLabel.text = obj.userName;
     self.timeLabel.text = obj.postTime;
     self.fromLabel.text = obj.postSource;
@@ -349,6 +357,11 @@
         _peopleImageView.clipsToBounds = YES;
         _peopleImageView.contentMode = UIViewContentModeScaleAspectFill;
         _peopleImageView.backgroundColor = [UIColor clearColor];
+        _peopleImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+        tap.numberOfTapsRequired =1;
+        tap.numberOfTouchesRequired =1;
+        [_peopleImageView addGestureRecognizer:tap];
     }
     return _peopleImageView;
 }
