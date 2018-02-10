@@ -10,5 +10,12 @@
 
 //列表图片/视频的View
 @interface ImageCom : UIView
-
+- (id)initWithBigImage:(CGFloat)width
+        bigImageHeight:(CGFloat)height
+       smallImageWidth:(CGFloat)swidth
+      samllImageHeight:(CGFloat)sheight
+            smallSpace:(CGFloat)sspace
+                frameW:(CGFloat)frameW
+                frameH:(CGFloat)frameH;
+- (void)configImageCom:(NSArray *)array height:(CGFloat)height;
 @end

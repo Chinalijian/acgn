@@ -193,8 +193,7 @@
         _aTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _aTableView.backgroundColor = [UIColor whiteColor];//UIColorFromRGB(0xf6f6f6);
 
-        
-        UIView *fV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _aTableView.frame.size.width, 70)];
+        UIView *fV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _aTableView.frame.size.width, 35)];
         fV.backgroundColor = [UIColor whiteColor];
         _aTableView.tableFooterView = fV;
     }

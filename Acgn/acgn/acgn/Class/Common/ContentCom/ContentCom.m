@@ -39,30 +39,56 @@
 #define PeopleImage_Width  138.5
 
 #define Content_Label_Space_Y 16
+#define Content_Label_H 72
 #define Content_Label_Widht DMScreenWidth-Space_Left_X*2-PeopleImage_Width
 
+#define Image_Height (Content_Label_Widht)*(0.64)+5
+#define Image_Width (Content_Label_Widht)-10
 #define Image_Space 8
+
+#define Small_Image_W_H 63
+#define Small_Image_Space 4
+
+
 #define BottomView_H 34
 
 + (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj {
+    NSLog(@"dd = %f",(Content_Label_Widht)*(0.64)+10);
     CGFloat totalHeight = 0;
     CGFloat imageH = [ContentCom getImageMaxHeight:obj];
     CGFloat contentH = [ContentCom getContentMaxHeight:obj];
-    totalHeight =  contentH + imageH + Name_Label_H+Time_Label_H+From_Label_H + Space_Y + Label_Space_Y*2 + Image_Space*2 + BottomView_H;
+    CGFloat contentTotalH = Content_Label_Space_Y;
+    if (contentH > 0) {
+        contentH = (contentH > Content_Label_H ? Content_Label_H:contentH);
+        contentTotalH = contentTotalH + contentH;
+    }
+    CGFloat imageTotalH = Image_Space;
+    if (imageH > 0) {
+        imageTotalH = imageH + Image_Space*2;
+    }
+    totalHeight =  contentTotalH + imageTotalH + Name_Label_H+Time_Label_H+From_Label_H + Space_Y + Label_Space_Y*2 + BottomView_H;
+    
     if (totalHeight <= PeopleImage_Height) {
-        totalHeight = totalHeight + 20;
+        totalHeight = totalHeight + (PeopleImage_Height-totalHeight) + 20;
     }
     return totalHeight;
 }
 
 + (CGFloat)getImageMaxHeight:(DynamicListData *)obj {
-    if (obj.postUrls.count == 1) {
-        NSString *url = [obj.postUrls firstObject];
-        
-    } else {
-        
+    if (obj.postUrls.count > 0) {
+        if (obj.postUrls.count == 1) {
+            return Image_Height;
+        } else {
+            NSInteger rowCount = obj.postUrls.count/3;
+            if (obj.postUrls.count%3 == 0) {
+                return Small_Image_W_H*rowCount+Small_Image_Space*(rowCount+1);
+            } else {
+                return Small_Image_W_H*(rowCount+1)+Small_Image_Space*(rowCount+2);
+            }
+        }
     }
-    return 124;
+
+    return 0;
 }
 
 + (CGFloat)getContentMaxHeight:(DynamicListData *)obj {
@@ -87,18 +113,26 @@
     self.fromLabel.text = obj.postSource;
     self.contentLabel.text = obj.postContext;
     [ATools changeLineSpaceForLabel:self.contentLabel WithSpace:5];
-    [self.peopleImageView sd_setImageWithURL:[NSURL URLWithString:obj.imageUrl] placeholderImage:nil];
+    NSString * imageUrl = [obj.imageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [self.peopleImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
     [self.attButton setTitle:obj.seeNum forState:UIControlStateNormal];
     [self.comButton setTitle:obj.commentNum forState:UIControlStateNormal];
     [self.praButton setTitle:obj.fabulousNum forState:UIControlStateNormal];
     
-//    CGFloat HH = [ContentCom getContentCommonCellHeight:obj];
-//    self.frame = CGRectMake(0, 0, self.bounds.size.width, HH);
+    CGFloat contentH = [ContentCom getContentMaxHeight:obj];
+    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_offset(contentH);
+    }];
     
-//    CGRect rect = self.frame;
-//    rect.size.height = [ContentCom getContentCommonCellHeight:obj];
-//    self.frame = rect;
-//
+    CGFloat imageH = [ContentCom getImageMaxHeight:obj];
+    [_imageComView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(Image_Space);
+        make.height.mas_offset(imageH);
+    }];
+    
+    [self.imageComView configImageCom:obj.postUrls height:imageH];
+    
+    [self layoutSubviews];
 }
 
 - (void)loadUI {
@@ -148,7 +182,14 @@
         make.top.mas_equalTo(self.fromLabel.mas_bottom).mas_offset(Content_Label_Space_Y);
         make.left.mas_equalTo(self.fromLabel).mas_offset(0);
         make.width.mas_offset(Content_Label_Widht);
-        make.height.mas_offset(72);
+        make.height.mas_offset(Content_Label_H);
+    }];
+    
+    [_imageComView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_contentLabel.mas_bottom).mas_offset(Image_Space);
+        make.left.mas_equalTo(_contentLabel.mas_left).mas_offset(0);
+        make.width.mas_offset(Image_Width);
+        make.height.mas_offset(0);
     }];
     
     [self setupMakeBottomSubViewsLayout];
@@ -164,7 +205,7 @@
 
 - (void)setupMakeBottomSubViewsLayout {
     [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.contentView).mas_offset(0);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(0);
         make.left.mas_equalTo(self.contentView).mas_offset(0);
         make.right.mas_equalTo(self.contentView).mas_offset(0);
         make.height.mas_offset(BottomView_H);
@@ -242,7 +283,8 @@
 
 - (ImageCom *)imageComView {
     if (_imageComView == nil) {
-        _imageComView = [[ImageCom alloc] init];
+        _imageComView = [[ImageCom alloc] initWithBigImage:Image_Width bigImageHeight:Image_Height-10 smallImageWidth:Small_Image_W_H samllImageHeight:Small_Image_W_H smallSpace:Small_Image_Space frameW:Content_Label_Widht frameH:0];
+        _imageComView.backgroundColor = [UIColor clearColor];
     }
     return _imageComView;
 }
@@ -290,6 +332,9 @@
 - (UIImageView *)peopleImageView {
     if (_peopleImageView == nil) {
         _peopleImageView = [[UIImageView alloc] init];
+        _peopleImageView.clipsToBounds = YES;
+        _peopleImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _peopleImageView.backgroundColor = [UIColor clearColor];
     }
     return _peopleImageView;
 }
