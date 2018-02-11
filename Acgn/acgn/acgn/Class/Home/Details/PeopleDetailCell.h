@@ -10,4 +10,5 @@
 
 @interface PeopleDetailCell : UITableViewCell
 + (CGFloat)getPeopleDetailCellHeight:(RoleDetailsPostData *)obj;
+- (void)configInfo:(RoleDetailsPostData *)obj;
 @end

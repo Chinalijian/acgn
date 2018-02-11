@@ -14,13 +14,16 @@
 @property (nonatomic, strong) UILabel *sourceLabel;
 @property (nonatomic, strong) UILabel *introduceLabel;
 @property (nonatomic, strong) UIImageView *peopleImageView;
-
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIView *alphaView;
 @property (nonatomic, strong) UIButton *attButton;
 @property (nonatomic, strong) UIButton *fansButton;
 
 @property (nonatomic, strong) UIButton *image3DButton;
+
+@property (nonatomic, assign) CGFloat introduceHeight;
+
+@property (nonatomic, strong) UIImageView *bgImageView;
 
 @end
 
@@ -43,6 +46,8 @@
 
 #define BottomView_H 34
 
+#define BottomView_BottomToView 26
+
 + (CGFloat)getViewTotalHeight:(RoleDetailsDataModel *)obj {
     CGFloat totalHeight = 0;
     CGFloat indtroduceHeight = [PeopleDetailHeader getIntroduceMaxHeight:obj];
@@ -50,7 +55,7 @@
     if (totalHeight < Total_Default_Height) {
         totalHeight = Total_Default_Height;
     }
-    return totalHeight;
+    return totalHeight+BottomView_BottomToView;
 }
 
 + (CGFloat)getIntroduceMaxHeight:(RoleDetailsDataModel *)obj {
@@ -68,6 +73,8 @@
 }
 
 - (void)configInfo:(RoleDetailsDataModel *)obj {
+    self.introduceHeight = [PeopleDetailHeader getIntroduceMaxHeight:obj];
+    [self loadUI];
     self.dynamicObj = obj;
     self.nameLabel.text = obj.userName;
     self.sourceLabel.text = obj.source;
@@ -81,23 +88,24 @@
         [self.attButton setTitle:@"关注" forState:UIControlStateNormal];
     }
     [self.fansButton setTitle:[NSString stringWithFormat:@"粉丝：%@", obj.fansNum] forState:UIControlStateNormal];
-    [self layoutSubviews];
 }
 
 - (id)initWithframe:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self loadUI];
+        //[self loadUI];
     }
     return self;
 }
 
 - (void)loadUI {
-    
+    self.backgroundColor = [UIColor whiteColor];
+    [self addSubview:self.bgImageView];
     [self addSubview:self.nameLabel];
     [self addSubview:self.sourceLabel];
     [self addSubview:self.introduceLabel];
     [self addSubview:self.bottomView];
+    [self.bottomView addSubview:self.alphaView];
     [self.bottomView addSubview:self.attButton];
     [self.bottomView addSubview:self.fansButton];
     [self addSubview:self.peopleImageView];
@@ -107,6 +115,11 @@
 }
 
 - (void)setupTopContentLayout {
+    
+    [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_equalTo(self).mas_offset(0);
+        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-BottomView_BottomToView);
+    }];
     
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self).mas_offset(Name_Space_Y);
@@ -122,7 +135,7 @@
     }];
     [_introduceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.sourceLabel.mas_bottom).mas_offset(Introduce_Label_Space_Y);
-        make.height.mas_offset(0);
+        make.height.mas_offset(self.introduceHeight);
         make.left.mas_equalTo(self.nameLabel).mas_offset(0);
         make.right.mas_equalTo(self.nameLabel).mas_offset(0);
     }];
@@ -130,15 +143,15 @@
     [self setupMakeBottomSubViewsLayout];
     
     [_peopleImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(0);
+        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-BottomView_BottomToView);
         make.right.mas_equalTo(self).mas_offset(-5);
         make.height.mas_offset(PeopleImage_Height);
         make.width.mas_offset(PeopleImage_Width);
     }];
     
     [_image3DButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-5);
-        make.right.mas_equalTo(self).mas_offset(-13);
+        make.bottom.mas_equalTo(_peopleImageView.mas_bottom).mas_offset(-5);
+        make.right.mas_equalTo(_bottomView.mas_right).mas_offset(-10);
         make.height.mas_offset(22);
         make.width.mas_offset(82);
     }];
@@ -147,7 +160,7 @@
 
 - (void)setupMakeBottomSubViewsLayout {
     [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(0);
+        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-BottomView_BottomToView);
         make.left.mas_equalTo(self).mas_offset(0);
         make.right.mas_equalTo(self).mas_offset(0);
         make.height.mas_offset(BottomView_H);
@@ -167,9 +180,17 @@
     [_fansButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.attButton).mas_offset(0);
         make.top.mas_equalTo(self.attButton).mas_offset(0);
-        make.left.mas_equalTo(self.attButton).mas_offset(Space_Left_X);
+        make.left.mas_equalTo(self.attButton.mas_right).mas_offset(Space_Left_X);
         make.width.mas_offset(90);
     }];
+}
+
+- (UIImageView *)bgImageView {
+    if (_bgImageView == nil) {
+        _bgImageView = [[UIImageView alloc] init];
+        _bgImageView.image = [UIImage imageNamed:@"details_header_bg_icon"];
+    }
+    return _bgImageView;
 }
 
 - (UILabel *)nameLabel {
@@ -177,7 +198,7 @@
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.text = @"";
         _nameLabel.textAlignment = NSTextAlignmentLeft;
-        _nameLabel.textColor = UIColorFromRGB(0xFFFFF);
+        _nameLabel.textColor = UIColorFromRGB(0xFFFFFF);
         _nameLabel.font = [UIFont boldSystemFontOfSize:18];
         _nameLabel.backgroundColor = [UIColor clearColor];
     }
@@ -200,8 +221,8 @@
         _introduceLabel.textAlignment = NSTextAlignmentLeft;
         _introduceLabel.textColor = UIColorFromRGB(0xFFFFFF);
         _introduceLabel.font = [UIFont systemFontOfSize:13];
-//        _introduceLabel.lineBreakMode = NSLineBreakByCharWrapping;
-//        _introduceLabel.numberOfLines = 3;
+        _introduceLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        _introduceLabel.numberOfLines = 0;
     }
     return _introduceLabel;
 }
@@ -269,7 +290,10 @@
         [_image3DButton setTitle:@"立体形象" forState:UIControlStateNormal];
         [_image3DButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_image3DButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        _image3DButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        _image3DButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        _image3DButton.layer.cornerRadius = 8;
+        _image3DButton.alpha = .8;
+        [_image3DButton setBackgroundColor: UIColorFromRGB(0xE96A79)];
     }
     return _image3DButton;
 }

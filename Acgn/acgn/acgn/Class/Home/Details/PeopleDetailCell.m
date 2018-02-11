@@ -41,7 +41,7 @@
 
 @implementation PeopleDetailCell
 + (CGFloat)getPeopleDetailCellHeight:(RoleDetailsPostData *)obj {
-    CGFloat contentHeight = [PeopleDetailCell getContentMaxHeight:obj];
+    CGFloat contentHeight = [PeopleDetailCell getContentMaxHeight:obj]+10;
     CGFloat picHeight = 0;
     if (obj.postType.integerValue == Info_Type_Picture || obj.postType.integerValue == Info_Type_GIf_Pic ) {
         //图片
@@ -78,6 +78,65 @@
     }
     return 0;
 }
+
+- (void)configInfo:(RoleDetailsPostData *)obj {
+    [self cleanObjSubView];
+    if (!OBJ_IS_NIL(obj)) {
+        NSArray *array = [obj.postTime componentsSeparatedByString:@" "];
+        self.bigTimeLabel.text = [array firstObject];
+        self.smallTimeLabel.text = [array lastObject];
+        self.contentLabel.text = obj.postContext;
+        
+        switch (obj.postType.integerValue) {
+            case Info_Type_Text:
+                self.typeImageView.image = [UIImage imageNamed:@"Text_Image_Icon"];
+                break;
+            case Info_Type_Picture:
+                self.typeImageView.image = [UIImage imageNamed:@"Picture_Image_Icon"];
+                break;
+            case Info_Type_GIf_Pic:
+                self.typeImageView.image = [UIImage imageNamed:@"Picture_Image_Icon"];
+                break;
+            case Info_Type_Video:
+                self.typeImageView.image = [UIImage imageNamed:@"Video_Image_Icon"];
+                break;
+            default:
+                break;
+        }
+        
+        CGFloat contentH = [PeopleDetailCell getContentMaxHeight:obj];
+        [_contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_offset(contentH);
+        }];
+        
+        if (obj.postType.integerValue != 0) {
+            self.imageCom.hidden = NO;
+            CGFloat imageH = [PeopleDetailCell getImageMaxHeight:obj];
+            [_imageCom mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_offset(imageH);
+            }];
+            
+            [self.imageCom configImageCom:obj.postUrls height:imageH];
+        }
+        [self.seeNumButton setTitle:obj.seeNum forState:UIControlStateNormal];
+        [self.commitNumButton setTitle:obj.commentNum forState:UIControlStateNormal];
+        [self.praiseNumButton setTitle:obj.fabulousNum forState:UIControlStateNormal];
+        [self layoutSubviews];
+    }
+    
+}
+
+- (void)cleanObjSubView {
+    self.bigTimeLabel.text = @"";
+    self.smallTimeLabel.text = @"";
+    self.contentLabel.text = @"";
+    self.imageCom.hidden = YES;
+    [self.seeNumButton setTitle:@"0" forState:UIControlStateNormal];
+    [self.commitNumButton setTitle:@"0" forState:UIControlStateNormal];
+    [self.praiseNumButton setTitle:@"0" forState:UIControlStateNormal];
+    
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -93,6 +152,7 @@
     [self addSubview:self.bigTimeLabel];
     [self addSubview:self.smallTimeLabel];
     [self addSubview:self.contentLabel];
+    [self addSubview:self.imageCom];
     [self addSubview:self.typeImageView];
     [self addSubview:self.lineLabel];
     [self addSubview:self.buttonView];
@@ -129,22 +189,23 @@
         make.width.mas_offset(0.5);
     }];
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.bigTimeLabel.mas_top).mas_offset(0);
+        make.top.mas_equalTo(self.typeImageView.mas_top).mas_offset(10);
         make.left.mas_equalTo(self.typeImageView.mas_right).mas_offset(Space_Left_View);
         make.height.mas_offset(0);
         make.width.mas_offset(Content_With);
     }];
-    [self.imageCom mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(Space_Content_);
-        make.left.mas_equalTo(self.contentLabel.mas_right).mas_offset(0);
-        make.height.mas_offset(0);
+    [self.buttonView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-Space_Bottom_Cell);
+        make.left.mas_equalTo(self.contentLabel.mas_left).mas_offset(0);
+        make.height.mas_offset(Button_View_);
         make.width.mas_offset(Content_With);
     }];
     
-    [self.buttonView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-Space_Bottom_Cell);
-        make.left.mas_equalTo(self.contentLabel.mas_right).mas_offset(0);
-        make.height.mas_offset(Button_View_);
+    [self.imageCom mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(Space_Content_);
+        make.left.mas_equalTo(self.contentLabel.mas_left).mas_offset(0);
+        //make.height.mas_offset(0);
+        make.bottom.mas_equalTo(self.buttonView.mas_top).mas_equalTo(10);
         make.width.mas_offset(Content_With);
     }];
     
@@ -162,20 +223,28 @@
     }];
     [self.praiseNumButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.buttonView).mas_offset(0);
-        make.left.mas_equalTo(self.buttonView).mas_offset(0);
+        make.right.mas_equalTo(self.buttonView).mas_offset(0);
         make.top.mas_equalTo(self.buttonView).mas_offset(0);
         make.width.mas_offset(Content_With/3);
     }];
     
 }
 
+- (ImageCom *)imageCom {
+    if (_imageCom == nil) {
+        _imageCom = [[ImageCom alloc] initWithBigImage:Content_With-10 bigImageHeight:Pic_Height-10 smallImageWidth:Small_Image_W_H samllImageHeight:Small_Image_W_H smallSpace:Small_Image_Space frameW:Content_With frameH:0];
+        _imageCom.backgroundColor = [UIColor clearColor];
+    }
+    return _imageCom;
+}
+
 - (UILabel *)bigTimeLabel {
     if (_bigTimeLabel == nil) {
         _bigTimeLabel = [[UILabel alloc] init];
         _bigTimeLabel.text = @"";
-        _bigTimeLabel.textAlignment = NSTextAlignmentLeft;
-        _bigTimeLabel.textColor = UIColorFromRGB(0xFFFFFF);
-        _bigTimeLabel.font = [UIFont systemFontOfSize:12];
+        _bigTimeLabel.textAlignment = NSTextAlignmentRight;
+        _bigTimeLabel.textColor = UIColorFromRGB(0x000000);
+        _bigTimeLabel.font = [UIFont systemFontOfSize:17];
     }
     return _bigTimeLabel;
 }
@@ -183,9 +252,9 @@
     if (_smallTimeLabel == nil) {
         _smallTimeLabel = [[UILabel alloc] init];
         _smallTimeLabel.text = @"";
-        _smallTimeLabel.textAlignment = NSTextAlignmentLeft;
-        _smallTimeLabel.textColor = UIColorFromRGB(0xFFFFFF);
-        _smallTimeLabel.font = [UIFont systemFontOfSize:12];
+        _smallTimeLabel.textAlignment = NSTextAlignmentRight;
+        _smallTimeLabel.textColor = UIColorFromRGB(0x000000);
+        _smallTimeLabel.font = [UIFont systemFontOfSize:13];
     }
     return _smallTimeLabel;
 }
@@ -194,18 +263,17 @@
         _contentLabel = [[UILabel alloc] init];
         _contentLabel.text = @"";
         _contentLabel.textAlignment = NSTextAlignmentLeft;
-        _contentLabel.textColor = UIColorFromRGB(0xFFFFFF);
-        _contentLabel.font = [UIFont systemFontOfSize:12];
+        _contentLabel.textColor = UIColorFromRGB(0x000000);
+        _contentLabel.font = [UIFont systemFontOfSize:13];
+        _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        _contentLabel.numberOfLines = 0;
     }
     return _contentLabel;
 }
 - (UILabel *)lineLabel {
     if (_lineLabel == nil) {
         _lineLabel = [[UILabel alloc] init];
-        _lineLabel.text = @"";
-        _lineLabel.textAlignment = NSTextAlignmentLeft;
-        _lineLabel.textColor = UIColorFromRGB(0xFFFFFF);
-        _lineLabel.font = [UIFont systemFontOfSize:12];
+        _lineLabel.backgroundColor = UIColorFromRGB(0x696969);
     }
     return _lineLabel;
 }
@@ -228,6 +296,7 @@
 - (UIView *)buttonView {
     if (_buttonView == nil) {
         _buttonView = [[UIView alloc] init];
+        //_buttonView.backgroundColor = [UIColor yellowColor];
     }
     return _buttonView;
 }
@@ -235,10 +304,10 @@
 - (UIButton *)seeNumButton {
     if (_seeNumButton == nil) {
         _seeNumButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_seeNumButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_seeNumButton setTitleColor:UIColorFromRGB(0x696969) forState:UIControlStateNormal];
         [_seeNumButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        [_seeNumButton setImage:[UIImage imageNamed:@"praise_yellow_icon"] forState:UIControlStateNormal];
-        [_seeNumButton setTitle:@"粉丝：2234" forState:UIControlStateNormal];
+        [_seeNumButton setImage:[UIImage imageNamed:@"look_img_grey"] forState:UIControlStateNormal];
+        [_seeNumButton setTitle:@"0" forState:UIControlStateNormal];
         _seeNumButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     return _seeNumButton;
@@ -246,10 +315,10 @@
 - (UIButton *)commitNumButton {
     if (_commitNumButton == nil) {
         _commitNumButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_commitNumButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_commitNumButton setTitleColor:UIColorFromRGB(0x696969) forState:UIControlStateNormal];
         [_commitNumButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        [_commitNumButton setImage:[UIImage imageNamed:@"praise_yellow_icon"] forState:UIControlStateNormal];
-        [_commitNumButton setTitle:@"粉丝：2234" forState:UIControlStateNormal];
+        [_commitNumButton setImage:[UIImage imageNamed:@"comment_img_grey"] forState:UIControlStateNormal];
+        [_commitNumButton setTitle:@"0" forState:UIControlStateNormal];
         _commitNumButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     }
     return _commitNumButton;
@@ -257,10 +326,10 @@
 - (UIButton *)praiseNumButton {
     if (_praiseNumButton == nil) {
         _praiseNumButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_praiseNumButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_praiseNumButton setTitleColor:UIColorFromRGB(0x696969) forState:UIControlStateNormal];
         [_praiseNumButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        [_praiseNumButton setImage:[UIImage imageNamed:@"praise_yellow_icon"] forState:UIControlStateNormal];
-        [_praiseNumButton setTitle:@"粉丝：2234" forState:UIControlStateNormal];
+        [_praiseNumButton setImage:[UIImage imageNamed:@"praise_grey_icon"] forState:UIControlStateNormal];
+        [_praiseNumButton setTitle:@"0" forState:UIControlStateNormal];
         _praiseNumButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     }
     return _praiseNumButton;

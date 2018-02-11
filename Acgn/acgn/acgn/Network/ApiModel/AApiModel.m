@@ -213,8 +213,8 @@
 }
 //个人详情里 人物发的帖子列表
 + (void)getRoleDtailsListData:(NSString *)roleId lastId:(NSString *)lastId block:(void(^)(BOOL result, NSArray *array))block {
-    NSString *userID = [AccountInfo getUserID];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:roleId, @"roleId", lastId, @"lastId", userID, @"uId", nil];
+    //NSString *userID = [AccountInfo getUserID];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:roleId, @"roleId", lastId, @"lastId", @"10", @"rowPage", nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_GetRoleDetails_List_Url parameters:dic method:DMHttpRequestPost dataModelClass:[RoleDetailsPostListData class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             RoleDetailsPostListData *model = (RoleDetailsPostListData *)responseObject;
