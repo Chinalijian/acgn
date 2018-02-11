@@ -11,17 +11,16 @@
 
 #define Space_Bottom_Cell 32
 #define Button_View_ 25
-
 #define Time_Width 70
 #define TypeButton_W 30.5
-
 #define Space_Right_Cell 24
 #define Space_Left_View 13
-
 #define Space_Content_ 10
-
+#define Video_Height 101
 #define Content_With (DMScreenWidth-Space_Right_Cell-Space_Left_View-TypeButton_W-Space_Left_View-Time_Width)
-
+#define Pic_Height (Content_With)*(0.64)+5
+#define Small_Image_W_H 63
+#define Small_Image_Space 4
 @interface PeopleDetailCell ()
 
 @property (nonatomic, strong) UILabel *bigTimeLabel;
@@ -41,8 +40,42 @@
 @end
 
 @implementation PeopleDetailCell
-+ (CGFloat)getPeopleDetailCellHeight {
-    
++ (CGFloat)getPeopleDetailCellHeight:(RoleDetailsPostData *)obj {
+    CGFloat contentHeight = [PeopleDetailCell getContentMaxHeight:obj];
+    CGFloat picHeight = 0;
+    if (obj.postType.integerValue == Info_Type_Picture || obj.postType.integerValue == Info_Type_GIf_Pic ) {
+        //图片
+        picHeight = [PeopleDetailCell getImageMaxHeight:obj];
+        if (picHeight>0) {
+            picHeight = picHeight + Space_Content_;
+        }
+        
+    } else if (obj.postType.integerValue == Info_Type_Video) {
+        //视频
+        picHeight = Video_Height +10;
+    }
+    CGFloat totalHeight = contentHeight + picHeight + Button_View_ + Space_Bottom_Cell + Space_Content_;
+    return totalHeight;
+}
++ (CGFloat)getContentMaxHeight:(RoleDetailsPostData *)obj {
+    if (OBJ_IS_NIL(obj)) {
+        return 0;
+    }
+    return [ATools getHeightByWidth:Content_With title:obj.postContext font:Commit_Font];
+}
++ (CGFloat)getImageMaxHeight:(RoleDetailsPostData *)obj {
+    if (obj.postUrls.count > 0) {
+        if (obj.postUrls.count == 1) {
+            return Pic_Height;
+        } else {
+            NSInteger rowCount = obj.postUrls.count/3;
+            if (obj.postUrls.count%3 == 0) {
+                return Small_Image_W_H*rowCount+Small_Image_Space*(rowCount+1);
+            } else {
+                return Small_Image_W_H*(rowCount+1)+Small_Image_Space*(rowCount+2);
+            }
+        }
+    }
     return 0;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

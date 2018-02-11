@@ -23,5 +23,13 @@ typedef NS_ENUM(NSInteger, AAccountType) {
     AAccountType_Edit        = 10,// 编辑资料
 };
 
+typedef NS_ENUM(NSInteger, Info_Type) {
+    Info_Type_Text          = 0, // 文字
+    Info_Type_Picture       = 1, // 图片
+    Info_Type_GIf_Pic       = 2, // 图片
+    Info_Type_Video         = 3, // 视频
+};
+
+
 
 #endif /* AEnums_h */

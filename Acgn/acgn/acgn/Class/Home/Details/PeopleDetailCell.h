@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PeopleDetailCell : UITableViewCell
-
++ (CGFloat)getPeopleDetailCellHeight:(RoleDetailsPostData *)obj;
 @end
