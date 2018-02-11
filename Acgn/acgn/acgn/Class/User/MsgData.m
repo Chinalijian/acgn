@@ -7,13 +7,13 @@
 //
 
 #import "MsgData.h"
-@implementation MsgListData
-@end
+//@implementation MsgListData
+//@end
 
 @implementation MsgData
 +(NSDictionary *)mj_objectClassInArray {
     return @{
-             @"data" : @"MsgListData"
+             @"data" : @"DynamicCommentListData"
              };
 }
 @end

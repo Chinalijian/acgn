@@ -7,15 +7,15 @@
 //
 
 #import "CollectionData.h"
-@implementation CollectionListData
-
-@end
+//@implementation CollectionListData
+//
+//@end
 
 
 @implementation CollectionData
 +(NSDictionary *)mj_objectClassInArray {
     return @{
-             @"data" : @"CollectionListData"
+             @"data" : @"DynamicListData"
              };
 }
 @end

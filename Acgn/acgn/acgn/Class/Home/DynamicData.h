@@ -79,6 +79,12 @@
 @property (nonatomic, copy) NSString *hasCollection;
 @property (nonatomic, copy) NSString *hasFabulousNum;
 
+//收藏列表
+@property (nonatomic, copy) NSString *collectionId;
+@property (nonatomic, copy) NSString *uId;
+@property (nonatomic, copy) NSString *collectionTime;
+
+
 @end
 
 @interface DynamicData : ABaseDataModel

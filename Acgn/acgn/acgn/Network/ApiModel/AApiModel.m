@@ -245,10 +245,10 @@
 
 //吐槽中心
 + (void)getGetCommentDetailsData:(NSString *)commentId lastId:(NSString *)lastId block:(void(^)(BOOL result, NSArray *array))block {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:commentId, @"commentId", lastId, @"lastId", @"20", @"rowPage", nil];
-    [[DMHttpClient sharedInstance] initWithUrl:DM_GetCommentDetails_Url parameters:dic method:DMHttpRequestPost dataModelClass:[DynamicData class] isMustToken:NO success:^(id responseObject) {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:commentId, @"commentId", lastId, @"lastId", @"10", @"rowPage", nil];
+    [[DMHttpClient sharedInstance] initWithUrl:DM_GetCommentDetails_Url parameters:dic method:DMHttpRequestPost dataModelClass:[MsgData class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
-            DynamicData *model = (DynamicData *)responseObject;
+            MsgData *model = (MsgData *)responseObject;
             block(YES, model.data);
         } else {
             block(NO, nil);
@@ -447,7 +447,7 @@
 //收藏列表
 + (void)getCollectionListForUser:(NSString *)lastId block:(void(^)(BOOL result, NSArray *array))block {
     NSString *userID = [AccountInfo getUserID];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:lastId, @"lastId", @"20", @"rowPage", userID, @"uId", nil];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:lastId, @"lastId", @"10", @"rowPage", userID, @"uId", nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_CollectionList_Url parameters:dic method:DMHttpRequestPost dataModelClass:[CollectionData class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             CollectionData *model = (CollectionData *)responseObject;

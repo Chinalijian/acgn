@@ -241,7 +241,7 @@
         _commitLabel.textAlignment = NSTextAlignmentLeft;
         _commitLabel.textColor = UIColorFromRGB(0x000000);
         _commitLabel.font = Commit_Font;
-        _commitLabel.backgroundColor = [UIColor whiteColor];
+        //_commitLabel.backgroundColor = [UIColor whiteColor];
         _commitLabel.lineBreakMode  =NSLineBreakByClipping;
         _commitLabel.numberOfLines = 0;
     }

@@ -78,6 +78,12 @@
     }
 }
 
+- (void)clickSelectSectionViewForGoToDetail:(id)obj {
+    if ([self.delegate respondsToSelector:@selector(clickSelectRowAtIndexPath:)]) {
+        [self.delegate clickSelectRowAtIndexPath:obj];
+    }
+}
+
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -85,6 +91,15 @@
         if (indexPath.section < self.datas.count) {
             DynamicListData *data = [self.datas objectAtIndex:indexPath.section];
             [self.delegate clickSelectRowAtIndexPath:data];
+        }
+    }
+    if ([self.delegate respondsToSelector:@selector(clickSelectRowAtIndexPathForCommit:)]) {
+        if (indexPath.section < self.datas.count) {
+            DynamicListData *data = [self.datas objectAtIndex:indexPath.section];
+            if (data.commentList.count > 0) {
+                DynamicCommentListData *lData = [data.commentList objectAtIndex:indexPath.row];
+                [self.delegate clickSelectRowAtIndexPathForCommit:lData];
+            }
         }
     }
 }

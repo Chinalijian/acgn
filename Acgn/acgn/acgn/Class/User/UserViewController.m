@@ -11,7 +11,8 @@
 #import "AboutViewController.h"
 #import "ModifyPsdViewController.h"
 #import "NickNameViewController.h"
-
+#import "MyFavViewController.h"
+#import "MyMsgViewController.h"
 @interface UserViewController () <UserViewDelegate>
 @property (nonatomic, strong) UserView *userView;
 @end
@@ -52,12 +53,16 @@
 
 - (void)goToPage:(AAccountType)type {
     switch (type) {
-        case AAccountType_Msg:
-            
+        case AAccountType_Msg: {
+            MyMsgViewController *myMsgVC = [[MyMsgViewController alloc] init];
+            [self.navigationController pushViewController:myMsgVC animated:YES];
             break;
-        case AAccountType_Fav:
-            
+        }
+        case AAccountType_Fav: {
+            MyFavViewController *myFavVC = [[MyFavViewController alloc] init];
+            [self.navigationController pushViewController:myFavVC animated:YES];
             break;
+        }
         case AAccountType_ChangePsd: {
             ModifyPsdViewController *modifyPsdVC = [[ModifyPsdViewController alloc] init];
             [self.navigationController pushViewController:modifyPsdVC animated:YES];

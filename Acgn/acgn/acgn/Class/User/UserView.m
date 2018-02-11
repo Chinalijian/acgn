@@ -180,6 +180,8 @@
 - (ComonTop *)topView {
     if (_topView == nil) {
         _topView = [[ComonTop alloc] initWithFrame:CGRectMake(0, 0, self.uTableView.frame.size.width, [ATools setViewFrameYForIPhoneX:TopView_H])];
+        _topView.logoImageView.clipsToBounds = YES;
+        _topView.logoImageView.layer.cornerRadius = (70.5)/2;
     }
     return _topView;
 }

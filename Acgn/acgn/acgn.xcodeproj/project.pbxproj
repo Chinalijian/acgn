@@ -51,6 +51,7 @@
 		3048356120279F3B00DAAE3F /* MyFavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3048356020279F3B00DAAE3F /* MyFavViewController.m */; };
 		3048356420279F5F00DAAE3F /* AttentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3048356320279F5F00DAAE3F /* AttentViewController.m */; };
 		3048356720279FA000DAAE3F /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3048356620279FA000DAAE3F /* SquareViewController.m */; };
+		3071B7ED2030A2CC00A4A6BA /* MsgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3071B7EC2030A2CC00A4A6BA /* MsgDetailViewController.m */; };
 		309D9037202588BA002F414F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 309D9036202588BA002F414F /* libc++.tbd */; };
 		309D903A20259373002F414F /* ABaseDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903920259373002F414F /* ABaseDataModel.m */; };
 		309D903D2025943C002F414F /* UserDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 309D903C2025943C002F414F /* UserDataModel.m */; };
@@ -180,6 +181,8 @@
 		3048356320279F5F00DAAE3F /* AttentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttentViewController.m; sourceTree = "<group>"; };
 		3048356520279FA000DAAE3F /* SquareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquareViewController.h; sourceTree = "<group>"; };
 		3048356620279FA000DAAE3F /* SquareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SquareViewController.m; sourceTree = "<group>"; };
+		3071B7EB2030A2CC00A4A6BA /* MsgDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgDetailViewController.h; sourceTree = "<group>"; };
+		3071B7EC2030A2CC00A4A6BA /* MsgDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgDetailViewController.m; sourceTree = "<group>"; };
 		309D9035202580F2002F414F /* DMServerApiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMServerApiConfig.h; sourceTree = "<group>"; };
 		309D9036202588BA002F414F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		309D903820259373002F414F /* ABaseDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABaseDataModel.h; sourceTree = "<group>"; };
@@ -543,6 +546,8 @@
 				2A7456FF20303676009E2880 /* PeopleDetailHeader.m */,
 				2A745701203043FA009E2880 /* PeopleDetailCell.h */,
 				2A745702203043FA009E2880 /* PeopleDetailCell.m */,
+				3071B7EB2030A2CC00A4A6BA /* MsgDetailViewController.h */,
+				3071B7EC2030A2CC00A4A6BA /* MsgDetailViewController.m */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -795,6 +800,7 @@
 				2A704B172022C31C00476D68 /* ABaseViewController.m in Sources */,
 				2ADF21C82022DF1600559427 /* AttentionPeopleList.m in Sources */,
 				300DE1542024ACBA008DBCBD /* NickNameViewController.m in Sources */,
+				3071B7ED2030A2CC00A4A6BA /* MsgDetailViewController.m in Sources */,
 				2A6F15D320245CE700B55AA7 /* DMHttpClient.m in Sources */,
 				30EAFE53202B62E1004C75C6 /* ContentCom.m in Sources */,
 				3048355E20279F2E00DAAE3F /* MyMsgViewController.m in Sources */,

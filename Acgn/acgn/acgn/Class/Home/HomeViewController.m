@@ -32,12 +32,8 @@
 }
 
 - (void)rightOneAction:(id)sender {
-//    UserViewController *userVC = [[UserViewController alloc] init];
-//    [self.navigationController pushViewController:userVC animated:YES];
-    [AApiModel getHomePostList:@"-1" block:^(BOOL result, NSArray *array) {
-        
-    }];
-
+    UserViewController *userVC = [[UserViewController alloc] init];
+    [self.navigationController pushViewController:userVC animated:YES];
 }
 
 

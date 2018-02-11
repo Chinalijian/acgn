@@ -104,12 +104,21 @@
         [self.delegate clickSelectPeopleImage:self.dynamicObj.roleId];
     }
 }
+- (void)tapActionRootView:(UITapGestureRecognizer *)tap {
+    if ([self.delegate respondsToSelector:@selector(clickSelectSectionViewForGoToDetail:)]) {
+        [self.delegate clickSelectSectionViewForGoToDetail:self.dynamicObj];
+    }
+}
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
                         frame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self loadUI];
+        UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapActionRootView:)];
+        tap.numberOfTapsRequired =1;
+        tap.numberOfTouchesRequired =1;
+        [self addGestureRecognizer:tap];
     }
     return self;
 }
@@ -118,7 +127,7 @@
     self.dynamicObj = obj;
     self.nameLabel.text = obj.userName;
     self.timeLabel.text = obj.postTime;
-    self.fromLabel.text = obj.postSource;
+    self.fromLabel.text = [NSString stringWithFormat:@"发自：%@", obj.postSource];
     self.contentLabel.text = obj.postContext;
     [ATools changeLineSpaceForLabel:self.contentLabel WithSpace:5];
     NSString * imageUrl = [obj.imageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];

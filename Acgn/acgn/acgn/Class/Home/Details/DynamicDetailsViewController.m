@@ -8,6 +8,7 @@
 
 #import "DynamicDetailsViewController.h"
 #import "ContentListView.h"
+#import "MsgDetailViewController.h"
 @interface DynamicDetailsViewController () <ContentListDelegate>
 @property (nonatomic, strong) ContentListView *contentListView;
 @property (nonatomic, strong) NSMutableArray *commitArray;
@@ -72,6 +73,12 @@
     }];
 }
 
+- (void)clickSelectRowAtIndexPathForCommit:(id)obj {
+    DynamicCommentListData *data = (DynamicCommentListData *)obj;
+    MsgDetailViewController *msdDetailVC = [[MsgDetailViewController alloc] init];
+    msdDetailVC.commitID = data.commentId;
+    [self.navigationController pushViewController:msdDetailVC animated:YES];
+}
 
 - (void)addRefreshLoadMore:(UITableView *)tableView {
     tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];

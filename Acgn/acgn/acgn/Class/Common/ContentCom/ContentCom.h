@@ -12,6 +12,7 @@
 
 @protocol ContentComDelegate <NSObject>
 - (void)clickSelectPeopleImage:(NSString *)roleId;
+- (void)clickSelectSectionViewForGoToDetail:(id)obj;
 @end
 
 
