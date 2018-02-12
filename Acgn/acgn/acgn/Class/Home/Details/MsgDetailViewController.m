@@ -12,6 +12,7 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, strong) UITableView *mTableView;
 @property (nonatomic, strong) NSString *lastID;
+@property (nonatomic, strong) SendMsgInputTextView *inputView;
 @end
 
 @implementation MsgDetailViewController
@@ -121,6 +122,7 @@
 
 - (void)loadUI {
     [self.view addSubview:self.mTableView];
+    [self.view addSubview:self.inputView];
 }
 
 #pragma mark - 初始化UIKIT
@@ -134,6 +136,20 @@
 
     }
     return _mTableView;
+}
+- (SendMsgInputTextView *)inputView {
+    if (_inputView == nil) {
+        CGFloat HX = 0;
+        if (IS_IPHONE_X) {
+            HX = 35;
+        }
+        _inputView = [[SendMsgInputTextView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-55-HX, DMScreenWidth, 55)];
+        _inputView.bgColor = UIColorFromRGB(0xF2F2F2);
+        _inputView.showLimitNum = NO;
+        _inputView.font = [UIFont systemFontOfSize:18];
+        _inputView.limitNum = 1000;
+    }
+    return _inputView;
 }
 
 

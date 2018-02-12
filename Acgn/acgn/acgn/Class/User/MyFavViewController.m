@@ -8,11 +8,11 @@
 
 #import "MyFavViewController.h"
 #import "ContentListView.h"
-@interface MyFavViewController () <ContentListDelegate>
+@interface MyFavViewController () <ContentListDelegate, EmptyViewDelegate>
 @property (nonatomic, strong) ContentListView *contentListView;
 @property (nonatomic, strong) NSString *lastID;
 @property (nonatomic, strong) NSMutableArray *datas;
-
+@property (nonatomic, strong) EmptyView *emptyView;
 @end
 
 @implementation MyFavViewController
@@ -23,9 +23,10 @@
     self.title = @"我的收藏";
     self.view.backgroundColor = [UIColor whiteColor];
     [self setNavigationBarTransparence:NO
-                            titleColor:[UIColor whiteColor]];
+                            titleColor:[UIColor blackColor]];
     self.lastID = @"-1";
     self.datas = [NSMutableArray array];
+    [self.view addSubview:self.emptyView];
     [self.view addSubview:self.contentListView];
     [self addRefreshLoadMore:self.contentListView.aTableView];
 }
@@ -69,6 +70,8 @@
     [AApiModel getCollectionListForUser:self.lastID block:^(BOOL result, NSArray *array) {
         if (result) {
             if (array.count > 0) {
+                weakSelf.contentListView.hidden = NO;
+                weakSelf.emptyView.hidden = YES;
                 if (weakSelf.lastID.intValue == -1) {
                     [weakSelf.datas removeAllObjects];
                 }
@@ -76,12 +79,25 @@
                 [weakSelf updataAttentList:weakSelf.datas];
                 DynamicListData *model = [array lastObject];
                 weakSelf.lastID = model.collectionId;
+            } else {
+                if (self.lastID.intValue == -1 && weakSelf.datas.count ==0) {
+                    weakSelf.emptyView.hidden = NO;
+                    weakSelf.contentListView.hidden = YES;
+                }
             }
         }
         [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
     }];
 }
-
+- (EmptyView *)emptyView {
+    if (_emptyView == nil) {
+        _emptyView = [[EmptyView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, DMScreenHeight-DMNavigationBarHeight) delegate:self];
+        _emptyView.backgroundColor = [UIColor whiteColor];
+        [_emptyView updateInfo:@"collection_null" title:@"空空如也，什么也没有" btnTitle:@""];
+        self.emptyView.hidden = YES;
+    }
+    return _emptyView;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

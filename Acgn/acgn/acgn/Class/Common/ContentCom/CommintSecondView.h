@@ -21,4 +21,7 @@
 - (void)setContentForThirdLabel:(NSString *)userName
                       otherName:(NSString *)otherName
                         content:(NSString *)content;
+- (void)setContentForFirstLabel:(NSString *)userName
+                      otherName:(NSString *)otherName
+                        content:(NSString *)content isUserNameNoColor:(BOOL)color; //color来表示userName是否改颜色，YES不改，NO修改
 @end

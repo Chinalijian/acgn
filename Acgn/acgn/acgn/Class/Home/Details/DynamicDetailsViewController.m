@@ -17,6 +17,9 @@
 @property (nonatomic, strong) NSMutableArray *detailsData;
 @property (nonatomic, strong) DynamicListData *obj;
 
+@property (nonatomic, strong) UIView *bottomView;
+@property (nonatomic, strong) SendMsgInputTextView *inputView;
+
 @end
 
 @implementation DynamicDetailsViewController
@@ -29,6 +32,8 @@
     self.detailsData = [NSMutableArray array];
     self.commitArray = [NSMutableArray array];
     [self.view addSubview:self.contentListView];
+    //[self.view addSubview:self.bottomView];
+    [self.view addSubview:self.inputView];
     [self addRefreshLoadMore:self.contentListView.aTableView];
 }
 
@@ -111,6 +116,33 @@
         _contentListView.backgroundColor = [UIColor whiteColor];
     }
     return _contentListView;
+}
+
+- (UIView *)bottomView {
+    if (_bottomView == nil) {
+        CGFloat B = 50;
+        if (IS_IPHONE_X) {
+            B = B + 44;
+        }
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-150, DMScreenWidth, B)];
+        _bottomView.backgroundColor = UIColorFromRGB(0xF2F2F2);
+    }
+    return _bottomView;
+}
+
+- (SendMsgInputTextView *)inputView {
+    if (_inputView == nil) {
+        CGFloat HX = 0;
+        if (IS_IPHONE_X) {
+            HX = 35;
+        }
+        _inputView = [[SendMsgInputTextView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-55-HX, DMScreenWidth, 55)];
+        _inputView.bgColor = UIColorFromRGB(0xF2F2F2);
+        _inputView.showLimitNum = NO;
+        _inputView.font = [UIFont systemFontOfSize:18];
+        _inputView.limitNum = 1000;
+    }
+    return _inputView;
 }
 
 

@@ -41,7 +41,7 @@
     
     for (int i = 0; i<[_svVeiws count]; i++) {
         UIView *view = [_svVeiws objectAtIndex:i];
-        view.frame = CGRectMake(i*self.frame.size.width, 0, view.frame.size.width, view.frame.size.height);
+        view.frame = CGRectMake(i*self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
         [self.viewScroll addSubview:view];
     }
 

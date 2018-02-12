@@ -111,6 +111,15 @@
     }
     return B;
 }
+
++ (CGFloat)setViewFrameHeightToBottomForIPhoneX:(CGFloat)b {
+    CGFloat B = b;
+    if (IS_IPHONE_X) {
+        B = B - 44;
+    }
+    return B;
+}
+
 //获取Label的高度和宽度，根据文字
 + (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont*)font {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];

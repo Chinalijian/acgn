@@ -36,7 +36,11 @@
     [self addSubview:self.thirdLabel];
     [self setupLabelLayout];
 }
-
+- (void)setContentForFirstLabel:(NSString *)userName
+                      otherName:(NSString *)otherName
+                        content:(NSString *)content isUserNameNoColor:(BOOL)color {
+    [self getColorStr:userName otherName:otherName content:content label:self.firstLabel isUserNameNoColor:color];
+}
 - (void)setContentForFirstLabel:(NSString *)userName
                       otherName:(NSString *)otherName
                         content:(NSString *)content {
@@ -56,8 +60,8 @@
 - (void)getColorStr:(NSString *)userName
                                  otherName:(NSString *)otherName
                                    content:(NSString *)content label:(UILabel *)label {
-    NSString *colorStr = [NSString stringWithFormat:@"%@@%@：",userName,otherName];
-    NSString *contentAll = [NSString stringWithFormat:@"%@@%@：%@",userName,otherName,content];
+    NSString *colorStr = [NSString stringWithFormat:@"%@ @%@：",userName,otherName];
+    NSString *contentAll = [NSString stringWithFormat:@"%@ @%@：%@",userName,otherName,content];
     NSMutableAttributedString *str = [ATools colerString:colorStr allStr:contentAll color:UIColorFromRGB(0xE96A79) font: [UIFont systemFontOfSize:13]];
     CGFloat H = [self getContentHeight:contentAll];
     [label mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -65,6 +69,42 @@
     }];
     label.attributedText = str;
 }
+
+- (void)getColorStr:(NSString *)userName
+          otherName:(NSString *)otherName
+            content:(NSString *)content label:(UILabel *)label isUserNameNoColor:(BOOL)color {
+    
+    if (STR_IS_NIL(userName) && STR_IS_NIL(otherName)) {
+        NSString *colorStr = @"";
+        NSMutableAttributedString *str = [ATools colerString:colorStr allStr:content color:UIColorFromRGB(0xE96A79) font: [UIFont systemFontOfSize:13]];
+        CGFloat H = [self getContentHeight:content];
+        [label mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_offset(H);
+        }];
+        label.attributedText = str;
+        return;
+    }
+    NSString *colorStr = @"";
+    NSString *contentAll = @"";
+    if (color) {
+        if (STR_IS_NIL(userName)) {
+            colorStr = otherName;
+            contentAll = [NSString stringWithFormat:@"%@：%@",otherName,content];
+        } else {
+            colorStr = [NSString stringWithFormat:@"@%@：",otherName];
+            contentAll = [NSString stringWithFormat:@"%@ @%@：%@",userName,otherName,content];
+        }
+    } else {
+        colorStr = [NSString stringWithFormat:@"%@ @%@：",userName,otherName];
+    }
+    NSMutableAttributedString *str = [ATools colerString:colorStr allStr:contentAll color:UIColorFromRGB(0xE96A79) font: [UIFont systemFontOfSize:13]];
+    CGFloat H = [self getContentHeight:contentAll];
+    [label mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_offset(H);
+    }];
+    label.attributedText = str;
+}
+
 
 - (CGFloat)getContentHeight:(NSString *)content {
     if (STR_IS_NIL(content)) {

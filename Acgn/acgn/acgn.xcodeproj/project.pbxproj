@@ -12,6 +12,7 @@
 		2A684789202C3B1E00D189D5 /* ContentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A684788202C3B1E00D189D5 /* ContentListView.m */; };
 		2A68478C202C3C5F00D189D5 /* ContentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A68478B202C3C5F00D189D5 /* ContentListCell.m */; };
 		2A68478F202C555D00D189D5 /* CommintSecondView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A68478E202C555D00D189D5 /* CommintSecondView.m */; };
+		2A69F51C2031338500D73DF6 /* ReplayMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A69F51B2031338500D73DF6 /* ReplayMineViewController.m */; };
 		2A6B1443202458CD00EA4A26 /* AccountLocalDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B1442202458CD00EA4A26 /* AccountLocalDataModel.m */; };
 		2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B144620245B9F00EA4A26 /* AApiModel.m */; };
 		2A6F15D220245CE700B55AA7 /* DMRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F15CD20245CE600B55AA7 /* DMRequestModel.m */; };
@@ -32,6 +33,11 @@
 		2A89A2E22019E5880021B844 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A89A2E12019E5880021B844 /* main.m */; };
 		2A89A2EC2019E5880021B844 /* acgnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A89A2EB2019E5880021B844 /* acgnTests.m */; };
 		2A89A2F72019E5880021B844 /* acgnUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A89A2F62019E5880021B844 /* acgnUITests.m */; };
+		2AC97147203133C100E25771 /* MySendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97146203133C100E25771 /* MySendViewController.m */; };
+		2AC9714A2031369A00E25771 /* MsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC971492031369A00E25771 /* MsgTableViewCell.m */; };
+		2AC9714D20314B7300E25771 /* SendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9714C20314B7300E25771 /* SendTableViewCell.m */; };
+		2AC971502031792D00E25771 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9714F2031792D00E25771 /* EmptyView.m */; };
+		2AC971532031908F00E25771 /* SendMsgInputTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC971522031908F00E25771 /* SendMsgInputTextView.m */; };
 		2ADF21BC2022C3A600559427 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF21BB2022C3A600559427 /* UserViewController.m */; };
 		2ADF21C12022C3EA00559427 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF21C02022C3EA00559427 /* LoginViewController.m */; };
 		2ADF21C42022C3FC00559427 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF21C32022C3FC00559427 /* RegisterViewController.m */; };
@@ -99,6 +105,8 @@
 		2A68478B202C3C5F00D189D5 /* ContentListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentListCell.m; sourceTree = "<group>"; };
 		2A68478D202C555D00D189D5 /* CommintSecondView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommintSecondView.h; sourceTree = "<group>"; };
 		2A68478E202C555D00D189D5 /* CommintSecondView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommintSecondView.m; sourceTree = "<group>"; };
+		2A69F51A2031338500D73DF6 /* ReplayMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplayMineViewController.h; sourceTree = "<group>"; };
+		2A69F51B2031338500D73DF6 /* ReplayMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplayMineViewController.m; sourceTree = "<group>"; };
 		2A6B1441202458CD00EA4A26 /* AccountLocalDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountLocalDataModel.h; sourceTree = "<group>"; };
 		2A6B1442202458CD00EA4A26 /* AccountLocalDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountLocalDataModel.m; sourceTree = "<group>"; };
 		2A6B144520245B9F00EA4A26 /* AApiModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AApiModel.h; sourceTree = "<group>"; };
@@ -143,6 +151,16 @@
 		2A89A2F22019E5880021B844 /* acgnUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = acgnUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A89A2F62019E5880021B844 /* acgnUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = acgnUITests.m; sourceTree = "<group>"; };
 		2A89A2F82019E5880021B844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AC97145203133C100E25771 /* MySendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySendViewController.h; sourceTree = "<group>"; };
+		2AC97146203133C100E25771 /* MySendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySendViewController.m; sourceTree = "<group>"; };
+		2AC971482031369A00E25771 /* MsgTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgTableViewCell.h; sourceTree = "<group>"; };
+		2AC971492031369A00E25771 /* MsgTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgTableViewCell.m; sourceTree = "<group>"; };
+		2AC9714B20314B7300E25771 /* SendTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendTableViewCell.h; sourceTree = "<group>"; };
+		2AC9714C20314B7300E25771 /* SendTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendTableViewCell.m; sourceTree = "<group>"; };
+		2AC9714E2031792D00E25771 /* EmptyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyView.h; sourceTree = "<group>"; };
+		2AC9714F2031792D00E25771 /* EmptyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptyView.m; sourceTree = "<group>"; };
+		2AC971512031908F00E25771 /* SendMsgInputTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendMsgInputTextView.h; sourceTree = "<group>"; };
+		2AC971522031908F00E25771 /* SendMsgInputTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendMsgInputTextView.m; sourceTree = "<group>"; };
 		2ADF21BA2022C3A600559427 /* UserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		2ADF21BB2022C3A600559427 /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		2ADF21BF2022C3EA00559427 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -377,6 +395,14 @@
 				3048355A20278A9500DAAE3F /* ModifyPsdViewController.m */,
 				3048355C20279F2E00DAAE3F /* MyMsgViewController.h */,
 				3048355D20279F2E00DAAE3F /* MyMsgViewController.m */,
+				2A69F51A2031338500D73DF6 /* ReplayMineViewController.h */,
+				2A69F51B2031338500D73DF6 /* ReplayMineViewController.m */,
+				2AC971482031369A00E25771 /* MsgTableViewCell.h */,
+				2AC971492031369A00E25771 /* MsgTableViewCell.m */,
+				2AC97145203133C100E25771 /* MySendViewController.h */,
+				2AC97146203133C100E25771 /* MySendViewController.m */,
+				2AC9714B20314B7300E25771 /* SendTableViewCell.h */,
+				2AC9714C20314B7300E25771 /* SendTableViewCell.m */,
 				3048355F20279F3B00DAAE3F /* MyFavViewController.h */,
 				3048356020279F3B00DAAE3F /* MyFavViewController.m */,
 				30F6FE8D202CCFDC00EB96A8 /* CollectionData.h */,
@@ -529,6 +555,10 @@
 				30EAFE52202B62E1004C75C6 /* ContentCom.m */,
 				30EAFE54202B7059004C75C6 /* ImageCom.h */,
 				30EAFE55202B705A004C75C6 /* ImageCom.m */,
+				2AC9714E2031792D00E25771 /* EmptyView.h */,
+				2AC9714F2031792D00E25771 /* EmptyView.m */,
+				2AC971512031908F00E25771 /* SendMsgInputTextView.h */,
+				2AC971522031908F00E25771 /* SendMsgInputTextView.m */,
 			);
 			path = ContentCom;
 			sourceTree = "<group>";
@@ -758,6 +788,7 @@
 				2A89A2D72019E5880021B844 /* ViewController.m in Sources */,
 				2A6B1443202458CD00EA4A26 /* AccountLocalDataModel.m in Sources */,
 				2A6F15D620246C0700B55AA7 /* ResetPsdViewController.m in Sources */,
+				2AC9714D20314B7300E25771 /* SendTableViewCell.m in Sources */,
 				2A89A2E22019E5880021B844 /* main.m in Sources */,
 				309D903D2025943C002F414F /* UserDataModel.m in Sources */,
 				2A89A2D42019E5880021B844 /* AppDelegate.m in Sources */,
@@ -776,6 +807,7 @@
 				2A6514612028571C00737DEF /* ContentBaseViewController.m in Sources */,
 				30F6FE8F202CCFDC00EB96A8 /* CollectionData.m in Sources */,
 				309D903A20259373002F414F /* ABaseDataModel.m in Sources */,
+				2AC971532031908F00E25771 /* SendMsgInputTextView.m in Sources */,
 				30EAFE56202B705A004C75C6 /* ImageCom.m in Sources */,
 				30F6FE8C202CB5EE00EB96A8 /* RoleDetailsDataModel.m in Sources */,
 				30F6FE88202C9D6800EB96A8 /* DynamicData.m in Sources */,
@@ -793,6 +825,8 @@
 				3048356120279F3B00DAAE3F /* MyFavViewController.m in Sources */,
 				2A68478C202C3C5F00D189D5 /* ContentListCell.m in Sources */,
 				2A6F15D9202474F400B55AA7 /* SetPsdViewController.m in Sources */,
+				2A69F51C2031338500D73DF6 /* ReplayMineViewController.m in Sources */,
+				2AC9714A2031369A00E25771 /* MsgTableViewCell.m in Sources */,
 				30F6FE92202CD25000EB96A8 /* MsgData.m in Sources */,
 				2A704B1C2022C37600476D68 /* HomeViewController.m in Sources */,
 				3048354E2026EE0C00DAAE3F /* AboutViewController.m in Sources */,
@@ -802,6 +836,8 @@
 				300DE1542024ACBA008DBCBD /* NickNameViewController.m in Sources */,
 				3071B7ED2030A2CC00A4A6BA /* MsgDetailViewController.m in Sources */,
 				2A6F15D320245CE700B55AA7 /* DMHttpClient.m in Sources */,
+				2AC971502031792D00E25771 /* EmptyView.m in Sources */,
+				2AC97147203133C100E25771 /* MySendViewController.m in Sources */,
 				30EAFE53202B62E1004C75C6 /* ContentCom.m in Sources */,
 				3048355E20279F2E00DAAE3F /* MyMsgViewController.m in Sources */,
 				2A7CFAB320244B9300CBE495 /* ATools.m in Sources */,
