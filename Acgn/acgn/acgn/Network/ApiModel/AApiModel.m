@@ -349,18 +349,21 @@
     }];
 }
 
-
 //发表评论
 + (void)addCommentForUser:(id)obj block:(void(^)(BOOL result))block {
+    DynamicCommentListData *data = (DynamicCommentListData *)obj;
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                @"", @"type",
-                                @"", @"replyUid",
-                                @"", @"replyId",
-                                @"", @"postId",
-                                @"", @"parentCommentId",
-                                @"", @"commentUid",
-                                @"", @"replyContext",
-                                @"", @"commentContext", nil];
+                                data.type, @"type",
+                                data.replyUid, @"replyUid",
+                                data.replyId, @"replyId",
+                                data.postId, @"postId",
+                                data.parentCommentId, @"parentCommentId",
+                                data.commentUid, @"commentUid",
+                                data.replyContext, @"replyContext",
+                                data.commentContext, @"commentContext",
+                                data.isRole, @"isRole",
+                                data.roleId, @"roleId", nil];
+    
     [[DMHttpClient sharedInstance] initWithUrl:DM_Add_Comment_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             block(YES);

@@ -9,7 +9,7 @@
 #import "DynamicDetailsViewController.h"
 #import "ContentListView.h"
 #import "MsgDetailViewController.h"
-@interface DynamicDetailsViewController () <ContentListDelegate>
+@interface DynamicDetailsViewController () <ContentListDelegate, SendMsgDeInputDelegate>
 @property (nonatomic, strong) ContentListView *contentListView;
 @property (nonatomic, strong) NSMutableArray *commitArray;
 @property (nonatomic, strong) NSString *lastID;
@@ -46,6 +46,9 @@
     [AApiModel getPostDetilsData:self.postID block:^(BOOL result, DynamicListData *obj) {
         if (result) {
             if (!OBJ_IS_NIL(obj)) {
+                if (weakSelf.lastID.intValue == -1) {
+                    [weakSelf.detailsData removeAllObjects];
+                }
                 [weakSelf.detailsData addObject:obj];
                 weakSelf.obj = obj;
                 [weakSelf getPostCommitData];
@@ -81,7 +84,7 @@
 - (void)clickSelectRowAtIndexPathForCommit:(id)obj {
     DynamicCommentListData *data = (DynamicCommentListData *)obj;
     MsgDetailViewController *msdDetailVC = [[MsgDetailViewController alloc] init];
-    msdDetailVC.commitID = data.commentId;
+    msdDetailVC.obj = data;
     [self.navigationController pushViewController:msdDetailVC animated:YES];
 }
 
@@ -104,6 +107,30 @@
 - (void)loadMore {
     [self getPostCommitData];
 }
+
+
+- (void)inputContent:(NSString *)content {
+    DynamicCommentListData *resultData = [[DynamicCommentListData alloc] init];
+    resultData.commentContext = content;
+    resultData.commentUid = [AccountInfo getUserID];
+    resultData.postId = self.postID;
+    resultData.isRole = @"";
+    resultData.parentCommentId = @"";
+    resultData.type = @"1";
+    resultData.replyId = @"";
+    resultData.replyUid = @"";
+    resultData.roleId = @"";
+    resultData.replyContext = @"";
+    
+    WS(weakSelf);
+    [AApiModel addCommentForUser:resultData block:^(BOOL result) {
+        if (result) {
+            [weakSelf refresh];
+        }
+    }];
+}
+
+
 
 -(void)updataAttentList:(NSMutableArray *)array {
     [self.contentListView updateList:array];
@@ -136,11 +163,12 @@
         if (IS_IPHONE_X) {
             HX = 35;
         }
-        _inputView = [[SendMsgInputTextView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-55-HX, DMScreenWidth, 55)];
+        _inputView = [[SendMsgInputTextView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-55-HX, DMScreenWidth, 65)];
         _inputView.bgColor = UIColorFromRGB(0xF2F2F2);
         _inputView.showLimitNum = NO;
         _inputView.font = [UIFont systemFontOfSize:18];
         _inputView.limitNum = 1000;
+        _inputView.delegate = self;
     }
     return _inputView;
 }

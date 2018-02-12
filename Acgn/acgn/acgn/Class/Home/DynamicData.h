@@ -53,6 +53,9 @@
 //吐槽中心
 @property (nonatomic, copy) NSString *fabulousNum;
 
+//发评论
+@property (nonatomic, copy) NSString *replyId;
+@property (nonatomic, copy) NSString *type;///本地使用
 
 @end
 

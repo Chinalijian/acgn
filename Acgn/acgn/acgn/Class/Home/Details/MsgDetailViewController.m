@@ -8,7 +8,7 @@
 
 #import "MsgDetailViewController.h"
 #import "ContentListCell.h"
-@interface MsgDetailViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MsgDetailViewController () <UITableViewDelegate, UITableViewDataSource, SendMsgDeInputDelegate>
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, strong) UITableView *mTableView;
 @property (nonatomic, strong) NSString *lastID;
@@ -48,7 +48,7 @@
 
 - (void)loadData {
     WS(weakSelf);
-    [AApiModel getGetCommentDetailsData:self.commitID lastId:self.lastID block:^(BOOL result, NSArray *array) {
+    [AApiModel getGetCommentDetailsData:self.obj.commentId lastId:self.lastID block:^(BOOL result, NSArray *array) {
         if (result) {
             if (array.count > 0) {
                 if (weakSelf.lastID.integerValue == -1) {
@@ -63,6 +63,27 @@
         [weakSelf endRefreshing:weakSelf.mTableView];
     }];
     
+}
+
+- (void)inputContent:(NSString *)content {
+    DynamicCommentListData *resultData = [[DynamicCommentListData alloc] init];
+    resultData.replyContext = self.obj.commentContext;
+    resultData.commentContext = content;
+    resultData.commentUid = self.obj.commentUid;
+    resultData.isRole = self.obj.isRole;
+    resultData.parentCommentId = self.obj.commentId;
+    resultData.postId = self.obj.postId;
+    resultData.replyId = self.obj.commentId;
+    resultData.replyUid = self.obj.commentUid;
+    resultData.roleId = self.obj.roleId;
+    resultData.type = @"2";
+
+    WS(weakSelf);
+    [AApiModel addCommentForUser:resultData block:^(BOOL result) {
+        if (result) {
+            [weakSelf refresh];
+        }
+    }];
 }
 
 #pragma mark UITableView Delegate
@@ -143,11 +164,12 @@
         if (IS_IPHONE_X) {
             HX = 35;
         }
-        _inputView = [[SendMsgInputTextView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-55-HX, DMScreenWidth, 55)];
+        _inputView = [[SendMsgInputTextView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-55-HX, DMScreenWidth, 65)];
         _inputView.bgColor = UIColorFromRGB(0xF2F2F2);
         _inputView.showLimitNum = NO;
         _inputView.font = [UIFont systemFontOfSize:18];
         _inputView.limitNum = 1000;
+        _inputView.delegate = self;
     }
     return _inputView;
 }

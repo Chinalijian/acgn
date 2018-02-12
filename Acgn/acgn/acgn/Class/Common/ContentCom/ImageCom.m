@@ -7,7 +7,7 @@
 //
 
 #import "ImageCom.h"
-
+#import "JLPhotoBrowser.h"
 @interface ImageCom()
 @property (nonatomic, strong) UIImageView *bigImageView;
 @property (nonatomic, strong) UIImageView *bigSourceImageView;
@@ -23,6 +23,14 @@
 
 @property (nonatomic, assign) CGFloat frameWidth;
 @property (nonatomic, assign) CGFloat frameHight;
+/**
+ *  imageViews
+ */
+@property (nonatomic,strong) NSMutableArray *imageViews;
+/**
+ *  URL数组
+ */
+@property (nonatomic,strong) NSMutableArray *bigImgUrls;
 
 @end
 
@@ -49,7 +57,8 @@
 }
 
 - (void)configImageCom:(NSArray *)array height:(CGFloat)height {
-    
+    [self.bigImgUrls removeAllObjects];
+    [self.imageViews removeAllObjects];
     if (![array isKindOfClass:[NSArray class]] || OBJ_IS_NIL(array) || array.count == 0) {
         NSLog(@"进来了 = %@", array);
         self.smallImageView.frame = CGRectZero;
@@ -58,6 +67,8 @@
         self.bigImageView.hidden = YES;
         return;
     }
+    
+    [self.bigImgUrls addObjectsFromArray: array];
     self.smallImageView.frame = CGRectMake(0, 0, self.smallImageView.frame.size.width, height);
     
     NSInteger imageCount = [array count];
@@ -70,6 +81,13 @@
             NSString * imageUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
             //[self.bigImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@""]];
             [self displaySourceImage:imageUrl];
+            
+            [self.imageViews addObject:self.bigImageView];
+            self.bigImageView.userInteractionEnabled = YES;
+            //2.添加手势
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap:)];
+            [_bigImageView addGestureRecognizer:tap];
+            
             
         } else {
             self.bigImageView.frame = CGRectMake(0, 0, self.bigImageView.frame.size.width, 0);
@@ -130,7 +148,7 @@
     [self addSubview:self.smallImageView];
     
     self.bigImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bWidth, self.bHeight)];
-    self.bigImageView.tag = 1;
+    self.bigImageView.tag = 1000;
     self.bigImageView.clipsToBounds = YES;
     self.bigImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:self.bigImageView];
@@ -163,11 +181,60 @@
         imageV.tag = 1000+i;
         imageV.clipsToBounds = YES;
         imageV.contentMode = UIViewContentModeScaleAspectFill;
+        imageV.userInteractionEnabled = YES;
         [self.smallImageView addSubview:imageV];
+        //2.添加手势
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap:)];
+        [imageV addGestureRecognizer:tap];
+        
+        [self.imageViews addObject:imageV];
     }
 }
 
+#pragma mark 图片点击
 
+-(void)imageTap:(UITapGestureRecognizer *)tap{
+    
+    //1.创建JLPhoto数组
+    NSMutableArray *photos = [NSMutableArray array];
+    
+    for (int i=0; i<self.imageViews.count; i++) {
+        
+        UIImageView *child = self.imageViews[i];
+        JLPhoto *photo = [[JLPhoto alloc] init];
+        //1.1设置原始imageView
+        photo.sourceImageView = child;
+        //1.2设置大图URL
+        photo.bigImgUrl = self.bigImgUrls[i];
+        //1.3设置图片tag
+        photo.tag = i;
+        [photos addObject:photo];
+        
+    }
+    
+    //2. 创建图片浏览器
+    JLPhotoBrowser *photoBrowser = [JLPhotoBrowser photoBrowser];
+    //2.1 设置JLPhoto数组
+    photoBrowser.photos = photos;
+    //2.2 设置当前要显示图片的tag
+    photoBrowser.currentIndex = (int)tap.view.tag-1000;
+    //2.3 显示图片浏览器
+    [photoBrowser show];
+}
+
+- (NSMutableArray *)imageViews {
+    if (_imageViews==nil) {
+        _imageViews = [NSMutableArray array];
+    }
+    return _imageViews;
+}
+
+- (NSMutableArray *)bigImgUrls {
+    if (_bigImgUrls==nil) {
+        _bigImgUrls = [NSMutableArray array];
+    }
+    return _bigImgUrls;
+}
 
 @end
 

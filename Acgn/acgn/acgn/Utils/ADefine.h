@@ -88,4 +88,32 @@ blue:(((rgbValue) & 0xFF))/255.f alpha:1.0]
 #define Head_Yellow_Color   UIColorFromRGB(0xFFE430)
 #define Head_Red_Color      UIColorFromRGB(0xF2C2ED)
 
+
+/** 设备屏幕宽 */
+#define kMainScreenWidth  [UIScreen mainScreen].bounds.size.width
+/** 设备屏幕高度 */
+#define kMainScreenHeight [UIScreen mainScreen].bounds.size.height
+
+/** 6位十六进制颜色转换 */
+//#define UIColorFromRGB(rgbValue) \
+//[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+/** 6位十六进制颜色转换，带透明度 */
+#define UIAlphaColorFromRGB(rgbValue,a) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
+
+
+
 #endif /* ADefine_h */
+
+
+
+
+
+
+
+
+
+
+
+
+

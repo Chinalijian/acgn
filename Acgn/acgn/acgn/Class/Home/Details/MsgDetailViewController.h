@@ -9,5 +9,5 @@
 #import "ABaseViewController.h"
 
 @interface MsgDetailViewController : ABaseViewController
-@property (nonatomic, strong) NSString *commitID;
+@property (nonatomic, strong) DynamicCommentListData *obj;
 @end

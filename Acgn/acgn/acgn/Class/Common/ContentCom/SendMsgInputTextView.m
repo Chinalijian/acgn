@@ -43,7 +43,7 @@
 
 - (void)AddtextFieldComments  {
     _bottomView = [[UIView alloc] initWithFrame:self.bounds];
-    _bottomView.backgroundColor = self.bgColor;
+    _bottomView.backgroundColor = UIColorFromRGB(0xF2F2F2);//self.bgColor;
     _bottomView.userInteractionEnabled= YES;
     [self addSubview:_bottomView];
     
@@ -110,9 +110,16 @@
 
 #pragma mark - 事件监听
 
-- (void)pinglun
-{
-    NSLog(@"发送");
+- (void)pinglun {
+    NSLog(@"发送  -》 %@", _textView.text);
+    [self endEditing:YES];
+    NSString *content = _textView.text;
+    if (STR_IS_NIL(content)) {
+        return;
+    }
+    if ([self.delegate respondsToSelector:@selector(inputContent:)]) {
+        [self.delegate inputContent:content];
+    }
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
