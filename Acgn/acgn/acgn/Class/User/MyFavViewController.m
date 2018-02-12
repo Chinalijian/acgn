@@ -52,6 +52,18 @@
     [self loadData];
 }
 
+- (void)clickSelectRowAtIndexPath:(id)obj {
+    DynamicListData *data = (DynamicListData *)obj;
+    DynamicDetailsViewController *ddVC = [[DynamicDetailsViewController alloc] init];
+    ddVC.postID = data.postId;
+    [self.navigationController pushViewController:ddVC animated:YES];
+}
+- (void)clickPeopleHead:(NSString *)roleID {
+    PeopleDetailsViewController *peopleVC = [[PeopleDetailsViewController alloc] init];
+    peopleVC.roleID = roleID;
+    [self.navigationController pushViewController:peopleVC animated:YES];
+}
+
 -(void)updataAttentList:(NSMutableArray *)array {
     [self.contentListView updateList:array];
 }

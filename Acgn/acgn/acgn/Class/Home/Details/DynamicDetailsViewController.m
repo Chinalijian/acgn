@@ -130,7 +130,11 @@
     }];
 }
 
-
+- (void)clickPeopleHead:(NSString *)roleID {
+    PeopleDetailsViewController *peopleVC = [[PeopleDetailsViewController alloc] init];
+    peopleVC.roleID = roleID;
+    [self.navigationController pushViewController:peopleVC animated:YES];
+}
 
 -(void)updataAttentList:(NSMutableArray *)array {
     [self.contentListView updateList:array];
