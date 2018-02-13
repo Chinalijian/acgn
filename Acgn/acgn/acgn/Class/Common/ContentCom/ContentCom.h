@@ -14,6 +14,8 @@
 @optional
 - (void)clickSelectPeopleImage:(NSString *)roleId;
 - (void)clickSelectSectionViewForGoToDetail:(id)obj;
+- (void)clickPraiseFabulous:(id)sender view:(id)viewSelf;
+- (void)clickFavForUser:(id)sender view:(id)viewSelf;
 @end
 
 
@@ -24,4 +26,5 @@
 @property (nonatomic, weak) id <ContentComDelegate> delegate;
 - (void)configInfo:(DynamicListData *)obj;
 + (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj;
+- (void)updateFabulous;
 @end

@@ -9,7 +9,8 @@
 #import "ContentListView.h"
 #import "ContentListCell.h"
 #import "ContentCom.h"
-@interface ContentListView() <UITableViewDelegate, UITableViewDataSource, ContentComDelegate>
+@interface ContentListView() <UITableViewDelegate,
+UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
 
 @end
 
@@ -42,6 +43,9 @@
         [self loadUI];
     }
     return self;
+}
+- (void)updateFabulous {
+    
 }
 
 - (void)updateList:(NSMutableArray *)array {
@@ -81,6 +85,24 @@
 - (void)clickSelectSectionViewForGoToDetail:(id)obj {
     if ([self.delegate respondsToSelector:@selector(clickSelectRowAtIndexPath:)]) {
         [self.delegate clickSelectRowAtIndexPath:obj];
+    }
+}
+
+- (void)userClickPraise:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(clickPraiseUser:)]) {
+        [self.delegate clickPraiseUser:sender];
+    }
+}
+
+- (void)clickFavForUser:(id)sender view:(id)viewSelf {
+    if ([self.delegate respondsToSelector:@selector(clickFavUser:view:)]) {
+        [self.delegate clickFavUser:sender view:viewSelf];
+    }
+}
+
+- (void)clickPraiseFabulous:(id)sender view:(id)viewSelf {
+    if ([self.delegate respondsToSelector:@selector(clickPraiseFabulous:view:)]) {
+        [self.delegate clickPraiseFabulous:sender view:viewSelf];
     }
 }
 
@@ -134,6 +156,7 @@
     ContentListCell *cell = [tableView dequeueReusableCellWithIdentifier:cListCell];
     if (!cell) {
         cell = [[ContentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cListCell];
+        cell.delegate = self;
     }
     
     if (self.datas.count > 0) {

@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @protocol PeopleDetailHeaderDelegate <NSObject>
+@optional
 - (void)clickSelectPeopleImage:(NSString *)roleId;
+- (void)clickClickAttBtn:(id)sender;
 @end
 
 //列表头的通用控件View
@@ -18,4 +20,5 @@
 @property (nonatomic, weak) id <PeopleDetailHeaderDelegate> delegate;
 - (void)configInfo:(RoleDetailsDataModel *)obj;
 + (CGFloat)getViewTotalHeight:(RoleDetailsDataModel *)obj;
+- (void)updateAttBtn:(BOOL)isAtt;
 @end

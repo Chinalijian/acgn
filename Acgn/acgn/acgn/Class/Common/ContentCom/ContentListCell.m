@@ -16,9 +16,10 @@
 
 @property (nonatomic, strong) CommintSecondView *secondView;
 
-
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIButton *praiseLabel;
+
+@property (nonatomic, strong) DynamicCommentListData *cellObj;
 
 @end
 
@@ -35,6 +36,12 @@
     return self;
 }
 
+- (void)clickPraise:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(userClickPraise:)]) {
+        [self.delegate userClickPraise:self.cellObj];
+    }
+}
+
 - (void)cleanSubViewInfo {
     self.headImageView.image = nil;
     self.nameLabel.text = @"";
@@ -45,12 +52,18 @@
 }
 
 - (void)configDynamicObj:(DynamicCommentListData *)obj {
+    self.cellObj = obj;
     [self cleanSubViewInfo];
     if (!OBJ_IS_NIL(obj)) {
         [self.headImageView sd_setImageWithURL:[NSURL URLWithString:obj.avatar] placeholderImage:PlaceholderImage];
         self.nameLabel.text = obj.userName;
         self.commitLabel.text = obj.commentContext;
         self.timeLabel.text = obj.commentTime;
+        if (obj.localPraise) {
+            [_praiseLabel setImage:[UIImage imageNamed:@"praise_yellow_icon"] forState:UIControlStateNormal];
+        } else {
+            [_praiseLabel setImage:[UIImage imageNamed:@"praise_grey_icon"] forState:UIControlStateNormal];
+        }
         [self.praiseLabel setTitle:obj.praiseNum forState:UIControlStateNormal];
         if (obj.secondView.count > 0) {
             NSInteger count = obj.secondView.count;
@@ -221,6 +234,7 @@
         [_praiseLabel setImage:[UIImage imageNamed:@"praise_grey_icon"] forState:UIControlStateNormal];
         [_praiseLabel.titleLabel setFont:[UIFont systemFontOfSize:12]];
         _praiseLabel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [_praiseLabel addTarget:self action:@selector(clickPraise:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _praiseLabel;
 }

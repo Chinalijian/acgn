@@ -99,6 +99,18 @@
 }
 
 
+- (void)clickPraise:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(clickPraiseFabulous:view:)]) {
+        [self.delegate clickPraiseFabulous:self.dynamicObj view:self];
+    }
+}
+
+- (void)clickFavBtn:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(clickFavForUser:view:)]) {
+        [self.delegate clickFavForUser:self.dynamicObj view:self];
+    }
+}
+
 - (void)tapAction:(UITapGestureRecognizer *)tap {
     if ([self.delegate respondsToSelector:@selector(clickSelectPeopleImage:)]) {
         [self.delegate clickSelectPeopleImage:self.dynamicObj.roleId];
@@ -135,7 +147,11 @@
     [self.attButton setTitle:obj.seeNum forState:UIControlStateNormal];
     [self.comButton setTitle:obj.commentNum forState:UIControlStateNormal];
     [self.praButton setTitle:obj.fabulousNum forState:UIControlStateNormal];
-    
+    if (obj.localPraise) {
+        [self.praButton setImage:[UIImage imageNamed:@"praise_yellow_icon"] forState:UIControlStateNormal];
+    } else {
+        [self.praButton setImage:[UIImage imageNamed:@"praise_white_icon"] forState:UIControlStateNormal];
+    }
     CGFloat contentH = [ContentCom getContentMaxHeight:obj];
     [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_offset(contentH);
@@ -150,6 +166,15 @@
     [self.imageComView configImageCom:obj.postUrls height:imageH];
     
     [self layoutSubviews];
+}
+
+- (void)updateFabulous {
+    [self.praButton setTitle:self.dynamicObj.fabulousNum forState:UIControlStateNormal];
+    if (self.dynamicObj.localPraise) {
+        [self.praButton setImage:[UIImage imageNamed:@"praise_yellow_icon"] forState:UIControlStateNormal];
+    } else {
+        [self.praButton setImage:[UIImage imageNamed:@"praise_white_icon"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)loadUI {
@@ -356,6 +381,7 @@
         [_praButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
         [_praButton setImage:[UIImage imageNamed:@"praise_white_icon"] forState:UIControlStateNormal];
         _praButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [_praButton addTarget:self action:@selector(clickPraise:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _praButton;
 }
@@ -380,6 +406,7 @@
         _favButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_favButton setImage:[UIImage imageNamed:@"collection_white"] forState:UIControlStateNormal];
         _favButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [_favButton addTarget:self action:@selector(clickFavBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _favButton;
 }

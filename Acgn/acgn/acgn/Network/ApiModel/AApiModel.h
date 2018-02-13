@@ -46,13 +46,13 @@
 //取消收藏
 + (void)delCollectionForUser:(NSString *)postId block:(void(^)(BOOL result))block;
 //点赞-帖子
-+ (void)addFabulousForUser:(NSString *)postId block:(void(^)(BOOL result))block;
++ (void)addFabulousForUser:(NSString *)postId block:(void(^)(BOOL result,NSString * praiseNum))block;
 //取消点赞-帖子
-+ (void)delFabulousForUser:(NSString *)postId block:(void(^)(BOOL result))block;
++ (void)delFabulousForUser:(NSString *)postId block:(void(^)(BOOL result,NSString * praiseNum))block;
 //点赞-评论
-+ (void)addPraiseForUser:(NSString *)postId commentId:(NSString *)commentId block:(void(^)(BOOL result))block;
++ (void)addPraiseForUser:(NSString *)postId commentId:(NSString *)commentId block:(void(^)(BOOL result, NSString * praiseNum))block;
 //取消点赞-评论
-+ (void)delPraiseForUser:(NSString *)postId commentId:(NSString *)commentId block:(void(^)(BOOL result))block;
++ (void)delPraiseForUser:(NSString *)postId commentId:(NSString *)commentId block:(void(^)(BOOL result, NSString * praiseNum))block;
 //发表评论
 + (void)addCommentForUser:(id)obj block:(void(^)(BOOL result))block;
 //添加关注

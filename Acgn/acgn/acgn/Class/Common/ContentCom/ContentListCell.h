@@ -24,7 +24,13 @@
 
 #define Info_Width DMScreenWidth-Head_Image_WH-Label_Space_X-Left_Space_X*2 //评论内容label的宽度
 
+@protocol ContentListCellDelegate <NSObject>
+@optional
+- (void)userClickPraise:(id)sender;
+@end
+
 @interface ContentListCell : UITableViewCell
+@property (nonatomic, weak) id <ContentListCellDelegate> delegate;
 - (void)configDynamicObj:(DynamicCommentListData *)obj;
 + (CGFloat)getCellMaxHeightAndUpdate:(DynamicCommentListData *)dynamicObj;
 @end

@@ -289,63 +289,66 @@
 }
 
 //点赞-帖子
-+ (void)addFabulousForUser:(NSString *)postId block:(void(^)(BOOL result))block {
++ (void)addFabulousForUser:(NSString *)postId block:(void(^)(BOOL result, NSString * praiseNum))block {
     NSString *userID = [AccountInfo getUserID];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:postId, @"postId", userID, @"uId", nil];
-    [[DMHttpClient sharedInstance] initWithUrl:DM_Add_Fabulous_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
+    [[DMHttpClient sharedInstance] initWithUrl:DM_Add_Fabulous_Url parameters:dic method:DMHttpRequestPost dataModelClass:[PraiseDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
-            block(YES);
+            PraiseDataModel *data = (PraiseDataModel *)responseObject;
+            block(YES, data.data);
         } else {
-            block(NO);
+            block(NO, @"-1");
         }
     } failure:^(NSError *error) {
-        block (NO);
+        block (NO, @"-1");
     }];
 }
 
 //取消点赞-帖子
-+ (void)delFabulousForUser:(NSString *)postId block:(void(^)(BOOL result))block {
++ (void)delFabulousForUser:(NSString *)postId block:(void(^)(BOOL result, NSString * praiseNum))block {
     NSString *userID = [AccountInfo getUserID];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:postId, @"postId", userID, @"uId", nil];
-    [[DMHttpClient sharedInstance] initWithUrl:DM_Del_Fabulous_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
+    [[DMHttpClient sharedInstance] initWithUrl:DM_Del_Fabulous_Url parameters:dic method:DMHttpRequestPost dataModelClass:[PraiseDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
-            block(YES);
+            PraiseDataModel *data = (PraiseDataModel *)responseObject;
+            block(YES, data.data);
         } else {
-            block(NO);
+            block(NO, @"-1");
         }
     } failure:^(NSError *error) {
-        block (NO);
+        block (NO, @"-1");
     }];
 }
 
 //点赞-评论
-+ (void)addPraiseForUser:(NSString *)postId commentId:(NSString *)commentId block:(void(^)(BOOL result))block {
++ (void)addPraiseForUser:(NSString *)postId commentId:(NSString *)commentId block:(void(^)(BOOL result ,NSString *praiseNum))block {
     NSString *userID = [AccountInfo getUserID];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:commentId, @"commentId", postId, @"postId", userID, @"uId", nil];
-    [[DMHttpClient sharedInstance] initWithUrl:DM_Add_Praise_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
+    [[DMHttpClient sharedInstance] initWithUrl:DM_Add_Praise_Url parameters:dic method:DMHttpRequestPost dataModelClass:[PraiseDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
-            block(YES);
+            PraiseDataModel *data = (PraiseDataModel *)responseObject;
+            block(YES, data.data);
         } else {
-            block(NO);
+            block(NO, @"-1");
         }
     } failure:^(NSError *error) {
-        block (NO);
+        block (NO, @"-1");
     }];
 }
 
 //取消点赞-评论
-+ (void)delPraiseForUser:(NSString *)postId commentId:(NSString *)commentId block:(void(^)(BOOL result))block {
++ (void)delPraiseForUser:(NSString *)postId commentId:(NSString *)commentId block:(void(^)(BOOL result,NSString *praiseNum))block {
     NSString *userID = [AccountInfo getUserID];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:commentId, @"commentId", postId, @"postId", userID, @"uId", nil];
-    [[DMHttpClient sharedInstance] initWithUrl:DM_Del_Praise_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
+    [[DMHttpClient sharedInstance] initWithUrl:DM_Del_Praise_Url parameters:dic method:DMHttpRequestPost dataModelClass:[PraiseDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
-            
-            block(YES);
+            PraiseDataModel *data = (PraiseDataModel *)responseObject;
+            block(YES, data.data);
         } else {
-            block(NO);
+            block(NO, @"-1");
         }
     } failure:^(NSError *error) {
-        block (NO);
+        block (NO, @"-1");
     }];
 }
 
@@ -377,8 +380,9 @@
 //添加关注
 + (void)addFollowForUser:(NSMutableArray *)roleIDs block:(void(^)(BOOL result))block {
     NSString *userID = [AccountInfo getUserID];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:roleIDs, @"roleId", userID, @"uId", nil];
-    [[DMHttpClient sharedInstance] initWithUrl:DM_Add_Follow_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
+    NSNumber *userIDNumber = [NSNumber numberWithInt:userID.intValue];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:roleIDs, @"roleId", userIDNumber, @"uid", nil];
+    [[DMHttpClient sharedInstance] initWithUrl:DM_Add_Follow_Url parameters:dic method:DMHttpRequestPost dataModelClass:[PraiseDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             block(YES);
         } else {
@@ -393,7 +397,7 @@
 + (void)delFollowForUser:(NSString *)roleId block:(void(^)(BOOL result))block {
     NSString *userID = [AccountInfo getUserID];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:roleId, @"roleId", userID, @"uId", nil];
-    [[DMHttpClient sharedInstance] initWithUrl:DM_Del_Follow_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
+    [[DMHttpClient sharedInstance] initWithUrl:DM_Del_Follow_Url parameters:dic method:DMHttpRequestPost dataModelClass:[PraiseDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             block(YES);
         } else {

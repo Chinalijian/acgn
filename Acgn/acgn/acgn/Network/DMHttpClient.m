@@ -59,16 +59,20 @@
         }
         
         if ([[responseObj objectForKey:@"code"] intValue] == DMHttpResponseCodeType_Success) {
-            id dataType = [responseObj objectForKey:Data_Key];
-            if ([dataType isKindOfClass:[NSArray class]]) {
+            if ([dataModelClass isEqual:[PraiseDataModel class]]) {
                 id responseDataModel = [dataModelClass mj_objectWithKeyValues:responseObj];
                 success(responseDataModel);
             } else {
-                id responseDataModel = [dataModelClass mj_objectWithKeyValues:[responseObj objectForKey:Data_Key]];
-                success(responseDataModel);
+                id dataType = [responseObj objectForKey:Data_Key];
+                if ([dataType isKindOfClass:[NSArray class]]) {
+                    id responseDataModel = [dataModelClass mj_objectWithKeyValues:responseObj];
+                    success(responseDataModel);
+                } else {
+                    id responseDataModel = [dataModelClass mj_objectWithKeyValues:[responseObj objectForKey:Data_Key]];
+                    success(responseDataModel);
+                }
             }
-            
-            
+
         } else {
             if ([[responseObj objectForKey:Msg_Key] isKindOfClass:[NSString class]]) {
                 [self responseStatusCodeException:[[responseObj objectForKey:Code_Key] intValue]

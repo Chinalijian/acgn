@@ -57,6 +57,9 @@
 @property (nonatomic, copy) NSString *replyId;
 @property (nonatomic, copy) NSString *type;///本地使用
 
+//是否点赞--本地使用
+@property (nonatomic, assign) BOOL localPraise;//YES 已点，NO，未点
+
 @end
 
 @interface DynamicListData: NSObject
@@ -87,7 +90,8 @@
 @property (nonatomic, copy) NSString *uId;
 @property (nonatomic, copy) NSString *collectionTime;
 
-
+//是否点赞--本地使用
+@property (nonatomic, assign) BOOL localPraise;//YES 已点，NO，未点
 @end
 
 @interface DynamicData : ABaseDataModel

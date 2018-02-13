@@ -72,28 +72,45 @@
     }
 }
 
+- (void)clickAttBtn:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(clickClickAttBtn:)]) {
+        [self.delegate clickClickAttBtn:self.dynamicObj];
+    }
+}
+
 - (void)configInfo:(RoleDetailsDataModel *)obj {
     self.introduceHeight = [PeopleDetailHeader getIntroduceMaxHeight:obj];
     [self loadUI];
     self.dynamicObj = obj;
-    self.nameLabel.text = obj.userName;
-    self.sourceLabel.text = obj.source;
-    self.introduceLabel.text = obj.introduce;
+    self.nameLabel.text = self.dynamicObj.userName;
+    self.sourceLabel.text = self.dynamicObj.source;
+    self.introduceLabel.text = self.dynamicObj.introduce;
     [ATools changeLineSpaceForLabel:self.introduceLabel WithSpace:5];
-    NSString * imageUrl = [obj.imageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString * imageUrl = [self.dynamicObj.imageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [self.peopleImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
-    if (obj.hasFollow.intValue >= 1) {
+    if (self.dynamicObj.hasFollow.intValue >= 1) {
         [self.attButton setTitle:@"已关注" forState:UIControlStateNormal];
     } else {
         [self.attButton setTitle:@"关注" forState:UIControlStateNormal];
     }
-    [self.fansButton setTitle:[NSString stringWithFormat:@"粉丝：%@", obj.fansNum] forState:UIControlStateNormal];
+    [self.fansButton setTitle:[NSString stringWithFormat:@"粉丝：%@", self.dynamicObj.fansNum] forState:UIControlStateNormal];
+}
+
+- (void)updateAttBtn:(BOOL)isAtt {
+    if (isAtt) { //关注
+        [self.attButton setTitle:@"已关注" forState:UIControlStateNormal];
+        self.dynamicObj.hasFollow = @"1";
+    } else {
+        [self.attButton setTitle:@"关注" forState:UIControlStateNormal];
+        self.dynamicObj.hasFollow = @"-1";
+    }
 }
 
 - (id)initWithframe:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         //[self loadUI];
+        self.dynamicObj = [[RoleDetailsDataModel alloc] init];
     }
     return self;
 }
@@ -250,6 +267,7 @@
         [_attButton setBackgroundColor: UIColorFromRGB(0xE96A79)];
         [_attButton setTitle:@"关注" forState:UIControlStateNormal];
         _attButton.layer.cornerRadius = 8;
+        [_attButton addTarget:self action:@selector(clickAttBtn:) forControlEvents:UIControlEventTouchUpInside];
 //        _attButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         
     }

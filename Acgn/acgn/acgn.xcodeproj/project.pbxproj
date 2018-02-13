@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A20F54020333674004CA124 /* PraiseDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A20F53F20333674004CA124 /* PraiseDataModel.m */; };
 		2A2374162031D58A00297AB2 /* POPCGUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2A2373E12031D58A00297AB2 /* POPCGUtils.mm */; };
 		2A2374172031D58A00297AB2 /* pop-ios-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A2373E32031D58A00297AB2 /* pop-ios-Info.plist */; };
 		2A2374182031D58A00297AB2 /* POPMath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2A2373E72031D58A00297AB2 /* POPMath.mm */; };
@@ -120,6 +121,8 @@
 
 /* Begin PBXFileReference section */
 		0D9B2E6DCABBD16AD945B837 /* Pods-acgn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-acgn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-acgn/Pods-acgn.debug.xcconfig"; sourceTree = "<group>"; };
+		2A20F53E20333674004CA124 /* PraiseDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PraiseDataModel.h; sourceTree = "<group>"; };
+		2A20F53F20333674004CA124 /* PraiseDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PraiseDataModel.m; sourceTree = "<group>"; };
 		2A2373DB2031D58A00297AB2 /* POPMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPMath.h; sourceTree = "<group>"; };
 		2A2373DC2031D58A00297AB2 /* POPDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPDefines.h; sourceTree = "<group>"; };
 		2A2373DD2031D58A00297AB2 /* POPAnimationInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPAnimationInternal.h; sourceTree = "<group>"; };
@@ -750,6 +753,8 @@
 				2AC9714F2031792D00E25771 /* EmptyView.m */,
 				2AC971512031908F00E25771 /* SendMsgInputTextView.h */,
 				2AC971522031908F00E25771 /* SendMsgInputTextView.m */,
+				2A20F53E20333674004CA124 /* PraiseDataModel.h */,
+				2A20F53F20333674004CA124 /* PraiseDataModel.m */,
 			);
 			path = ContentCom;
 			sourceTree = "<group>";
@@ -1047,6 +1052,7 @@
 				300DE1542024ACBA008DBCBD /* NickNameViewController.m in Sources */,
 				2A23741E2031D58A00297AB2 /* POPDecayAnimation.mm in Sources */,
 				3071B7ED2030A2CC00A4A6BA /* MsgDetailViewController.m in Sources */,
+				2A20F54020333674004CA124 /* PraiseDataModel.m in Sources */,
 				2A6F15D320245CE700B55AA7 /* DMHttpClient.m in Sources */,
 				2AC971502031792D00E25771 /* EmptyView.m in Sources */,
 				2AC97147203133C100E25771 /* MySendViewController.m in Sources */,

@@ -84,6 +84,52 @@
     }];
 }
 
+- (void)clickPraiseUser:(id)sender {
+    WS(weakSelf);
+    DynamicCommentListData *data = (DynamicCommentListData *)sender;
+    if (data.localPraise) {
+        [AApiModel delPraiseForUser:data.postId commentId:data.commentId block:^(BOOL result, NSString *praiseNum) {
+            if (result) {
+                data.localPraise = NO;
+                data.praiseNum = praiseNum;//[NSString stringWithFormat:@"%d", data.praiseNum.intValue-1];
+            }
+            [weakSelf.contentListView.aTableView reloadData];
+        }];
+    } else {
+        [AApiModel addPraiseForUser:data.postId commentId:data.commentId block:^(BOOL result, NSString *praiseNum) {
+            if (result) {
+                data.localPraise = YES;
+                data.praiseNum = praiseNum;//[NSString stringWithFormat:@"%d", data.praiseNum.intValue+1];
+            }
+            [weakSelf.contentListView.aTableView reloadData];
+        }];
+    }
+}
+
+- (void)clickPraiseFabulous:(id)sender  view:(id)viewSelf {
+    //WS(weakSelf);
+    DynamicListData *data = (DynamicListData *)sender;
+    ContentCom *cc = (ContentCom *)viewSelf;
+    if (data.localPraise) {
+        [AApiModel delFabulousForUser:data.postId block:^(BOOL result, NSString *praiseNum) {
+            if (result) {
+                data.localPraise = NO;
+                data.fabulousNum = praiseNum;//[NSString stringWithFormat:@"%d", data.praiseNum.intValue-1];
+            }
+            [cc updateFabulous];
+        }];
+        
+    } else {
+        [AApiModel addFabulousForUser:data.postId block:^(BOOL result, NSString *praiseNum) {
+            if (result) {
+                data.localPraise = YES;
+                data.fabulousNum = praiseNum;//[NSString stringWithFormat:@"%d", data.praiseNum.intValue+1];
+            }
+            [cc updateFabulous];
+        }];
+        
+    }
+}
 - (ContentListView *)contentListView {
     if (_contentListView == nil) {
         _contentListView = [[ContentListView alloc] initWithFrame:

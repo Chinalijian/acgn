@@ -9,7 +9,7 @@
 #import "PeopleDetailsViewController.h"
 #import "PeopleDetailCell.h"
 #import "PeopleDetailHeader.h"
-@interface PeopleDetailsViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface PeopleDetailsViewController ()<UITableViewDelegate, UITableViewDataSource, PeopleDetailHeaderDelegate>
 @property (nonatomic, strong) UITableView *pTableView;
 @property (nonatomic, strong) PeopleDetailHeader *headerView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -23,9 +23,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"个人详情";
-    self.lastID = @"-1";
+    self.lastID = @"-2";
     self.datas = [NSMutableArray array];
-    self.detailData = nil;//[[RoleDetailsDataModel alloc] init];
+    self.detailData = [[RoleDetailsDataModel alloc] init];
     [self.view addSubview:self.pTableView];
     
     [self addRefreshLoadMore:self.pTableView];
@@ -44,7 +44,7 @@
 }
 
 - (void)refresh {
-    if (self.detailData == nil) {
+    if (self.lastID.intValue == -2) {
         [self getPeopleInfoDetails];
     }
     self.lastID = @"-1";
@@ -57,6 +57,7 @@
 
 - (void)getPeopleInfoDetails {
     WS(weakSelf);
+    
     [AApiModel getRoleInfoData:self.roleID block:^(BOOL result, RoleDetailsDataModel *obj) {
         if (result) {
             weakSelf.detailData = obj;
@@ -85,6 +86,28 @@
         }
         [weakSelf endRefreshing:weakSelf.pTableView];
     }];
+}
+
+- (void)clickClickAttBtn:(id)sender {
+    WS(weakSelf);
+    __block RoleDetailsDataModel *data = (RoleDetailsDataModel *)sender;
+    
+    if (data.hasFollow.intValue > 0) {
+        [AApiModel delFollowForUser:data.roleId block:^(BOOL result) {
+            if (result) {
+                [weakSelf.headerView updateAttBtn:NO];
+            }
+            
+        }];
+    } else {
+        [AApiModel addFollowForUser:[NSMutableArray arrayWithObject:[NSNumber numberWithInt:data.roleId.intValue]] block:^(BOOL result) {
+            if (result) {
+                [weakSelf.headerView updateAttBtn:YES];
+            }
+            
+        }];
+    }
+    
 }
 
 #pragma mark UITableView Delegate
@@ -142,6 +165,7 @@
     if (!_headerView) {
         _headerView = [[PeopleDetailHeader alloc] init];
         _headerView.backgroundColor = [UIColor whiteColor];
+        _headerView.delegate = self;
     }
     return _headerView;
 }

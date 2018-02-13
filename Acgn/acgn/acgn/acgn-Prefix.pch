@@ -20,6 +20,8 @@
 #import "UIImageView+WebCache.h"
 #import "SVProgressHUD.h"
 
+#import "PraiseDataModel.h"
+
 #import "ATools.h"
 #import "ADefine.h"
 #import "AEnums.h"
@@ -34,6 +36,8 @@
 #import "SendMsgInputTextView.h"
 
 #import "EmptyView.h"
+
+#import "ContentCom.h"
 
 #import "PeopleDetailsViewController.h"
 #import "RoleDetailsDataModel.h"
