@@ -91,6 +91,12 @@
 //上传头像
 #define Upload_Head_Image_Url           [DM_Url stringByAppendingFormat:@"user/uploadAvatar"]
 
+//weixin
+#define Login_Wecat_Url           [DM_Url stringByAppendingFormat:@"user/wxLogin"]
+//qq
+#define Login_QQ_Url            [DM_Url stringByAppendingFormat:@"user/qqLogin"]
+//weibo
+#define Login_Weibo_Url           [DM_Url stringByAppendingFormat:@"user/wbLogin"]
 
 #endif /* DMServerApiConfig_h */
 

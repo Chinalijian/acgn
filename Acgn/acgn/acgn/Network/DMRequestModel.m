@@ -32,6 +32,8 @@
         self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         //请求超时时间
         self.manager.requestSerializer.timeoutInterval = 15;
+        
+        
     }
     return self;
 }
@@ -61,6 +63,10 @@
         //预处理（显示加载信息啥的）
         if (prepare) {
             prepare();
+        }
+        
+        if ([url containsString:Login_Wecat_Url] ||[url containsString:Login_QQ_Url] ||[url containsString:Login_Weibo_Url]||[url containsString:DM_User_Loing_Url]) {
+            [self.manager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"source"];
         }
         
         switch (method) {

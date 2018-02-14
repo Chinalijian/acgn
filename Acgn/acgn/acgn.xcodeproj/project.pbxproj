@@ -36,6 +36,16 @@
 		2A23AA07203416DE00F6E7D2 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A23AA03203416DE00F6E7D2 /* VPImageCropperViewController.m */; };
 		2A23AA08203416DE00F6E7D2 /* CameraImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A23AA06203416DE00F6E7D2 /* CameraImageViewController.m */; };
 		2A23AA0A2034183E00F6E7D2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA092034183D00F6E7D2 /* MobileCoreServices.framework */; };
+		2A23AA1120342FAF00F6E7D2 /* UMLoginPublicClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A23AA0F20342FAF00F6E7D2 /* UMLoginPublicClass.m */; };
+		2A23AA142034356100F6E7D2 /* ShareManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A23AA132034356100F6E7D2 /* ShareManage.m */; };
+		2A23AA162034797F00F6E7D2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA152034797F00F6E7D2 /* Security.framework */; };
+		2A23AA182034798A00F6E7D2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA172034798A00F6E7D2 /* SystemConfiguration.framework */; };
+		2A23AA1A2034799700F6E7D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA192034799700F6E7D2 /* CoreGraphics.framework */; };
+		2A23AA1C203479AF00F6E7D2 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA1B203479AF00F6E7D2 /* libiconv.tbd */; };
+		2A23AA1E203479C000F6E7D2 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA1D203479C000F6E7D2 /* libstdc++.tbd */; };
+		2A23AA20203479CA00F6E7D2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA1F203479CA00F6E7D2 /* libz.tbd */; };
+		2A23AA22203479D600F6E7D2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA21203479D600F6E7D2 /* CoreTelephony.framework */; };
+		2A23AA24203479E400F6E7D2 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA23203479E400F6E7D2 /* libsqlite3.tbd */; };
 		2A65145E20284B7D00737DEF /* MulCategoryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */; };
 		2A6514612028571C00737DEF /* ContentBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6514602028571C00737DEF /* ContentBaseViewController.m */; };
 		2A684789202C3B1E00D189D5 /* ContentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A684788202C3B1E00D189D5 /* ContentListView.m */; };
@@ -194,6 +204,18 @@
 		2A23AA05203416DE00F6E7D2 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
 		2A23AA06203416DE00F6E7D2 /* CameraImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraImageViewController.m; sourceTree = "<group>"; };
 		2A23AA092034183D00F6E7D2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		2A23AA0F20342FAF00F6E7D2 /* UMLoginPublicClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMLoginPublicClass.m; sourceTree = "<group>"; };
+		2A23AA1020342FAF00F6E7D2 /* UMLoginPublicClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMLoginPublicClass.h; sourceTree = "<group>"; };
+		2A23AA122034356100F6E7D2 /* ShareManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManage.h; sourceTree = "<group>"; };
+		2A23AA132034356100F6E7D2 /* ShareManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManage.m; sourceTree = "<group>"; };
+		2A23AA152034797F00F6E7D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		2A23AA172034798A00F6E7D2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2A23AA192034799700F6E7D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2A23AA1B203479AF00F6E7D2 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		2A23AA1D203479C000F6E7D2 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		2A23AA1F203479CA00F6E7D2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		2A23AA21203479D600F6E7D2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2A23AA23203479E400F6E7D2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		2A65145A20284B7D00737DEF /* MulCategoryScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulCategoryScrollView.h; sourceTree = "<group>"; };
 		2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulCategoryScrollView.m; sourceTree = "<group>"; };
 		2A65145F2028571C00737DEF /* ContentBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBaseViewController.h; sourceTree = "<group>"; };
@@ -339,6 +361,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A23AA24203479E400F6E7D2 /* libsqlite3.tbd in Frameworks */,
+				2A23AA22203479D600F6E7D2 /* CoreTelephony.framework in Frameworks */,
+				2A23AA20203479CA00F6E7D2 /* libz.tbd in Frameworks */,
+				2A23AA1E203479C000F6E7D2 /* libstdc++.tbd in Frameworks */,
+				2A23AA1C203479AF00F6E7D2 /* libiconv.tbd in Frameworks */,
+				2A23AA1A2034799700F6E7D2 /* CoreGraphics.framework in Frameworks */,
+				2A23AA182034798A00F6E7D2 /* SystemConfiguration.framework in Frameworks */,
+				2A23AA162034797F00F6E7D2 /* Security.framework in Frameworks */,
 				2A23AA0A2034183E00F6E7D2 /* MobileCoreServices.framework in Frameworks */,
 				309D9037202588BA002F414F /* libc++.tbd in Frameworks */,
 				79407EF8AA25CCA0EAA39FE3 /* libPods-acgn.a in Frameworks */,
@@ -365,6 +395,14 @@
 		009634EC2B33F03261A25690 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2A23AA23203479E400F6E7D2 /* libsqlite3.tbd */,
+				2A23AA21203479D600F6E7D2 /* CoreTelephony.framework */,
+				2A23AA1F203479CA00F6E7D2 /* libz.tbd */,
+				2A23AA1D203479C000F6E7D2 /* libstdc++.tbd */,
+				2A23AA1B203479AF00F6E7D2 /* libiconv.tbd */,
+				2A23AA192034799700F6E7D2 /* CoreGraphics.framework */,
+				2A23AA172034798A00F6E7D2 /* SystemConfiguration.framework */,
+				2A23AA152034797F00F6E7D2 /* Security.framework */,
 				2A23AA092034183D00F6E7D2 /* MobileCoreServices.framework */,
 				309D9036202588BA002F414F /* libc++.tbd */,
 				B66A192853DD68A87F7C5CED /* libPods-acgn.a */,
@@ -482,6 +520,17 @@
 				2A23AA06203416DE00F6E7D2 /* CameraImageViewController.m */,
 			);
 			path = VPImageCropper;
+			sourceTree = "<group>";
+		};
+		2A23AA0B20342F2800F6E7D2 /* ShareManage */ = {
+			isa = PBXGroup;
+			children = (
+				2A23AA122034356100F6E7D2 /* ShareManage.h */,
+				2A23AA132034356100F6E7D2 /* ShareManage.m */,
+				2A23AA1020342FAF00F6E7D2 /* UMLoginPublicClass.h */,
+				2A23AA0F20342FAF00F6E7D2 /* UMLoginPublicClass.m */,
+			);
+			path = ShareManage;
 			sourceTree = "<group>";
 		};
 		2A65145820284B7D00737DEF /* MulCategoryScrollView */ = {
@@ -732,6 +781,7 @@
 		3048355520273B5A00DAAE3F /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				2A23AA0B20342F2800F6E7D2 /* ShareManage */,
 				2A23AA02203416DE00F6E7D2 /* VPImageCropper */,
 				2A23742C2031E1EE00297AB2 /* JLBrowser */,
 				3048355620273B5A00DAAE3F /* YLSwitch.h */,
@@ -954,12 +1004,18 @@
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+				"${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle",
+				"${PODS_ROOT}/UMengUShare/UShareSDK/SocialLibraries/QQ/QQSDK/TencentOpenApi_IOS_Bundle.bundle",
+				"${PODS_ROOT}/UMengUShare/UShareSDK/SocialLibraries/Sina/SinaSDK/WeiboSDK.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKPromptResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TencentOpenApi_IOS_Bundle.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1030,6 +1086,7 @@
 				2A7CFAAF202415B900CBE495 /* AccountCell.m in Sources */,
 				3048355B20278A9500DAAE3F /* ModifyPsdViewController.m in Sources */,
 				2ADF21C12022C3EA00559427 /* LoginViewController.m in Sources */,
+				2A23AA1120342FAF00F6E7D2 /* UMLoginPublicClass.m in Sources */,
 				2A6514612028571C00737DEF /* ContentBaseViewController.m in Sources */,
 				30F6FE8F202CCFDC00EB96A8 /* CollectionData.m in Sources */,
 				309D903A20259373002F414F /* ABaseDataModel.m in Sources */,
@@ -1051,6 +1108,7 @@
 				2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */,
 				2A68478F202C555D00D189D5 /* CommintSecondView.m in Sources */,
 				2A23AA08203416DE00F6E7D2 /* CameraImageViewController.m in Sources */,
+				2A23AA142034356100F6E7D2 /* ShareManage.m in Sources */,
 				2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */,
 				30FD391A2028BA3700F26185 /* PeopleListCell.m in Sources */,
 				2A74570020303676009E2880 /* PeopleDetailHeader.m in Sources */,
@@ -1253,7 +1311,7 @@
 				INFOPLIST_FILE = acgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.acgn.acgn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Plus.CartoonApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1271,7 +1329,7 @@
 				INFOPLIST_FILE = acgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.acgn.acgn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Plus.CartoonApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

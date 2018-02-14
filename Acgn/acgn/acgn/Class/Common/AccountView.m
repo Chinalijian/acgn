@@ -152,14 +152,23 @@
 
 - (void)clickQQ:(id)sender {
     //qq登录
+    if ([self.delegate respondsToSelector:@selector(clickThirdPartyQQ:)]) {
+        [self.delegate clickThirdPartyQQ:sender];
+    }
 }
 
 - (void)clickWecat:(id)sender {
     //微信登录
+    if ([self.delegate respondsToSelector:@selector(clickThirdPartyWecat:)]) {
+        [self.delegate clickThirdPartyWecat:sender];
+    }
 }
 
 - (void)clickWeibo:(id)sender {
     //微博登录
+    if ([self.delegate respondsToSelector:@selector(clickThirdPartyWeibo:)]) {
+        [self.delegate clickThirdPartyWeibo:sender];
+    }
 }
 
 - (void)clickGetCode:(id)sender {

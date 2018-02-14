@@ -72,6 +72,13 @@
 //上传头像
 + (void)uploadHeadImageForUser:(UIImage *)image block:(void(^)(BOOL result, NSString *imageUrl))block;
 
+//微博登录
++ (void)loginWeibo:(NSDictionary *)dic block:(void(^)(BOOL result))block;
+//QQ登录
++ (void)loginQQ:(NSDictionary *)dic block:(void(^)(BOOL result))block;
+//微信登录
++ (void)loginWeiXin:(NSDictionary *)dic block:(void(^)(BOOL result))block;
+
 
 @end
 

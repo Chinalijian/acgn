@@ -502,6 +502,53 @@
     }];
 }
 
+//微博登录
++ (void)loginWeibo:(NSDictionary *)dic block:(void(^)(BOOL result))block {
+    NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:[dic objectForKey:@"access_token"], @"access_token", nil];
+    [[DMHttpClient sharedInstance] initWithUrl:Login_Weibo_Url parameters:dic1 method:DMHttpRequestPost dataModelClass:[UserDataModel class] isMustToken:NO success:^(id responseObject) {
+        if (!OBJ_IS_NIL(responseObject)) {
+            UserDataModel *model = (UserDataModel *)responseObject;
+            [AccountInfo saveAccountInfo:model];
+            block(YES);
+        } else {
+            block(NO);
+        }
+    } failure:^(NSError *error) {
+        block (NO);
+    }];
+}
+//QQ登录
++ (void)loginQQ:(NSDictionary *)dic block:(void (^)(BOOL result)) block {
+    NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:[dic objectForKey:@"open_id"], @"open_id", [dic objectForKey:@"access_token"], @"access_token", nil];
+    [[DMHttpClient sharedInstance] initWithUrl:Login_QQ_Url parameters:dic1 method:DMHttpRequestPost dataModelClass:[UserDataModel class] isMustToken:NO success:^(id responseObject) {
+        if (!OBJ_IS_NIL(responseObject)) {
+            UserDataModel *model = (UserDataModel *)responseObject;
+            [AccountInfo saveAccountInfo:model];
+            block(YES);
+        } else {
+            block(NO);
+        }
+    } failure:^(NSError *error) {
+        block (NO);
+    }];
+}
+//微信登录
++ (void)loginWeiXin:(NSDictionary *)dic block:(void (^)(BOOL result))block{
+    NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:[dic objectForKey:@"access_token"], @"accesstoken", [dic objectForKey:@"open_id"], @"openid", nil];
+    [[DMHttpClient sharedInstance] initWithUrl:Login_Wecat_Url parameters:dic1 method:DMHttpRequestPost dataModelClass:[UserDataModel class] isMustToken:NO success:^(id responseObject) {
+        if (!OBJ_IS_NIL(responseObject)) {
+            UserDataModel *model = (UserDataModel *)responseObject;
+            [AccountInfo saveAccountInfo:model];
+            block(YES);
+        } else {
+            block(NO);
+        }
+    } failure:^(NSError *error) {
+        block (NO);
+    }];
+}
+
+
 @end
 
 

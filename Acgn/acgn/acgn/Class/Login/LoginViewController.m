@@ -10,8 +10,12 @@
 #import "AccountView.h"
 #import "RegisterViewController.h"
 #import "ResetPsdViewController.h"
+#import "UMLoginPublicClass.h"
+#import <UMSocialCore/UMSocialCore.h>
+#import "UMLoginPublicClass.h"
 @interface LoginViewController () <AccountViewDelegate>
 @property (nonatomic, strong) AccountView *aView;
+@property (nonatomic, strong) NSMutableArray *loginPlats;
 @end
 
 @implementation LoginViewController
@@ -22,6 +26,10 @@
     self.title = @"快速登录";
     self.view.backgroundColor = [UIColor whiteColor];
     [IQKeyboardManager sharedManager].enable = YES;
+    self.loginPlats = [NSMutableArray array];
+//    [self.loginPlats addObject:UMShareToWechatSession];
+//    [self.loginPlats addObject:UMShareToQQ];
+//    [self.loginPlats addObject:UMShareToSina];
     [self loadUI];
 }
 
@@ -62,19 +70,62 @@
 - (void)clickAccountResetPsd:(id)sender {
     //找回密码
     ResetPsdViewController *resVC = [[ResetPsdViewController alloc] init];
+    resVC.isThirdParty = YES;
     [self.navigationController pushViewController:resVC animated:YES];
 }
 
 - (void)clickThirdPartyQQ:(id)sender {
     //qq登录
+    WS(weakSelf);
+    [UMLoginPublicClass loginWithThirdPlat:UMSocialPlatformType_QQ andLoginCtr:self andLoginInfo:^(NSDictionary *info) {
+        if (!OBJ_IS_NIL(info)) {
+            [AApiModel loginQQ:info block:^(BOOL result) {
+                if (result) {
+                    //发送登录成功的广播
+                    [[NSNotificationCenter defaultCenter] postNotificationName:DMNotification_Login_Success_Key object:nil userInfo:nil];
+                    [weakSelf clickAccountResetPsd:nil];
+                }
+            }];
+        }
+    }];
 }
 
 - (void)clickThirdPartyWecat:(id)sender {
     //微信登录
+    WS(weakSelf);
+    [UMLoginPublicClass loginWithThirdPlat:UMSocialPlatformType_WechatSession andLoginCtr:self andLoginInfo:^(NSDictionary *info) {
+        if (!OBJ_IS_NIL(info)) {
+            [AApiModel loginWeiXin:info block:^(BOOL result) {
+                if (result) {
+                    //发送登录成功的广播
+                    [[NSNotificationCenter defaultCenter] postNotificationName:DMNotification_Login_Success_Key object:nil userInfo:nil];
+                    [weakSelf clickAccountResetPsd:nil];
+                }
+            }];
+        } else {
+            
+        }
+    }];
 }
 
 - (void)clickThirdPartyWeibo:(id)sender {
     //微博登录
+    WS(weakSelf);
+    [UMLoginPublicClass loginWithThirdPlat:UMSocialPlatformType_Sina andLoginCtr:self andLoginInfo:^(NSDictionary *info) {
+        if (!OBJ_IS_NIL(info)) {
+            [AApiModel loginWeibo:info block:^(BOOL result) {
+                if (result) {
+                    //发送登录成功的广播
+                    [[NSNotificationCenter defaultCenter] postNotificationName:DMNotification_Login_Success_Key object:nil userInfo:nil];
+                    [weakSelf clickAccountResetPsd:nil];
+                }
+            }];
+        }
+    }];
+}
+
+- (void)gotoSettingPsd {
+    
 }
 
 #pragma mark -
