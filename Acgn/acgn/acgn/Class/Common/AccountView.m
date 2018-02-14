@@ -99,7 +99,8 @@
 
 - (void)updateHeadUrlAndNickName {
     if (self.aType == AAccountType_NickName) {
-        [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:[AccountInfo getUserHeadUrl]]
+        NSString * imageUrls = [[AccountInfo getUserHeadUrl] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:imageUrls]
                               placeholderImage:[UIImage imageNamed:@"public_logo"]];
         self.logoNameLabel.text = [AccountInfo getUserName];
     }
@@ -271,7 +272,7 @@
     cameraBgView.backgroundColor = [UIColor blackColor];
     cameraBgView.alpha = .5;
     [_topImageView addSubview:cameraBgView];
-    
+    _topImageView.userInteractionEnabled = YES;
     UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [cameraButton setImage:[UIImage imageNamed:@"camera_icon"] forState:UIControlStateNormal];
     [cameraButton addTarget:self action:@selector(clickCamera:) forControlEvents:UIControlEventTouchUpInside];
@@ -315,6 +316,9 @@
         _logoImageView.clipsToBounds = YES;
         _logoImageView.layer.cornerRadius = _logoImageView.frame.size.height/2;
         _logoNameLabel.text = [AccountInfo getUserName];
+        NSString * imageUrls = [[AccountInfo getUserHeadUrl] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:imageUrls]
+                              placeholderImage:[UIImage imageNamed:@"public_logo"]];
         [self initUpdateHeadImageUrl];
     }
 }
@@ -531,7 +535,7 @@
         _qqButton.backgroundColor = [UIColor whiteColor];
         [_qqButton setTitle:@"QQ登录" forState:UIControlStateNormal];
         [_qqButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_qqButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [_qqButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
         [_qqButton setImage:[UIImage imageNamed:@"qq_icon"] forState:UIControlStateNormal];
         [_qqButton addTarget:self action:@selector(clickQQ:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -544,7 +548,7 @@
         _wecatButton.backgroundColor = [UIColor whiteColor];
         [_wecatButton setTitle:@"微信登录" forState:UIControlStateNormal];
         [_wecatButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_wecatButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [_wecatButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
         [_wecatButton setImage:[UIImage imageNamed:@"wecat_icon"] forState:UIControlStateNormal];
         [_wecatButton addTarget:self action:@selector(clickWecat:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -557,7 +561,7 @@
         _weiboButton.backgroundColor = [UIColor whiteColor];
         [_weiboButton setTitle:@"微博登录" forState:UIControlStateNormal];
         [_weiboButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_weiboButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [_weiboButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
         [_weiboButton setImage:[UIImage imageNamed:@"weibo_icon"] forState:UIControlStateNormal];
         [_weiboButton addTarget:self action:@selector(clickWeibo:) forControlEvents:UIControlEventTouchUpInside];
     }

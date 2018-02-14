@@ -141,6 +141,16 @@
         cell.rightLabel.hidden = YES;
         cell.rightLabel.text = @"";
     }
+    if (indexPath.row == 0) {
+        if (self.hasNoMsg) {
+            cell.redPointLabel.hidden = NO;
+        } else {
+            cell.redPointLabel.hidden = YES;
+        }
+        
+    } else {
+        cell.redPointLabel.hidden = YES;
+    }
     return cell;
 }
 

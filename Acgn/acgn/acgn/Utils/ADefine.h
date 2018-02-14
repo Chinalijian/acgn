@@ -87,7 +87,8 @@ blue:(((rgbValue) & 0xFF))/255.f alpha:1.0]
 #define Head_Blue_Color     UIColorFromRGB(0x75D2FD)
 #define Head_Yellow_Color   UIColorFromRGB(0xFFE430)
 #define Head_Red_Color      UIColorFromRGB(0xF2C2ED)
-
+#define NavigationBarHeight (44.0f)
+#define StatusBarHeight (20.0f)
 
 /** 设备屏幕宽 */
 #define kMainScreenWidth  [UIScreen mainScreen].bounds.size.width

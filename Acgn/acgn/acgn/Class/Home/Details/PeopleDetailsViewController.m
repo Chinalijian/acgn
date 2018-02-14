@@ -9,7 +9,7 @@
 #import "PeopleDetailsViewController.h"
 #import "PeopleDetailCell.h"
 #import "PeopleDetailHeader.h"
-@interface PeopleDetailsViewController ()<UITableViewDelegate, UITableViewDataSource, PeopleDetailHeaderDelegate>
+@interface PeopleDetailsViewController ()<UITableViewDelegate, UITableViewDataSource, PeopleDetailHeaderDelegate, PeopleDetailCellDelegate>
 @property (nonatomic, strong) UITableView *pTableView;
 @property (nonatomic, strong) PeopleDetailHeader *headerView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -110,9 +110,39 @@
     
 }
 
+- (void)userClickFabulousPraise:(id)sender {
+    WS(weakSelf);
+    DynamicListData *data = (DynamicListData *)sender;
+    if (data.localPraise) {
+        [AApiModel delFabulousForUser:data.postId block:^(BOOL result, NSString *praiseNum) {
+            if (result) {
+                data.localPraise = NO;
+                data.fabulousNum = praiseNum;//[NSString stringWithFormat:@"%d", data.praiseNum.intValue-1];
+            }
+            [weakSelf.pTableView reloadData];
+        }];
+        
+    } else {
+        [AApiModel addFabulousForUser:data.postId block:^(BOOL result, NSString *praiseNum) {
+            if (result) {
+                data.localPraise = YES;
+                data.fabulousNum = praiseNum;//[NSString stringWithFormat:@"%d", data.praiseNum.intValue+1];
+            }
+            [weakSelf.pTableView reloadData];
+        }];
+        
+    }
+}
+
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row < self.datas.count) {
+        RoleDetailsPostData *data = [self.datas objectAtIndex:indexPath.row];
+        DynamicDetailsViewController *ddVC = [[DynamicDetailsViewController alloc] init];
+        ddVC.postID = data.postId;
+        [self.navigationController pushViewController:ddVC animated:YES];
+    }
 }
 
 #pragma mark UITableView Datasource
@@ -138,6 +168,7 @@
     PeopleDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:peopleDCell];
     if (!cell) {
         cell = [[PeopleDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:peopleDCell];
+        cell.delegate = self;
     }
     
     if (self.datas.count > 0) {

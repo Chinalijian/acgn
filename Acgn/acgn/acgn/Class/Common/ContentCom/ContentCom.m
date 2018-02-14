@@ -24,6 +24,8 @@
 @property (nonatomic, strong) UIButton *praButton;
 @property (nonatomic, strong) UIButton *favButton;
 
+@property (nonatomic, strong) UIButton *attBtn;
+
 @end
 
 @implementation ContentCom
@@ -152,6 +154,35 @@
     } else {
         [self.praButton setImage:[UIImage imageNamed:@"praise_white_icon"] forState:UIControlStateNormal];
     }
+    
+    if (obj.hasFollow.intValue > 0) {
+        _attBtn.hidden = YES;
+    } else {
+        _attBtn.hidden = NO;
+    }
+    
+    if (obj.favPage) {
+        
+        [_favButton setImage:nil forState:UIControlStateNormal];
+        [_favButton setBackgroundColor:UIColorFromRGB(0xE96A79)];
+        [_favButton setTitle:@"删除" forState:UIControlStateNormal];
+        [_favButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _favButton.layer.cornerRadius = 9;
+        [_favButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        _favButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    } else {
+        if (obj.hasCollection.intValue == 0) {
+            [_favButton setImage:[UIImage imageNamed:@"collection_white"] forState:UIControlStateNormal];
+        } else {
+            [_favButton setImage:[UIImage imageNamed:@"collection_yellow"] forState:UIControlStateNormal];
+        }
+    }
+    
+    CGFloat nameW = [ATools getHeightByHeight:Name_Label_H title:obj.userName font:[UIFont boldSystemFontOfSize:18]];
+    [_attBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(Space_Left_X+nameW+10);
+    }];
+    
     CGFloat contentH = [ContentCom getContentMaxHeight:obj];
     [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_offset(contentH);
@@ -168,6 +199,12 @@
     [self layoutSubviews];
 }
 
+- (void)clickAttBtn:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(clickAttForUser:view:)]) {
+        [self.delegate clickAttForUser:self.dynamicObj view:self];
+    }
+}
+
 - (void)updateFabulous {
     [self.praButton setTitle:self.dynamicObj.fabulousNum forState:UIControlStateNormal];
     if (self.dynamicObj.localPraise) {
@@ -177,9 +214,30 @@
     }
 }
 
+- (void)updateCollectionView {
+    
+    if (self.dynamicObj.hasCollection.intValue == 0) {
+        [_favButton setImage:[UIImage imageNamed:@"collection_white"] forState:UIControlStateNormal];
+    } else {
+        [_favButton setImage:[UIImage imageNamed:@"collection_yellow"] forState:UIControlStateNormal];
+    }
+}
+
+- (void)updateAttentView {
+    if (self.dynamicObj.hasFollow.intValue > 0) {
+        //[_attBtn setTitle:@"已关注" forState:UIControlStateNormal];
+        _attBtn.hidden = YES;
+    } else {
+        _attBtn.hidden = NO;
+        [_attBtn setTitle:@"关注" forState:UIControlStateNormal];
+    }
+    
+}
+
 - (void)loadUI {
     
     [self.contentView addSubview:self.nameLabel];
+    [self.contentView addSubview:self.attBtn];
     [self.contentView addSubview:self.timeLabel];
     [self.contentView addSubview:self.fromLabel];
     [self.contentView addSubview:self.contentLabel];
@@ -191,9 +249,11 @@
     [self.bottomView addSubview:self.attButton];
     [self.bottomView addSubview:self.comButton];
     [self.bottomView addSubview:self.praButton];
-    [self.bottomView addSubview:self.favButton];
     
     [self.contentView addSubview:self.peopleImageView];
+    
+    [self.contentView addSubview:self.favButton];
+    
     [self setupTopContentLayout];
 }
 
@@ -205,6 +265,12 @@
         make.height.mas_offset(Name_Label_H);
         make.left.mas_equalTo(self.contentView).mas_offset(Space_Left_X);
         make.right.mas_equalTo(self.contentView).mas_offset(-Space_Left_X);
+    }];
+    [_attBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(_nameLabel.mas_right).mas_offset(0);
+        make.top.mas_equalTo(_nameLabel.mas_top).mas_offset(-2);
+        make.width.mas_offset(42);
+        make.height.mas_offset(22);
     }];
     [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.nameLabel.mas_bottom).mas_offset(Label_Space_Y);
@@ -243,6 +309,14 @@
         make.width.mas_offset(PeopleImage_Width);
     }];
     
+    [_favButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.bottomView.mas_bottom).mas_offset(-6);
+//        make.top.mas_equalTo(self.bottomView.mas_top).mas_offset(0);
+        make.right.mas_equalTo(self.alphaView.mas_right).mas_offset(-5);
+        make.width.mas_offset(42);
+        make.height.mas_offset(22);
+    }];
+    
 }
 
 - (void)setupMakeBottomSubViewsLayout {
@@ -278,12 +352,7 @@
         make.width.mas_offset(width);
     }];
     
-    [_favButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.praButton).mas_offset(0);
-        make.top.mas_equalTo(self.praButton).mas_offset(0);
-        make.right.mas_equalTo(self.alphaView.mas_right).mas_offset(-5);
-        make.width.mas_offset(width);
-    }];
+   
 }
 
 - (UILabel *)nameLabel {
@@ -409,6 +478,21 @@
         [_favButton addTarget:self action:@selector(clickFavBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _favButton;
+}
+
+- (UIButton *)attBtn {
+    if (_attBtn == nil) {
+        _attBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_attBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_attBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [_attBtn setBackgroundColor: UIColorFromRGB(0xE96A79)];
+        [_attBtn setTitle:@"关注" forState:UIControlStateNormal];
+        _attBtn.layer.cornerRadius = 8;
+        [_attBtn addTarget:self action:@selector(clickAttBtn:) forControlEvents:UIControlEventTouchUpInside];
+        //        _attButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        
+    }
+    return _attBtn;
 }
 
 @end

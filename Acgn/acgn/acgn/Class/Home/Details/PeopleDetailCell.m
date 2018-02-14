@@ -36,7 +36,7 @@
 @property (nonatomic, strong) UIButton *praiseNumButton;
 
 @property (nonatomic, strong) ImageCom *imageCom;
-
+@property (nonatomic, strong) RoleDetailsPostData *roleData;
 @end
 
 @implementation PeopleDetailCell
@@ -82,6 +82,7 @@
 - (void)configInfo:(RoleDetailsPostData *)obj {
     [self cleanObjSubView];
     if (!OBJ_IS_NIL(obj)) {
+        self.roleData = obj;
         NSArray *array = [obj.postTime componentsSeparatedByString:@" "];
         self.bigTimeLabel.text = [array firstObject];
         self.smallTimeLabel.text = [array lastObject];
@@ -121,9 +122,21 @@
         [self.seeNumButton setTitle:obj.seeNum forState:UIControlStateNormal];
         [self.commitNumButton setTitle:obj.commentNum forState:UIControlStateNormal];
         [self.praiseNumButton setTitle:obj.fabulousNum forState:UIControlStateNormal];
+        if (obj.localPraise) {
+            [_praiseNumButton setImage:[UIImage imageNamed:@"praise_yellow_icon"] forState:UIControlStateNormal];
+        } else {
+            [_praiseNumButton setImage:[UIImage imageNamed:@"praise_grey_icon"] forState:UIControlStateNormal];
+        }
         [self layoutSubviews];
     }
     
+}
+
+
+- (void)clickPraise:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(userClickFabulousPraise:)]) {
+        [self.delegate userClickFabulousPraise:self.roleData];
+    }
 }
 
 - (void)cleanObjSubView {
@@ -331,6 +344,7 @@
         [_praiseNumButton setImage:[UIImage imageNamed:@"praise_grey_icon"] forState:UIControlStateNormal];
         [_praiseNumButton setTitle:@"0" forState:UIControlStateNormal];
         _praiseNumButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [_praiseNumButton addTarget:self action:@selector(clickPraise:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _praiseNumButton;
 }

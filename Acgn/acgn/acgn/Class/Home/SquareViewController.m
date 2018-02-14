@@ -8,7 +8,7 @@
 
 #import "SquareViewController.h"
 #import "ContentListView.h"
-@interface SquareViewController () <ContentListDelegate>
+@interface SquareViewController () <ContentListDelegate, ContentComDelegate>
 @property (nonatomic, strong) ContentListView *contentListView;
 @property (nonatomic, strong) NSString *lastID;
 @property (nonatomic, strong) NSMutableArray *squareArray;
@@ -130,6 +130,39 @@
         
     }
 }
+
+- (void)clickFavUser:(id)sender view:(id)viewSelf {
+    DynamicListData *obj = (DynamicListData *)sender;
+    ContentCom *cc = (ContentCom *)viewSelf;
+    if (obj.hasCollection.intValue == 0) {
+        [AApiModel addCollectionForUser:obj.postId roleId:obj.roleId block:^(BOOL result) {
+            if (result) {
+                obj.hasCollection = @"1";
+                [cc updateCollectionView];
+            }
+        }];
+    } else {
+        [AApiModel delCollectionForUser:obj.postId block:^(BOOL result) {
+            if (result) {
+                obj.hasCollection = @"0";
+                [cc updateCollectionView];
+            }
+        }];
+    }
+}
+
+- (void)clickAttForUser:(id)sender view:(id)viewSelf {
+    DynamicListData *obj = (DynamicListData *)sender;
+    ContentCom *cc = (ContentCom *)viewSelf;
+    [AApiModel addFollowForUser:[NSMutableArray arrayWithObject:[NSNumber numberWithInt:obj.roleId.intValue]] block:^(BOOL result) {
+        if (result) {
+            obj.hasFollow = @"1";
+            [cc updateAttentView];
+        }
+        
+    }];
+}
+
 - (ContentListView *)contentListView {
     if (_contentListView == nil) {
         _contentListView = [[ContentListView alloc] initWithFrame:

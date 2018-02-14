@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, DMHttpRequestType) {
     DMHttpRequestPost,
     DMHttpRequestDelete,
     DMHttpRequestPut,
+    DMHttpRequestFile,
 };
 
 typedef NS_ENUM(NSInteger, DMHttpResponseCodeType) {

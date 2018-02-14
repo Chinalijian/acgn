@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol PeopleDetailCellDelegate <NSObject>
+@optional
+- (void)userClickFabulousPraise:(id)sender;
+@end
 @interface PeopleDetailCell : UITableViewCell
+@property (nonatomic, weak) id <PeopleDetailCellDelegate> delegate;
 + (CGFloat)getPeopleDetailCellHeight:(RoleDetailsPostData *)obj;
 - (void)configInfo:(RoleDetailsPostData *)obj;
 @end

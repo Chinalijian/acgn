@@ -34,7 +34,24 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [IQKeyboardManager sharedManager].enable = YES;
     [self loadUI];
-    //[self notificationAll];
+    [self notificationAll];
+}
+
+- (void)getNoReadMsg {
+    WS(weakSelf);
+    [AApiModel getHasNoReadForUser:^(BOOL result) {
+        if (result) {
+            weakSelf.userView.hasNoMsg = YES;
+            [weakSelf.userView.uTableView reloadData];
+        }
+    }];
+}
+
+- (void)getUserInfo {
+    WS(weakSelf);
+    [AApiModel getUserInfoForUser:^(BOOL result) {
+        [weakSelf.userView updateUserInfo];
+    }];
 }
 
 - (void)updateUserInfo:(NSNotification *)notification {
@@ -54,6 +71,7 @@
 - (void)goToPage:(AAccountType)type {
     switch (type) {
         case AAccountType_Msg: {
+            self.userView.hasNoMsg = NO;
             MyMsgViewController *myMsgVC = [[MyMsgViewController alloc] init];
             [self.navigationController pushViewController:myMsgVC animated:YES];
             break;
@@ -96,7 +114,14 @@
     [super viewWillAppear: animated];
     [self setNavigationBarTransparence:YES titleColor:[UIColor whiteColor]];
     //[_userView updateUserInfo];
+    if (!STR_IS_NIL([AccountInfo getUserID])) {
+        [self getNoReadMsg];
+        [self getUserInfo];
+    }
+    
+    [_userView.uTableView reloadData];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

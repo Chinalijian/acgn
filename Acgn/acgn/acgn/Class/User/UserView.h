@@ -17,6 +17,7 @@
 
 @interface UserView : UIView
 @property (nonatomic, strong) UITableView *uTableView;
+@property (nonatomic, assign) BOOL hasNoMsg;
 @property (nonatomic, weak) id <UserViewDelegate> delegate;
 - (void)updateUserInfo;
 @end

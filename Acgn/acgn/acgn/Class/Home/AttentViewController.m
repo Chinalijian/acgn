@@ -24,6 +24,32 @@
 
 @implementation AttentViewController
 
+- (void)notificationAll {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUserInfo:)
+                                                 name:DMNotification_Login_Success_Key
+                                               object:nil];
+}
+
+- (void)updateUserInfo:(NSNotification *)notification {
+    NSString *hasCollection = [AccountInfo getHasFollowStatus];
+    self.roleListDatas = [NSMutableArray array];
+    self.noFollowIDs = [NSMutableArray array];//不关注的roleID列表
+    [self.attentListDatas removeAllObjects];
+    self.lastID = @"-1";
+    self.lastPeopleID = @"-1";
+    if (hasCollection.intValue > 0) {
+        [self addRefreshLoadMore:self.contentListView.aTableView];
+        [self.contentListView.aTableView reloadData];
+        [self removePeopleListView];
+        [self attentDynamicList];
+    } else {
+        [self.view addSubview:self.apListView];
+        [self addRefreshLoadMore:self.apListView.aTableView];
+        [self getRoleListData];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -40,6 +66,9 @@
     } else {
         [self addRefreshLoadMore:self.contentListView.aTableView];
     }
+    
+    [self notificationAll];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -137,19 +166,17 @@
     WS(weakSelf);
     [AApiModel getHomeAttentList:self.lastID block:^(BOOL result, NSArray *array) {
         if (result) {
-            if (array.count > 0) {
-                if (weakSelf.lastID.intValue > -1) {
-                    [weakSelf.attentListDatas addObjectsFromArray:array];
-                } else {
-                    [weakSelf.attentListDatas removeAllObjects];
-                    [weakSelf.attentListDatas addObjectsFromArray:array];
-                }
-                [weakSelf updataAttentList:weakSelf.attentListDatas];
-                DynamicListData *model = [array lastObject];
-                weakSelf.lastID = model.postId;
-            } else {
-               // [weakSelf.contentListView.aTableView.mj_footer endRefreshingWithNoMoreData];
+            if (weakSelf.lastID.intValue == -1) {
+                [weakSelf.attentListDatas removeAllObjects];
             }
+            if (array.count > 0) {
+                [weakSelf.attentListDatas addObjectsFromArray:array];
+            }
+            [weakSelf updataAttentList:weakSelf.attentListDatas];
+            DynamicListData *model = [array lastObject];
+            weakSelf.lastID = model.postId;
+        } else {
+               // [weakSelf.contentListView.aTableView.mj_footer endRefreshingWithNoMoreData];
         }
         [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
     }];
@@ -166,7 +193,7 @@
     }
 }
 
-- (void)clickPraiseUser:(id)sender {
+- (void)clickPraiseUser:(id)sender { //点评论
     WS(weakSelf);
     DynamicCommentListData *data = (DynamicCommentListData *)sender;
     if (data.localPraise) {
@@ -214,7 +241,23 @@
 }
 
 - (void)clickFavUser:(id)sender view:(id)viewSelf {
-    
+    DynamicListData *obj = (DynamicListData *)sender;
+    ContentCom *cc = (ContentCom *)viewSelf;
+    if (obj.hasCollection.intValue == 0) {
+        [AApiModel addCollectionForUser:obj.postId roleId:obj.roleId block:^(BOOL result) {
+            if (result) {
+                obj.hasCollection = @"1";
+                [cc updateCollectionView];
+            }
+        }];
+    } else {
+        [AApiModel delCollectionForUser:obj.postId block:^(BOOL result) {
+            if (result) {
+                obj.hasCollection = @"0";
+                [cc updateCollectionView];
+            }
+        }];
+    }
 }
 
 - (void)clickSelectRowAtIndexPath:(id)obj {
@@ -235,9 +278,11 @@
 }
 
 - (void)removePeopleListView {
-    self.apListView.hidden = YES;
-    [self.apListView removeFromSuperview];
-    self.apListView = nil;
+    if (self.apListView != nil) {
+        self.apListView.hidden = YES;
+        [self.apListView removeFromSuperview];
+        self.apListView = nil;
+    }
 }
 
 -(AttentionPeopleList *)apListView{

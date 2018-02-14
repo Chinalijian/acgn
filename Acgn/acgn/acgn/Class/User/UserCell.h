@@ -10,5 +10,6 @@
 
 @interface UserCell : UITableViewCell
 @property (nonatomic, strong) UILabel *rightLabel;
+@property (nonatomic, strong) UILabel *redPointLabel;
 - (void)configInfo:(NSString *)imageName title:(NSString *)title;
 @end

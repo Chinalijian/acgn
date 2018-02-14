@@ -33,6 +33,9 @@
 		2A2374332031E1EE00297AB2 /* JLPieProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A23742E2031E1EE00297AB2 /* JLPieProgressView.m */; };
 		2A2374342031E1EE00297AB2 /* JLPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A23742F2031E1EE00297AB2 /* JLPhotoBrowser.m */; };
 		2A2374352031E1EE00297AB2 /* JLPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2374312031E1EE00297AB2 /* JLPhoto.m */; };
+		2A23AA07203416DE00F6E7D2 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A23AA03203416DE00F6E7D2 /* VPImageCropperViewController.m */; };
+		2A23AA08203416DE00F6E7D2 /* CameraImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A23AA06203416DE00F6E7D2 /* CameraImageViewController.m */; };
+		2A23AA0A2034183E00F6E7D2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA092034183D00F6E7D2 /* MobileCoreServices.framework */; };
 		2A65145E20284B7D00737DEF /* MulCategoryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */; };
 		2A6514612028571C00737DEF /* ContentBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6514602028571C00737DEF /* ContentBaseViewController.m */; };
 		2A684789202C3B1E00D189D5 /* ContentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A684788202C3B1E00D189D5 /* ContentListView.m */; };
@@ -186,6 +189,11 @@
 		2A2374302031E1EE00297AB2 /* JLPieProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPieProgressView.h; sourceTree = "<group>"; };
 		2A2374312031E1EE00297AB2 /* JLPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPhoto.m; sourceTree = "<group>"; };
 		2A2374322031E1EE00297AB2 /* JLPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPhotoBrowser.h; sourceTree = "<group>"; };
+		2A23AA03203416DE00F6E7D2 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
+		2A23AA04203416DE00F6E7D2 /* CameraImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraImageViewController.h; sourceTree = "<group>"; };
+		2A23AA05203416DE00F6E7D2 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		2A23AA06203416DE00F6E7D2 /* CameraImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraImageViewController.m; sourceTree = "<group>"; };
+		2A23AA092034183D00F6E7D2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		2A65145A20284B7D00737DEF /* MulCategoryScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulCategoryScrollView.h; sourceTree = "<group>"; };
 		2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulCategoryScrollView.m; sourceTree = "<group>"; };
 		2A65145F2028571C00737DEF /* ContentBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBaseViewController.h; sourceTree = "<group>"; };
@@ -331,6 +339,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A23AA0A2034183E00F6E7D2 /* MobileCoreServices.framework in Frameworks */,
 				309D9037202588BA002F414F /* libc++.tbd in Frameworks */,
 				79407EF8AA25CCA0EAA39FE3 /* libPods-acgn.a in Frameworks */,
 			);
@@ -356,6 +365,7 @@
 		009634EC2B33F03261A25690 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2A23AA092034183D00F6E7D2 /* MobileCoreServices.framework */,
 				309D9036202588BA002F414F /* libc++.tbd */,
 				B66A192853DD68A87F7C5CED /* libPods-acgn.a */,
 			);
@@ -461,6 +471,17 @@
 				2A2374322031E1EE00297AB2 /* JLPhotoBrowser.h */,
 			);
 			path = JLBrowser;
+			sourceTree = "<group>";
+		};
+		2A23AA02203416DE00F6E7D2 /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				2A23AA03203416DE00F6E7D2 /* VPImageCropperViewController.m */,
+				2A23AA04203416DE00F6E7D2 /* CameraImageViewController.h */,
+				2A23AA05203416DE00F6E7D2 /* VPImageCropperViewController.h */,
+				2A23AA06203416DE00F6E7D2 /* CameraImageViewController.m */,
+			);
+			path = VPImageCropper;
 			sourceTree = "<group>";
 		};
 		2A65145820284B7D00737DEF /* MulCategoryScrollView */ = {
@@ -711,6 +732,7 @@
 		3048355520273B5A00DAAE3F /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				2A23AA02203416DE00F6E7D2 /* VPImageCropper */,
 				2A23742C2031E1EE00297AB2 /* JLBrowser */,
 				3048355620273B5A00DAAE3F /* YLSwitch.h */,
 				3048355720273B5A00DAAE3F /* YLSwitch.m */,
@@ -1028,6 +1050,7 @@
 				3048355820273B5A00DAAE3F /* YLSwitch.m in Sources */,
 				2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */,
 				2A68478F202C555D00D189D5 /* CommintSecondView.m in Sources */,
+				2A23AA08203416DE00F6E7D2 /* CameraImageViewController.m in Sources */,
 				2A6B144720245B9F00EA4A26 /* AApiModel.m in Sources */,
 				30FD391A2028BA3700F26185 /* PeopleListCell.m in Sources */,
 				2A74570020303676009E2880 /* PeopleDetailHeader.m in Sources */,
@@ -1064,6 +1087,7 @@
 				300DE15A2024D1F9008DBCBD /* UserCell.m in Sources */,
 				2A2374292031D58A00297AB2 /* POPLayerExtras.mm in Sources */,
 				2ADF21C42022C3FC00559427 /* RegisterViewController.m in Sources */,
+				2A23AA07203416DE00F6E7D2 /* VPImageCropperViewController.m in Sources */,
 				2A23741B2031D58A00297AB2 /* POPAnimationTracer.mm in Sources */,
 				3048356720279FA000DAAE3F /* SquareViewController.m in Sources */,
 				2A65145E20284B7D00737DEF /* MulCategoryScrollView.m in Sources */,

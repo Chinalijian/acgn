@@ -28,7 +28,7 @@
 @property (nonatomic, copy) NSString *thumbnailUrl;
 @property (nonatomic, copy) NSString *hasCollection;
 @property (nonatomic, copy) NSString *hasFabulousNum;
-
+@property (nonatomic, assign) BOOL localPraise;//YES 已点，NO，未点
 @end
 
 @interface RoleDetailsPostListData: ABaseDataModel

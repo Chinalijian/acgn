@@ -88,7 +88,8 @@
 #define DM_CollectionList_Url           [DM_Url stringByAppendingFormat:@"user/post/collectionList"]
 //获取用户信息
 #define DM_Get_User_Info_Url            [DM_Url stringByAppendingFormat:@"user/getUserInfo"]
-
+//上传头像
+#define Upload_Head_Image_Url           [DM_Url stringByAppendingFormat:@"user/uploadAvatar"]
 
 
 #endif /* DMServerApiConfig_h */

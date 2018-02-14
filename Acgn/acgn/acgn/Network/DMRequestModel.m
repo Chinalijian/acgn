@@ -125,6 +125,25 @@
                 
             }
                 break;
+            case DMHttpRequestFile:{
+                NSMutableDictionary *dic =(NSMutableDictionary *)parameters;
+                NSDictionary *fileDic = [[NSDictionary alloc] initWithObjectsAndKeys:[dic objectForKey:@"uId"], @"uid", nil];
+                NSData *fielData = [dic objectForKey:@"file"];
+                [self.manager POST:url parameters:fileDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                    [formData appendPartWithFileData:fielData name:@"file" fileName:@"11.jpg" mimeType:@"image/jpg"];
+                } progress:^(NSProgress * _Nonnull uploadProgress) {
+                    
+                } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                    if (success) {
+                        success(responseObject);
+                    }
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    if (failure) {
+                        failure(error);
+                    }
+                }];
+            }
+                break;
             default:
                 break;
         }

@@ -131,6 +131,17 @@
     return height;
 }
 
+//获取Label的高度和宽度，根据文字
++ (CGFloat)getHeightByHeight:(CGFloat)height title:(NSString *)title font:(UIFont*)font {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, height)];
+    label.text = title;
+    label.font = font;
+    label.numberOfLines = 0;
+    [label sizeToFit];
+    CGFloat width1 = label.frame.size.width;
+    return width1;
+}
+
 + (NSMutableAttributedString *)colerString:(NSString *)sourceStr allStr:(NSString *)allStr color:(UIColor *)color font:(UIFont *)font {
     NSString *colorString = sourceStr;
     NSString *textString = allStr;

@@ -16,6 +16,7 @@
 - (void)clickSelectSectionViewForGoToDetail:(id)obj;
 - (void)clickPraiseFabulous:(id)sender view:(id)viewSelf;
 - (void)clickFavForUser:(id)sender view:(id)viewSelf;
+- (void)clickAttForUser:(id)sender view:(id)viewSelf;
 @end
 
 
@@ -27,4 +28,6 @@
 - (void)configInfo:(DynamicListData *)obj;
 + (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj;
 - (void)updateFabulous;
+- (void)updateCollectionView;
+- (void)updateAttentView;
 @end

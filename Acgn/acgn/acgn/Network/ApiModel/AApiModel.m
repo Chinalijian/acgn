@@ -470,7 +470,7 @@
 //获取用户信息
 + (void)getUserInfoForUser:(void(^)(BOOL result))block {
     NSString *userID = [AccountInfo getUserID];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:userID, @"uId", nil];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:userID, @"uid", nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_Get_User_Info_Url parameters:dic method:DMHttpRequestPost dataModelClass:[UserDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
              UserDataModel *model = (UserDataModel *)responseObject;
@@ -481,6 +481,24 @@
         }
     } failure:^(NSError *error) {
         block (NO);
+    }];
+}
+
+//上传头像
++ (void)uploadHeadImageForUser:(UIImage *)image block:(void(^)(BOOL result, NSString *imageUrl))block {
+    NSString *userID = [AccountInfo getUserID];
+    //NSData *imageData = UIImagePNGRepresentation(image);
+    NSData *imageData = UIImageJPEGRepresentation(image,1);
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:userID, @"uId", imageData, @"file", nil];
+    [[DMHttpClient sharedInstance] initWithUrl:Upload_Head_Image_Url parameters:dic method:DMHttpRequestFile dataModelClass:[PraiseDataModel class] isMustToken:NO success:^(id responseObject) {
+        if (!OBJ_IS_NIL(responseObject)) {
+            PraiseDataModel *model = (PraiseDataModel *)responseObject;
+            block(YES, model.data);
+        } else {
+            block(NO, nil);
+        }
+    } failure:^(NSError *error) {
+        block (NO, nil);
     }];
 }
 

@@ -64,6 +64,43 @@
     [self.navigationController pushViewController:peopleVC animated:YES];
 }
 
+
+- (void)clickFavUser:(id)sender view:(id)viewSelf {
+    WS(weakSelf);
+    DynamicListData *obj = (DynamicListData *)sender;
+    [AApiModel delCollectionForUser:obj.postId block:^(BOOL result) {
+        if (result) {
+            [weakSelf.datas removeObject:obj];
+            [weakSelf updataAttentList:weakSelf.datas];
+            [weakSelf refresh];
+        }
+    }];
+}
+- (void)clickPraiseFabulous:(id)sender  view:(id)viewSelf {
+    //WS(weakSelf);
+    DynamicListData *data = (DynamicListData *)sender;
+    ContentCom *cc = (ContentCom *)viewSelf;
+    if (data.localPraise) {
+        [AApiModel delFabulousForUser:data.postId block:^(BOOL result, NSString *praiseNum) {
+            if (result) {
+                data.localPraise = NO;
+                data.fabulousNum = praiseNum;//[NSString stringWithFormat:@"%d", data.praiseNum.intValue-1];
+            }
+            [cc updateFabulous];
+        }];
+        
+    } else {
+        [AApiModel addFabulousForUser:data.postId block:^(BOOL result, NSString *praiseNum) {
+            if (result) {
+                data.localPraise = YES;
+                data.fabulousNum = praiseNum;//[NSString stringWithFormat:@"%d", data.praiseNum.intValue+1];
+            }
+            [cc updateFabulous];
+        }];
+        
+    }
+}
+
 -(void)updataAttentList:(NSMutableArray *)array {
     [self.contentListView updateList:array];
 }
@@ -73,6 +110,7 @@
         _contentListView = [[ContentListView alloc] initWithFrame:
                             CGRectMake(0, 0, DMScreenWidth, DMScreenHeight-DMNavigationBarHeight) delegate:self];
         _contentListView.backgroundColor = [UIColor whiteColor];
+        _contentListView.isFavPage = YES;
     }
     return _contentListView;
 }

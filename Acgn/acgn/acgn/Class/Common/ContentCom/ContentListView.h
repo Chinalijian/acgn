@@ -9,18 +9,21 @@
 #import <UIKit/UIKit.h>
 
 @protocol ContentListDelegate <NSObject>
+@optional
 - (void)clickSelectRowAtIndexPath:(id)obj;
 - (void)clickPeopleHead:(NSString *)roleID;
 - (void)clickSelectRowAtIndexPathForCommit:(id)obj;
 - (void)clickPraiseUser:(id)sender;
 - (void)clickPraiseFabulous:(id)sender view:(id)viewSelf;
 - (void)clickFavUser:(id)sender view:(id)viewSelf;
+- (void)clickAttForUser:(id)sender view:(id)viewSelf;
 @end
 
 @interface ContentListView : UIView
 @property (nonatomic, strong) UITableView *aTableView;
 @property (nonatomic, weak) id <ContentListDelegate>delegate;
 @property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, assign) BOOL isFavPage;
 - (id)initWithFrame:(CGRect)frame delegate:(id<ContentListDelegate>) delegate;
 - (void)updateList:(NSMutableArray *)array;
 - (void)updateFabulous;

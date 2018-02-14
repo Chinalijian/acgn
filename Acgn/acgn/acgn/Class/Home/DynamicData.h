@@ -60,6 +60,7 @@
 //是否点赞--本地使用
 @property (nonatomic, assign) BOOL localPraise;//YES 已点，NO，未点
 
+
 @end
 
 @interface DynamicListData: NSObject
@@ -92,6 +93,8 @@
 
 //是否点赞--本地使用
 @property (nonatomic, assign) BOOL localPraise;//YES 已点，NO，未点
+@property (nonatomic, assign) BOOL favPage; //YES 是，NO，否
+
 @end
 
 @interface DynamicData : ABaseDataModel

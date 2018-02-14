@@ -105,6 +105,11 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
         [self.delegate clickPraiseFabulous:sender view:viewSelf];
     }
 }
+- (void)clickAttForUser:(id)sender view:(id)viewSelf {
+    if ([self.delegate respondsToSelector:@selector(clickAttForUser:view:)]) {
+        [self.delegate clickAttForUser:sender view:viewSelf];
+    }
+}
 
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -185,6 +190,10 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
     [self modfiyBackgroudColor:infoV index:section];
     if (section < self.datas.count) {
         DynamicListData *data = [self.datas objectAtIndex:section];
+        data.favPage = self.isFavPage;
+        if (self.isFavPage) {
+            data.hasCollection = @"1";
+        }
         [infoV configInfo:data];
     }
     return infoV;

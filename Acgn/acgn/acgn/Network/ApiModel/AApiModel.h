@@ -69,7 +69,8 @@
 + (void)getCollectionListForUser:(NSString *)lastId block:(void(^)(BOOL result, NSArray *array))block;
 //获取用户信息
 + (void)getUserInfoForUser:(void(^)(BOOL result))block;
-
+//上传头像
++ (void)uploadHeadImageForUser:(UIImage *)image block:(void(^)(BOOL result, NSString *imageUrl))block;
 
 
 @end

@@ -40,6 +40,7 @@
     [self addSubview:self.titleLabel];
     [self addSubview:self.rightLabel];
     [self addSubview:self.lineLabel];
+    [self addSubview:self.redPointLabel];
     [self setupMakeBodyViewSubViewsLayout];
 }
 
@@ -68,8 +69,14 @@
     [_lineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self).mas_offset(0);
         make.left.mas_equalTo(self).mas_offset(0);
-        make.bottom.mas_equalTo(self.mas_bottom).mas_equalTo(-0.5);
-        make.height.mas_equalTo(0.5);
+        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-0.5);
+        make.height.mas_offset(0.5);
+    }];
+    [_redPointLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self);
+        make.left.mas_equalTo(_titleImageView.mas_right).mas_offset(75);
+        make.width.mas_offset(7);
+        make.height.mas_offset(7);
     }];
 }
 
@@ -109,6 +116,16 @@
     }
     return _lineLabel;
 }
+
+- (UILabel *)redPointLabel {
+    if (_redPointLabel == nil) {
+        _redPointLabel = [[UILabel alloc] init];
+        _redPointLabel.backgroundColor = UIColorFromRGB(0xFF0000);
+        _redPointLabel.layer.cornerRadius = 3.5;
+    }
+    return _redPointLabel;
+}
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
