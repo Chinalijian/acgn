@@ -9,5 +9,5 @@
 #import "ABaseViewController.h"
 
 @interface ResetPsdViewController : ABaseViewController
-@property (nonatomic, assign) BOOL isThirdParty;
+//@property (nonatomic, assign) BOOL isThirdParty;
 @end

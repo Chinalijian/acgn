@@ -156,7 +156,7 @@
             DynamicData *model = (DynamicData *)responseObject;
             block(YES, model.data);
         } else {
-            block(NO, nil);
+            block(YES, nil);
         }
     } failure:^(NSError *error) {
         block (NO, nil);
@@ -460,7 +460,7 @@
             CollectionData *model = (CollectionData *)responseObject;
             block(YES, model.data);
         } else {
-            block(NO, nil);
+            block(YES, nil);
         }
     } failure:^(NSError *error) {
         block (NO, nil);
@@ -547,7 +547,38 @@
         block (NO);
     }];
 }
+//绑定手机号验证码
++ (void)bindPhoneCode:(NSString *)phone block:(void(^)(BOOL result))block {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:phone, @"phone",nil];
+    [[DMHttpClient sharedInstance] initWithUrl:Bind_Phone_Code_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
+        if (!OBJ_IS_NIL(responseObject)) {
+            block(YES);
+        } else {
+            block(NO);
+        }
+    } failure:^(NSError *error) {
+        block (NO);
+    }];
+}
 
+//绑定手机号
++ (void)bindPhoneForUser:(NSString *)phone psd:(NSString *)password code:(NSString *)code block:(void(^)(BOOL result))block {
+    NSString *psdStr = [ATools MD5:password];
+    NSString *countID = [AccountInfo getUserID];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:phone, @"phone", psdStr, @"password", code, @"verCode", countID, @"uId", nil];
+    [[DMHttpClient sharedInstance] initWithUrl:Bind_Phone_Url parameters:dic method:DMHttpRequestPost dataModelClass:[UserDataModel class] isMustToken:NO success:^(id responseObject) {
+        if (!OBJ_IS_NIL(responseObject)) {
+            //保存数据
+            UserDataModel *model = (UserDataModel *)responseObject;
+            [AccountInfo saveAccountInfo:model];
+            block(YES);
+        } else {
+            block(NO);
+        }
+    } failure:^(NSError *error) {
+        block (NO);
+    }];
+}
 
 @end
 

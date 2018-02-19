@@ -11,7 +11,15 @@
 #import <UMSocialCore/UMSocialPlatformConfig.h>
 @implementation UMLoginPublicClass
 
++ (void)cancelAuthWithPlatform:(UMSocialPlatformType)platformType {
+    [[UMSocialManager defaultManager] cancelAuthWithPlatform:platformType completion:^(id result, NSError *error) {
+        
+    }];
+}
+
 + (void)loginWithThirdPlat:(UMSocialPlatformType)platformType andLoginCtr:(UIViewController *)ctr andLoginInfo:(LoginInfoBlock)loginInfoBlock{
+    
+    [UMLoginPublicClass cancelAuthWithPlatform:platformType];
 
     [[UMSocialManager defaultManager] authWithPlatform:platformType currentViewController:nil completion:^(id result, NSError *error) {
         if (!error) {

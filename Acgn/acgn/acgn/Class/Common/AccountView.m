@@ -85,6 +85,10 @@
             self.titleImages = [NSArray arrayWithObjects:@"psd_icon", @"psd_icon", @"psd_icon", nil];
             self.placeholders = [NSArray arrayWithObjects:@"请输入当前密码", @"请设置6-16位新密码", @"请再次输入新密码", nil];
             break;
+        case AAccountType_BindPhone:
+            self.titleImages = [NSArray arrayWithObjects:@"phone_icon", @"yzm_icon", @"psd_icon", nil];
+            self.placeholders = [NSArray arrayWithObjects:@"请输入你的手机号码", @"请输入收到的验证码", @"请设置6-16位新密码", nil];
+            break;
         default:
             break;
     }
@@ -223,7 +227,7 @@
         [cell textSwitchSecure:NO];
     }
     
-    if (self.aType == AAccountType_Register || self.aType == AAccountType_ResetPsd) {
+    if (self.aType == AAccountType_Register || self.aType == AAccountType_ResetPsd || self.aType == AAccountType_BindPhone) {
         if (indexPath.row == 1) {
             [cell.bgView layoutIfNeeded];
             [self initGetCodeButton:cell.bgView];

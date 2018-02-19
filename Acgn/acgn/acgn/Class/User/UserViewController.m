@@ -13,6 +13,7 @@
 #import "NickNameViewController.h"
 #import "MyFavViewController.h"
 #import "MyMsgViewController.h"
+#import "RegisterViewController.h"
 @interface UserViewController () <UserViewDelegate>
 @property (nonatomic, strong) UserView *userView;
 @end
@@ -82,8 +83,16 @@
             break;
         }
         case AAccountType_ChangePsd: {
-            ModifyPsdViewController *modifyPsdVC = [[ModifyPsdViewController alloc] init];
-            [self.navigationController pushViewController:modifyPsdVC animated:YES];
+            NSString *phoneNumber = [AccountInfo getUserPhone];
+            if (STR_IS_NIL(phoneNumber)) {
+                RegisterViewController *bindPhoneVC = [[RegisterViewController alloc] init];
+                bindPhoneVC.isBindPhone = YES;
+                [self.navigationController pushViewController:bindPhoneVC animated:YES];
+            } else {
+                ModifyPsdViewController *modifyPsdVC = [[ModifyPsdViewController alloc] init];
+                [self.navigationController pushViewController:modifyPsdVC animated:YES];
+            }
+            
             break;
         }
         case AAccountType_About: {

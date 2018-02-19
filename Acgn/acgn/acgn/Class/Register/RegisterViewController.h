@@ -9,5 +9,5 @@
 #import "ABaseViewController.h"
 
 @interface RegisterViewController : ABaseViewController
-
+@property (nonatomic, assign) BOOL isBindPhone;
 @end

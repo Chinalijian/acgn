@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, AAccountType) {
     AAccountType_Fav         = 8, // 我的收藏
     AAccountType_ChangePsd   = 9, // 修改密码
     AAccountType_Edit        = 10,// 编辑资料
+    AAccountType_BindPhone   = 11,// 绑定手机号
 };
 
 typedef NS_ENUM(NSInteger, Info_Type) {

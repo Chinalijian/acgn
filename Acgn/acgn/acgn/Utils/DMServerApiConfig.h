@@ -92,11 +92,15 @@
 #define Upload_Head_Image_Url           [DM_Url stringByAppendingFormat:@"user/uploadAvatar"]
 
 //weixin
-#define Login_Wecat_Url           [DM_Url stringByAppendingFormat:@"user/wxLogin"]
+#define Login_Wecat_Url                 [DM_Url stringByAppendingFormat:@"user/wxLogin"]
 //qq
-#define Login_QQ_Url            [DM_Url stringByAppendingFormat:@"user/qqLogin"]
+#define Login_QQ_Url                    [DM_Url stringByAppendingFormat:@"user/qqLogin"]
 //weibo
-#define Login_Weibo_Url           [DM_Url stringByAppendingFormat:@"user/wbLogin"]
+#define Login_Weibo_Url                 [DM_Url stringByAppendingFormat:@"user/wbLogin"]
+//绑定手机号获取验证码
+#define Bind_Phone_Code_Url             [DM_Url stringByAppendingFormat:@"user/getBindCode"]
+//绑定手机号
+#define Bind_Phone_Url                  [DM_Url stringByAppendingFormat:@"user/bindPhone"]
 
 #endif /* DMServerApiConfig_h */
 

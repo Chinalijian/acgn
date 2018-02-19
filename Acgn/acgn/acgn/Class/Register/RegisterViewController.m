@@ -19,7 +19,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"快速注册";
+    if (self.isBindPhone) {
+        self.title = @"绑定手机";
+    } else {
+        self.title = @"快速注册";
+    }
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [IQKeyboardManager sharedManager].enable = YES;
     [self loadUI];
@@ -51,12 +56,24 @@
         return;
     }
     WS(weakSelf);
-    [AApiModel registerSystem:phoneObj.content psd:psdObj.content code:codeObj.content block:^(BOOL result) {
-        if (result) {
-            NSInteger index = [weakSelf.navigationController.childViewControllers indexOfObject:weakSelf];
-            [weakSelf.navigationController popToViewController:[weakSelf.navigationController.childViewControllers objectAtIndex:index-2] animated:YES];
-        }
-    }];
+    
+    if (self.isBindPhone) {
+        [AApiModel bindPhoneForUser:phoneObj.content psd:psdObj.content code:codeObj.content block:^(BOOL result) {
+            if (result) {
+//                NSInteger index = [weakSelf.navigationController.childViewControllers indexOfObject:weakSelf];
+//                [weakSelf.navigationController popToViewController:[weakSelf.navigationController.childViewControllers objectAtIndex:index-2] animated:YES];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }
+        }];
+    } else {
+        [AApiModel registerSystem:phoneObj.content psd:psdObj.content code:codeObj.content block:^(BOOL result) {
+            if (result) {
+                NSInteger index = [weakSelf.navigationController.childViewControllers indexOfObject:weakSelf];
+                [weakSelf.navigationController popToViewController:[weakSelf.navigationController.childViewControllers objectAtIndex:index-2] animated:YES];
+            }
+        }];
+    }
+    
     
 }
 
@@ -70,13 +87,25 @@
         [ATools showSVProgressHudCustom:@"" title:@"请输入正确的手机号码"];
         return;
     }
-    [AApiModel getCodeForRegisterSystem:obj.content block:^(BOOL result) {
-        if (result) {
-        
-        } else {
-            
-        }
-    }];
+    
+    if (self.isBindPhone) {
+        [AApiModel bindPhoneCode:obj.content block:^(BOOL result) {
+            if (result) {
+                
+            } else {
+                
+            }
+        }];
+    } else {
+        [AApiModel getCodeForRegisterSystem:obj.content block:^(BOOL result) {
+            if (result) {
+                
+            } else {
+                
+            }
+        }];
+    }
+    
 }
 
 #pragma mark -
@@ -87,7 +116,12 @@
 
 - (AccountView *)aView {
     if (_aView == nil) {
-        _aView = [[AccountView alloc] initWithFrame:self.view.bounds type:AAccountType_Register];
+        if (self.isBindPhone) {
+             _aView = [[AccountView alloc] initWithFrame:self.view.bounds type:AAccountType_BindPhone];
+        } else {
+             _aView = [[AccountView alloc] initWithFrame:self.view.bounds type:AAccountType_Register];
+        }
+       
         _aView.delegate = self;
     }
     return _aView;

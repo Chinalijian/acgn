@@ -88,9 +88,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
-    if (self.isThirdParty) {
-        self.title = @"设置密码";
-    }
+//    if (self.isThirdParty) {
+//        self.title = @"设置密码";
+//    }
     [self setNavigationBarTransparence:YES titleColor:[UIColor whiteColor]];
 }
 

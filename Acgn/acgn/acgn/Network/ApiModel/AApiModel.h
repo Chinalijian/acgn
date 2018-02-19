@@ -78,7 +78,10 @@
 + (void)loginQQ:(NSDictionary *)dic block:(void(^)(BOOL result))block;
 //微信登录
 + (void)loginWeiXin:(NSDictionary *)dic block:(void(^)(BOOL result))block;
-
+//绑定手机号验证码
++ (void)bindPhoneCode:(NSString *)phone block:(void(^)(BOOL result))block;
+//绑定手机号
++ (void)bindPhoneForUser:(NSString *)phone psd:(NSString *)password code:(NSString *)code block:(void(^)(BOOL result))block;
 
 @end
 

@@ -169,7 +169,7 @@
             if (weakSelf.lastID.intValue == -1) {
                 [weakSelf.attentListDatas removeAllObjects];
             }
-            if (array.count > 0) {
+            if (!OBJ_IS_NIL(array) && array.count > 0) {
                 [weakSelf.attentListDatas addObjectsFromArray:array];
             }
             [weakSelf updataAttentList:weakSelf.attentListDatas];

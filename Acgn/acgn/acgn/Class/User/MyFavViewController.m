@@ -119,18 +119,19 @@
     WS(weakSelf);
     [AApiModel getCollectionListForUser:self.lastID block:^(BOOL result, NSArray *array) {
         if (result) {
-            if (array.count > 0) {
+            if (weakSelf.lastID.intValue == -1) {
+                [weakSelf.datas removeAllObjects];
+            }
+            if (!OBJ_IS_NIL(array) && array.count > 0) {
                 weakSelf.contentListView.hidden = NO;
                 weakSelf.emptyView.hidden = YES;
-                if (weakSelf.lastID.intValue == -1) {
-                    [weakSelf.datas removeAllObjects];
-                }
+                
                 [weakSelf.datas addObjectsFromArray:array];
                 [weakSelf updataAttentList:weakSelf.datas];
                 DynamicListData *model = [array lastObject];
                 weakSelf.lastID = model.collectionId;
             } else {
-                if (self.lastID.intValue == -1 && weakSelf.datas.count ==0) {
+                if (self.lastID.intValue == -1 && weakSelf.datas.count == 0) {
                     weakSelf.emptyView.hidden = NO;
                     weakSelf.contentListView.hidden = YES;
                 }

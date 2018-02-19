@@ -9,6 +9,7 @@
 #import "UserView.h"
 #import "UserCell.h"
 #import "LoginViewController.h"
+#import "UMLoginPublicClass.h"
 @interface UserView() <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *datas;
