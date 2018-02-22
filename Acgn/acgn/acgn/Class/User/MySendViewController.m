@@ -53,7 +53,7 @@
     WS(weakSelf);
     [AApiModel mySendList:self.lastID block:^(BOOL result, NSArray *array) {
         if (result) {
-            if (array > 0) {
+            if (array.count > 0) {
                 weakSelf.sTableView.hidden = NO;
                 weakSelf.emptyView.hidden = YES;
                 if (self.lastID.intValue == -1) {

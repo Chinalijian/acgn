@@ -152,11 +152,18 @@
     NSString *userID = [AccountInfo getUserID];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:lastId, @"lastId", @"20", @"rowPage", userID, @"uId", nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_FollowHome_Url parameters:dic method:DMHttpRequestPost dataModelClass:[DynamicData class] isMustToken:NO success:^(id responseObject) {
+        
         if (!OBJ_IS_NIL(responseObject)) {
-            DynamicData *model = (DynamicData *)responseObject;
-            block(YES, model.data);
+            if (![responseObject isKindOfClass:[NSString class]]) {
+                DynamicData *model = (DynamicData *)responseObject;
+                block(YES, model.data);
+            } else {
+                [ATools showSVProgressHudCustom:@"" title:(NSString *)responseObject];
+                block(YES, nil);
+            }
         } else {
-            block(YES, nil);
+            [ATools showSVProgressHudCustom:@"" title:@"暂无关注"];
+           block(YES, nil);
         }
     } failure:^(NSError *error) {
         block (NO, nil);
@@ -457,9 +464,15 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:lastId, @"lastId", @"10", @"rowPage", userID, @"uId", nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_CollectionList_Url parameters:dic method:DMHttpRequestPost dataModelClass:[CollectionData class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
-            CollectionData *model = (CollectionData *)responseObject;
-            block(YES, model.data);
+            if (![responseObject isKindOfClass:[NSString class]]) {
+                CollectionData *model = (CollectionData *)responseObject;
+                block(YES, model.data);
+            } else {
+                [ATools showSVProgressHudCustom:@"" title:(NSString *)responseObject];
+                block(YES, nil);
+            }
         } else {
+            [ATools showSVProgressHudCustom:@"" title:@"暂无收藏"];
             block(YES, nil);
         }
     } failure:^(NSError *error) {
@@ -504,7 +517,7 @@
 
 //微博登录
 + (void)loginWeibo:(NSDictionary *)dic block:(void(^)(BOOL result))block {
-    NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:[dic objectForKey:@"access_token"], @"access_token", nil];
+    NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:[dic objectForKey:@"access_token"], @"access_token", [dic objectForKey:@"uid"], @"uid", nil];
     [[DMHttpClient sharedInstance] initWithUrl:Login_Weibo_Url parameters:dic1 method:DMHttpRequestPost dataModelClass:[UserDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             UserDataModel *model = (UserDataModel *)responseObject;
@@ -566,11 +579,10 @@
     NSString *psdStr = [ATools MD5:password];
     NSString *countID = [AccountInfo getUserID];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:phone, @"phone", psdStr, @"password", code, @"verCode", countID, @"uId", nil];
-    [[DMHttpClient sharedInstance] initWithUrl:Bind_Phone_Url parameters:dic method:DMHttpRequestPost dataModelClass:[UserDataModel class] isMustToken:NO success:^(id responseObject) {
+    [[DMHttpClient sharedInstance] initWithUrl:Bind_Phone_Url parameters:dic method:DMHttpRequestPost dataModelClass:[NSObject class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             //保存数据
-            UserDataModel *model = (UserDataModel *)responseObject;
-            [AccountInfo saveAccountInfo:model];
+            [AccountInfo saveUserPhone:phone];
             block(YES);
         } else {
             block(NO);

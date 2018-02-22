@@ -74,7 +74,7 @@
             }
 
         } else if ([[responseObj objectForKey:@"code"] intValue] == 1021 || [[responseObj objectForKey:@"code"] intValue] == 1022) {
-            success(nil);
+            success([responseObj objectForKey:@"msg"]);
         } else {
             if ([[responseObj objectForKey:Msg_Key] isKindOfClass:[NSString class]]) {
                 [self responseStatusCodeException:[[responseObj objectForKey:Code_Key] intValue]

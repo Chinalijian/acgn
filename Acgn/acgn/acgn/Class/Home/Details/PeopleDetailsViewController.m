@@ -74,7 +74,7 @@
     WS(weakSelf);
     [AApiModel getRoleDtailsListData:self.roleID lastId:self.lastID block:^(BOOL result, NSArray *array) {
         if (result) {
-            if (array > 0) {
+            if (array.count > 0) {
                 if (self.lastID.intValue == -1) {
                     [weakSelf.datas removeAllObjects];
                 }

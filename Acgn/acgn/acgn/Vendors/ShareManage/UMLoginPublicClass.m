@@ -27,6 +27,7 @@
             UMSocialUserInfoResponse *resp = result;
             switch (platformType) {
                 case UMSocialPlatformType_Sina:
+                    [dic setValue:resp.uid forKey:@"uid"];
                     [dic setValue:resp.accessToken forKey:@"access_token"];
                     break;
                 case UMSocialPlatformType_QQ:
