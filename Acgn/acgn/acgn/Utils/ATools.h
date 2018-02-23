@@ -42,7 +42,15 @@
  */
 + (void)changeSpaceForLabel:(UILabel *)label withLineSpace:(float)lineSpace WordSpace:(float)wordSpace;
 
-
+/**
+ *  NSString转换成NSMutableAttributedString
+ *  @param font  字体
+ *  @param lineSpacing  行间距
+ *  @param text  内容
+ */
++(NSMutableAttributedString *)attributedStringFromStingWithFont:(UIFont *)font
+                                                withLineSpacing:(CGFloat)lineSpacing
+                                                           text:(NSString *)text;
 @end
 
 

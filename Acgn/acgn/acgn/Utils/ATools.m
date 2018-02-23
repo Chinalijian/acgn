@@ -176,7 +176,7 @@
     
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];
     label.attributedText = attributedString;
-    //[label sizeToFit];
+    [label sizeToFit];
 }
 
 /**
@@ -203,6 +203,30 @@
     label.attributedText = attributedString;
     [label sizeToFit];
 }
+
+
+/**
+ *  NSString转换成NSMutableAttributedString
+ *  @param font  字体
+ *  @param lineSpacing  行间距
+ *  @param text  内容
+ */
++(NSMutableAttributedString *)attributedStringFromStingWithFont:(UIFont *)font
+                                                withLineSpacing:(CGFloat)lineSpacing
+                                                           text:(NSString *)text {
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName:font}];
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:lineSpacing];
+    [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail]; //截断方式，"abcd..."
+    [attributedStr addAttribute:NSParagraphStyleAttributeName
+                          value:paragraphStyle
+                          range:NSMakeRange(0, [text length])];
+    return attributedStr;
+}
+
+
+
 @end
 
 

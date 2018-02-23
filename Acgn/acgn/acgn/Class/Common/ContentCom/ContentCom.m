@@ -61,7 +61,7 @@
     CGFloat contentH = [ContentCom getContentMaxHeight:obj];
     CGFloat contentTotalH = Content_Label_Space_Y;
     if (contentH > 0) {
-        contentH = (contentH > Content_Label_H ? Content_Label_H:contentH);
+        contentH = (contentH > Content_Label_H ? Content_Label_H:contentH+10);
         contentTotalH = contentTotalH + contentH;
     }
     CGFloat imageTotalH = Image_Space;
@@ -142,8 +142,9 @@
     self.nameLabel.text = obj.userName;
     self.timeLabel.text = obj.postTime;
     self.fromLabel.text = [NSString stringWithFormat:@"发自：%@", obj.postSource];
-    self.contentLabel.text = obj.postContext;
-    [ATools changeLineSpaceForLabel:self.contentLabel WithSpace:5];
+    self.contentLabel.attributedText = [ATools attributedStringFromStingWithFont:Commit_Font withLineSpacing:5 text:obj.postContext];
+//    self.contentLabel.text = obj.postContext;
+//    [ATools changeLineSpaceForLabel:self.contentLabel WithSpace:5];
     NSString * imageUrl = [obj.imageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [self.peopleImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
     [self.attButton setTitle:obj.seeNum forState:UIControlStateNormal];
@@ -184,10 +185,12 @@
     }];
     
     CGFloat contentH = [ContentCom getContentMaxHeight:obj];
-    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_offset(contentH);
-    }];
-    
+    if (contentH < Content_Label_H) {
+        [_contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_offset(contentH+10);
+        }];
+    }
+
     CGFloat imageH = [ContentCom getImageMaxHeight:obj];
     [_imageComView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(Image_Space);
@@ -196,7 +199,7 @@
     
     [self.imageComView configImageCom:obj.postUrls height:imageH];
     
-    [self layoutSubviews];
+    //[self layoutSubviews];
 }
 
 - (void)clickAttBtn:(id)sender {
@@ -351,8 +354,6 @@
         make.left.mas_equalTo(self.comButton.mas_right).mas_offset(0);
         make.width.mas_offset(width);
     }];
-    
-   
 }
 
 - (UILabel *)nameLabel {
@@ -385,7 +386,7 @@
         _contentLabel.font = [UIFont systemFontOfSize:13];
         _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
         _contentLabel.numberOfLines = 3;
-        _contentLabel.backgroundColor = [UIColor redColor];
+        //_contentLabel.backgroundColor = [UIColor redColor];
     }
     return _contentLabel;
 }
