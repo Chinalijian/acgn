@@ -130,6 +130,18 @@
     CGFloat height = label.frame.size.height;
     return height;
 }
+//获取Label的高度和宽度，根据文字---包含行间距
++ (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont*)font withLineSpacing:(CGFloat)lineSpacing {
+    CGSize maxSize = CGSizeMake(width, CGFLOAT_MAX);
+    //段落样式
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    //设置行间距
+    [paragraphStyle setLineSpacing:lineSpacing];
+    //计算文字尺寸
+    CGSize size = [title boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font,NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+    CGFloat height = size.height;
+    return height;
+}
 
 //获取Label的高度和宽度，根据文字
 + (CGFloat)getHeightByHeight:(CGFloat)height title:(NSString *)title font:(UIFont*)font {
@@ -161,9 +173,10 @@
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:space];
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];
     label.attributedText = attributedString;
-    [label sizeToFit];
+    //[label sizeToFit];
 }
 
 /**

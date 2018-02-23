@@ -97,7 +97,7 @@
     if (OBJ_IS_NIL(obj)) {
         return 0;
     }
-    return [ATools getHeightByWidth:Content_Label_Widht title:obj.postContext font:Commit_Font];
+    return [ATools getHeightByWidth:Content_Label_Widht title:obj.postContext font:Commit_Font withLineSpacing:5];
 }
 
 
@@ -385,6 +385,7 @@
         _contentLabel.font = [UIFont systemFontOfSize:13];
         _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
         _contentLabel.numberOfLines = 3;
+        _contentLabel.backgroundColor = [UIColor redColor];
     }
     return _contentLabel;
 }
