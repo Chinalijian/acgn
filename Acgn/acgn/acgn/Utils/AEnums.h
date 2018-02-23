@@ -31,6 +31,10 @@ typedef NS_ENUM(NSInteger, Info_Type) {
     Info_Type_Video         = 3, // 视频
 };
 
+typedef NS_ENUM(NSInteger, ContentCom_Type) {
+    ContentCom_Type_LineNumber   = 0, // 行数限制
+    ContentCom_Type_All          = 1, // 全部，没有行数限制
+};
 
 
 #endif /* AEnums_h */

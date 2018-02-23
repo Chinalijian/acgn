@@ -34,10 +34,11 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
     
 }
 
-- (id)initWithFrame:(CGRect)frame delegate:(id<ContentListDelegate>) delegate {
+- (id)initWithFrame:(CGRect)frame delegate:(id<ContentListDelegate>) delegate withType:(ContentCom_Type)ccType {
     self = [super initWithFrame:frame];
     if (self) {
         self.delegate = delegate;
+        self.ccType = ccType;
         self.datas = [NSMutableArray array];
         //[self testData];
         [self loadUI];
@@ -184,7 +185,7 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
     if(infoV==nil) {
         infoV = [[ContentCom alloc]
                  initWithReuseIdentifier:cc
-                 frame:CGRectMake(0, 0, self.aTableView.frame.size.width, 0)];
+                 frame:CGRectMake(0, 0, self.aTableView.frame.size.width, 0) contentComType:self.ccType];
     }
     infoV.delegate = self;
     [self modfiyBackgroudColor:infoV index:section];
@@ -203,7 +204,7 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
     if (section < self.datas.count) {
         DynamicListData *data = [self.datas objectAtIndex:section];
         if(!OBJ_IS_NIL(data)) {
-            return [ContentCom getContentCommonCellHeight:data];
+            return [ContentCom getContentCommonCellHeight:data contentType:self.ccType];
         }
     }
     return 0;

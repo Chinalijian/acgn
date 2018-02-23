@@ -166,7 +166,8 @@
 - (ContentListView *)contentListView {
     if (_contentListView == nil) {
         _contentListView = [[ContentListView alloc] initWithFrame:
-                            CGRectMake(0, 0, DMScreenWidth, DMScreenHeight-DMNavigationBarHeight) delegate:self];
+                            CGRectMake(0, 0, DMScreenWidth, DMScreenHeight-DMNavigationBarHeight) delegate:self withType:ContentCom_Type_LineNumber];
+   
         _contentListView.backgroundColor = [UIColor whiteColor];
     }
     return _contentListView;

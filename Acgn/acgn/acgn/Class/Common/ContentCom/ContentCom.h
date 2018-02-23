@@ -24,9 +24,11 @@
 @interface ContentCom : UITableViewHeaderFooterView
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
                         frame:(CGRect)frame;
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
+                        frame:(CGRect)frame contentComType:(ContentCom_Type)type;
 @property (nonatomic, weak) id <ContentComDelegate> delegate;
 - (void)configInfo:(DynamicListData *)obj;
-+ (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj;
++ (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj contentType:(ContentCom_Type)type;
 - (void)updateFabulous;
 - (void)updateCollectionView;
 - (void)updateAttentView;

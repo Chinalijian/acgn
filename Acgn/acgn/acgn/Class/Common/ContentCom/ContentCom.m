@@ -9,6 +9,9 @@
 #import "ContentCom.h"
 
 @interface ContentCom()
+
+@property (nonatomic, assign) ContentCom_Type ccType;
+
 @property (nonatomic, strong) DynamicListData *dynamicObj;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
@@ -54,14 +57,16 @@
 
 #define BottomView_H 34
 
-+ (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj {
++ (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj contentType:(ContentCom_Type)type {
     NSLog(@"dd = %f",(Content_Label_Widht)*(0.64)+10);
     CGFloat totalHeight = 0;
     CGFloat imageH = [ContentCom getImageMaxHeight:obj];
     CGFloat contentH = [ContentCom getContentMaxHeight:obj];
     CGFloat contentTotalH = Content_Label_Space_Y;
     if (contentH > 0) {
-        contentH = (contentH > Content_Label_H ? Content_Label_H:contentH+10);
+        if (type != ContentCom_Type_All) {
+            contentH = (contentH > Content_Label_H ? Content_Label_H:contentH+10);
+        }
         contentTotalH = contentTotalH + contentH;
     }
     CGFloat imageTotalH = Image_Space;
@@ -100,7 +105,6 @@
     return [ATools getHeightByWidth:Content_Label_Widht title:obj.postContext font:Commit_Font withLineSpacing:5];
 }
 
-
 - (void)clickPraise:(id)sender {
     if ([self.delegate respondsToSelector:@selector(clickPraiseFabulous:view:)]) {
         [self.delegate clickPraiseFabulous:self.dynamicObj view:self];
@@ -128,6 +132,20 @@
                         frame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.ccType = ContentCom_Type_LineNumber;
+        [self loadUI];
+        UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapActionRootView:)];
+        tap.numberOfTapsRequired =1;
+        tap.numberOfTouchesRequired =1;
+        [self addGestureRecognizer:tap];
+    }
+    return self;
+}
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
+                        frame:(CGRect)frame contentComType:(ContentCom_Type)type {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.ccType = type;
         [self loadUI];
         UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapActionRootView:)];
         tap.numberOfTapsRequired =1;
@@ -185,7 +203,13 @@
     }];
     
     CGFloat contentH = [ContentCom getContentMaxHeight:obj];
-    if (contentH < Content_Label_H) {
+    if (self.ccType != ContentCom_Type_All) {
+        if (contentH < Content_Label_H) {
+            [_contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_offset(contentH+10);
+            }];
+        }
+    } else {
         [_contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_offset(contentH+10);
         }];
@@ -386,6 +410,9 @@
         _contentLabel.font = [UIFont systemFontOfSize:13];
         _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
         _contentLabel.numberOfLines = 3;
+        if (self.ccType == ContentCom_Type_All) {
+            _contentLabel.numberOfLines = 0;
+        }
         //_contentLabel.backgroundColor = [UIColor redColor];
     }
     return _contentLabel;
@@ -431,7 +458,7 @@
         [_attButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
         [_attButton setImage:[UIImage imageNamed:@"look_img_white"] forState:UIControlStateNormal];
         _attButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    
+        _attButton.userInteractionEnabled = NO;
     }
     return _attButton;
 }
@@ -442,6 +469,7 @@
         [_comButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
         [_comButton setImage:[UIImage imageNamed:@"comment_img_white"] forState:UIControlStateNormal];
         _comButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _comButton.userInteractionEnabled = NO;
     }
     return _comButton;
 }

@@ -24,7 +24,8 @@
 @property (nonatomic, weak) id <ContentListDelegate>delegate;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) BOOL isFavPage;
-- (id)initWithFrame:(CGRect)frame delegate:(id<ContentListDelegate>) delegate;
+@property (nonatomic, assign) ContentCom_Type ccType;
+- (id)initWithFrame:(CGRect)frame delegate:(id<ContentListDelegate>) delegate withType:(ContentCom_Type)ccType;
 - (void)updateList:(NSMutableArray *)array;
 - (void)updateFabulous;
 @end
