@@ -130,7 +130,7 @@
 + (CGFloat)getCellMaxHeightAndUpdate:(DynamicCommentListData *)dynamicObj {
     CGFloat commitH = [self getCommitContentMaxHeight:dynamicObj];
     CGFloat secondH = [self getSecondViewMaxHeight:dynamicObj];
-    CGFloat heightRow = Content_List_Cell_H + commitH + secondH;
+    CGFloat heightRow = Content_List_Cell_H + commitH + (secondH>0?secondH+10:secondH);
     return heightRow;
 }
 

@@ -13,6 +13,7 @@
 - (void)clickTopGotoLogin;
 - (void)clickTopGotoNikeNamePage;
 - (void)goToPage:(AAccountType)type;
+- (void)clickLogoutSystem;
 @end
 
 @interface UserView : UIView

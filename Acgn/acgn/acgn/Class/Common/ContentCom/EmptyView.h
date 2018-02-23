@@ -13,6 +13,7 @@
 @end
 @interface EmptyView : UIView
 @property (nonatomic, weak) id <EmptyViewDelegate> delegate;
+@property (nonatomic, strong) UIImageView *topImageView;
 - (id)initWithFrame:(CGRect)frame delegate:(id<EmptyViewDelegate>) delegate;
 - (void)updateInfo:(NSString *)imageName title:(NSString *)title btnTitle:(NSString *)btnTitle;
 @end

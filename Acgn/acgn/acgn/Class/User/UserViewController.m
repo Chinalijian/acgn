@@ -69,6 +69,17 @@
     [self.navigationController pushViewController:nickNameVC animated:YES];
 }
 
+- (void)clickLogoutSystem {
+    WS(weakSelf);
+    DMAlertMananger *alert = [[DMAlertMananger shareManager] creatAlertWithTitle:@"是否确定退出？" message:@"" preferredStyle:UIAlertControllerStyleAlert cancelTitle:@"取消" otherTitle:@"确定", nil];
+    [alert showWithViewController:self IndexBlock:^(NSInteger index) {
+        if (index == 1) { // 右侧
+            [AccountInfo removeUserAllInfo];
+            [weakSelf.userView updateUserInfo];
+        }
+    }];
+}
+
 - (void)goToPage:(AAccountType)type {
     switch (type) {
         case AAccountType_Msg: {

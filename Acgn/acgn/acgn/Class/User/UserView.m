@@ -59,8 +59,9 @@
 }
 
 - (void)clickLogoutSure:(id)sender {
-    [AccountInfo removeUserAllInfo];
-    [self upDateTopInfo];
+    if ([self.delegate respondsToSelector:@selector(clickLogoutSystem)]) {
+        [self.delegate clickLogoutSystem];
+    }
 }
 
 //创建轻拍手势

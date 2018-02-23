@@ -67,14 +67,20 @@
 
 - (void)clickFavUser:(id)sender view:(id)viewSelf {
     WS(weakSelf);
-    DynamicListData *obj = (DynamicListData *)sender;
-    [AApiModel delCollectionForUser:obj.postId block:^(BOOL result) {
-        if (result) {
-            [weakSelf.datas removeObject:obj];
-            [weakSelf updataAttentList:weakSelf.datas];
-            [weakSelf refresh];
+    DMAlertMananger *alert = [[DMAlertMananger shareManager] creatAlertWithTitle:@"是否确定删除？" message:@"" preferredStyle:UIAlertControllerStyleAlert cancelTitle:@"取消" otherTitle:@"确定", nil];
+    [alert showWithViewController:self IndexBlock:^(NSInteger index) {
+        if (index == 1) { // 右侧
+            DynamicListData *obj = (DynamicListData *)sender;
+            [AApiModel delCollectionForUser:obj.postId block:^(BOOL result) {
+                if (result) {
+                    [weakSelf.datas removeObject:obj];
+                    [weakSelf updataAttentList:weakSelf.datas];
+                    [weakSelf refresh];
+                }
+            }];
         }
     }];
+    
 }
 - (void)clickPraiseFabulous:(id)sender  view:(id)viewSelf {
     //WS(weakSelf);

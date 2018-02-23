@@ -105,6 +105,8 @@
 		30C586F6202F753A00CB1EC0 /* PeopleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C586F5202F753A00CB1EC0 /* PeopleDetailsViewController.m */; };
 		30EAFE53202B62E1004C75C6 /* ContentCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EAFE52202B62E1004C75C6 /* ContentCom.m */; };
 		30EAFE56202B705A004C75C6 /* ImageCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EAFE55202B705A004C75C6 /* ImageCom.m */; };
+		30F58AF62040497600997AB9 /* DMAlertMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F58AF42040497600997AB9 /* DMAlertMananger.m */; };
+		30F58AF9204062A800997AB9 /* DynamicEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F58AF8204062A800997AB9 /* DynamicEmptyCell.m */; };
 		30F6FE88202C9D6800EB96A8 /* DynamicData.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F6FE87202C9D6800EB96A8 /* DynamicData.m */; };
 		30F6FE8C202CB5EE00EB96A8 /* RoleDetailsDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F6FE8B202CB5EE00EB96A8 /* RoleDetailsDataModel.m */; };
 		30F6FE8F202CCFDC00EB96A8 /* CollectionData.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F6FE8E202CCFDC00EB96A8 /* CollectionData.m */; };
@@ -338,6 +340,10 @@
 		30EAFE52202B62E1004C75C6 /* ContentCom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentCom.m; sourceTree = "<group>"; };
 		30EAFE54202B7059004C75C6 /* ImageCom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCom.h; sourceTree = "<group>"; };
 		30EAFE55202B705A004C75C6 /* ImageCom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCom.m; sourceTree = "<group>"; };
+		30F58AF42040497600997AB9 /* DMAlertMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMAlertMananger.m; sourceTree = "<group>"; };
+		30F58AF52040497600997AB9 /* DMAlertMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMAlertMananger.h; sourceTree = "<group>"; };
+		30F58AF7204062A800997AB9 /* DynamicEmptyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicEmptyCell.h; sourceTree = "<group>"; };
+		30F58AF8204062A800997AB9 /* DynamicEmptyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynamicEmptyCell.m; sourceTree = "<group>"; };
 		30F6FE86202C9D6800EB96A8 /* DynamicData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicData.h; sourceTree = "<group>"; };
 		30F6FE87202C9D6800EB96A8 /* DynamicData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynamicData.m; sourceTree = "<group>"; };
 		30F6FE8A202CB5EE00EB96A8 /* RoleDetailsDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoleDetailsDataModel.h; sourceTree = "<group>"; };
@@ -502,11 +508,11 @@
 			isa = PBXGroup;
 			children = (
 				2A23742D2031E1EE00297AB2 /* JLPhoto.h */,
-				2A23742E2031E1EE00297AB2 /* JLPieProgressView.m */,
-				2A23742F2031E1EE00297AB2 /* JLPhotoBrowser.m */,
-				2A2374302031E1EE00297AB2 /* JLPieProgressView.h */,
 				2A2374312031E1EE00297AB2 /* JLPhoto.m */,
+				2A23742E2031E1EE00297AB2 /* JLPieProgressView.m */,
+				2A2374302031E1EE00297AB2 /* JLPieProgressView.h */,
 				2A2374322031E1EE00297AB2 /* JLPhotoBrowser.h */,
+				2A23742F2031E1EE00297AB2 /* JLPhotoBrowser.m */,
 			);
 			path = JLBrowser;
 			sourceTree = "<group>";
@@ -793,6 +799,7 @@
 		309D904A20259A26002F414F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				30F58AF32040497600997AB9 /* BlockAlertView */,
 				2A65145820284B7D00737DEF /* MulCategoryScrollView */,
 				309D904B20259A26002F414F /* DMUserDefaults */,
 			);
@@ -831,6 +838,15 @@
 			path = ContentCom;
 			sourceTree = "<group>";
 		};
+		30F58AF32040497600997AB9 /* BlockAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				30F58AF42040497600997AB9 /* DMAlertMananger.m */,
+				30F58AF52040497600997AB9 /* DMAlertMananger.h */,
+			);
+			path = BlockAlertView;
+			sourceTree = "<group>";
+		};
 		30F6FE89202CB5DC00EB96A8 /* Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -846,6 +862,8 @@
 				2A745702203043FA009E2880 /* PeopleDetailCell.m */,
 				3071B7EB2030A2CC00A4A6BA /* MsgDetailViewController.h */,
 				3071B7EC2030A2CC00A4A6BA /* MsgDetailViewController.m */,
+				30F58AF7204062A800997AB9 /* DynamicEmptyCell.h */,
+				30F58AF8204062A800997AB9 /* DynamicEmptyCell.m */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -1068,6 +1086,7 @@
 				2A6F15D620246C0700B55AA7 /* ResetPsdViewController.m in Sources */,
 				2AC9714D20314B7300E25771 /* SendTableViewCell.m in Sources */,
 				2A89A2E22019E5880021B844 /* main.m in Sources */,
+				30F58AF62040497600997AB9 /* DMAlertMananger.m in Sources */,
 				309D903D2025943C002F414F /* UserDataModel.m in Sources */,
 				2A89A2D42019E5880021B844 /* AppDelegate.m in Sources */,
 				2ADF21BC2022C3A600559427 /* UserViewController.m in Sources */,
@@ -1126,6 +1145,7 @@
 				3048354E2026EE0C00DAAE3F /* AboutViewController.m in Sources */,
 				309D904020259747002F414F /* AccountInfo.m in Sources */,
 				2A23741A2031D58A00297AB2 /* POPCustomAnimation.mm in Sources */,
+				30F58AF9204062A800997AB9 /* DynamicEmptyCell.m in Sources */,
 				2A704B172022C31C00476D68 /* ABaseViewController.m in Sources */,
 				2ADF21C82022DF1600559427 /* AttentionPeopleList.m in Sources */,
 				2A2374282031D58A00297AB2 /* POPAnimationEvent.mm in Sources */,

@@ -160,7 +160,9 @@
         _aTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _aTableView.backgroundColor = [UIColor whiteColor];//UIColorFromRGB(0xf6f6f6);
         _aTableView.tableHeaderView = self.topHeadView;
-        
+        self.aTableView.estimatedRowHeight = 0;
+        self.aTableView.estimatedSectionHeaderHeight = 0;
+        self.aTableView.estimatedSectionFooterHeight = 0;
         UIView *fV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _aTableView.frame.size.width, 70)];
         fV.backgroundColor = [UIColor whiteColor];
         _aTableView.tableFooterView = fV;

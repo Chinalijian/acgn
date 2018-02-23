@@ -9,8 +9,6 @@
 #import "EmptyView.h"
 
 @interface EmptyView()
-
-@property (nonatomic, strong) UIImageView *topImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *bButton;
 

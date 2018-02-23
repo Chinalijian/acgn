@@ -50,7 +50,7 @@
 
 + (CGFloat)getViewTotalHeight:(RoleDetailsDataModel *)obj {
     CGFloat totalHeight = 0;
-    CGFloat indtroduceHeight = [PeopleDetailHeader getIntroduceMaxHeight:obj];
+    CGFloat indtroduceHeight = [PeopleDetailHeader getIntroduceMaxHeight:obj] + 10;
     totalHeight = indtroduceHeight + Name_Space_Y + Name_Label_H + Source_Label_Space_Y + Source_Label_H + Introduce_Label_Space_Y*2 + BottomView_H;
     if (totalHeight < Total_Default_Height) {
         totalHeight = Total_Default_Height;
@@ -62,7 +62,7 @@
     if (OBJ_IS_NIL(obj)) {
         return 0;
     }
-    return [ATools getHeightByWidth:Introduce_Label_Width title:obj.introduce font:Commit_Font];
+    return [ATools getHeightByWidth:Introduce_Label_Width title:obj.introduce font:Commit_Font withLineSpacing:5];
 }
 
 
@@ -79,13 +79,14 @@
 }
 
 - (void)configInfo:(RoleDetailsDataModel *)obj {
-    self.introduceHeight = [PeopleDetailHeader getIntroduceMaxHeight:obj];
+    self.introduceHeight = [PeopleDetailHeader getIntroduceMaxHeight:obj]+10;
     [self loadUI];
     self.dynamicObj = obj;
     self.nameLabel.text = self.dynamicObj.userName;
     self.sourceLabel.text = self.dynamicObj.source;
-    self.introduceLabel.text = self.dynamicObj.introduce;
-    [ATools changeLineSpaceForLabel:self.introduceLabel WithSpace:5];
+    self.introduceLabel.attributedText = [ATools attributedStringFromStingWithFont:Commit_Font withLineSpacing:5 text:self.dynamicObj.introduce];
+    //self.introduceLabel.text = self.dynamicObj.introduce;
+    //[ATools changeLineSpaceForLabel:self.introduceLabel WithSpace:5];
     NSString * imageUrl = [self.dynamicObj.imageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [self.peopleImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
     if (self.dynamicObj.hasFollow.intValue >= 1) {
@@ -127,7 +128,7 @@
     [self.bottomView addSubview:self.fansButton];
     [self addSubview:self.peopleImageView];
     [self addSubview:self.image3DButton];
-    
+
     [self setupTopContentLayout];
 }
 
@@ -278,8 +279,8 @@
         _fansButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_fansButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_fansButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        [_fansButton setImage:[UIImage imageNamed:@"praise_yellow_icon"] forState:UIControlStateNormal];
-        [_fansButton setTitle:@"粉丝：2234" forState:UIControlStateNormal];
+        [_fansButton setImage:[UIImage imageNamed:@"fans_image_icon"] forState:UIControlStateNormal];
+        [_fansButton setTitle:@"   粉丝：" forState:UIControlStateNormal];
         _fansButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     return _fansButton;

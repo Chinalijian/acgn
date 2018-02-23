@@ -11,6 +11,8 @@
 @protocol SendMsgDeInputDelegate <NSObject>
 @optional
 - (void)inputContent:(NSString *)content;
+- (void)showKeyBoard;
+- (void)hiddenKeyBoard;
 @end
 
 @interface SendMsgInputTextView : UIView
@@ -19,4 +21,6 @@
 @property (nonatomic,assign)BOOL showLimitNum; //显示字数
 @property (nonatomic,assign)NSInteger limitNum; //限制字数
 @property (nonatomic,strong)UIFont *font;       //文字大小
+
+- (void)cleanTextInfo;
 @end

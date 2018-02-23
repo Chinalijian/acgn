@@ -12,17 +12,20 @@
     UITextView *_textView;//输入框
     UILabel *_textApl;//字数
     CGRect _rect;
+    UILabel *_alpLabel;
 }
+
+
 @end
+
 @implementation SendMsgInputTextView
-
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
          [[IQKeyboardManager sharedManager] setEnable:NO];
         _rect = self.frame;
+        
         [self initNotification];
         [self AddtextFieldComments];
     }
@@ -51,15 +54,35 @@
     lineView.backgroundColor = UIColorFromRGB(0xBAB8B8);//[UIColor colorWithWhite:0.6 alpha:0.3];
     [_bottomView addSubview:lineView];
     
-    _textView = [[UITextView alloc] initWithFrame:CGRectMake(15, 5, self.frame.size.width-15-88, 40)];
-    _textView.layer.cornerRadius = 15;
-    _textView.layer.borderWidth = 1;
+    UIView *editInfoView = [[UIView alloc] initWithFrame:CGRectMake(15, 5, self.frame.size.width-15-88, 40)];
+    editInfoView.layer.cornerRadius = 15;
+    editInfoView.layer.borderWidth = 1;
+    editInfoView.layer.borderColor = lineView.backgroundColor.CGColor;
+    [_bottomView addSubview:editInfoView];
+    
+    UIImageView *editIconImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 26/2, 24, 24)];
+    editIconImage.image = [UIImage imageNamed:@"edit_pen_icon"];
+    [_bottomView addSubview:editIconImage];
+    
+    UILabel *alpLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, editInfoView.frame.origin.y, 100, editInfoView.frame.size.height)];
+    alpLabel.text = @"各种吐槽尽管来";
+    alpLabel.textColor = UIColorFromRGB(0x939393);
+    alpLabel.font = [UIFont systemFontOfSize:13];
+    alpLabel.textAlignment = NSTextAlignmentLeft;
+    [_bottomView addSubview:alpLabel];
+    _alpLabel = alpLabel;
+    
+    _textView = [[UITextView alloc] initWithFrame:CGRectMake(_alpLabel.frame.origin.x-2, 5, self.frame.size.width-50-88+2, 40)];
+//    _textView.layer.cornerRadius = 15;
+//    _textView.layer.borderWidth = 1;
     _textView.delegate = self;
     _textView.font = [UIFont systemFontOfSize:13];
     _textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _textView.autocorrectionType = UITextAutocorrectionTypeNo;
-    _textView.layer.borderColor = lineView.backgroundColor.CGColor;
+//    _textView.layer.borderColor = lineView.backgroundColor.CGColor;
+    _textView.backgroundColor = [UIColor clearColor];
     [_bottomView addSubview:_textView];
+    
     
     _textApl = [[UILabel alloc] init];
     _textApl.frame = CGRectMake(CGRectGetMaxX(_textView.frame)-37, 35, 30, 6);
@@ -108,6 +131,11 @@
     _textView.font = font;
 }
 
+- (void)cleanTextInfo {
+    _textView.text = @"";
+    _alpLabel.hidden = NO;
+}
+
 #pragma mark - 事件监听
 
 - (void)pinglun {
@@ -123,6 +151,13 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
+    NSString *textContent = textView.text;
+    if (STR_IS_NIL(textContent)) {
+        _alpLabel.hidden = NO;
+    } else {
+        _alpLabel.hidden = YES;
+    }
+    
     if (_showLimitNum) {
         NSString *toBeString = textView.text;
         NSArray *currentar = [UITextInputMode activeInputModes];
@@ -161,8 +196,7 @@
 
 #pragma mark - 键盘监听
 
-- (void)keyboardWillShow:(NSNotification *)notification
-{
+- (void)keyboardWillShow:(NSNotification *)notification {
     //得到键盘高度
     NSDictionary *userInfo = [notification userInfo];
     NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
@@ -170,12 +204,18 @@
     // - 49
     self.frame = CGRectMake(0, _rect.origin.y - keyboardRect.size.height, CGRectGetWidth(_bottomView.frame), CGRectGetHeight(_bottomView.frame));
 
+    if ([self.delegate respondsToSelector:@selector(showKeyBoard)]) {
+        [self.delegate showKeyBoard];
+    }
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
+- (void)keyboardWillHide:(NSNotification *)notification {
+    if ([self.delegate respondsToSelector:@selector(hiddenKeyBoard)]) {
+        [self.delegate hiddenKeyBoard];
+    }
     //-49
     self.frame = _rect;
+    
 }
 
 @end

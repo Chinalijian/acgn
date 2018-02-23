@@ -31,6 +31,9 @@
  *  原始frame数组
  */
 @property (nonatomic,strong) NSMutableArray *originRects;
+
+@property (nonatomic,strong) UILabel *countImageLabel;
+
 @end
 
 @implementation JLPhotoBrowser
@@ -114,6 +117,13 @@
     
     //4.创建子视图
     [self setupSmallScrollViews];
+    
+    self.countImageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, DMScreenWidth, 32)];
+    self.countImageLabel.textColor = [UIColor whiteColor];
+    self.countImageLabel.font = [UIFont systemFontOfSize:14];
+    self.countImageLabel.textAlignment = NSTextAlignmentCenter;
+    self.countImageLabel.text = [NSString stringWithFormat:@"%d/%lu", self.currentIndex+1, (unsigned long)self.photos.count];
+    [self addSubview:_countImageLabel];
     
 }
 
@@ -316,6 +326,13 @@
 }
 
 #pragma mark UIScrollViewDelegate
+
+//滚动过程中获取当前索引
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    int index = ([scrollView contentOffset].x+scrollView.frame.size.width/2)/scrollView.frame.size.width;
+    NSLog(@"当前索引 = %d", index);
+    self.countImageLabel.text = [NSString stringWithFormat:@"%d/%lu", index+1, (unsigned long)self.photos.count];
+}
 
 //告诉scrollview要缩放的是哪个子控件
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView

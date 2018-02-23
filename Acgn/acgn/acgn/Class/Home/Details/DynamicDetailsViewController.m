@@ -20,6 +20,10 @@
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) SendMsgInputTextView *inputView;
 
+@property (nonatomic, strong) EmptyView *emptyView;
+
+@property (nonatomic, strong) UIView *hiddenInputView;
+
 @end
 
 @implementation DynamicDetailsViewController
@@ -33,6 +37,7 @@
     self.commitArray = [NSMutableArray array];
     [self.view addSubview:self.contentListView];
     //[self.view addSubview:self.bottomView];
+    [self.view addSubview:self.hiddenInputView];
     [self.view addSubview:self.inputView];
     [self addRefreshLoadMore:self.contentListView.aTableView];
 }
@@ -204,6 +209,7 @@
     WS(weakSelf);
     [AApiModel addCommentForUser:resultData block:^(BOOL result) {
         if (result) {
+            [weakSelf.inputView cleanTextInfo];
             [weakSelf refresh];
         }
     }];
@@ -256,6 +262,28 @@
     return _inputView;
 }
 
+- (UIView *)hiddenInputView {
+    if (_hiddenInputView == nil) {
+        _hiddenInputView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DMScreenWidth, DMScreenHeight)];
+        _hiddenInputView.userInteractionEnabled = YES;
+        _hiddenInputView.hidden = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenInputViewTap:)];
+        [_hiddenInputView addGestureRecognizer:tap];
+    }
+    return _hiddenInputView;
+}
+
+-(void)hiddenInputViewTap:(UITapGestureRecognizer *)tap {
+    [self.view endEditing:YES];
+}
+
+- (void)showKeyBoard {
+    _hiddenInputView.hidden = NO;
+}
+
+- (void)hiddenKeyBoard {
+    _hiddenInputView.hidden = YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

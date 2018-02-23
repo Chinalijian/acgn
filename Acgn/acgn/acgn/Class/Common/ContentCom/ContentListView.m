@@ -9,6 +9,7 @@
 #import "ContentListView.h"
 #import "ContentListCell.h"
 #import "ContentCom.h"
+#import "DynamicEmptyCell.h"
 @interface ContentListView() <UITableViewDelegate,
 UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
 
@@ -138,6 +139,9 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
         CGFloat H = [self getCellMaxHeight:indexPath];
         return H;
     }
+    if (self.ccType == ContentCom_Type_All) {
+        return 250;
+    }
     return 0;
 }
 
@@ -151,6 +155,10 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
         if (!OBJ_IS_NIL(data)) {
             if (data.commentList.count > 0) {
                 return data.commentList.count;
+            } else {
+                if (self.ccType == ContentCom_Type_All) {
+                    return 1;//为了显示空白提示页
+                }
             }
         }
     }
@@ -158,6 +166,7 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *cListCell = @"ContentListCell";
     ContentListCell *cell = [tableView dequeueReusableCellWithIdentifier:cListCell];
     if (!cell) {
@@ -171,6 +180,15 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
             if (data.commentList.count > 0) {
                 DynamicCommentListData *dynamicObj = [data.commentList objectAtIndex:indexPath.row];
                 [cell configDynamicObj:dynamicObj];
+            } else {
+                if (self.ccType == ContentCom_Type_All) {
+                    static NSString *emptyListCell = @"DynamicEmptyCell";
+                    DynamicEmptyCell *cellempty = [tableView dequeueReusableCellWithIdentifier:emptyListCell];
+                    if (!cellempty) {
+                        cellempty = [[DynamicEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:emptyListCell];
+                    }
+                    return cellempty;
+                }
             }
         }
     }
@@ -249,7 +267,9 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
         //_aTableView.scrollEnabled = NO;
         _aTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _aTableView.backgroundColor = [UIColor whiteColor];//UIColorFromRGB(0xf6f6f6);
-
+        self.aTableView.estimatedRowHeight = 0;
+        self.aTableView.estimatedSectionHeaderHeight = 0;
+        self.aTableView.estimatedSectionFooterHeight = 0;
         UIView *fV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _aTableView.frame.size.width, 35)];
         fV.backgroundColor = [UIColor whiteColor];
         _aTableView.tableFooterView = fV;

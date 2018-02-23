@@ -84,8 +84,17 @@
     if (!OBJ_IS_NIL(obj)) {
         self.roleData = obj;
         NSArray *array = [obj.postTime componentsSeparatedByString:@" "];
-        self.bigTimeLabel.text = [array firstObject];
-        self.smallTimeLabel.text = [array lastObject];
+        if (array.count == 1) {
+            self.bigTimeLabel.text = [array firstObject];
+            self.smallTimeLabel.text = @"";
+        } else if (array.count == 2) {
+            self.bigTimeLabel.text = [array firstObject];
+            self.smallTimeLabel.text = [array lastObject];
+        } else {
+            self.bigTimeLabel.text = @"";
+            self.smallTimeLabel.text = @"";
+        }
+        
         self.contentLabel.text = obj.postContext;
         
         switch (obj.postType.integerValue) {

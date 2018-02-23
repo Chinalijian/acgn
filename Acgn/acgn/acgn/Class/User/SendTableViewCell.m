@@ -146,13 +146,13 @@
     
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_left).offset(Left_Space_X);
-        make.top.mas_equalTo(_secondView1.mas_bottom).offset(1);
+        make.top.mas_equalTo(_secondView1.mas_bottom).offset(0);
         make.width.mas_offset(DMScreenWidth/3+30);
-        make.height.mas_offset(Bottom_Area_H/2);
+        make.height.mas_offset(Bottom_Area_H/2-5);
     }];
     [self.praiseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.mas_right).offset(-Left_Space_X);
-        make.top.mas_equalTo(_secondView1.mas_bottom).offset(0);
+        make.top.mas_equalTo(_secondView1.mas_bottom).offset(-3);
         make.width.mas_offset(Bottom_Area_H);
         make.height.mas_offset(22);
     }];

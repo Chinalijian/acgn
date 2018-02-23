@@ -202,7 +202,7 @@
         if (i%3 == 0) {
             XX = _sSpace;
         } else {
-            XX = _sSpace*i+_sSpace+_sWidth*i;
+            XX = _sSpace*(i%3)+_sSpace+_sWidth*(i%3);
         }
         if (i/3 == 0) {
             YY = _sSpace;

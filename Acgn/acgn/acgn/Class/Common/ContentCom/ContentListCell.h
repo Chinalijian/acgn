@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define Content_List_Cell_H 90 //cell的默认高度
+#define Content_List_Cell_H 80//90 //cell的默认高度
 #define Top_Space_Y     13.5    //距离上部的间距
 #define Left_Space_X    16      //距离左边的间距
 #define Head_Image_WH   33      //头像的宽高

@@ -60,7 +60,10 @@
 + (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj contentType:(ContentCom_Type)type {
     NSLog(@"dd = %f",(Content_Label_Widht)*(0.64)+10);
     CGFloat totalHeight = 0;
-    CGFloat imageH = [ContentCom getImageMaxHeight:obj];
+    CGFloat imageH = 0;
+    if (obj.postType.integerValue != Info_Type_Text) {
+        imageH = [ContentCom getImageMaxHeight:obj];
+    }
     CGFloat contentH = [ContentCom getContentMaxHeight:obj];
     CGFloat contentTotalH = Content_Label_Space_Y;
     if (contentH > 0) {
@@ -214,15 +217,17 @@
             make.height.mas_offset(contentH+10);
         }];
     }
-
-    CGFloat imageH = [ContentCom getImageMaxHeight:obj];
-    [_imageComView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(Image_Space);
-        make.height.mas_offset(imageH);
-    }];
-    
-    [self.imageComView configImageCom:obj.postUrls height:imageH];
-    
+    CGFloat imageH = 0;
+    if (obj.postType.integerValue != Info_Type_Text) {
+        imageH = [ContentCom getImageMaxHeight:obj];
+        [_imageComView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(Image_Space);
+            make.height.mas_offset(imageH);
+        }];
+        
+        [self.imageComView configImageCom:obj.postUrls height:imageH];
+    }
+   
     //[self layoutSubviews];
 }
 

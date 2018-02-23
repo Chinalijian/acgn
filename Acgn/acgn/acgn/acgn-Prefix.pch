@@ -19,7 +19,7 @@
 #import <SDWebImageManager.h>
 #import "UIImageView+WebCache.h"
 #import "SVProgressHUD.h"
-
+#import "DMAlertMananger.h"
 #import "PraiseDataModel.h"
 
 #import "ATools.h"
