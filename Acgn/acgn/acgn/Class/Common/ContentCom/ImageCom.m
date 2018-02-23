@@ -75,6 +75,7 @@
     if (imageCount > 0) {
         if (imageCount == 1) {
             self.bigImageView.frame = CGRectMake(0, 0, self.bigImageView.frame.size.width, height);
+            //self.bigImageView.backgroundColor = [UIColor redColor];
             self.smallImageView.hidden = YES;
             self.bigImageView.hidden = NO;
             NSString *url = [array firstObject];
@@ -82,7 +83,7 @@
             //[self.bigImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@""]];
             [self displaySourceImage:imageUrl];
             
-            [self.imageViews addObject:self.bigImageView];
+//            [self.imageViews addObject:self.bigImageView];
             self.bigImageView.userInteractionEnabled = YES;
             //2.添加手势
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap:)];
@@ -121,17 +122,48 @@
                 __typeof(&*weakImageView) strongImageView = weakImageView;
                 if (strongImageView) {
                     if (image != nil) {
-                        if (image.size.width >= image.size.height) {
-                            //横着的长方形或者正方形
-                            CGFloat viewH = (image.size.height)/(image.size.width)*(weakSelf.bWidth);
-                            strongImageView.frame = CGRectMake(0, 0, weakSelf.bWidth, viewH);
-                        } else {
-                            //竖着的长方形
-                            CGFloat viewW = (image.size.width)/(image.size.height)*(weakSelf.bHeight);
-                            strongImageView.frame = CGRectMake(0, 0, viewW, weakSelf.bHeight);
+////                        if (image.size.width >= weakSelf.bWidth && image.size.height >= weakSelf.bHeight) {
+////                            strongImageView.frame = CGRectMake(0, 0, weakSelf.bWidth, weakSelf.bHeight);
+////                        } else
+//                        if (image.size.width >= image.size.height) {
+//                            //横着的长方形或者正方形
+//                            CGFloat viewH = (image.size.height)/(image.size.width)*(weakSelf.bWidth);
+//                            strongImageView.frame = CGRectMake(0, 0, weakSelf.bWidth, viewH);
+//                        } else {
+//                            //竖着的长方形
+//                            CGFloat viewW = (image.size.width)/(image.size.height)*(weakSelf.bHeight);
+//                            strongImageView.frame = CGRectMake(0, 0, viewW, weakSelf.bHeight);
+//                        }
+//                        NSLog(@"dddd = %f", strongImageView.frame.size.height);
+                        //得到当前视图的frame
+    
+                        //得到当前Image的frame
+                        CGSize imageSize = image.size;
+                        //得到当前ImageView 的frame
+                        CGRect imageVRect = strongImageView.frame;
+                        //image的宽度大于当前视图的宽度
+                        if(imageSize.width > weakSelf.bWidth)
+                        {
+                            //根据宽度计算高度，确定宽度
+                            imageVRect.size.height = weakSelf.bWidth * imageSize.height / imageSize.width;
+                            imageVRect.size.width = weakSelf.bWidth;
                         }
-                        NSLog(@"dddd = %f", strongImageView.frame.size.height);
+                        //image的高度大于当前视图的高度
+                        if(imageVRect.size.height > weakSelf.bHeight)
+                        {
+                            
+                            //根据高度计算宽度，确定宽度
+                            imageVRect.size.width = weakSelf.bHeight * imageVRect.size.width / imageVRect.size.height;
+                            imageVRect.size.height = weakSelf.bHeight;
+                        }
+                        
+                        //计算x，y
+                        imageVRect.origin.x = 0;//(weakSelf.bWidth-imageVRect.size.width)/2;
+                        imageVRect.origin.y = 0;//(weakSelf.bHeight-imageVRect.size.height)/2;
+                        strongImageView.frame = imageVRect;
+                    
                         strongImageView.image = image;
+                        [weakSelf.imageViews addObject:strongImageView];
                         [strongImageView setNeedsLayout];
                     }
                     

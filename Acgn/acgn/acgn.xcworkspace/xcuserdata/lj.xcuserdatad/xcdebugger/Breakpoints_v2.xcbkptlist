@@ -20,12 +20,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "acgn/Network/ApiModel/AApiModel.m"
-            timestampString = "540748465.9415441"
+            timestampString = "541058406.8186589"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "536"
-            endingLineNumber = "536"
-            landmarkName = "+loginWeiXin:block:"
+            startingLineNumber = "537"
+            endingLineNumber = "537"
+            landmarkName = "+loginQQ:block:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[AApiModel loginQQ:block:]"
+                  moduleName = "acgn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lj/Ares/Project/acgn/Acgn/acgn/acgn/Network/ApiModel/AApiModel.m"
+                  timestampString = "541058406.915043"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "537"
+                  endingLineNumber = "537"
+                  offsetFromSymbolStart = "320">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__27+[AApiModel loginQQ:block:]_block_invoke"
+                  moduleName = "acgn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lj/Ares/Project/acgn/Acgn/acgn/acgn/Network/ApiModel/AApiModel.m"
+                  timestampString = "541058406.9174269"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "538"
+                  endingLineNumber = "538"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "acgn/Class/Home/AttentViewController.m"
+            timestampString = "541058406.818729"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "-getRoleListData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

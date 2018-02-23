@@ -57,7 +57,8 @@
     self.attentListDatas = [NSMutableArray array];
     self.lastID = @"-1";
     [self.view addSubview:self.contentListView];
-    if (STR_IS_NIL([AccountInfo getUserID])) {
+    NSString *hasCollection = [AccountInfo getHasFollowStatus];
+    if (STR_IS_NIL([AccountInfo getUserID]) || hasCollection.integerValue <= 0) {
         self.roleListDatas = [NSMutableArray array];
         self.noFollowIDs = [NSMutableArray array];//不关注的roleID列表
         self.lastPeopleID = @"-1";
@@ -88,13 +89,15 @@
 
 - (void)refresh {
     if (!STR_IS_NIL([AccountInfo getUserID])) {
-        self.lastID = @"-1";
-        [self attentDynamicList];
-        return;
+        NSString *hasCollection = [AccountInfo getHasFollowStatus];
+        if (hasCollection.intValue > 0) {
+            self.lastID = @"-1";
+            [self attentDynamicList];
+            return;
+        }
     }
     self.lastPeopleID = @"-1";
     [self getRoleListData];
-    
 }
 
 - (void)loadMore {
