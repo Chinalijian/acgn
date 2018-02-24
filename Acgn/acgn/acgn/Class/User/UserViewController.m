@@ -83,17 +83,35 @@
 - (void)goToPage:(AAccountType)type {
     switch (type) {
         case AAccountType_Msg: {
+            if (STR_IS_NIL([AccountInfo getUserID])) {
+                LoginViewController *loginVC = [[LoginViewController alloc] init];
+                [self.navigationController pushViewController:loginVC animated:YES];
+                return;
+            }
+            
             self.userView.hasNoMsg = NO;
             MyMsgViewController *myMsgVC = [[MyMsgViewController alloc] init];
             [self.navigationController pushViewController:myMsgVC animated:YES];
             break;
         }
         case AAccountType_Fav: {
+            if (STR_IS_NIL([AccountInfo getUserID])) {
+                LoginViewController *loginVC = [[LoginViewController alloc] init];
+                [self.navigationController pushViewController:loginVC animated:YES];
+                return;
+            }
+            
             MyFavViewController *myFavVC = [[MyFavViewController alloc] init];
             [self.navigationController pushViewController:myFavVC animated:YES];
             break;
         }
         case AAccountType_ChangePsd: {
+            if (STR_IS_NIL([AccountInfo getUserID])) {
+                LoginViewController *loginVC = [[LoginViewController alloc] init];
+                [self.navigationController pushViewController:loginVC animated:YES];
+                return;
+            }
+            
             NSString *phoneNumber = [AccountInfo getUserPhone];
             if (STR_IS_NIL(phoneNumber)) {
                 RegisterViewController *bindPhoneVC = [[RegisterViewController alloc] init];

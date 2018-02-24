@@ -138,9 +138,9 @@
         make.top.left.right.mas_equalTo(self).mas_offset(0);
         make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-BottomView_BottomToView);
     }];
-    
+    CGFloat YY = Name_Space_Y+[ATools getNavViewFrameHeightForIPhone];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self).mas_offset(Name_Space_Y);
+        make.top.mas_equalTo(self).mas_offset(YY);
         make.height.mas_offset(Name_Label_H);
         make.left.mas_equalTo(self).mas_offset(Space_Left_X);
         make.width.mas_offset(Introduce_Label_Width);

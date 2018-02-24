@@ -19,7 +19,7 @@
 
 @property (nonatomic, strong) NSString *lastID;
 @property (nonatomic, strong) NSMutableArray *attentListDatas;
-
+@property (nonatomic, assign) BOOL isNotificationGetDynamicData;
 @end
 
 @implementation AttentViewController
@@ -28,6 +28,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateUserInfo:)
                                                  name:DMNotification_Login_Success_Key
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateDynamicList:)
+                                                 name:DMNotification_Follw_Success_Key
                                                object:nil];
 }
 
@@ -49,19 +53,31 @@
         [self getRoleListData];
     }
 }
+- (void)updateDynamicList:(NSNotification *)notification {
+    _isNotificationGetDynamicData = YES;
+    [self getAttentListData];
+}
+
+- (void)getAttentListData {
+    if (self.isNotificationGetDynamicData) {
+        self.isNotificationGetDynamicData = NO;
+        [self removePeopleListView];
+        [self addRefreshLoadMore:self.contentListView.aTableView];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    self.roleListDatas = [NSMutableArray array];
+    self.noFollowIDs = [NSMutableArray array];//不关注的roleID列表
+    self.lastPeopleID = @"-1";
     self.attentListDatas = [NSMutableArray array];
     self.lastID = @"-1";
     [self.view addSubview:self.contentListView];
     NSString *hasCollection = [AccountInfo getHasFollowStatus];
     if (STR_IS_NIL([AccountInfo getUserID]) || hasCollection.integerValue <= 0) {
-        self.roleListDatas = [NSMutableArray array];
-        self.noFollowIDs = [NSMutableArray array];//不关注的roleID列表
-        self.lastPeopleID = @"-1";
         [self.view addSubview:self.apListView];
         [self addRefreshLoadMore:self.apListView.aTableView];
     } else {
@@ -74,6 +90,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+//    NSString *hasCollection = [AccountInfo getHasFollowStatus];
+//    if (STR_IS_NIL([AccountInfo getUserID]) || hasCollection.integerValue <= 0) {
+//        //显示关注人物列表
+//    } else {
+//
+//    }
 }
 
 - (void)addRefreshLoadMore:(UITableView *)tableView {
@@ -101,7 +123,6 @@
 }
 
 - (void)loadMore {
-    
     if (!STR_IS_NIL([AccountInfo getUserID])) {
         [self attentDynamicList];
         return;
@@ -144,8 +165,8 @@
     [AApiModel addFollowForUser:arrayRoleIDs block:^(BOOL result) {
         if (result) {
             //[weakSelf attentDynamicList];
-            [weakSelf removePeopleListView];
-            [weakSelf addRefreshLoadMore:weakSelf.contentListView.aTableView];
+            [weakSelf getAttentListData];
+            
         } else { }
     }];
 }
@@ -174,15 +195,26 @@
             }
             if (!OBJ_IS_NIL(array) && array.count > 0) {
                 [weakSelf.attentListDatas addObjectsFromArray:array];
+                [weakSelf updataAttentList:weakSelf.attentListDatas];
+                DynamicListData *model = [array lastObject];
+                weakSelf.lastID = model.postId;
+                [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
+            } else {
+                [weakSelf.contentListView.aTableView reloadData];
+                [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
+                //goto 关注人物列表页
+                [weakSelf performSelector:@selector(delayMethodShowPeopleView) withObject:nil afterDelay:1.0];
             }
-            [weakSelf updataAttentList:weakSelf.attentListDatas];
-            DynamicListData *model = [array lastObject];
-            weakSelf.lastID = model.postId;
+            
         } else {
-               // [weakSelf.contentListView.aTableView.mj_footer endRefreshingWithNoMoreData];
+            [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
         }
-        [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
+        
     }];
+}
+
+- (void)delayMethodShowPeopleView {
+    [self showPeopleListView];
 }
 
 - (void)clickAttentButton:(id)sender {
@@ -285,7 +317,20 @@
         self.apListView.hidden = YES;
         [self.apListView removeFromSuperview];
         self.apListView = nil;
+        [self.roleListDatas removeAllObjects];
     }
+}
+
+- (void)showPeopleListView {
+    [AccountInfo saveUserHasFollow:@"0"];
+    [self removePeopleListView];
+    [self.view addSubview:self.apListView];
+    self.apListView.hidden = NO;
+//    self.contentListView.hidden = YES;
+    [self addRefreshLoadMore:self.apListView.aTableView];
+    
+    [self.attentListDatas removeAllObjects];
+    self.lastID = @"-1";
 }
 
 -(AttentionPeopleList *)apListView{

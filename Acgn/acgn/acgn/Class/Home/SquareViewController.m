@@ -86,6 +86,11 @@
 
 - (void)clickPraiseUser:(id)sender {
     WS(weakSelf);
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        return;
+    }
     DynamicCommentListData *data = (DynamicCommentListData *)sender;
     if (data.localPraise) {
         [AApiModel delPraiseForUser:data.postId commentId:data.commentId block:^(BOOL result, NSString *praiseNum) {
@@ -108,6 +113,11 @@
 
 - (void)clickPraiseFabulous:(id)sender  view:(id)viewSelf {
     //WS(weakSelf);
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        return;
+    }
     DynamicListData *data = (DynamicListData *)sender;
     ContentCom *cc = (ContentCom *)viewSelf;
     if (data.localPraise) {
@@ -132,6 +142,11 @@
 }
 
 - (void)clickFavUser:(id)sender view:(id)viewSelf {
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        return;
+    }
     DynamicListData *obj = (DynamicListData *)sender;
     ContentCom *cc = (ContentCom *)viewSelf;
     if (obj.hasCollection.intValue == 0) {
@@ -152,6 +167,11 @@
 }
 
 - (void)clickAttForUser:(id)sender view:(id)viewSelf {
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        return;
+    }
     DynamicListData *obj = (DynamicListData *)sender;
     ContentCom *cc = (ContentCom *)viewSelf;
     [AApiModel addFollowForUser:[NSMutableArray arrayWithObject:[NSNumber numberWithInt:obj.roleId.intValue]] block:^(BOOL result) {

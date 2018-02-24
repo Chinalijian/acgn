@@ -120,6 +120,13 @@
     return B;
 }
 
++ (CGFloat)getNavViewFrameHeightForIPhone {
+    if (IS_IPHONE_X) {
+        return 88;
+    }
+    return 64;
+}
+
 //获取Label的高度和宽度，根据文字
 + (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont*)font {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];

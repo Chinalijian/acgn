@@ -23,11 +23,11 @@
 @property (nonatomic, strong) EmptyView *emptyView;
 
 @property (nonatomic, strong) UIView *hiddenInputView;
-
+@property (nonatomic, strong) UIView *tempNavBar;
 @end
 
 @implementation DynamicDetailsViewController
-
+#define  NAV_H [ATools getNavViewFrameHeightForIPhone]
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -40,13 +40,27 @@
     [self.view addSubview:self.hiddenInputView];
     [self.view addSubview:self.inputView];
     [self addRefreshLoadMore:self.contentListView.aTableView];
+    [self.view addSubview:self.tempNavBar];
+    self.tempNavBar.alpha = 0;
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    [self setNavigationBarTransparence:YES titleColor:[UIColor blackColor]];
+}
+
 
 - (void)loadData {
     [self getPostDetailsData];
 }
 
 - (void)clickPraiseUser:(id)sender {
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        return;
+    }
+    
     WS(weakSelf);
     DynamicCommentListData *data = (DynamicCommentListData *)sender;
     if (data.localPraise) {
@@ -69,6 +83,12 @@
 }
 
 - (void)clickPraiseFabulous:(id)sender  view:(id)viewSelf {
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        return;
+    }
+    
     //WS(weakSelf);
     DynamicListData *data = (DynamicListData *)sender;
     ContentCom *cc = (ContentCom *)viewSelf;
@@ -94,6 +114,12 @@
 }
 
 - (void)clickFavUser:(id)sender view:(id)viewSelf {
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        return;
+    }
+    
     DynamicListData *obj = (DynamicListData *)sender;
     ContentCom *cc = (ContentCom *)viewSelf;
     if (obj.hasCollection.intValue == 0) {
@@ -114,6 +140,12 @@
 }
 
 - (void)clickAttForUser:(id)sender view:(id)viewSelf {
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        return;
+    }
+    
     DynamicListData *obj = (DynamicListData *)sender;
     ContentCom *cc = (ContentCom *)viewSelf;
     [AApiModel addFollowForUser:[NSMutableArray arrayWithObject:[NSNumber numberWithInt:obj.roleId.intValue]] block:^(BOOL result) {
@@ -225,6 +257,17 @@
     [self.contentListView updateList:array];
 }
 
+- (void)tempNavigationBarShowHidden:(UIScrollView *)scrollView {
+    CGFloat offsetY = scrollView.contentOffset.y;
+    if (offsetY >= 0) {
+        CGFloat alpha = MIN(1, 1-(120-offsetY)/(120));//计算透明度
+        self.tempNavBar.alpha = alpha;
+    } else {
+        self.tempNavBar.alpha = 0;
+    }
+}
+
+
 - (ContentListView *)contentListView {
     if (_contentListView == nil) {
         _contentListView = [[ContentListView alloc] initWithFrame:
@@ -252,7 +295,7 @@
         if (IS_IPHONE_X) {
             HX = 35;
         }
-        _inputView = [[SendMsgInputTextView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-55-HX, DMScreenWidth, 65)];
+        _inputView = [[SendMsgInputTextView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-55-HX+NAV_H, DMScreenWidth, 65)];
         _inputView.bgColor = UIColorFromRGB(0xF2F2F2);
         _inputView.showLimitNum = NO;
         _inputView.font = [UIFont systemFontOfSize:18];
@@ -260,6 +303,17 @@
         _inputView.delegate = self;
     }
     return _inputView;
+}
+
+- (UIView *)tempNavBar {
+    if (!_tempNavBar) {
+        _tempNavBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DMScreenWidth, NAV_H)];
+        _tempNavBar.backgroundColor = [UIColor whiteColor];
+        UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, NAV_H-0.5, _tempNavBar.frame.size.width, 0.5)];
+        lineLabel.backgroundColor = UIColorFromRGB(0x939393);
+        [_tempNavBar addSubview:lineLabel];
+    }
+    return _tempNavBar;
 }
 
 - (UIView *)hiddenInputView {

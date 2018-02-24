@@ -21,6 +21,7 @@
 + (CGFloat)setViewFrameYForIPhoneX:(CGFloat)y;
 + (CGFloat)setViewFrameBottomForIPhoneX:(CGFloat)b;
 + (CGFloat)setViewFrameHeightToBottomForIPhoneX:(CGFloat)b;
++ (CGFloat)getNavViewFrameHeightForIPhone;
 //获取Label的高度，根据文字
 + (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont*)font;
 //获取Label的高度和宽度，根据文字---包含行间距

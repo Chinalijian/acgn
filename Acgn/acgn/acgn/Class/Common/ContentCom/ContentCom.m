@@ -54,12 +54,14 @@
 #define Small_Image_W_H 63
 #define Small_Image_Space 4
 
+#define Temp_Nav_H [ATools getNavViewFrameHeightForIPhone]
 
 #define BottomView_H 34
 
 + (CGFloat)getContentCommonCellHeight:(DynamicListData *)obj contentType:(ContentCom_Type)type {
     NSLog(@"dd = %f",(Content_Label_Widht)*(0.64)+10);
     CGFloat totalHeight = 0;
+    CGFloat tempNavHeight = Temp_Nav_H;
     CGFloat imageH = 0;
     if (obj.postType.integerValue != Info_Type_Text) {
         imageH = [ContentCom getImageMaxHeight:obj];
@@ -80,6 +82,9 @@
     
     if (totalHeight <= PeopleImage_Height) {
         totalHeight = totalHeight + (PeopleImage_Height-totalHeight) + 20;
+    }
+    if (type == ContentCom_Type_All) {
+        totalHeight = totalHeight + tempNavHeight;
     }
     return totalHeight;
 }
@@ -290,9 +295,12 @@
 }
 
 - (void)setupTopContentLayout {
-
+    CGFloat YY = Space_Y;
+    if (self.ccType == ContentCom_Type_All) {
+        YY = YY + Temp_Nav_H;
+    }
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView).mas_offset(Space_Y);
+        make.top.mas_equalTo(self.contentView).mas_offset(YY);
         make.centerX.mas_equalTo(self.contentView);
         make.height.mas_offset(Name_Label_H);
         make.left.mas_equalTo(self.contentView).mas_offset(Space_Left_X);

@@ -253,12 +253,20 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
             break;
     }
 }
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.ccType == ContentCom_Type_All) {
+        if ([self.delegate respondsToSelector:@selector(tempNavigationBarShowHidden:)]) {
+            [self.delegate tempNavigationBarShowHidden:scrollView];
+        }
+    }
+}
 
+#pragma mark - 初始化UIKIT
 - (void)loadUI {
     [self addSubview:self.aTableView];
 }
 
-#pragma mark - 初始化UIKIT
 - (UITableView *)aTableView {
     if (!_aTableView) {
         _aTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStyleGrouped];
@@ -273,6 +281,9 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
         UIView *fV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _aTableView.frame.size.width, 35)];
         fV.backgroundColor = [UIColor whiteColor];
         _aTableView.tableFooterView = fV;
+        if (@available(iOS 11.0, *)) {
+            _aTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
     }
     return _aTableView;
 }

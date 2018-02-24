@@ -13,6 +13,8 @@
 //登录成功的通知
 #define DMNotification_Login_Success_Key @"Login_Success_Key"
 
+#define DMNotification_Follw_Success_Key @"Follow_Success_Key"
+
 #pragma mark - Font
 
 #define DMFontPingFang_Light(fontSize) [UIFont fontWithName:@"PingFangSC-Light" size:fontSize]//细体

@@ -15,21 +15,29 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, strong) RoleDetailsDataModel *detailData;
 @property (nonatomic, strong) NSString *lastID;
+@property (nonatomic, strong) UIView *tempNavBar;
 @end
 
 @implementation PeopleDetailsViewController
-
+#define  NAV_H [ATools getNavViewFrameHeightForIPhone]
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"个人详情";
     self.lastID = @"-2";
+    self.view.backgroundColor =[UIColor redColor];
     self.datas = [NSMutableArray array];
     self.detailData = [[RoleDetailsDataModel alloc] init];
     [self.view addSubview:self.pTableView];
     
     [self addRefreshLoadMore:self.pTableView];
-    
+    [self.view addSubview:self.tempNavBar];
+    self.tempNavBar.alpha = 0;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    [self setNavigationBarTransparence:YES titleColor:[UIColor blackColor]];
 }
 
 - (void)addRefreshLoadMore:(UITableView *)tableView {
@@ -62,7 +70,7 @@
         if (result) {
             weakSelf.detailData = obj;
             CGFloat headerHeight = [PeopleDetailHeader getViewTotalHeight:obj];
-            weakSelf.headerView.frame = CGRectMake(0, 0, weakSelf.pTableView.frame.size.width, headerHeight);
+            weakSelf.headerView.frame = CGRectMake(0, 0, weakSelf.pTableView.frame.size.width, headerHeight+NAV_H);
             weakSelf.pTableView.tableHeaderView = weakSelf.headerView;
             [weakSelf.headerView configInfo:obj];
             
@@ -89,6 +97,13 @@
 }
 
 - (void)clickClickAttBtn:(id)sender {
+    
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        return;
+    }
+    
     WS(weakSelf);
     __block RoleDetailsDataModel *data = (RoleDetailsDataModel *)sender;
     
@@ -111,6 +126,12 @@
 }
 
 - (void)userClickFabulousPraise:(id)sender {
+    if (STR_IS_NIL([AccountInfo getUserID])) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        return;
+    }
+    
     WS(weakSelf);
     DynamicListData *data = (DynamicListData *)sender;
     if (data.localPraise) {
@@ -178,15 +199,34 @@
     
     return cell;
 }
+
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offsetY = scrollView.contentOffset.y;
+    if (offsetY >= 0) {
+        CGFloat alpha = MIN(1, 1-(120-offsetY)/(120));//计算透明度
+        self.tempNavBar.alpha = alpha;
+    } else {
+        self.tempNavBar.alpha = 0;
+    }
+}
+
+
 #pragma mark - 初始化UIKIT
 - (UITableView *)pTableView {
     if (!_pTableView) {
-        _pTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, DMScreenHeight-DMNavigationBarHeight) style:UITableViewStylePlain];
+        _pTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, DMScreenHeight) style:UITableViewStylePlain];
         _pTableView.delegate = self;
         _pTableView.dataSource = self;
         _pTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _pTableView.backgroundColor = [UIColor whiteColor];//UIColorFromRGB(0xf6f6f6);
         //_pTableView.tableHeaderView = self.headerView;
+        if (@available(iOS 11.0, *)) {
+            _pTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+        self.pTableView.estimatedRowHeight = 0;
+        self.pTableView.estimatedSectionHeaderHeight = 0;
+        self.pTableView.estimatedSectionFooterHeight = 0;
     }
     return _pTableView;
 }
@@ -195,10 +235,21 @@
 - (PeopleDetailHeader *)headerView {
     if (!_headerView) {
         _headerView = [[PeopleDetailHeader alloc] init];
-        _headerView.backgroundColor = [UIColor whiteColor];
+        _headerView.backgroundColor = [UIColor redColor];
         _headerView.delegate = self;
     }
     return _headerView;
+}
+
+- (UIView *)tempNavBar {
+    if (!_tempNavBar) {
+        _tempNavBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DMScreenWidth, [ATools getNavViewFrameHeightForIPhone])];
+        _tempNavBar.backgroundColor = [UIColor whiteColor];
+        UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _tempNavBar.frame.size.height-0.5, _tempNavBar.frame.size.width, 0.5)];
+        lineLabel.backgroundColor = UIColorFromRGB(0x939393);
+        [_tempNavBar addSubview:lineLabel];
+    }
+    return _tempNavBar;
 }
 
 - (void)didReceiveMemoryWarning {

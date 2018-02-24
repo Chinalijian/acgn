@@ -17,6 +17,7 @@
 - (void)clickPraiseFabulous:(id)sender view:(id)viewSelf;
 - (void)clickFavUser:(id)sender view:(id)viewSelf;
 - (void)clickAttForUser:(id)sender view:(id)viewSelf;
+- (void)tempNavigationBarShowHidden:(UIScrollView *)scrollView;
 @end
 
 @interface ContentListView : UIView

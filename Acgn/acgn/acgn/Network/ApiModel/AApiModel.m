@@ -391,6 +391,10 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:roleIDs, @"roleId", userIDNumber, @"uid", nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_Add_Follow_Url parameters:dic method:DMHttpRequestPost dataModelClass:[PraiseDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
+            NSString *userFollowStatus = [AccountInfo getHasFollowStatus];
+            if (userFollowStatus.integerValue != 1) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:DMNotification_Follw_Success_Key object:nil userInfo:nil];
+            }
             [AccountInfo saveUserHasFollow:@"1"];
             block(YES);
         } else {
