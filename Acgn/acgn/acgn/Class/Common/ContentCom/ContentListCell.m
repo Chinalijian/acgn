@@ -162,7 +162,7 @@
                     break;
                 }
             }
-            commitSecond = commitListH;
+            commitSecond = commitListH+5;
         }
         return commitSecond;
     }

@@ -24,11 +24,44 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"吐槽详情";
+    [self setNavigationBarTransparence:NO
+                            titleColor:[UIColor blackColor]];
     self.datas = [NSMutableArray array];
     [self loadUI];
     [self addRefreshLoadMore:self.mTableView];
+
+    [[ NSNotificationCenter defaultCenter ] addObserver : self selector : @selector (statusBarFrameWillChange:) name : UIApplicationWillChangeStatusBarFrameNotification object : nil ];
+    
+    [[ NSNotificationCenter defaultCenter ] addObserver : self selector : @selector (layoutControllerSubViews:) name : UIApplicationDidChangeStatusBarFrameNotification object : nil ];
+    
+}
+- (void)layoutControllerSubViews:(NSNotification*)notification {
+    [self changeInputFrame];
+}
+- (void)statusBarFrameWillChange:(NSNotification*)notification {
+    [self changeInputFrame];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    [self changeInputFrame];
 }
 
+- (void)changeInputFrame {
+    CGFloat HX = 0;
+    CGFloat HI = 0;
+    if (IS_IPHONE_X) {
+        HX = 35;
+        HI = 17;
+    }
+    CGRect statusBarRect = [[UIApplication sharedApplication] statusBarFrame];
+    if (statusBarRect.size.height == 40) {
+        _inputView.frame = CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-50+HI-HX-20, DMScreenWidth, 50+HI);
+    } else {
+        _inputView.frame = CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-50+HI-HX, DMScreenWidth, 50+HI);
+    }
+    
+    [_inputView rectFrame:_inputView.frame];
+}
 - (void)addRefreshLoadMore:(UITableView *)tableView {
     tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
     tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
@@ -166,10 +199,12 @@
 - (SendMsgInputTextView *)inputView {
     if (_inputView == nil) {
         CGFloat HX = 0;
+        CGFloat HI = 0;
         if (IS_IPHONE_X) {
             HX = 35;
+            HI = 17;
         }
-        _inputView = [[SendMsgInputTextView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-55-HX, DMScreenWidth, 65)];
+        _inputView = [[SendMsgInputTextView alloc] initWithFrame:CGRectMake(0, DMScreenHeight-DMNavigationBarHeight-50+HI-HX, DMScreenWidth, 50+HI)];
         _inputView.bgColor = UIColorFromRGB(0xF2F2F2);
         _inputView.showLimitNum = NO;
         _inputView.font = [UIFont systemFontOfSize:18];

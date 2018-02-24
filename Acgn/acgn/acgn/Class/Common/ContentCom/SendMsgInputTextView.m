@@ -31,7 +31,9 @@
     }
     return self;
 }
-
+- (void)rectFrame:(CGRect)rect {
+     _rect = rect;
+}
 
 #pragma mark - 初始化键盘监听
 

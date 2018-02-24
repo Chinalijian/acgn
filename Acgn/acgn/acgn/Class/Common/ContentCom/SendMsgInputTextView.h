@@ -21,6 +21,6 @@
 @property (nonatomic,assign)BOOL showLimitNum; //显示字数
 @property (nonatomic,assign)NSInteger limitNum; //限制字数
 @property (nonatomic,strong)UIFont *font;       //文字大小
-
+- (void)rectFrame:(CGRect)rect;
 - (void)cleanTextInfo;
 @end
