@@ -15,10 +15,6 @@
 
 /**************************************************************************************************************/
 
-
-//：api.cn.discovermelody-app.com
-//学生/老师英文：api.us.discovermelody-app.com
-
 #if SERVER_ENVIRONMENT == 0 //正式
     #define DM_Local_Url @"http://www.jiayiworld.com/"//服务器访问地址
 #elif

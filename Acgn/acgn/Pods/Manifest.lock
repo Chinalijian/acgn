@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.0)
   - AFNetworking/UIKit (3.2.0):
     - AFNetworking/NSURLSession
+  - FLAnimatedImage (1.0.12)
   - IQKeyboardManager (5.0.7)
   - LUNSegmentedControl (1.0.7)
   - Masonry (1.1.0)
@@ -23,6 +24,9 @@ PODS:
   - SDWebImage (4.3.0):
     - SDWebImage/Core (= 4.3.0)
   - SDWebImage/Core (4.3.0)
+  - SDWebImage/GIF (4.3.0):
+    - FLAnimatedImage (~> 1.0)
+    - SDWebImage/Core
   - SVProgressHUD (2.2.3)
   - Toast (3.1.0)
   - UMengUShare/Core (6.4.8.2):
@@ -53,6 +57,7 @@ DEPENDENCIES:
   - MJRefresh (~> 3.1)
   - Reachability (~> 3.1.1)
   - SDWebImage (~> 4.0)
+  - SDWebImage/GIF
   - SVProgressHUD
   - Toast (~> 3.1.0)
   - UMengUShare/Social/QQ
@@ -61,6 +66,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   LUNSegmentedControl: f868b1ea740f9917f05dbcb4cded85c33ec606e6
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -72,6 +78,6 @@ SPEC CHECKSUMS:
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
   UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
 
-PODFILE CHECKSUM: 3cc9f825190972f420c0f2245e0ec1048350999a
+PODFILE CHECKSUM: 7325a83ec2e7db9071c94daa3f7d81c7070d90da
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.2.1

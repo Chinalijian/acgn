@@ -179,7 +179,6 @@
             obj.hasFollow = @"1";
             [cc updateAttentView];
         }
-        
     }];
 }
 

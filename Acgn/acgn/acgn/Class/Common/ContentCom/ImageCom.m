@@ -33,7 +33,13 @@
 @property (nonatomic,strong) NSMutableArray *bigImgUrls;
 
 @end
-
+/*
+ FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif"]]];
+ FLAnimatedImageView *imageView = [[FLAnimatedImageView alloc] init];
+ imageView.animatedImage = image;
+ imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
+ [self.view addSubview:imageView];
+ */
 @implementation ImageCom
 - (id)initWithBigImage:(CGFloat)width
         bigImageHeight:(CGFloat)height

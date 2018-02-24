@@ -6,6 +6,7 @@ target 'acgn' do
 
   pod 'AFNetworking', '~> 3.0'
   pod 'SDWebImage', '~> 4.0'
+  pod 'SDWebImage/GIF'
   pod 'Masonry', '~> 1.0'
   pod 'MJRefresh', '~> 3.1'
   pod 'MJExtension', '~> 3.0'
