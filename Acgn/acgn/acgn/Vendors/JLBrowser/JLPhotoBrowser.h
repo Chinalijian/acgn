@@ -27,4 +27,6 @@
  */
 + (instancetype)photoBrowser;
 
+@property (nonatomic, assign) Info_Type typeInfo;
+
 @end

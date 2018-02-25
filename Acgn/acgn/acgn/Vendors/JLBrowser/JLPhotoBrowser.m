@@ -137,6 +137,21 @@
         
         UIScrollView *smallScrollView = [self creatSmallScrollView:i];
         JLPhoto *photo = [self addTapWithTag:i];
+        FLAnimatedImageView *imageView = [[FLAnimatedImageView alloc] init];
+        if (self.typeInfo == Info_Type_GIf_Pic) {
+            NSString * imageUrl = [photo.bigImgUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+            imageView = [[FLAnimatedImageView alloc] init];
+            imageView.animatedImage = image;
+            photo.gifSourceImageView = imageView;
+            //            imageView.frame = photo.sourceImageView.frame;//CGRectMake(0.0, 0.0, 100.0, 100.0);
+            [photo addSubview:imageView];
+//            photo.frame = photo.sourceImageView.frame;
+//            photo.image = photo.sourceImageView.image;
+//            [self setupPhotoFrame:photo];
+//            return;
+        }
+        
         [smallScrollView addSubview:photo];
         
         JLPieProgressView *loop = [self creatLoopWithTag:i];
@@ -169,6 +184,7 @@
                 }else{
                     
                     photo.frame = [weakSelf.originRects[i] CGRectValue];
+                    
                     [UIView animateWithDuration:0.3 animations:^{
                         [weakSelf setupPhotoFrame:photo];
                     }];
@@ -192,6 +208,30 @@
 }
 
 - (void)setupPhotoFrame:(JLPhoto *)photo{
+    
+    UIScrollView *smallScrollView = (UIScrollView *)photo.superview;
+    
+    self.blackView.alpha = 1.0;
+    
+    CGFloat ratio = (double)photo.image.size.height/(double)photo.image.size.width;
+    
+    CGFloat bigW = ScreenWidth;
+    CGFloat bigH = ScreenWidth*ratio;
+    
+    if (bigH<ScreenHeight) {
+        photo.bounds = CGRectMake(0, 0, bigW, bigH);
+        photo.center = CGPointMake(ScreenWidth/2, ScreenHeight/2);
+    }else{//设置长图的frame
+        photo.frame = CGRectMake(0, 0, bigW, bigH);
+        smallScrollView.contentSize = CGSizeMake(ScreenWidth, bigH);
+    }
+    if (photo.gifSourceImageView) {
+        photo.gifSourceImageView.frame = photo.bounds;
+    }
+    
+}
+
+- (void)setupGifPhotoFrame:(FLAnimatedImageView *)photo{
     
     UIScrollView *smallScrollView = (UIScrollView *)photo.superview;
     

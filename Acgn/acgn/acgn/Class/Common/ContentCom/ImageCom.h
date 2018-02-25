@@ -17,5 +17,5 @@
             smallSpace:(CGFloat)sspace
                 frameW:(CGFloat)frameW
                 frameH:(CGFloat)frameH;
-- (void)configImageCom:(NSArray *)array height:(CGFloat)height;
+- (void)configImageCom:(NSArray *)array height:(CGFloat)height type:(Info_Type)type;
 @end

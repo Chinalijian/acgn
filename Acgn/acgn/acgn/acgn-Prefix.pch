@@ -18,6 +18,8 @@
 #import <MJExtension.h>
 #import <SDWebImageManager.h>
 #import "UIImageView+WebCache.h"
+#import <FLAnimatedImageView.h>
+#import <FLAnimatedImage.h>
 #import "SVProgressHUD.h"
 #import "DMAlertMananger.h"
 #import "PraiseDataModel.h"

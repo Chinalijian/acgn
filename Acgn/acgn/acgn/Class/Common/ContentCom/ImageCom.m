@@ -26,11 +26,14 @@
 /**
  *  imageViews
  */
-@property (nonatomic,strong) NSMutableArray *imageViews;
+@property (nonatomic, strong) NSMutableArray *imageViews;
 /**
  *  URL数组
  */
-@property (nonatomic,strong) NSMutableArray *bigImgUrls;
+@property (nonatomic, strong) NSMutableArray *bigImgUrls;
+
+@property (nonatomic, assign) Info_Type typeInfo;
+@property (nonatomic, strong) UILabel *gifLabel;
 
 @end
 /*
@@ -62,7 +65,8 @@
     return self;
 }
 
-- (void)configImageCom:(NSArray *)array height:(CGFloat)height {
+- (void)configImageCom:(NSArray *)array height:(CGFloat)height type:(Info_Type)type {
+    self.typeInfo = type;
     [self.bigImgUrls removeAllObjects];
     [self.imageViews removeAllObjects];
     if (![array isKindOfClass:[NSArray class]] || OBJ_IS_NIL(array) || array.count == 0) {
@@ -252,6 +256,7 @@
     
     //2. 创建图片浏览器
     JLPhotoBrowser *photoBrowser = [JLPhotoBrowser photoBrowser];
+    photoBrowser.typeInfo = self.typeInfo;
     //2.1 设置JLPhoto数组
     photoBrowser.photos = photos;
     //2.2 设置当前要显示图片的tag

@@ -230,7 +230,7 @@
             make.height.mas_offset(imageH);
         }];
         
-        [self.imageComView configImageCom:obj.postUrls height:imageH];
+        [self.imageComView configImageCom:obj.postUrls height:imageH type:obj.postType.integerValue];
     }
    
     //[self layoutSubviews];

@@ -126,7 +126,7 @@
                 make.height.mas_offset(imageH);
             }];
             
-            [self.imageCom configImageCom:obj.postUrls height:imageH];
+            [self.imageCom configImageCom:obj.postUrls height:imageH type:obj.postType.integerValue];
         }
         [self.seeNumButton setTitle:obj.seeNum forState:UIControlStateNormal];
         [self.commitNumButton setTitle:obj.commentNum forState:UIControlStateNormal];
