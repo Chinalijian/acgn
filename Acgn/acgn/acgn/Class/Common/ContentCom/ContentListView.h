@@ -18,6 +18,7 @@
 - (void)clickFavUser:(id)sender view:(id)viewSelf;
 - (void)clickAttForUser:(id)sender view:(id)viewSelf;
 - (void)tempNavigationBarShowHidden:(UIScrollView *)scrollView;
+- (void)clickVideoListPlay:(Info_Type)type videoUrl:(NSString *)videoUrl;
 @end
 
 @interface ContentListView : UIView

@@ -21,5 +21,5 @@ target 'acgn' do
   pod 'UMengUShare/Social/QQ'
   # 集成新浪微博(精简版1M)
   pod 'UMengUShare/Social/Sina'
-
+  pod 'ZFDownload'
 end

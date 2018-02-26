@@ -127,6 +127,12 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
     }
 }
 
+- (void)clickVideoPlay:(Info_Type)type videoUrl:(NSString *)videoUrl {
+    if ([self.delegate respondsToSelector:@selector(clickVideoListPlay:videoUrl:)]) {
+        [self.delegate clickVideoListPlay:type videoUrl:videoUrl];
+    }
+}
+
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

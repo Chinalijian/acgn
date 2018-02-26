@@ -116,6 +116,7 @@
 		30AC00EA20446C54003A88FD /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 30AC00DD20446C53003A88FD /* MMMaterialDesignSpinner.m */; };
 		30AC00EB20446C54003A88FD /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 30AC00DF20446C53003A88FD /* ASValueTrackingSlider.m */; };
 		30AC00EF20446C78003A88FD /* MoviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30AC00EE20446C78003A88FD /* MoviePlayerViewController.m */; };
+		30AC00F320446D9B003A88FD /* UINavigationController+ZFFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 30AC00F120446D9B003A88FD /* UINavigationController+ZFFullscreenPopGesture.m */; };
 		30C586F6202F753A00CB1EC0 /* PeopleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C586F5202F753A00CB1EC0 /* PeopleDetailsViewController.m */; };
 		30EAFE53202B62E1004C75C6 /* ContentCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EAFE52202B62E1004C75C6 /* ContentCom.m */; };
 		30EAFE56202B705A004C75C6 /* ImageCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EAFE55202B705A004C75C6 /* ImageCom.m */; };
@@ -377,6 +378,8 @@
 		30AC00DF20446C53003A88FD /* ASValueTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValueTrackingSlider.m; sourceTree = "<group>"; };
 		30AC00ED20446C78003A88FD /* MoviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePlayerViewController.h; sourceTree = "<group>"; };
 		30AC00EE20446C78003A88FD /* MoviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePlayerViewController.m; sourceTree = "<group>"; };
+		30AC00F120446D9B003A88FD /* UINavigationController+ZFFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+ZFFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		30AC00F220446D9B003A88FD /* UINavigationController+ZFFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+ZFFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		30C586F4202F753A00CB1EC0 /* PeopleDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleDetailsViewController.h; sourceTree = "<group>"; };
 		30C586F5202F753A00CB1EC0 /* PeopleDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleDetailsViewController.m; sourceTree = "<group>"; };
 		30EAFE51202B62E1004C75C6 /* ContentCom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentCom.h; sourceTree = "<group>"; };
@@ -832,6 +835,7 @@
 		3048355520273B5A00DAAE3F /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				30AC00F020446D9B003A88FD /* ZFNavigationController */,
 				30AC00C520446C53003A88FD /* ZFPlayer */,
 				2A23AA0B20342F2800F6E7D2 /* ShareManage */,
 				2A23AA02203416DE00F6E7D2 /* VPImageCropper */,
@@ -909,6 +913,15 @@
 				30AC00EE20446C78003A88FD /* MoviePlayerViewController.m */,
 			);
 			path = PlayerViewController;
+			sourceTree = "<group>";
+		};
+		30AC00F020446D9B003A88FD /* ZFNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				30AC00F120446D9B003A88FD /* UINavigationController+ZFFullscreenPopGesture.m */,
+				30AC00F220446D9B003A88FD /* UINavigationController+ZFFullscreenPopGesture.h */,
+			);
+			path = ZFNavigationController;
 			sourceTree = "<group>";
 		};
 		30EAFE50202B62CB004C75C6 /* ContentCom */ = {
@@ -1231,6 +1244,7 @@
 				30FD391A2028BA3700F26185 /* PeopleListCell.m in Sources */,
 				2A74570020303676009E2880 /* PeopleDetailHeader.m in Sources */,
 				2A684789202C3B1E00D189D5 /* ContentListView.m in Sources */,
+				30AC00F320446D9B003A88FD /* UINavigationController+ZFFullscreenPopGesture.m in Sources */,
 				30AC00E020446C54003A88FD /* ZFPlayerModel.m in Sources */,
 				3048356120279F3B00DAAE3F /* MyFavViewController.m in Sources */,
 				2A2374212031D58A00297AB2 /* POPAnimation.mm in Sources */,

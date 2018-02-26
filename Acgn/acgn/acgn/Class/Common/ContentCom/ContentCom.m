@@ -144,6 +144,12 @@
     }
 }
 
+- (void)clickVideoImagePlay:(Info_Type)type videoUrl:(NSString *)videoUrl; {
+    if ([self.delegate respondsToSelector:@selector(clickVideoPlay:videoUrl:)]) {
+        [self.delegate clickVideoPlay:type videoUrl:videoUrl];
+    }
+}
+
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
                         frame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -462,6 +468,7 @@
 - (ImageCom *)imageComView {
     if (_imageComView == nil) {
         _imageComView = [[ImageCom alloc] initWithBigImage:Image_Width bigImageHeight:Image_Height-10 smallImageWidth:Small_Image_W_H samllImageHeight:Small_Image_W_H smallSpace:Small_Image_Space frameW:Content_Label_Widht frameH:0];
+        _imageComView.delegate = self;
         _imageComView.backgroundColor = [UIColor clearColor];
     }
     return _imageComView;

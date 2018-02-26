@@ -41,6 +41,8 @@
 
 #import "ContentCom.h"
 
+#import "MoviePlayerViewController.h"
+
 #import "PeopleDetailsViewController.h"
 #import "RoleDetailsDataModel.h"
 

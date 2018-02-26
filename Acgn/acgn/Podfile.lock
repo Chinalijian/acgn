@@ -14,6 +14,19 @@ PODS:
   - AFNetworking/Serialization (3.2.0)
   - AFNetworking/UIKit (3.2.0):
     - AFNetworking/NSURLSession
+  - ASIHTTPRequest (1.8.2):
+    - ASIHTTPRequest/ASIWebPageRequest (= 1.8.2)
+    - ASIHTTPRequest/CloudFiles (= 1.8.2)
+    - ASIHTTPRequest/Core (= 1.8.2)
+    - ASIHTTPRequest/S3 (= 1.8.2)
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/CloudFiles (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/Core (1.8.2):
+    - Reachability
+  - ASIHTTPRequest/S3 (1.8.2):
+    - ASIHTTPRequest/Core
   - FLAnimatedImage (1.0.12)
   - IQKeyboardManager (5.0.7)
   - LUNSegmentedControl (1.0.7)
@@ -47,6 +60,8 @@ PODS:
   - UMengUShare/Social/WeChat (6.4.8.2):
     - UMengUShare/Core
     - UMengUShare/Social/ReducedWeChat
+  - ZFDownload (1.0.2):
+    - ASIHTTPRequest
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -63,9 +78,11 @@ DEPENDENCIES:
   - UMengUShare/Social/QQ
   - UMengUShare/Social/Sina
   - UMengUShare/Social/WeChat
+  - ZFDownload
 
 SPEC CHECKSUMS:
   AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
+  ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   LUNSegmentedControl: f868b1ea740f9917f05dbcb4cded85c33ec606e6
@@ -77,7 +94,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: a5eaeff664a82dda89809c409ace40183ce91523
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
   UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
+  ZFDownload: a52f94ebb080833b8a8ceb19a409f2941343fe7f
 
-PODFILE CHECKSUM: e5b27451c83bccfc440fff0356a6fc96ceee0d28
+PODFILE CHECKSUM: b4c6d03b2a0e2690c0123b70de78d94ad12bdf17
 
 COCOAPODS: 1.2.1

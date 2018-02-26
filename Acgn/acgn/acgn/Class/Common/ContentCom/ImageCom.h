@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol ImageComDelegate <NSObject>
+@optional
+- (void)clickVideoImagePlay:(Info_Type)type videoUrl:(NSString *)videoUrl;
+@end
 //列表图片/视频的View
 @interface ImageCom : UIView
 @property (nonatomic, strong) NSString *viedoTime;
+@property (nonatomic, weak) id <ImageComDelegate> delegate;
 - (id)initWithBigImage:(CGFloat)width
         bigImageHeight:(CGFloat)height
        smallImageWidth:(CGFloat)swidth

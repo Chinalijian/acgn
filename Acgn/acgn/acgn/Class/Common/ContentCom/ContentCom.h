@@ -17,6 +17,7 @@
 - (void)clickPraiseFabulous:(id)sender view:(id)viewSelf;
 - (void)clickFavForUser:(id)sender view:(id)viewSelf;
 - (void)clickAttForUser:(id)sender view:(id)viewSelf;
+- (void)clickVideoPlay:(Info_Type)type videoUrl:(NSString *)videoUrl;
 @end
 
 

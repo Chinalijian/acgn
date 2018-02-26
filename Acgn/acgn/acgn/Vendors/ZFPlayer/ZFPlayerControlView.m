@@ -140,6 +140,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         [self addSubview:self.bottomProgressView];
         
         // 添加子控件的约束
+        //
         [self makeSubViewsConstraints];
         
         self.downLoadBtn.hidden     = YES;
@@ -167,41 +168,41 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     }];
     
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.mas_trailing).offset(7);
-        make.top.equalTo(self.mas_top).offset(-7);
+        make.trailing.mas_equalTo(self.mas_trailing).mas_offset(7);
+        make.top.mas_equalTo(self.mas_top).mas_offset(-7);
         make.width.height.mas_equalTo(20);
     }];
     
     [self.topImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.equalTo(self);
-        make.top.equalTo(self.mas_top).offset(0);
+        make.leading.trailing.mas_equalTo(self);
+        make.top.mas_equalTo(self.mas_top).mas_offset(0);
         make.height.mas_equalTo(50);
     }];
     
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.topImageView.mas_leading).offset(10);
-        make.top.equalTo(self.topImageView.mas_top).offset(3);
+        make.leading.mas_equalTo(self.topImageView.mas_leading).mas_offset(10);
+        make.top.mas_equalTo(self.topImageView.mas_top).mas_offset(3);
         make.width.height.mas_equalTo(40);
     }];
 
     [self.downLoadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(40);
         make.height.mas_equalTo(49);
-        make.trailing.equalTo(self.topImageView.mas_trailing).offset(-10);
-        make.centerY.equalTo(self.backBtn.mas_centerY);
+        make.trailing.mas_equalTo(self.topImageView.mas_trailing).mas_offset(-10);
+        make.centerY.mas_equalTo(self.backBtn.mas_centerY);
     }];
 
     [self.resolutionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(40);
         make.height.mas_equalTo(25);
-        make.trailing.equalTo(self.downLoadBtn.mas_leading).offset(-10);
-        make.centerY.equalTo(self.backBtn.mas_centerY);
+        make.trailing.mas_equalTo(self.downLoadBtn.mas_leading).mas_offset(-10);
+        make.centerY.mas_equalTo(self.backBtn.mas_centerY);
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.backBtn.mas_trailing).offset(5);
-        make.centerY.equalTo(self.backBtn.mas_centerY);
-        make.trailing.equalTo(self.resolutionBtn.mas_leading).offset(-10);
+        make.leading.mas_equalTo(self.backBtn.mas_trailing).mas_offset(5);
+        make.centerY.mas_equalTo(self.backBtn.mas_centerY);
+        make.trailing.mas_equalTo(self.resolutionBtn.mas_leading).mas_offset(-10);
     }];
     
     [self.bottomImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -210,64 +211,64 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     }];
     
     [self.startBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.bottomImageView.mas_leading).offset(5);
-        make.bottom.equalTo(self.bottomImageView.mas_bottom).offset(-5);
+        make.leading.mas_equalTo(self.bottomImageView.mas_leading).mas_offset(5);
+        make.bottom.mas_equalTo(self.bottomImageView.mas_bottom).mas_offset(-5);
         make.width.height.mas_equalTo(30);
     }];
     
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.startBtn.mas_trailing).offset(-3);
-        make.centerY.equalTo(self.startBtn.mas_centerY);
+        make.leading.mas_equalTo(self.startBtn.mas_trailing).mas_offset(-3);
+        make.centerY.mas_equalTo(self.startBtn.mas_centerY);
         make.width.mas_equalTo(43);
     }];
     
     [self.fullScreenBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(30);
-        make.trailing.equalTo(self.bottomImageView.mas_trailing).offset(-5);
-        make.centerY.equalTo(self.startBtn.mas_centerY);
+        make.trailing.mas_equalTo(self.bottomImageView.mas_trailing).mas_offset(-5);
+        make.centerY.mas_equalTo(self.startBtn.mas_centerY);
     }];
     
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.fullScreenBtn.mas_leading).offset(3);
-        make.centerY.equalTo(self.startBtn.mas_centerY);
+        make.trailing.mas_equalTo(self.fullScreenBtn.mas_leading).mas_offset(3);
+        make.centerY.mas_equalTo(self.startBtn.mas_centerY);
         make.width.mas_equalTo(43);
     }];
     
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.currentTimeLabel.mas_trailing).offset(4);
-        make.trailing.equalTo(self.totalTimeLabel.mas_leading).offset(-4);
-        make.centerY.equalTo(self.startBtn.mas_centerY);
+        make.leading.mas_equalTo(self.currentTimeLabel.mas_trailing).mas_offset(4);
+        make.trailing.mas_equalTo(self.totalTimeLabel.mas_leading).mas_offset(-4);
+        make.centerY.mas_equalTo(self.startBtn.mas_centerY);
     }];
     
     [self.videoSlider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.currentTimeLabel.mas_trailing).offset(4);
-        make.trailing.equalTo(self.totalTimeLabel.mas_leading).offset(-4);
-        make.centerY.equalTo(self.currentTimeLabel.mas_centerY).offset(-1);
+        make.leading.mas_equalTo(self.currentTimeLabel.mas_trailing).mas_offset(4);
+        make.trailing.mas_equalTo(self.totalTimeLabel.mas_leading).mas_offset(-4);
+        make.centerY.mas_equalTo(self.currentTimeLabel.mas_centerY).mas_offset(-1);
         make.height.mas_equalTo(30);
     }];
     
     [self.lockBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.mas_leading).offset(iPhoneX?35:15);
-        make.centerY.equalTo(self.mas_centerY);
+        make.leading.mas_equalTo(self.mas_leading).mas_offset(iPhoneX?35:15);
+        make.centerY.mas_equalTo(self.mas_centerY);
         make.width.height.mas_equalTo(32);
     }];
     
     [self.repeatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-         make.center.equalTo(self);
+         make.center.mas_equalTo(self);
     }];
     
     [self.playeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(50);
-        make.center.equalTo(self);
+        make.center.mas_equalTo(self);
     }];
     
     [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self);
+        make.center.mas_equalTo(self);
         make.width.with.height.mas_equalTo(45);
     }];
     
     [self.failBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self);
+        make.center.mas_equalTo(self);
         make.width.mas_equalTo(130);
         make.height.mas_equalTo(33);
     }];
@@ -275,7 +276,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     [self.fastView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(125);
         make.height.mas_equalTo(80);
-        make.center.equalTo(self);
+        make.center.mas_equalTo(self);
     }];
     
     [self.fastImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -287,13 +288,13 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     
     [self.fastTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.with.trailing.mas_equalTo(0);
-        make.top.mas_equalTo(self.fastImageView.mas_bottom).offset(2);
+        make.top.mas_equalTo(self.fastImageView.mas_bottom).mas_offset(2);
     }];
     
     [self.fastProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(12);
         make.trailing.mas_equalTo(-12);
-        make.top.mas_equalTo(self.fastTimeLabel.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.fastTimeLabel.mas_bottom).mas_offset(10);
     }];
     
     [self.bottomProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -501,12 +502,12 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     self.fullScreen             = YES;
     self.lockBtn.hidden         = !self.isFullScreen;
     self.fullScreenBtn.selected = self.isFullScreen;
-    [self.backBtn setImage:ZFPlayerImage(@"ZFPlayer_back_full") forState:UIControlStateNormal];
-    [self.backBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topImageView.mas_top).offset(23);
-        make.leading.equalTo(self.topImageView.mas_leading).offset(10);
-        make.width.height.mas_equalTo(40);
-    }];
+//    [self.backBtn setImage:ZFPlayerImage(@"ZFPlayer_back_full") forState:UIControlStateNormal];
+//    [self.backBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.topImageView.mas_top).mas_offset(23);
+//        make.leading.mas_equalTo(self.topImageView.mas_leading).mas_offset(10);
+//        make.width.height.mas_equalTo(40);
+//    }];
 }
 /**
  *  设置竖屏的约束
@@ -515,11 +516,11 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     self.fullScreen             = NO;
     self.lockBtn.hidden         = !self.isFullScreen;
     self.fullScreenBtn.selected = self.isFullScreen;
-    [self.backBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topImageView.mas_top).offset(3);
-        make.leading.equalTo(self.topImageView.mas_leading).offset(10);
-        make.width.height.mas_equalTo(40);
-    }];
+//    [self.backBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.topImageView.mas_top).mas_offset(3);
+//        make.leading.mas_equalTo(self.topImageView.mas_leading).mas_offset(10);
+//        make.width.height.mas_equalTo(40);
+//    }];
 
     if (self.isCellVideo) {
         [self.backBtn setImage:ZFPlayerImage(@"ZFPlayer_close") forState:UIControlStateNormal];
@@ -918,11 +919,11 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 
     if (playerModel.title) { self.titleLabel.text = playerModel.title; }
     // 设置网络占位图片
-    if (playerModel.placeholderImageURLString) {
-        [self.placeholderImageView setImageWithURLString:playerModel.placeholderImageURLString placeholder:ZFPlayerImage(@"ZFPlayer_loading_bgView")];
-    } else {
-        self.placeholderImageView.image = playerModel.placeholderImage;
-    }
+//    if (playerModel.placeholderImageURLString) {
+//        [self.placeholderImageView setImageWithURLString:playerModel.placeholderImageURLString placeholder:ZFPlayerImage(@"ZFPlayer_loading_bgView")];
+//    } else {
+//        self.placeholderImageView.image = playerModel.placeholderImage;
+//    }
     if (playerModel.resolutionDic) {
         [self zf_playerResolutionArray:[playerModel.resolutionDic allKeys]];
     }
@@ -1119,8 +1120,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     [self.resolutionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(40);
         make.height.mas_equalTo(25*resolutionArray.count);
-        make.leading.equalTo(self.resolutionBtn.mas_leading).offset(0);
-        make.top.equalTo(self.resolutionBtn.mas_bottom).offset(0);
+        make.leading.mas_equalTo(self.resolutionBtn.mas_leading).mas_offset(0);
+        make.top.mas_equalTo(self.resolutionBtn.mas_bottom).mas_offset(0);
     }];
     
     // 分辨率View上边的Btn

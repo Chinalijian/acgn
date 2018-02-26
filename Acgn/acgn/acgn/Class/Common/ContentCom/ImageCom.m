@@ -303,10 +303,14 @@
     
     if (self.typeInfo == Info_Type_Video) {
         //去视频播放器
-    
+        if ([self.delegate respondsToSelector:@selector(clickVideoImagePlay:videoUrl:)]) {
+            [self.delegate clickVideoImagePlay:Info_Type_Video videoUrl:[self.bigImgUrls firstObject]];
+        }
     } else if (self.typeInfo == Info_Type_Url_Video) {
         //去web页
-        
+        if ([self.delegate respondsToSelector:@selector(clickVideoImagePlay:videoUrl:)]) {
+            [self.delegate clickVideoImagePlay:Info_Type_Url_Video videoUrl:[self.bigImgUrls firstObject]];
+        }
     } else {
         
         //1.创建JLPhoto数组
