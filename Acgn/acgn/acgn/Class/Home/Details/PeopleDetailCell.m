@@ -43,7 +43,7 @@
 + (CGFloat)getPeopleDetailCellHeight:(RoleDetailsPostData *)obj {
     CGFloat contentHeight = [PeopleDetailCell getContentMaxHeight:obj]+10;
     CGFloat picHeight = 0;
-    if (obj.postType.integerValue == Info_Type_Picture || obj.postType.integerValue == Info_Type_GIf_Pic ) {
+    if (obj.postType.integerValue == Info_Type_GIf_Pic) {
         //图片
         picHeight = [PeopleDetailCell getImageMaxHeight:obj];
         if (picHeight>0) {
@@ -101,9 +101,9 @@
             case Info_Type_Text:
                 self.typeImageView.image = [UIImage imageNamed:@"Text_Image_Icon"];
                 break;
-            case Info_Type_Picture:
-                self.typeImageView.image = [UIImage imageNamed:@"Picture_Image_Icon"];
-                break;
+//            case Info_Type_Picture:
+//                self.typeImageView.image = [UIImage imageNamed:@"Picture_Image_Icon"];
+//                break;
             case Info_Type_GIf_Pic:
                 self.typeImageView.image = [UIImage imageNamed:@"Picture_Image_Icon"];
                 break;

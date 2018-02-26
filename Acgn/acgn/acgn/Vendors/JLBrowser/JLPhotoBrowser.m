@@ -104,7 +104,6 @@
 }
 
 -(void)show{
-    
     //1.添加photoBrowser
     [JLKeyWindow addSubview:self];
     
@@ -117,7 +116,7 @@
     
     //4.创建子视图
     [self setupSmallScrollViews];
-    
+    [SVProgressHUD dismiss];
     self.countImageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, DMScreenWidth, 32)];
     self.countImageLabel.textColor = [UIColor whiteColor];
     self.countImageLabel.font = [UIFont systemFontOfSize:14];
@@ -128,86 +127,119 @@
 }
 
 #pragma mark 创建子视图
-
+- (void)showWaitingPop {
+    [SVProgressHUD setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];//背景颜色
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD show];
+}
 -(void)setupSmallScrollViews{
-    
-    __weak JLPhotoBrowser *weakSelf = self;
     
     for (int i=0; i<self.photos.count; i++) {
         
         UIScrollView *smallScrollView = [self creatSmallScrollView:i];
         JLPhoto *photo = [self addTapWithTag:i];
         FLAnimatedImageView *imageView = [[FLAnimatedImageView alloc] init];
-        if (self.typeInfo == Info_Type_GIf_Pic) {
-            NSString * imageUrl = [photo.bigImgUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-            FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
-            imageView = [[FLAnimatedImageView alloc] init];
-            imageView.animatedImage = image;
-            photo.gifSourceImageView = imageView;
-            //            imageView.frame = photo.sourceImageView.frame;//CGRectMake(0.0, 0.0, 100.0, 100.0);
-            [photo addSubview:imageView];
-//            photo.frame = photo.sourceImageView.frame;
-//            photo.image = photo.sourceImageView.image;
-//            [self setupPhotoFrame:photo];
-//            return;
-        }
-        
-        [smallScrollView addSubview:photo];
-        
-        JLPieProgressView *loop = [self creatLoopWithTag:i];
-        [smallScrollView addSubview:loop];
         NSString * imageUrl = [photo.bigImgUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        
-        NSURL *bigImgUrl = [NSURL URLWithString:imageUrl];
-        
-        //检查图片是否已经缓存过
-        [[SDImageCache sharedImageCache] queryCacheOperationForKey:imageUrl done:^(UIImage * _Nullable image, NSData * _Nullable data, SDImageCacheType cacheType) {
-            if (image==nil) {
-                loop.hidden = NO;
+        if (self.typeInfo == Info_Type_GIf_Pic) {
+            if ([[photo.bigImgUrl lastPathComponent] containsString:@".gif"]) {
+                dispatch_queue_t queue =dispatch_queue_create("loadImage",NULL);
+                dispatch_async(queue, ^{
+                    FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+    
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        imageView.animatedImage = image;
+                        photo.gifSourceImageView = imageView;
+                        [photo addSubview:imageView];
+                        [smallScrollView addSubview:photo];
+                        photo.frame = [self.originRects[i] CGRectValue];
+                        [UIView animateWithDuration:0.3 animations:^{
+                            [self setupGIFPhotoFrame:photo];
+                        }];
+                    });
+                });
+            } else {
+                [smallScrollView addSubview:photo];
+                [self loadUrlImage:photo imageUrl:imageUrl loop:nil index:i];
             }
-        }];
+        } else {
+            [smallScrollView addSubview:photo];
+            [self loadUrlImage:photo imageUrl:imageUrl loop:nil index:i];
+        }
+    }
+}
+
+- (void)loadUrlImage:(JLPhoto *)photo imageUrl:(NSString *)imageUrl loop:(JLPieProgressView *)loop index:(int)i {
+    __weak JLPhotoBrowser *weakSelf = self;
+    NSURL *bigImgUrl = [NSURL URLWithString:imageUrl];
+    
+//    //检查图片是否已经缓存过
+//    [[SDImageCache sharedImageCache] queryCacheOperationForKey:imageUrl done:^(UIImage * _Nullable image, NSData * _Nullable data, SDImageCacheType cacheType) {
+//        if (image==nil) {
+//            loop.hidden = NO;
+//        }
+//    }];
+    
+    [photo sd_setImageWithURL:bigImgUrl placeholderImage:nil options:SDWebImageRetryFailed | SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+        //设置进度条
+        //loop.progressValue = (CGFloat)receivedSize/(CGFloat)expectedSize;
+    } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         
-        [photo sd_setImageWithURL:bigImgUrl placeholderImage:nil options:SDWebImageRetryFailed | SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-            //设置进度条
-            loop.progressValue = (CGFloat)receivedSize/(CGFloat)expectedSize;
-        } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if (image!=nil) {
             
-            if (image!=nil) {
+            loop.hidden = YES;
+            
+            //下载回来的图片
+            if (cacheType==SDImageCacheTypeNone) {
                 
-                loop.hidden = YES;
-                
-                //下载回来的图片
-                if (cacheType==SDImageCacheTypeNone) {
-                    
-                    [weakSelf setupPhotoFrame:photo];
-                    
-                }else{
-                    
-                    photo.frame = [weakSelf.originRects[i] CGRectValue];
-                    
-                    [UIView animateWithDuration:0.3 animations:^{
-                        [weakSelf setupPhotoFrame:photo];
-                    }];
-                    
-                }
+                [weakSelf setupPhotoFrame:photo];
                 
             }else{
                 
-                //图片下载失败
-                photo.bounds = CGRectMake(0, 0, 240, 240);
-                photo.center = CGPointMake(ScreenWidth/2, ScreenHeight/2);
-                photo.contentMode = UIViewContentModeScaleAspectFit;
-                photo.image = [UIImage imageNamed:@"preview_image_failure"];
+                photo.frame = [weakSelf.originRects[i] CGRectValue];
                 
-                [loop removeFromSuperview];
+                [UIView animateWithDuration:0.3 animations:^{
+                    [weakSelf setupPhotoFrame:photo];
+                }];
                 
             }
-        }];
-    }
-    
+            
+        }else{
+            
+            //图片下载失败
+            photo.bounds = CGRectMake(0, 0, 240, 240);
+            photo.center = CGPointMake(ScreenWidth/2, ScreenHeight/2);
+            photo.contentMode = UIViewContentModeScaleAspectFit;
+            photo.image = [UIImage imageNamed:@"preview_image_failure"];
+            
+            //[loop removeFromSuperview];
+            
+        }
+    }];
 }
-
-- (void)setupPhotoFrame:(JLPhoto *)photo{
+- (void)setupGIFPhotoFrame:(JLPhoto *)photo {
+    
+    UIScrollView *smallScrollView = (UIScrollView *)photo.superview;
+    
+    self.blackView.alpha = 1.0;
+    
+    CGFloat ratio = (double)photo.gifSourceImageView.image.size.height/(double)photo.gifSourceImageView.image.size.width;
+    
+    CGFloat bigW = ScreenWidth;
+    CGFloat bigH = ScreenWidth*ratio;
+    
+    if (bigH<ScreenHeight) {
+        photo.bounds = CGRectMake(0, 0, bigW, bigH);
+        photo.center = CGPointMake(ScreenWidth/2, ScreenHeight/2);
+    }else{//设置长图的frame
+        photo.frame = CGRectMake(0, 0, bigW, bigH);
+        smallScrollView.contentSize = CGSizeMake(ScreenWidth, bigH);
+    }
+    if (photo.gifSourceImageView && self.typeInfo == Info_Type_GIf_Pic) {
+        photo.gifSourceImageView.frame = photo.bounds;
+        photo.image = nil;
+    }
+}
+- (void)setupPhotoFrame:(JLPhoto *)photo {
     
     UIScrollView *smallScrollView = (UIScrollView *)photo.superview;
     
@@ -225,10 +257,10 @@
         photo.frame = CGRectMake(0, 0, bigW, bigH);
         smallScrollView.contentSize = CGSizeMake(ScreenWidth, bigH);
     }
-    if (photo.gifSourceImageView) {
+    if (photo.gifSourceImageView && self.typeInfo == Info_Type_GIf_Pic) {
         photo.gifSourceImageView.frame = photo.bounds;
+        photo.image = nil;
     }
-    
 }
 
 - (void)setupGifPhotoFrame:(FLAnimatedImageView *)photo{

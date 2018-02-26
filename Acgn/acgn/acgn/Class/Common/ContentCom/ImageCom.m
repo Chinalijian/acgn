@@ -236,7 +236,6 @@
 #pragma mark 图片点击
 
 -(void)imageTap:(UITapGestureRecognizer *)tap{
-    
     //1.创建JLPhoto数组
     NSMutableArray *photos = [NSMutableArray array];
     
