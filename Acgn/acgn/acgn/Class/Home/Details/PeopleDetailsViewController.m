@@ -33,6 +33,8 @@
     [self addRefreshLoadMore:self.pTableView];
     [self.view addSubview:self.tempNavBar];
     self.tempNavBar.alpha = 0;
+    
+    [self refresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -43,7 +45,7 @@
 - (void)addRefreshLoadMore:(UITableView *)tableView {
     tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
     tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
-    [tableView.mj_header beginRefreshing];
+    //[tableView.mj_header beginRefreshing];
 }
 
 - (void)endRefreshing:(UITableView *)tableView {

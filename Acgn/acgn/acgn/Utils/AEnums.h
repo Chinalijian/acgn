@@ -26,9 +26,10 @@ typedef NS_ENUM(NSInteger, AAccountType) {
 
 typedef NS_ENUM(NSInteger, Info_Type) {
     Info_Type_Text          = 0, // 文字
-    Info_Type_Picture       = 1, // 图片
-    Info_Type_GIf_Pic       = 2, // 图片
+    //Info_Type_Picture       = 1, // 图片
+    Info_Type_GIf_Pic       = 1, // 图片orGIF
     Info_Type_Video         = 3, // 视频
+    Info_Type_Url_Video     = 4, // 第三方视频
 };
 
 typedef NS_ENUM(NSInteger, ContentCom_Type) {

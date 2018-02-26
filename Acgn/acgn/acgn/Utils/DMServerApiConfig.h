@@ -45,6 +45,8 @@
 #define DM_FollowHome_Url               [DM_Url stringByAppendingFormat:@"post/isFollowHome"]
 //首页广场
 #define DM_HomePost_Url                 [DM_Url stringByAppendingFormat:@"post/homePost"]
+//获取最新的帖子
+#define DM_Latest_Post_Url              [DM_Url stringByAppendingFormat:@"post/refreshPost"]
 //动态详情
 #define DM_GetPostDetails_Url           [DM_Url stringByAppendingFormat:@"post/getPostDetils"]
 //动态详情评论列表

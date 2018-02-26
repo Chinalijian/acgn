@@ -12,7 +12,8 @@
 #import "DynamicEmptyCell.h"
 @interface ContentListView() <UITableViewDelegate,
 UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
-
+@property (nonatomic, strong) DynamicEmptyCell *emptyCell;
+@property (nonatomic, assign) BOOL commitDataStatus;//是否是动态详情页面的评论数据
 @end
 
 @implementation ContentListView
@@ -50,9 +51,22 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
     
 }
 
+- (void)detailsCommit {
+    self.commitDataStatus = YES;
+}
+
 - (void)updateList:(NSMutableArray *)array {
     self.datas = array;
     [self.aTableView reloadData];
+    if (self.emptyCell) {
+        if (self.ccType == ContentCom_Type_All) {
+            if (array.count > 0 && self.commitDataStatus) {
+                self.emptyCell.hidden = NO;
+                return;
+            }
+        }
+        self.emptyCell.hidden = YES;
+    }
 }
 
 - (void)clickSelectedPeople:(id)sender {
@@ -186,6 +200,8 @@ UITableViewDataSource, ContentComDelegate, ContentListCellDelegate>
                     DynamicEmptyCell *cellempty = [tableView dequeueReusableCellWithIdentifier:emptyListCell];
                     if (!cellempty) {
                         cellempty = [[DynamicEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:emptyListCell];
+                        cellempty.hidden = YES;
+                        self.emptyCell = cellempty;
                     }
                     return cellempty;
                 }

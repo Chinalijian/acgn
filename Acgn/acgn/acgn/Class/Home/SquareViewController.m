@@ -11,6 +11,7 @@
 @interface SquareViewController () <ContentListDelegate, ContentComDelegate>
 @property (nonatomic, strong) ContentListView *contentListView;
 @property (nonatomic, strong) NSString *lastID;
+@property (nonatomic, strong) NSString *firstID;
 @property (nonatomic, strong) NSMutableArray *squareArray;
 @end
 
@@ -22,6 +23,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.squareArray = [NSMutableArray array];
     self.lastID = @"-1";
+    self.firstID = @"";
     [self.view addSubview:self.contentListView];
     [self addRefreshLoadMore:self.contentListView.aTableView];
 }
@@ -38,9 +40,13 @@
 }
 
 - (void)refresh {
-    self.lastID = @"-1";
-    [self getSquareListData];
     
+    if ([self.firstID isEqualToString:@""]) {
+        self.lastID = @"-1";
+        [self getSquareListData];
+    } else {
+        [self refreshSquareListData];
+    }
 }
 
 - (void)loadMore {
@@ -74,8 +80,13 @@
                     [weakSelf.squareArray addObjectsFromArray:array];
                 }
                 [weakSelf updataAttentList:weakSelf.squareArray];
+                if (weakSelf.lastID.intValue == -1) {
+                    DynamicListData *model = [array firstObject];
+                    weakSelf.firstID = model.postId;
+                }
                 DynamicListData *model = [array lastObject];
                 weakSelf.lastID = model.postId;
+
             } else {
 
             }
@@ -83,6 +94,30 @@
         [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
     }];
 }
+
+- (void)refreshSquareListData {
+    WS(weakSelf);
+    [AApiModel getLatestPostContent:@"2" indexId:self.firstID block:^(BOOL result, RefreshDataSubModel *obj) {
+        if (result) {
+            if (!OBJ_IS_NIL(obj)) {
+                [weakSelf.squareArray removeAllObjects];
+                if (obj.latestPost.count > 0) {
+                    [weakSelf.squareArray addObjectsFromArray:obj.latestPost];
+                    DynamicListData *model = [obj.latestPost firstObject];
+                    weakSelf.firstID = model.postId;
+                }
+                if (obj.oldPost.count > 0) {
+                    [weakSelf.squareArray addObjectsFromArray:obj.oldPost];
+                    DynamicListData *modelLast = [obj.oldPost lastObject];
+                    weakSelf.lastID = modelLast.postId;
+                }
+                [weakSelf updataAttentList:weakSelf.squareArray];
+            } else { }
+        } else { }
+        [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
+    }];
+}
+
 
 - (void)clickPraiseUser:(id)sender {
     WS(weakSelf);

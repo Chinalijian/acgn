@@ -24,7 +24,7 @@
     [[ShareManage shareInstance] initThirdPartyInfo];
     [self initAcgnRootViewController];
     [self.window makeKeyAndVisible];
-   
+
     return YES;
 }
 

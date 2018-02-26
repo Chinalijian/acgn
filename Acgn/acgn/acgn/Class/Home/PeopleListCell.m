@@ -28,7 +28,7 @@
 - (void)configPeopleInfo:(PeopleDataModel *)objL objRight:(PeopleDataModel *)objR {
     if (!OBJ_IS_NIL(objL)) {
         
-        [self.leftView.peopleImageView sd_setImageWithURL:[NSURL URLWithString:objL.imageUrl] placeholderImage:nil];
+        [self.leftView.peopleImageView sd_setImageWithURL:[NSURL URLWithString:objL.imageUrl] placeholderImage:Default_Placeholder_Image];
         self.leftView.nameLabel.text = objL.userName;
         self.leftView.titleLabel.text = objL.source;
         self.leftView.fansLabel.text = [NSString stringWithFormat:@"粉丝：%@", objL.fansNum];
@@ -48,7 +48,7 @@
         self.leftView.lineLabel.hidden = YES;
     }
     if (!OBJ_IS_NIL(objR)) {
-        [self.rightView.peopleImageView sd_setImageWithURL:[NSURL URLWithString:objR.imageUrl] placeholderImage:nil];
+        [self.rightView.peopleImageView sd_setImageWithURL:[NSURL URLWithString:objR.imageUrl] placeholderImage:Default_Placeholder_Image];
         self.rightView.nameLabel.text = objR.userName;
         self.rightView.titleLabel.text = objR.source;
         self.rightView.fansLabel.text = [NSString stringWithFormat:@"粉丝：%@", objR.fansNum];

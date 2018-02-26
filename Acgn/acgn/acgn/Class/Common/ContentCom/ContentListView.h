@@ -29,4 +29,5 @@
 - (id)initWithFrame:(CGRect)frame delegate:(id<ContentListDelegate>) delegate withType:(ContentCom_Type)ccType;
 - (void)updateList:(NSMutableArray *)array;
 - (void)updateFabulous;
+- (void)detailsCommit;
 @end

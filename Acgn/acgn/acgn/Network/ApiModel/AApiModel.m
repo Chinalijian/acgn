@@ -185,7 +185,21 @@
         block (NO, nil);
     }];
 }
-
+//获取最新的帖子
++ (void)getLatestPostContent:(NSString *)type indexId:(NSString *)indexID block:(void(^)(BOOL result, RefreshDataSubModel *obj))block {
+    NSString *userID = [AccountInfo getUserID];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:indexID, @"indexId", @"20", @"rowPage", userID, @"uId", type, @"type", nil];
+    [[DMHttpClient sharedInstance] initWithUrl:DM_Latest_Post_Url parameters:dic method:DMHttpRequestPost dataModelClass:[RefreshDataSubModel class] isMustToken:NO success:^(id responseObject) {
+        if (!OBJ_IS_NIL(responseObject)) {
+            RefreshDataSubModel *model = (RefreshDataSubModel *)responseObject;
+            block(YES, model);
+        } else {
+            block(NO, nil);
+        }
+    } failure:^(NSError *error) {
+        block (NO, nil);
+    }];
+}
 //获取动态详情
 + (void)getPostDetilsData:(NSString *)postId block:(void(^)(BOOL result, DynamicListData *obj))block {
     NSString *userID = [AccountInfo getUserID];
@@ -220,8 +234,8 @@
 }
 //个人详情里 人物发的帖子列表
 + (void)getRoleDtailsListData:(NSString *)roleId lastId:(NSString *)lastId block:(void(^)(BOOL result, NSArray *array))block {
-    //NSString *userID = [AccountInfo getUserID];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:roleId, @"roleId", lastId, @"lastId", @"10", @"rowPage", nil];
+    NSString *userID = [AccountInfo getUserID];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:roleId, @"roleId", lastId, @"lastId", @"10", @"rowPage", userID, @"uId", nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_GetRoleDetails_List_Url parameters:dic method:DMHttpRequestPost dataModelClass:[RoleDetailsPostListData class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
             RoleDetailsPostListData *model = (RoleDetailsPostListData *)responseObject;

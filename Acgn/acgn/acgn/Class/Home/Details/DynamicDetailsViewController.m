@@ -43,7 +43,7 @@
     [self addRefreshLoadMore:self.contentListView.aTableView];
     [self.view addSubview:self.tempNavBar];
     self.tempNavBar.alpha = 0;
-
+    [self refresh];
     [[ NSNotificationCenter defaultCenter ] addObserver : self selector : @selector (statusBarFrameWillChange:) name : UIApplicationWillChangeStatusBarFrameNotification object : nil ];
     
     [[ NSNotificationCenter defaultCenter ] addObserver : self selector : @selector (layoutControllerSubViews:) name : UIApplicationDidChangeStatusBarFrameNotification object : nil ];
@@ -217,6 +217,7 @@
                 }
                 [weakSelf.commitArray addObjectsFromArray:array];
                 weakSelf.obj.commentList = weakSelf.commitArray;
+                [weakSelf.contentListView detailsCommit];
                 [weakSelf updataAttentList:weakSelf.detailsData];
                 DynamicCommentListData *model = [array lastObject];
                 weakSelf.lastID = model.commentId;
@@ -236,7 +237,7 @@
 - (void)addRefreshLoadMore:(UITableView *)tableView {
     tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
     tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
-    [tableView.mj_header beginRefreshing];
+    //[tableView.mj_header beginRefreshing];
 }
 
 - (void)endRefreshing:(UITableView *)tableView {

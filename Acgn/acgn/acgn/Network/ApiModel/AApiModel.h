@@ -31,6 +31,8 @@
 + (void)getHomeAttentList:(NSString *)lastId block:(void(^)(BOOL result, NSArray *array))block;
 //首页广场
 + (void)getHomePostList:(NSString *)lastId block:(void(^)(BOOL result, NSArray *array))block;
+//获取最新的帖子
++ (void)getLatestPostContent:(NSString *)type indexId:(NSString *)indexID block:(void(^)(BOOL result, RefreshDataSubModel *obj))block;
 //获取动态详情
 + (void)getPostDetilsData:(NSString *)postId block:(void(^)(BOOL result, DynamicListData *obj))block;
 //获取动态评论列表

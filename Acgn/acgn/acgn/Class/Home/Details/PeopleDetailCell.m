@@ -43,14 +43,14 @@
 + (CGFloat)getPeopleDetailCellHeight:(RoleDetailsPostData *)obj {
     CGFloat contentHeight = [PeopleDetailCell getContentMaxHeight:obj]+10;
     CGFloat picHeight = 0;
-    if (obj.postType.integerValue == Info_Type_Picture || obj.postType.integerValue == Info_Type_GIf_Pic ) {
+    if (obj.postType.integerValue == Info_Type_GIf_Pic) {
         //图片
         picHeight = [PeopleDetailCell getImageMaxHeight:obj];
         if (picHeight>0) {
             picHeight = picHeight + Space_Content_;
         }
         
-    } else if (obj.postType.integerValue == Info_Type_Video) {
+    } else if (obj.postType.integerValue == Info_Type_Video || obj.postType.integerValue == Info_Type_Url_Video) {
         //视频
         picHeight = Video_Height +10;
     }
@@ -101,13 +101,16 @@
             case Info_Type_Text:
                 self.typeImageView.image = [UIImage imageNamed:@"Text_Image_Icon"];
                 break;
-            case Info_Type_Picture:
-                self.typeImageView.image = [UIImage imageNamed:@"Picture_Image_Icon"];
-                break;
+//            case Info_Type_Picture:
+//                self.typeImageView.image = [UIImage imageNamed:@"Picture_Image_Icon"];
+//                break;
             case Info_Type_GIf_Pic:
                 self.typeImageView.image = [UIImage imageNamed:@"Picture_Image_Icon"];
                 break;
             case Info_Type_Video:
+                self.typeImageView.image = [UIImage imageNamed:@"Video_Image_Icon"];
+                break;
+            case Info_Type_Url_Video:
                 self.typeImageView.image = [UIImage imageNamed:@"Video_Image_Icon"];
                 break;
             default:
@@ -126,7 +129,7 @@
                 make.height.mas_offset(imageH);
             }];
             
-            [self.imageCom configImageCom:obj.postUrls height:imageH type:obj.postType.integerValue];
+            [self.imageCom configImageCom:obj.postUrls height:imageH type:obj.postType.integerValue thumbnailUrl:obj.thumbnailUrl];
         }
         [self.seeNumButton setTitle:obj.seeNum forState:UIControlStateNormal];
         [self.commitNumButton setTitle:obj.commentNum forState:UIControlStateNormal];

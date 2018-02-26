@@ -65,6 +65,14 @@
     CGFloat imageH = 0;
     if (obj.postType.integerValue != Info_Type_Text) {
         imageH = [ContentCom getImageMaxHeight:obj];
+        if ((obj.postType.integerValue == Info_Type_Url_Video || obj.postType.integerValue == Info_Type_Video)) {
+            if (STR_IS_NIL(obj.thumbnailUrl) && obj.postUrls.count == 0) {
+                imageH = 0;
+            } else {
+                imageH = Image_Height;
+            }
+            
+        }
     }
     CGFloat contentH = [ContentCom getContentMaxHeight:obj];
     CGFloat contentTotalH = Content_Label_Space_Y;
@@ -225,12 +233,22 @@
     CGFloat imageH = 0;
     if (obj.postType.integerValue != Info_Type_Text) {
         imageH = [ContentCom getImageMaxHeight:obj];
+        if ((obj.postType.integerValue == Info_Type_Url_Video || obj.postType.integerValue == Info_Type_Video)) {
+            if (STR_IS_NIL(obj.thumbnailUrl) && obj.postUrls.count == 0) {
+                imageH = 0;
+            } else {
+                imageH = Image_Height;
+            }
+            
+        }
         [_imageComView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(Image_Space);
             make.height.mas_offset(imageH);
         }];
-        
-        [self.imageComView configImageCom:obj.postUrls height:imageH type:obj.postType.integerValue];
+        if (obj.postType.integerValue == Info_Type_Url_Video || obj.postType.integerValue == Info_Type_Video) {
+            self.imageComView.viedoTime = obj.videoTime;
+        }
+        [self.imageComView configImageCom:obj.postUrls height:imageH type:obj.postType.integerValue thumbnailUrl:obj.thumbnailUrl];
     }
    
     //[self layoutSubviews];
