@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSMutableArray *noFollowIDs;
 
 @property (nonatomic, strong) NSString *lastID;
+@property (nonatomic, strong) NSString *firstID;
 @property (nonatomic, strong) NSMutableArray *attentListDatas;
 @property (nonatomic, assign) BOOL isNotificationGetDynamicData;
 @end
@@ -41,6 +42,7 @@
     self.noFollowIDs = [NSMutableArray array];//不关注的roleID列表
     [self.attentListDatas removeAllObjects];
     self.lastID = @"-1";
+    self.firstID = @"";
     self.lastPeopleID = @"-1";
     if (hasCollection.intValue > 0) {
         [self addRefreshLoadMore:self.contentListView.aTableView];
@@ -75,6 +77,7 @@
     self.lastPeopleID = @"-1";
     self.attentListDatas = [NSMutableArray array];
     self.lastID = @"-1";
+    self.firstID = @"";
     [self.view addSubview:self.contentListView];
     NSString *hasCollection = [AccountInfo getHasFollowStatus];
     if (STR_IS_NIL([AccountInfo getUserID]) || hasCollection.integerValue <= 0) {
@@ -113,8 +116,12 @@
     if (!STR_IS_NIL([AccountInfo getUserID])) {
         NSString *hasCollection = [AccountInfo getHasFollowStatus];
         if (hasCollection.intValue > 0) {
-            self.lastID = @"-1";
-            [self attentDynamicList];
+            if ([self.firstID isEqualToString:@""]) {
+                self.lastID = @"-1";
+                [self attentDynamicList];
+            } else {
+                [self refreshDynamicData];
+            }
             return;
         }
     }
@@ -196,6 +203,10 @@
             if (!OBJ_IS_NIL(array) && array.count > 0) {
                 [weakSelf.attentListDatas addObjectsFromArray:array];
                 [weakSelf updataAttentList:weakSelf.attentListDatas];
+                if (weakSelf.lastID.intValue == -1) {
+                    DynamicListData *model = [array firstObject];
+                    weakSelf.firstID = model.postId;
+                }
                 DynamicListData *model = [array lastObject];
                 weakSelf.lastID = model.postId;
                 [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
@@ -210,6 +221,45 @@
             [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
         }
         
+    }];
+}
+
+- (void)refreshDynamicData {
+    WS(weakSelf);
+    [AApiModel getLatestPostContent:@"1" indexId:self.firstID block:^(BOOL result, RefreshDataSubModel *obj) {
+        if (result) {
+            if (!OBJ_IS_NIL(obj)) {
+//                NSRange range = NSMakeRange(0, [array count]);
+//                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+//                [weakSelf.attentListDatas insertObjects:array atIndexes:indexSet];
+                [weakSelf.attentListDatas removeAllObjects];
+                if (obj.latestPost.count > 0) {
+                    [weakSelf.attentListDatas addObjectsFromArray:obj.latestPost];
+                    DynamicListData *model = [obj.latestPost firstObject];
+                    weakSelf.firstID = model.postId;
+                }
+                if (obj.oldPost.count > 0) {
+                    [weakSelf.attentListDatas addObjectsFromArray:obj.oldPost];
+                    DynamicListData *modelLast = [obj.oldPost lastObject];
+                    weakSelf.lastID = modelLast.postId;
+                }
+                [weakSelf updataAttentList:weakSelf.attentListDatas];
+                [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
+                
+                if (obj.latestPost.count <= 0 && obj.oldPost.count <= 0) {
+                    //goto 关注人物列表页
+                    [weakSelf performSelector:@selector(delayMethodShowPeopleView) withObject:nil afterDelay:1.0];
+                }
+                
+            } else {
+                [weakSelf.contentListView.aTableView reloadData];
+                [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
+                //goto 关注人物列表页
+                [weakSelf performSelector:@selector(delayMethodShowPeopleView) withObject:nil afterDelay:1.0];
+            }
+        } else {
+            [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
+        }
     }];
 }
 
@@ -331,6 +381,7 @@
     
     [self.attentListDatas removeAllObjects];
     self.lastID = @"-1";
+    self.firstID = @"";
 }
 
 -(AttentionPeopleList *)apListView{

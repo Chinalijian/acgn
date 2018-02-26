@@ -10,6 +10,7 @@
 
 //列表图片/视频的View
 @interface ImageCom : UIView
+@property (nonatomic, strong) NSString *viedoTime;
 - (id)initWithBigImage:(CGFloat)width
         bigImageHeight:(CGFloat)height
        smallImageWidth:(CGFloat)swidth
@@ -17,5 +18,5 @@
             smallSpace:(CGFloat)sspace
                 frameW:(CGFloat)frameW
                 frameH:(CGFloat)frameH;
-- (void)configImageCom:(NSArray *)array height:(CGFloat)height type:(Info_Type)type;
+- (void)configImageCom:(NSArray *)array height:(CGFloat)height type:(Info_Type)type thumbnailUrl:(NSString *)thumbnailUrl;
 @end

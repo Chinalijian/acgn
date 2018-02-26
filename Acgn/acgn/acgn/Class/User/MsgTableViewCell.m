@@ -45,7 +45,7 @@
 - (void)configDynamicObj:(DynamicCommentListData *)obj {
     [self cleanSubViewInfo];
     if (!OBJ_IS_NIL(obj)) {
-        [self.headImageView sd_setImageWithURL:[NSURL URLWithString:obj.avatar] placeholderImage:PlaceholderImage];
+        [self.headImageView sd_setImageWithURL:[NSURL URLWithString:obj.avatar] placeholderImage:Default_Placeholder_Image];
         self.nameLabel.text = obj.otherName;
         self.commitLabel.text = obj.replyContext;
         self.timeLabel.text = obj.commentTime;

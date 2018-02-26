@@ -83,6 +83,7 @@
 		2ADF21C82022DF1600559427 /* AttentionPeopleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF21C72022DF1600559427 /* AttentionPeopleList.m */; };
 		2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF21CA20230E9C00559427 /* UImage+colorImge.m */; };
 		2ADF21CD2023139800559427 /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2ADF21CC2023139800559427 /* image.jpeg */; };
+		2AFDA56E2043F00F0056F29F /* RefreshDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AFDA56D2043F00F0056F29F /* RefreshDataModel.m */; };
 		300DE1542024ACBA008DBCBD /* NickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1532024ACBA008DBCBD /* NickNameViewController.m */; };
 		300DE1572024D1DD008DBCBD /* UserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1562024D1DD008DBCBD /* UserView.m */; };
 		300DE15A2024D1F9008DBCBD /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1592024D1F9008DBCBD /* UserCell.m */; };
@@ -296,6 +297,8 @@
 		2ADF21C920230E9C00559427 /* UImage+colorImge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UImage+colorImge.h"; sourceTree = "<group>"; };
 		2ADF21CA20230E9C00559427 /* UImage+colorImge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UImage+colorImge.m"; sourceTree = "<group>"; };
 		2ADF21CC2023139800559427 /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
+		2AFDA56C2043F00F0056F29F /* RefreshDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RefreshDataModel.h; sourceTree = "<group>"; };
+		2AFDA56D2043F00F0056F29F /* RefreshDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RefreshDataModel.m; sourceTree = "<group>"; };
 		300DE1522024ACBA008DBCBD /* NickNameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NickNameViewController.h; sourceTree = "<group>"; };
 		300DE1532024ACBA008DBCBD /* NickNameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NickNameViewController.m; sourceTree = "<group>"; };
 		300DE1552024D1DD008DBCBD /* UserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserView.h; sourceTree = "<group>"; };
@@ -637,6 +640,8 @@
 				30FD39222028D0E000F26185 /* PeopleListDataModel.m */,
 				30F6FE86202C9D6800EB96A8 /* DynamicData.h */,
 				30F6FE87202C9D6800EB96A8 /* DynamicData.m */,
+				2AFDA56C2043F00F0056F29F /* RefreshDataModel.h */,
+				2AFDA56D2043F00F0056F29F /* RefreshDataModel.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1167,6 +1172,7 @@
 				2ADF21C42022C3FC00559427 /* RegisterViewController.m in Sources */,
 				2A23AA07203416DE00F6E7D2 /* VPImageCropperViewController.m in Sources */,
 				2A23741B2031D58A00297AB2 /* POPAnimationTracer.mm in Sources */,
+				2AFDA56E2043F00F0056F29F /* RefreshDataModel.m in Sources */,
 				3048356720279FA000DAAE3F /* SquareViewController.m in Sources */,
 				2A65145E20284B7D00737DEF /* MulCategoryScrollView.m in Sources */,
 			);

@@ -13,7 +13,7 @@
 @property (nonatomic, strong) UIImageView *bigSourceImageView;
 @property (nonatomic, strong) UILabel *typeLabel;
 
-@property (nonatomic, strong) UIImageView *videoIconView;
+@property (nonatomic, strong) UIButton *videoIconView;
 @property (nonatomic, strong) UIView *smallImageView;
 
 @property (nonatomic, assign) CGFloat bWidth;
@@ -60,72 +60,87 @@
     return self;
 }
 
-- (void)configImageCom:(NSArray *)array height:(CGFloat)height type:(Info_Type)type {
+- (void)onlySinglePic:(NSString *)imageUrl height:(CGFloat)height {
+    
+    self.bigImageView.frame = CGRectMake(0, 0, self.bigImageView.frame.size.width, height);
+    //self.bigImageView.backgroundColor = [UIColor redColor];
+    self.smallImageView.hidden = YES;
+    self.bigImageView.hidden = NO;
+    self.typeLabel.hidden = YES;
+    self.videoIconView.hidden = YES;
+    NSString * imageUrlS = [imageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [self displaySourceImage:imageUrlS];
+    self.bigImageView.userInteractionEnabled = YES;
+    //2.添加手势
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap:)];
+    [_bigImageView addGestureRecognizer:tap];
+    if (_typeInfo == Info_Type_GIf_Pic) {
+        if ([[imageUrlS lastPathComponent] containsString:@".gif"]) {
+            self.typeLabel.text = @"GIF";
+            self.typeLabel.hidden = NO;
+        } else {
+            self.typeLabel.text = @"";
+            self.typeLabel.hidden = YES;
+        }
+    } else if (_typeInfo == Info_Type_Video || _typeInfo == Info_Type_Url_Video) {
+        if (STR_IS_NIL(self.viedoTime)) {
+            self.typeLabel.text = self.viedoTime;
+            self.typeLabel.hidden = NO;
+            self.videoIconView.hidden = NO;
+        } else {
+            self.typeLabel.text = @"未知";
+            self.typeLabel.hidden = NO;
+            self.videoIconView.hidden = NO;
+        }
+    }
+}
+
+- (void)cleanSubObj {
+    self.smallImageView.frame = CGRectZero;
+    self.bigImageView.frame = CGRectZero;
+    self.smallImageView.hidden = YES;
+    self.bigImageView.hidden = YES;
+    self.typeLabel.hidden = YES;
+    self.videoIconView.hidden = YES;
+}
+
+- (void)configImageCom:(NSArray *)array height:(CGFloat)height type:(Info_Type)type thumbnailUrl:(NSString *)thumbnailUrl {
     self.typeInfo = type;
     [self.bigImgUrls removeAllObjects];
     [self.imageViews removeAllObjects];
-    if (![array isKindOfClass:[NSArray class]] || OBJ_IS_NIL(array) || array.count == 0) {
-        NSLog(@"进来了 = %@", array);
-        self.smallImageView.frame = CGRectZero;
-        self.bigImageView.frame = CGRectZero;
-        self.smallImageView.hidden = YES;
-        self.bigImageView.hidden = YES;
-        self.typeLabel.hidden = YES;
-        return;
-    }
-    
-    [self.bigImgUrls addObjectsFromArray: array];
-    self.smallImageView.frame = CGRectMake(0, 0, self.smallImageView.frame.size.width, height);
-    
-    NSInteger imageCount = [array count];
-    if (imageCount > 0) {
-        if (imageCount == 1) {
-            self.bigImageView.frame = CGRectMake(0, 0, self.bigImageView.frame.size.width, height);
-            //self.bigImageView.backgroundColor = [UIColor redColor];
-            self.smallImageView.hidden = YES;
-            self.bigImageView.hidden = NO;
-            self.typeLabel.hidden = YES;
-            NSString *url = [array firstObject];
-            NSString * imageUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-            //[self.bigImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@""]];
-            [self displaySourceImage:imageUrl];
-            
-//            [self.imageViews addObject:self.bigImageView];
-            self.bigImageView.userInteractionEnabled = YES;
-            //2.添加手势
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap:)];
-            [_bigImageView addGestureRecognizer:tap];
-            if (_typeInfo == Info_Type_GIf_Pic) {
-                if ([[imageUrl lastPathComponent] containsString:@".gif"]) {
-                    self.typeLabel.text = @"GIF";
-                    self.typeLabel.hidden = NO;
-                } else {
-                    self.typeLabel.text = @"";
-                    self.typeLabel.hidden = YES;
-                }
-            } else if (_typeInfo == Info_Type_Video) {
-                
-            }
-            
+    if (self.typeInfo == Info_Type_Video || self.typeInfo == Info_Type_Url_Video) { //视频
+        if ((![array isKindOfClass:[NSArray class]] || OBJ_IS_NIL(array) || array.count == 0) && STR_IS_NIL(thumbnailUrl)) {
+            [self cleanSubObj];
         } else {
-            self.bigImageView.frame = CGRectMake(0, 0, self.bigImageView.frame.size.width, 0);
-            self.smallImageView.hidden = NO;
-            self.typeLabel.hidden = YES;
-            self.bigImageView.hidden = YES;
-            for(UIView *view in [self.smallImageView subviews]) {
-                [view removeFromSuperview];
-            }
-            [self initSmallImages:array];
-//            for (int i = 0; i < imageCount; i ++) {
-//                UIImageView *iV = [self.smallImageView viewWithTag:1000+i];
-//                NSString *url = [array objectAtIndex:i];
-//                NSString * imageUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-//                [iV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
-//            }
+            [self.bigImgUrls addObjectsFromArray: array];
+            self.smallImageView.frame = CGRectMake(0, 0, self.smallImageView.frame.size.width, height);
+            [self onlySinglePic:thumbnailUrl height:height];
         }
+        
     } else {
-        self.smallImageView.frame = CGRectZero;
-        self.bigImageView.frame = CGRectZero;
+        //图片
+        if ((![array isKindOfClass:[NSArray class]] || OBJ_IS_NIL(array) || array.count == 0)) {
+            [self cleanSubObj];
+        } else {
+            [self.bigImgUrls addObjectsFromArray: array];
+            self.smallImageView.frame = CGRectMake(0, 0, self.smallImageView.frame.size.width, height);
+            NSInteger imageCount = [array count];
+
+            if (imageCount == 1) {
+                NSString *url = [array firstObject];
+                [self onlySinglePic:url height:height];
+            } else {
+                self.bigImageView.frame = CGRectMake(0, 0, self.bigImageView.frame.size.width, 0);
+                self.smallImageView.hidden = NO;
+                self.typeLabel.hidden = YES;
+                self.bigImageView.hidden = YES;
+                self.videoIconView.hidden = YES;
+                for(UIView *view in [self.smallImageView subviews]) {
+                    [view removeFromSuperview];
+                }
+                [self initSmallImages:array];
+            }
+        }
     }
 }
 
@@ -133,7 +148,9 @@
     WS(weakSelf);
     __weak __typeof(&*self.bigSourceImageView) weakImageView = self.bigSourceImageView;
     __weak __typeof(&*self.typeLabel) weakLabel = self.typeLabel;
-    [self.bigSourceImageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:nil options:SDWebImageAvoidAutoSetImage progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    __weak __typeof(&*self.videoIconView) weakVideoIconView = self.videoIconView;
+   
+    [self.bigSourceImageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:Default_Placeholder_Image options:SDWebImageAvoidAutoSetImage progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
     } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             //do something.....
@@ -167,9 +184,12 @@
                         imageVRect.origin.x = 0;//(weakSelf.bWidth-imageVRect.size.width)/2;
                         imageVRect.origin.y = 0;//(weakSelf.bHeight-imageVRect.size.height)/2;
                         strongImageView.frame = imageVRect;
-                        weakLabel.frame = CGRectMake(imageVRect.size.width-24-4, imageVRect.size.height-16-4, 24, 16);
-                        //weakLabel.hidden = NO;
-                        //weakLabel.layer.cornerRadius = 7;
+                        if (weakSelf.typeInfo == Info_Type_Video || weakSelf.typeInfo == Info_Type_Url_Video) {
+                            weakLabel.frame = CGRectMake(imageVRect.size.width-35-4, imageVRect.size.height-16-4, 35, 16);
+                            weakVideoIconView.frame = CGRectMake((imageVRect.size.width-38)/2, (imageVRect.size.height/2)/2, 38, 38);
+                        } else {
+                            weakLabel.frame = CGRectMake(imageVRect.size.width-24-4, imageVRect.size.height-16-4, 24, 16);
+                        }
                         strongImageView.image = image;
                         [weakSelf.imageViews addObject:strongImageView];
                         [strongImageView setNeedsLayout];
@@ -198,6 +218,18 @@
     self.bigSourceImageView.clipsToBounds = YES;
     self.bigSourceImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.bigImageView addSubview:self.bigSourceImageView];
+    
+    self.videoIconView = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.videoIconView.frame = CGRectMake(0, 0, 38, 38);
+    self.videoIconView.backgroundColor = UIColorFromRGB(0x2D2D30);
+    self.videoIconView.alpha = .5;
+    [self.videoIconView setImage:[UIImage imageNamed:@"home_video_icon"] forState:UIControlStateNormal];
+    //self.videoIconView.image = [UIImage imageNamed:@"home_video_icon"];
+    self.videoIconView.userInteractionEnabled = NO;
+    self.videoIconView.clipsToBounds = YES;
+    self.videoIconView.layer.cornerRadius = 19;
+    [self.bigSourceImageView addSubview:self.videoIconView];
+    self.videoIconView.hidden = YES;
     
     self.typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 24, 16)];
     _typeLabel.text = @"";
@@ -243,7 +275,8 @@
         
         NSString *url = [array objectAtIndex:i];
         NSString * imageUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        [imageV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
+        
+        [imageV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:Default_Placeholder_Image];
 
         
         if (_typeInfo == Info_Type_GIf_Pic) {

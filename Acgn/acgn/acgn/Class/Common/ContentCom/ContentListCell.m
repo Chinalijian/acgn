@@ -55,7 +55,7 @@
     self.cellObj = obj;
     [self cleanSubViewInfo];
     if (!OBJ_IS_NIL(obj)) {
-        [self.headImageView sd_setImageWithURL:[NSURL URLWithString:obj.avatar] placeholderImage:PlaceholderImage];
+        [self.headImageView sd_setImageWithURL:[NSURL URLWithString:obj.avatar] placeholderImage:Default_Placeholder_Image];
         self.nameLabel.text = obj.userName;
         self.commitLabel.text = obj.commentContext;
         self.timeLabel.text = obj.commentTime;

@@ -20,12 +20,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "acgn/Network/ApiModel/AApiModel.m"
-            timestampString = "541075510.746768"
+            timestampString = "541334810.196297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "537"
-            endingLineNumber = "537"
-            landmarkName = "+loginQQ:block:"
+            startingLineNumber = "551"
+            endingLineNumber = "551"
+            landmarkName = "+loginWeibo:block:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "acgn/Class/Home/AttentViewController.m"
+            timestampString = "541334810.196367"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "-requestAttentPeoples"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

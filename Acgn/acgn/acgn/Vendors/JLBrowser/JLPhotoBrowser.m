@@ -139,7 +139,6 @@
     return [NSData dataWithContentsOfFile:path];
 }
 
-
 -(void)setupSmallScrollViews{
     WS(weakSelf);
     for (int i=0; i<self.photos.count; i++) {
@@ -214,7 +213,7 @@
 //        }
 //    }];
     
-    [photo sd_setImageWithURL:bigImgUrl placeholderImage:nil options:SDWebImageRetryFailed | SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    [photo sd_setImageWithURL:bigImgUrl placeholderImage:Default_Placeholder_Image options:SDWebImageRetryFailed | SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         //设置进度条
         //loop.progressValue = (CGFloat)receivedSize/(CGFloat)expectedSize;
     } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {

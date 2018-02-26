@@ -79,6 +79,7 @@
 @property (nonatomic, copy) NSString *replyNum;
 @property (nonatomic, copy) NSString *hasFollow;
 @property (nonatomic, copy) NSString *postUrl;
+@property (nonatomic, copy) NSString *videoTime;
 @property (nonatomic, strong) NSArray *commentList;
 
 //动态详情里面特有的
