@@ -11,6 +11,7 @@
 @interface ImageCom()
 @property (nonatomic, strong) UIImageView *bigImageView;
 @property (nonatomic, strong) UIImageView *bigSourceImageView;
+@property (nonatomic, strong) UILabel *typeLabel;
 
 @property (nonatomic, strong) UIImageView *videoIconView;
 @property (nonatomic, strong) UIView *smallImageView;
@@ -36,13 +37,7 @@
 @property (nonatomic, strong) UILabel *gifLabel;
 
 @end
-/*
- FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif"]]];
- FLAnimatedImageView *imageView = [[FLAnimatedImageView alloc] init];
- imageView.animatedImage = image;
- imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
- [self.view addSubview:imageView];
- */
+
 @implementation ImageCom
 - (id)initWithBigImage:(CGFloat)width
         bigImageHeight:(CGFloat)height
@@ -75,6 +70,7 @@
         self.bigImageView.frame = CGRectZero;
         self.smallImageView.hidden = YES;
         self.bigImageView.hidden = YES;
+        self.typeLabel.hidden = YES;
         return;
     }
     
@@ -88,6 +84,7 @@
             //self.bigImageView.backgroundColor = [UIColor redColor];
             self.smallImageView.hidden = YES;
             self.bigImageView.hidden = NO;
+            self.typeLabel.hidden = YES;
             NSString *url = [array firstObject];
             NSString * imageUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
             //[self.bigImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@""]];
@@ -98,22 +95,33 @@
             //2.添加手势
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap:)];
             [_bigImageView addGestureRecognizer:tap];
-            
+            if (_typeInfo == Info_Type_GIf_Pic) {
+                if ([[imageUrl lastPathComponent] containsString:@".gif"]) {
+                    self.typeLabel.text = @"GIF";
+                    self.typeLabel.hidden = NO;
+                } else {
+                    self.typeLabel.text = @"";
+                    self.typeLabel.hidden = YES;
+                }
+            } else if (_typeInfo == Info_Type_Video) {
+                
+            }
             
         } else {
             self.bigImageView.frame = CGRectMake(0, 0, self.bigImageView.frame.size.width, 0);
             self.smallImageView.hidden = NO;
+            self.typeLabel.hidden = YES;
             self.bigImageView.hidden = YES;
             for(UIView *view in [self.smallImageView subviews]) {
                 [view removeFromSuperview];
             }
-            [self initSmallImages:array.count];
-            for (int i = 0; i < imageCount; i ++) {
-                UIImageView *iV = [self.smallImageView viewWithTag:1000+i];
-                NSString *url = [array objectAtIndex:i];
-                NSString * imageUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                [iV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
-            }
+            [self initSmallImages:array];
+//            for (int i = 0; i < imageCount; i ++) {
+//                UIImageView *iV = [self.smallImageView viewWithTag:1000+i];
+//                NSString *url = [array objectAtIndex:i];
+//                NSString * imageUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+//                [iV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
+//            }
         }
     } else {
         self.smallImageView.frame = CGRectZero;
@@ -124,6 +132,7 @@
 - (void)displaySourceImage:(NSString *)url {
     WS(weakSelf);
     __weak __typeof(&*self.bigSourceImageView) weakImageView = self.bigSourceImageView;
+    __weak __typeof(&*self.typeLabel) weakLabel = self.typeLabel;
     [self.bigSourceImageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:nil options:SDWebImageAvoidAutoSetImage progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
     } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -132,19 +141,6 @@
                 __typeof(&*weakImageView) strongImageView = weakImageView;
                 if (strongImageView) {
                     if (image != nil) {
-////                        if (image.size.width >= weakSelf.bWidth && image.size.height >= weakSelf.bHeight) {
-////                            strongImageView.frame = CGRectMake(0, 0, weakSelf.bWidth, weakSelf.bHeight);
-////                        } else
-//                        if (image.size.width >= image.size.height) {
-//                            //横着的长方形或者正方形
-//                            CGFloat viewH = (image.size.height)/(image.size.width)*(weakSelf.bWidth);
-//                            strongImageView.frame = CGRectMake(0, 0, weakSelf.bWidth, viewH);
-//                        } else {
-//                            //竖着的长方形
-//                            CGFloat viewW = (image.size.width)/(image.size.height)*(weakSelf.bHeight);
-//                            strongImageView.frame = CGRectMake(0, 0, viewW, weakSelf.bHeight);
-//                        }
-//                        NSLog(@"dddd = %f", strongImageView.frame.size.height);
                         //得到当前视图的frame
     
                         //得到当前Image的frame
@@ -171,7 +167,9 @@
                         imageVRect.origin.x = 0;//(weakSelf.bWidth-imageVRect.size.width)/2;
                         imageVRect.origin.y = 0;//(weakSelf.bHeight-imageVRect.size.height)/2;
                         strongImageView.frame = imageVRect;
-                    
+                        weakLabel.frame = CGRectMake(imageVRect.size.width-24-4, imageVRect.size.height-16-4, 24, 16);
+                        //weakLabel.hidden = NO;
+                        //weakLabel.layer.cornerRadius = 7;
                         strongImageView.image = image;
                         [weakSelf.imageViews addObject:strongImageView];
                         [strongImageView setNeedsLayout];
@@ -201,14 +199,26 @@
     self.bigSourceImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.bigImageView addSubview:self.bigSourceImageView];
     
+    self.typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 24, 16)];
+    _typeLabel.text = @"";
+    _typeLabel.textColor = [UIColor whiteColor];
+    _typeLabel.font = [UIFont systemFontOfSize:9];
+    _typeLabel.backgroundColor = UIColorFromRGB(0x2D2D30);
+    _typeLabel.alpha = .5;
+    _typeLabel.clipsToBounds = YES;
+    _typeLabel.layer.cornerRadius = 7;
+    _typeLabel.textAlignment = NSTextAlignmentCenter;
+    [self.bigSourceImageView addSubview:self.typeLabel];
+    self.typeLabel.hidden = YES;
+    
     self.smallImageView.hidden = YES;
     self.bigImageView.hidden = YES;
 }
 
-- (void)initSmallImages:(NSInteger)count {
+- (void)initSmallImages:(NSArray *)array {
     CGFloat XX = _sSpace;
     CGFloat YY = _sSpace;
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < array.count; i++) {
         if (i%3 == 0) {
             XX = _sSpace;
         } else {
@@ -230,6 +240,27 @@
         [imageV addGestureRecognizer:tap];
         
         [self.imageViews addObject:imageV];
+        
+        NSString *url = [array objectAtIndex:i];
+        NSString * imageUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        [imageV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
+
+        
+        if (_typeInfo == Info_Type_GIf_Pic) {
+            if ([[imageUrl lastPathComponent] containsString:@".gif"]) {
+                
+                UILabel *typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(_sWidth-24-4, _sHeight-16-4, 24, 16)];
+                typeLabel.text = @"GIF";
+                typeLabel.textColor = [UIColor whiteColor];
+                typeLabel.font = [UIFont systemFontOfSize:9];
+                typeLabel.backgroundColor = UIColorFromRGB(0x2D2D30);
+                typeLabel.alpha = .5;
+                typeLabel.clipsToBounds = YES;
+                typeLabel.layer.cornerRadius = 7;
+                typeLabel.textAlignment = NSTextAlignmentCenter;
+                [imageV addSubview:typeLabel];
+            }
+        }
     }
 }
 

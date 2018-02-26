@@ -132,8 +132,16 @@
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD show];
 }
+//从沙盒读取
+- (NSData *)imageDataFromDiskCacheWithKey:(NSString *)key
+{
+    NSString *path = [[[SDWebImageManager sharedManager] imageCache] defaultCachePathForKey:key];
+    return [NSData dataWithContentsOfFile:path];
+}
+
+
 -(void)setupSmallScrollViews{
-    
+    WS(weakSelf);
     for (int i=0; i<self.photos.count; i++) {
         
         UIScrollView *smallScrollView = [self creatSmallScrollView:i];
@@ -141,7 +149,22 @@
         FLAnimatedImageView *imageView = [[FLAnimatedImageView alloc] init];
         NSString * imageUrl = [photo.bigImgUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         if (self.typeInfo == Info_Type_GIf_Pic) {
+            
             if ([[photo.bigImgUrl lastPathComponent] containsString:@".gif"]) {
+                
+                //将GIF转换成Data
+                NSData *gifImageData = [self imageDataFromDiskCacheWithKey:imageUrl];
+                if (gifImageData) {
+                    [self animatedImageView:imageView data:gifImageData photo:photo scrollView:smallScrollView index:i];
+                } else {
+                    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageUrl] options:0 progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                        [[SDImageCache sharedImageCache] storeImage:image imageData:data forKey:imageUrl toDisk:YES completion:^{
+                            
+                        }];
+                        [weakSelf animatedImageView:imageView data:data photo:photo scrollView:smallScrollView index:i];
+                    }];
+                }
+                /*
                 dispatch_queue_t queue =dispatch_queue_create("loadImage",NULL);
                 dispatch_async(queue, ^{
                     FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
@@ -156,7 +179,7 @@
                             [self setupGIFPhotoFrame:photo];
                         }];
                     });
-                });
+                });*/
             } else {
                 [smallScrollView addSubview:photo];
                 [self loadUrlImage:photo imageUrl:imageUrl loop:nil index:i];
@@ -166,6 +189,18 @@
             [self loadUrlImage:photo imageUrl:imageUrl loop:nil index:i];
         }
     }
+}
+//通过数据创建GIF
+- (void)animatedImageView:(FLAnimatedImageView *)imageView data:(NSData *)data photo:(JLPhoto *)photo scrollView:(UIScrollView *)smallScrollView index:(int)i {
+    FLAnimatedImage *gifImage = [FLAnimatedImage animatedImageWithGIFData:data];
+    imageView.animatedImage = gifImage;
+    photo.gifSourceImageView = imageView;
+    [photo addSubview:imageView];
+    [smallScrollView addSubview:photo];
+    photo.frame = [self.originRects[i] CGRectValue];
+    [UIView animateWithDuration:0.3 animations:^{
+        [self setupGIFPhotoFrame:photo];
+    }];
 }
 
 - (void)loadUrlImage:(JLPhoto *)photo imageUrl:(NSString *)imageUrl loop:(JLPieProgressView *)loop index:(int)i {
