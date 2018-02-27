@@ -33,6 +33,8 @@
     // Do any additional setup after loading the view.
     self.title = @"动态详情";
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     self.lastID = @"-1";
     self.detailsData = [NSMutableArray array];
     self.commitArray = [NSMutableArray array];
