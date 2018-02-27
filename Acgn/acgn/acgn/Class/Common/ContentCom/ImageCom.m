@@ -186,7 +186,7 @@
                         strongImageView.frame = imageVRect;
                         if (weakSelf.typeInfo == Info_Type_Video || weakSelf.typeInfo == Info_Type_Url_Video) {
                             weakLabel.frame = CGRectMake(imageVRect.size.width-35-4, imageVRect.size.height-16-4, 35, 16);
-                            weakVideoIconView.frame = CGRectMake((imageVRect.size.width-38)/2, (imageVRect.size.height/2)/2, 38, 38);
+                            weakVideoIconView.frame = CGRectMake((imageVRect.size.width-38)/2, (imageVRect.size.height-38)/2, 38, 38);
                         } else {
                             weakLabel.frame = CGRectMake(imageVRect.size.width-24-4, imageVRect.size.height-16-4, 24, 16);
                         }

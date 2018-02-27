@@ -66,7 +66,7 @@
 }
 
 - (void)clickVideoListPlay:(Info_Type)type videoUrl:(NSString *)videoUrl {
-    videoUrl = @"http://120.25.226.186:32812/resources/videos/minion_01.mp4";
+    //videoUrl = @"http://120.25.226.186:32812/resources/videos/minion_01.mp4";
     if (STR_IS_NIL(videoUrl)) {
         [ATools showSVProgressHudCustom:@"" title:@"视频资源不存在"];
     } else {
