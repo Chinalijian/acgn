@@ -425,6 +425,7 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:roleId, @"roleId", userID, @"uId", nil];
     [[DMHttpClient sharedInstance] initWithUrl:DM_Del_Follow_Url parameters:dic method:DMHttpRequestPost dataModelClass:[PraiseDataModel class] isMustToken:NO success:^(id responseObject) {
         if (!OBJ_IS_NIL(responseObject)) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:DMNotification_Follw_Success_Key object:nil userInfo:nil];
             block(YES);
         } else {
             block(NO);

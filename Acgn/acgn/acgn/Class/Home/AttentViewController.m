@@ -247,6 +247,7 @@
                 [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
                 
                 if (obj.latestPost.count <= 0 && obj.oldPost.count <= 0) {
+                    [AccountInfo saveUserHasFollow:@"0"];
                     //goto 关注人物列表页
                     [weakSelf performSelector:@selector(delayMethodShowPeopleView) withObject:nil afterDelay:1.0];
                 }
