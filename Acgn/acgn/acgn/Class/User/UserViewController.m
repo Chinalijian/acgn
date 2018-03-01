@@ -76,6 +76,7 @@
         if (index == 1) { // 右侧
             [AccountInfo removeUserAllInfo];
             [weakSelf.userView updateUserInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:DMNotification_LogOut_Success_Key object:nil userInfo:nil];
         }
     }];
 }

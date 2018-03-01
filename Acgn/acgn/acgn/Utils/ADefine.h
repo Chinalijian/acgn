@@ -12,7 +12,9 @@
 #pragma mark - broadcast
 //登录成功的通知
 #define DMNotification_Login_Success_Key @"Login_Success_Key"
-
+//退出登录成功的通知
+#define DMNotification_LogOut_Success_Key @"LogOut_Success_Key"
+///关注成功
 #define DMNotification_Follw_Success_Key @"Follow_Success_Key"
 
 #pragma mark - Font

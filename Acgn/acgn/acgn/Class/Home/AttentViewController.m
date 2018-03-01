@@ -31,9 +31,17 @@
                                                  name:DMNotification_Login_Success_Key
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(logoutSuccess:)
+                                                 name:DMNotification_LogOut_Success_Key
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateDynamicList:)
                                                  name:DMNotification_Follw_Success_Key
                                                object:nil];
+}
+
+- (void)logoutSuccess:(NSNotification *)notification {
+    [self delayMethodShowPeopleView];
 }
 
 - (void)updateUserInfo:(NSNotification *)notification {

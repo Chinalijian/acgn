@@ -83,7 +83,7 @@
             self.typeLabel.hidden = YES;
         }
     } else if (_typeInfo == Info_Type_Video || _typeInfo == Info_Type_Url_Video) {
-        if (STR_IS_NIL(self.viedoTime)) {
+        if (!STR_IS_NIL(self.viedoTime)) {
             self.typeLabel.text = self.viedoTime;
             self.typeLabel.hidden = NO;
             self.videoIconView.hidden = NO;

@@ -82,7 +82,6 @@
 		2ADF21C42022C3FC00559427 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF21C32022C3FC00559427 /* RegisterViewController.m */; };
 		2ADF21C82022DF1600559427 /* AttentionPeopleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF21C72022DF1600559427 /* AttentionPeopleList.m */; };
 		2ADF21CB20230E9C00559427 /* UImage+colorImge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF21CA20230E9C00559427 /* UImage+colorImge.m */; };
-		2ADF21CD2023139800559427 /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2ADF21CC2023139800559427 /* image.jpeg */; };
 		2AFDA56E2043F00F0056F29F /* RefreshDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AFDA56D2043F00F0056F29F /* RefreshDataModel.m */; };
 		300DE1542024ACBA008DBCBD /* NickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1532024ACBA008DBCBD /* NickNameViewController.m */; };
 		300DE1572024D1DD008DBCBD /* UserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 300DE1562024D1DD008DBCBD /* UserView.m */; };
@@ -310,7 +309,6 @@
 		2ADF21C72022DF1600559427 /* AttentionPeopleList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttentionPeopleList.m; sourceTree = "<group>"; };
 		2ADF21C920230E9C00559427 /* UImage+colorImge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UImage+colorImge.h"; sourceTree = "<group>"; };
 		2ADF21CA20230E9C00559427 /* UImage+colorImge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UImage+colorImge.m"; sourceTree = "<group>"; };
-		2ADF21CC2023139800559427 /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
 		2AFDA56C2043F00F0056F29F /* RefreshDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RefreshDataModel.h; sourceTree = "<group>"; };
 		2AFDA56D2043F00F0056F29F /* RefreshDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RefreshDataModel.m; sourceTree = "<group>"; };
 		300DE1522024ACBA008DBCBD /* NickNameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NickNameViewController.h; sourceTree = "<group>"; };
@@ -825,7 +823,6 @@
 		2ADF21BE2022C3D400559427 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				2ADF21CC2023139800559427 /* image.jpeg */,
 				2ADF21BF2022C3EA00559427 /* LoginViewController.h */,
 				2ADF21C02022C3EA00559427 /* LoginViewController.m */,
 			);
@@ -1098,7 +1095,6 @@
 				30AC00E620446C54003A88FD /* ZFPlayer.bundle in Resources */,
 				2A2374172031D58A00297AB2 /* pop-ios-Info.plist in Resources */,
 				2A23741F2031D58A00297AB2 /* pop-osx-Info.plist in Resources */,
-				2ADF21CD2023139800559427 /* image.jpeg in Resources */,
 				2A23741D2031D58A00297AB2 /* pop-tvos-Info.plist in Resources */,
 				2A89A2DF2019E5880021B844 /* LaunchScreen.storyboard in Resources */,
 				2A89A2DC2019E5880021B844 /* Assets.xcassets in Resources */,
@@ -1450,7 +1446,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BR9B47C6A9;
+				DEVELOPMENT_TEAM = R76K9B3FJQ;
 				GCC_PREFIX_HEADER = "acgn/acgn-Prefix.pch";
 				INFOPLIST_FILE = acgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1468,7 +1464,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BR9B47C6A9;
+				DEVELOPMENT_TEAM = R76K9B3FJQ;
 				GCC_PREFIX_HEADER = "acgn/acgn-Prefix.pch";
 				INFOPLIST_FILE = acgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

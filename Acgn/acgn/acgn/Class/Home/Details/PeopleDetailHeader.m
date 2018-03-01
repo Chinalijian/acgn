@@ -313,6 +313,7 @@
         _image3DButton.layer.cornerRadius = 8;
         _image3DButton.alpha = .8;
         [_image3DButton setBackgroundColor: UIColorFromRGB(0xE96A79)];
+        _image3DButton.hidden = YES;
     }
     return _image3DButton;
 }
