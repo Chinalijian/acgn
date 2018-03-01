@@ -181,7 +181,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(self.topImageView.mas_leading).mas_offset(10);
-        make.top.mas_equalTo(self.topImageView.mas_top).mas_offset(3);
+        make.top.mas_equalTo(self.topImageView.mas_top).mas_offset([ATools setViewFrameYForIPhoneX:3]);
         make.width.height.mas_equalTo(40);
     }];
 
