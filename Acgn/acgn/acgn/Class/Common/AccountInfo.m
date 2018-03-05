@@ -39,12 +39,12 @@
 
 //读取uid
 + (NSString *)getUserID {
-    return [DMUserDefaults getValueWithKey:U_UID];
+    return STR_IS_NIL([DMUserDefaults getValueWithKey:U_UID])?@"":[DMUserDefaults getValueWithKey:U_UID] ;
 }
 
 //读取phone
 + (NSString *)getUserPhone {
-    return [DMUserDefaults getValueWithKey:U_PHONE];
+    return STR_IS_NIL([DMUserDefaults getValueWithKey:U_PHONE])?@"":[DMUserDefaults getValueWithKey:U_PHONE] ;
 }
 
 //读取是否有关注
