@@ -94,6 +94,7 @@
     //[self.navigationController setNavigationBarHidden:NO];
     //[self setNavigationBarTransparence:NO titleColor:[UIColor blackColor]];
     [self useMethodToFindBlackLineAndHind:NO];
+    [self setNavigationBarTransparence:NO titleColor:[UIColor blackColor]];
 }
 
 - (void)didReceiveMemoryWarning {

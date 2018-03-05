@@ -344,6 +344,7 @@
     [self.thirdPartyView addSubview:self.qqButton];
     [self.thirdPartyView addSubview:self.wecatButton];
     [self.thirdPartyView addSubview:self.weiboButton];
+    self.thirdPartyView.hidden = YES;
 }
 
 - (void)setupButtonEdgeInsetsMake {

@@ -222,7 +222,9 @@
                 [weakSelf.contentListView.aTableView reloadData];
                 [weakSelf endRefreshing:weakSelf.contentListView.aTableView];
                 //goto 关注人物列表页
-                [weakSelf performSelector:@selector(delayMethodShowPeopleView) withObject:nil afterDelay:1.0];
+                if (weakSelf.lastID.intValue == -1) {
+                    [weakSelf performSelector:@selector(delayMethodShowPeopleView) withObject:nil afterDelay:1.0];
+                }
             }
             
         } else {

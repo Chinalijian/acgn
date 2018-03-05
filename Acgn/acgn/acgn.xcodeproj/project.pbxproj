@@ -885,7 +885,7 @@
 				TargetAttributes = {
 					2A89A2CE2019E5880021B844 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					2A89A2E62019E5880021B844 = {
 						CreatedOnToolsVersion = 9.2;
@@ -1256,17 +1256,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Dare Investment management Co., Ltd. (R76K9B3FJQ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dare Investment management Co., Ltd. (R76K9B3FJQ)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = R76K9B3FJQ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BR9B47C6A9;
 				GCC_PREFIX_HEADER = "acgn/acgn-Prefix.pch";
 				INFOPLIST_FILE = acgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Plus.CartoonApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2601984f-16b0-4bbb-b0dc-4cac7bc17880";
-				PROVISIONING_PROFILE_SPECIFIER = ACGN_DIS_20180301;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1278,17 +1278,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Dare Investment management Co., Ltd. (R76K9B3FJQ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dare Investment management Co., Ltd. (R76K9B3FJQ)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = R76K9B3FJQ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BR9B47C6A9;
 				GCC_PREFIX_HEADER = "acgn/acgn-Prefix.pch";
 				INFOPLIST_FILE = acgn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Plus.CartoonApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2601984f-16b0-4bbb-b0dc-4cac7bc17880";
-				PROVISIONING_PROFILE_SPECIFIER = ACGN_DIS_20180301;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

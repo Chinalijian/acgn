@@ -95,6 +95,8 @@
                     [weakSelf.navigationController popViewControllerAnimated:YES];
                 }
             }];
+        } else {
+            [SVProgressHUD dismiss];
         }
     }];
 }
@@ -115,7 +117,7 @@
                 }
             }];
         } else {
-            
+            [SVProgressHUD dismiss];
         }
     }];
 }
@@ -135,6 +137,8 @@
                     [weakSelf.navigationController popViewControllerAnimated:YES];
                 }
             }];
+        } else {
+            [SVProgressHUD dismiss];
         }
     }];
 }
