@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-
+#import <objc/runtime.h>
 @interface UIViewController (ZFFullscreenPopGesture)
 
 /// 隐藏NavigationBar（默认NO）

@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 #import "UINavigationController+ZFFullscreenPopGesture.h"
-#import <objc/runtime.h>
+
 
 #define APP_WINDOW                  [UIApplication sharedApplication].delegate.window
 #define SCREEN_WIDTH                [UIScreen mainScreen].bounds.size.width
