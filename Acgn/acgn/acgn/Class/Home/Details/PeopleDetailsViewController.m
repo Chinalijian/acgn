@@ -160,6 +160,7 @@
 
 - (void)clickGotoModeShow:(id)sender {
     ModelShowViewController *msVC = [[ModelShowViewController alloc] init];
+    msVC.detailData = self.detailData;
     [self.navigationController pushViewController:msVC animated:YES];
 }
 

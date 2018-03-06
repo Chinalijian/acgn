@@ -139,8 +139,11 @@
 
 - (void)loadMore {
     if (!STR_IS_NIL([AccountInfo getUserID])) {
-        [self attentDynamicList];
-        return;
+        NSString *hasCollection = [AccountInfo getHasFollowStatus];
+        if (hasCollection.intValue > 0) {
+            [self attentDynamicList];
+            return;
+        }
     }
     [self getRoleListData];
 }

@@ -21,6 +21,9 @@
 @property (nonatomic, strong) NSArray *leftArray;
 @property (nonatomic, strong) NSArray *rightArray;
 @property (nonatomic, strong) NSArray *rightTitleArray;
+
+@property (nonatomic, strong) UIProgressView *bottomProgressView;
+
 @end
 
 @implementation ModelShowViewController
@@ -34,8 +37,30 @@
     self.leftArray = [NSArray arrayWithObjects:@"ms_l_icon_1",@"ms_l_icon_2",@"ms_l_icon_3",@"ms_l_icon_4", nil];
     self.rightArray = [NSArray arrayWithObjects:@"ms_r_icon_1",@"ms_r_icon_2",@"ms_r_icon_3",@"ms_r_icon_4", nil];
     self.rightTitleArray = [NSArray arrayWithObjects:@"活 动",@"福 利",@"道 具",@"信 息", nil];
-    [self loadLive2D];
+    //[self loadLive2D];
     [self loadUI];
+    [self downLoadModelFiles];
+}
+
+- (void)downLoadModelFiles {
+    WS(weakSelf);
+    __weak __typeof(&*self.bottomProgressView) weakProgressView = self.bottomProgressView;
+    [AApiModel downloadFileFromServer:self.detailData.showUrl fileName:self.detailData.fileName block:^(BOOL result) {
+        if (result) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf loadLive2D];
+            });
+        } else {
+            
+        }
+    } progress:^(double fractionCompleted) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"进度条毁掉");
+            //weakProgressView.progress =fractionCompleted;
+            [weakProgressView setProgress:fractionCompleted animated:YES];
+        });
+        
+    }];
 }
 
 - (void)loadLive2D {
@@ -46,8 +71,14 @@
     
     live2DMgr->changeModel();
     
+    UIView *liView = (UIView *)viewA;
     // 画面に表示
-    [self.view addSubview:(UIView*)viewA];
+    [self.view addSubview:liView];
+    
+    [self.view sendSubviewToBack:liView];
+    
+    if (LAppDefine::DEBUG_LOG) NSLog(@"viewWillAppear @ViewController");
+    live2DMgr->onResume();
 }
 
 - (void)clickButton:(id)sender {
@@ -112,8 +143,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (LAppDefine::DEBUG_LOG) NSLog(@"viewWillAppear @ViewController");
-    live2DMgr->onResume();
     [super viewWillAppear:animated];
     [self setNavigationBarTransparence:YES titleColor:[UIColor whiteColor]];
 }
@@ -155,11 +184,11 @@
 }
 
 - (void)loadProgressSubView {
-    UIProgressView *bottomProgressView = [[UIProgressView alloc] initWithFrame:CGRectMake(18, 14, self.view.frame.size.width-18*2, 7)];
-    bottomProgressView.progressImage = [UIImage imageNamed:@"jindu_progress_"];//[UIColor whiteColor];
-    bottomProgressView.trackImage = [UIImage imageNamed:@"jindu_progress_bg_"];
-    bottomProgressView.progress = .7;
-    [self.progressView addSubview:bottomProgressView];
+    self.bottomProgressView = [[UIProgressView alloc] initWithFrame:CGRectMake(18, 14, self.view.frame.size.width-18*2, 7)];
+    _bottomProgressView.progressImage = [UIImage imageNamed:@"jindu_progress_"];//[UIColor whiteColor];
+    _bottomProgressView.trackImage = [UIImage imageNamed:@"jindu_progress_bg_"];
+    _bottomProgressView.progress = 0.01;
+    [self.progressView addSubview:_bottomProgressView];
 }
 
 - (void)loadBottomSubViews {

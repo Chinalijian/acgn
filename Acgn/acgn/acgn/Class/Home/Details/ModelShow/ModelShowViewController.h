@@ -9,5 +9,5 @@
 #import "ABaseViewController.h"
 
 @interface ModelShowViewController : ABaseViewController
-
+@property (nonatomic, strong) RoleDetailsDataModel *detailData;
 @end

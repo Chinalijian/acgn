@@ -8,6 +8,7 @@
 
 #import "DMHttpClient.h"
 #import "DMRequestModel.h"
+
 #import <objc/objc.h>
 #import <objc/runtime.h>
 
@@ -24,6 +25,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
+        
     });
     return instance;
 }
@@ -221,6 +223,57 @@
         NSLog(@"失败了");
         failure(nil);
     }
+}
+
+- (void)downLoadFileRequest:(NSURL *)fileUrl fileName:(NSString *)fileName
+                    success:(void (^)(id responseObject))success
+                    failure:(void (^)( NSError *error))failure
+                    progress:(void (^)(double fractionCompleted))progressDownload {
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    //AFN3.0+基于封住URLSession的句柄
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    //请求
+    NSURLRequest *request = [NSURLRequest requestWithURL:fileUrl];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        //NSLog(@"下载进度 = %f",1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
+        NSLog(@"下载进度：%f", 1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
+        progressDownload(1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *path = [cachesPath stringByAppendingPathComponent:response.suggestedFilename];
+        return [NSURL fileURLWithPath:path];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+         NSLog(@"下载完成");
+        if (error != nil) {
+            failure(error);
+        } else {
+            success(filePath);
+        }
+    }];
+    [downloadTask resume];
+}
+
+- (void)reachabilityNetworkStatus {
+    /* 监听网络状态 */
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if (status == AFNetworkReachabilityStatusUnknown) {
+            NSLog(@"当前网络：未知网络");
+        } else if (status == AFNetworkReachabilityStatusNotReachable) {
+            NSLog(@"当前网络：没有网络");
+        } else if (status == AFNetworkReachabilityStatusReachableViaWWAN) {
+            NSLog(@"当前网络：手机流量");
+        } else if (status == AFNetworkReachabilityStatusReachableViaWiFi) {
+            NSLog(@"当前网络：WiFi");
+        }
+    }];
+    [manager startMonitoring];
 }
 
 - (void)cancleAllHttpRequestOperations {

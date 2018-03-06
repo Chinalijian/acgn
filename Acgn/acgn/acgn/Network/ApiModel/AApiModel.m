@@ -611,6 +611,21 @@
         block (NO);
     }];
 }
+//下载文件
++ (void)downloadFileFromServer:(NSString *)fileUrl fileName:(NSString *)fileName block:(void(^)(BOOL result))block progress:(void(^)(double fractionCompleted)) progressDownload {
+    if (!STR_IS_NIL(fileUrl)) {
+        NSURL *fileUrls = [NSURL URLWithString:fileUrl];
+        [[DMHttpClient sharedInstance] downLoadFileRequest:fileUrls fileName:fileName success:^(id responseObject){
+            NSURL *responseUrl = (NSURL *)responseObject;
+            block(YES);
+        } failure:^(NSError *error) {
+            block(NO);
+        } progress:^(double fractionCompleted) {
+            progressDownload(fractionCompleted);
+        }];
+    }
+    
+}
 
 @end
 
