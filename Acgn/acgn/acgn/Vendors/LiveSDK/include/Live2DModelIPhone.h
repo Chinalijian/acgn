@@ -22,11 +22,8 @@
 //--------- LIVE2D NAMESPACE ------------
 namespace live2d 
 {
-
 	class ModelContext ;
 
-
-	
 	class Live2DModelIPhone : public live2d::ALive2DModel
 	{
 	public:

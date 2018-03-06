@@ -1,0 +1,42 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"tangli.moc",
+	"textures":[
+		"tangli.2048/texture_00.png"
+	],
+	"hit_areas":
+	[
+		{"name":"head", "id":"D_REF.HEAD"},
+		{"name":"body", "id":"D_REF.BODY"}
+
+	],
+	"expressions":[
+		{"name":"F00.exp.json","file":"expressions/F00.exp.json"},
+		{"name":"F01.exp.json","file":"expressions/F01.exp.json"},
+		{"name":"F02.exp.json","file":"expressions/F02.exp.json"},
+		{"name":"F03.exp.json","file":"expressions/F03.exp.json"},
+		{"name":"F04.exp.json","file":"expressions/F04.exp.json"},
+		{"name":"F05.exp.json","file":"expressions/F05.exp.json"},
+		{"name":"F06.exp.json","file":"expressions/F06.exp.json"},
+		{"name":"F07.exp.json","file":"expressions/F07.exp.json"},
+		{"name":"F08.exp.json","file":"expressions/F08.exp.json"},
+		{"name":"F09.exp.json","file":"expressions/F09.exp.json"}
+	],
+	"motions":{
+		"":[
+			{"file":"moutions/angry.mtn"},
+			{"file":"moutions/blink.mtn"},
+			{"file":"moutions/fingerheart.mtn"},
+			{"file":"moutions/introduce.mtn"},
+			{"file":"moutions/query.mtn"},
+			{"file":"moutions/sad.mtn"},
+			{"file":"moutions/shy.mtn"},
+			{"file":"moutions/surprise.mtn"},
+			{"file":"moutions/unhappy.mtn"}
+		],
+		"idle":[
+			{"file":"moutions/idle.mtn"}
+		]
+	},
+	"physics":"physics.json"
+}

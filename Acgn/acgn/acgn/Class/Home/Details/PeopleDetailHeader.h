@@ -12,6 +12,7 @@
 @optional
 - (void)clickSelectPeopleImage:(NSString *)roleId;
 - (void)clickClickAttBtn:(id)sender;
+- (void)clickGotoModeShow:(id)sender;
 @end
 
 //列表头的通用控件View

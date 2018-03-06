@@ -156,7 +156,9 @@ bool LAppLive2DManager::tapEvent(float x,float y)
 		{
 			// 顔をタップしたら表情切り替え
 			if(LAppDefine::DEBUG_LOG)NSLog( @"tap face");
-			models[i]->setRandomExpression();
+            NSLog(@"Ares Modify");
+            //models[i]->setRandomExpression();
+            models[i]->startRandomMotion(MOTION_GROUP_TAP_BODY, PRIORITY_NORMAL );
 		}
 		else if(models[i]->hitTest( HIT_AREA_BODY,x, y))
 		{

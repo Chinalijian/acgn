@@ -107,8 +107,9 @@ namespace live2d
 
 			modelMatrix=new L2DModelMatrix(live2DModel->getCanvasWidth(),live2DModel->getCanvasHeight());
 			modelMatrix->setWidth(2);
-			modelMatrix->setCenterPosition(0, 0);
-			
+            pm->log("Ares Modify");
+//            modelMatrix->setCenterPosition(0, 0);
+            modelMatrix->setCenterPosition(0, -0.215);
 		}
 
 		void L2DBaseModel::loadTexture(int no,const char path[])

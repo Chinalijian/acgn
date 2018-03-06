@@ -30,7 +30,7 @@ static const char BACK_IMAGE_NAME[] = "back_class_normal.png" ;
 
 
 //模型的定义--
-static const char MODEL_HARU[]		= "live2d/haru/haru.model.json";
+static const char MODEL_HARU[]		= "tangli/tangli.model.json";
 //static const char MODEL_HARU_A[]        = "live2d/haru/haru_01.model.json";
 //static const char MODEL_HARU_B[]        = "live2d/haru/haru_02.model.json";
 //static const char MODEL_SHIZUKU[]        = "live2d/shizuku/shizuku.model.json";
@@ -39,8 +39,11 @@ static const char MODEL_HARU[]		= "live2d/haru/haru.model.json";
 
 // 匹配外部文件
 static const char MOTION_GROUP_IDLE[]			="idle";        // 眼圈
-static const char MOTION_GROUP_TAP_BODY[]		="tap_body";    // 点身体
-static const char MOTION_GROUP_FLICK_HEAD[]	    ="flick_head";  // 点击头
+// Ares Modify
+static const char MOTION_GROUP_TAP_BODY[]        ="";    // 点身体
+static const char MOTION_GROUP_FLICK_HEAD[]        ="";  // 点击头
+//static const char MOTION_GROUP_TAP_BODY[]        ="tap_body";    // 点身体
+//static const char MOTION_GROUP_FLICK_HEAD[]        ="flick_head";  // 点击头
 static const char MOTION_GROUP_PINCH_IN[]		="pinch_in";    // 扩大
 static const char MOTION_GROUP_PINCH_OUT[]		="pinch_out";   // 缩小
 static const char MOTION_GROUP_SHAKE[]			="shake";       // 马赛克

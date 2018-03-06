@@ -36,7 +36,7 @@ using namespace live2d::framework;
 	{
         // Get the layer
         CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
-		
+        eaglLayer.backgroundColor = [UIColor redColor].CGColor;
 		if(LAppDefine::DEBUG_LOG)NSLog(@"OpenGL scale:%f",[UIScreen mainScreen].scale);
 		self.contentScaleFactor = [UIScreen mainScreen].scale ;
 		

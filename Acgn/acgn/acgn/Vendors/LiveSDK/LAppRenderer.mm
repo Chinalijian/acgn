@@ -45,7 +45,7 @@ using namespace live2d::framework;
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, defaultFramebuffer);
 		glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
 		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, colorRenderbuffer);
-				
+        //glClearColor(0, 0, 0, 0);
         [self setupBackground];
 		accelX=0;
 		accelY=0;
@@ -240,6 +240,8 @@ using namespace live2d::framework;
     // 描画範囲。画面の最大表示範囲に合わせる
     [bg setDrawRect:
 		VIEW_LOGICAL_MAX_LEFT:VIEW_LOGICAL_MAX_RIGHT:VIEW_LOGICAL_MAX_BOTTOM:VIEW_LOGICAL_MAX_TOP];
+    
+
 }
 
 

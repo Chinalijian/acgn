@@ -78,6 +78,12 @@
     }
 }
 
+- (void)clickModeShow:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(clickGotoModeShow:)]) {
+        [self.delegate clickGotoModeShow:sender];
+    }
+}
+
 - (void)configInfo:(RoleDetailsDataModel *)obj {
     self.introduceHeight = [PeopleDetailHeader getIntroduceMaxHeight:obj]+10;
     [self loadUI];
@@ -313,7 +319,8 @@
         _image3DButton.layer.cornerRadius = 8;
         _image3DButton.alpha = .8;
         [_image3DButton setBackgroundColor: UIColorFromRGB(0xE96A79)];
-        _image3DButton.hidden = YES;
+        [_image3DButton addTarget:self action:@selector(clickModeShow:) forControlEvents:UIControlEventTouchUpInside];
+       
     }
     return _image3DButton;
 }
