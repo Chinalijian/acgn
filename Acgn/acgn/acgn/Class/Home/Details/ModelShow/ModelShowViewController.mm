@@ -13,6 +13,10 @@
 #include "LAppLive2DManager.h"
 
 @interface ModelShowViewController ()
+
+@property (nonatomic, strong) UIImageView *bgImageView;
+@property (nonatomic, strong) UIImageView *defaultShowImageView;
+
 @property (nonatomic, strong) UIView *leftView;
 @property (nonatomic, strong) UIView *rightView;
 @property (nonatomic, strong) UIView *bottomView;
@@ -23,7 +27,7 @@
 @property (nonatomic, strong) NSArray *rightTitleArray;
 
 @property (nonatomic, strong) UIProgressView *bottomProgressView;
-
+@property (nonatomic, assign) Model_Show_Type type;
 @end
 
 @implementation ModelShowViewController
@@ -34,12 +38,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"立体形象";
+    self.type = Model_Show_Type_Default;
     self.leftArray = [NSArray arrayWithObjects:@"ms_l_icon_1",@"ms_l_icon_2",@"ms_l_icon_3",@"ms_l_icon_4", nil];
     self.rightArray = [NSArray arrayWithObjects:@"ms_r_icon_1",@"ms_r_icon_2",@"ms_r_icon_3",@"ms_r_icon_4", nil];
     self.rightTitleArray = [NSArray arrayWithObjects:@"活 动",@"福 利",@"道 具",@"信 息", nil];
     //[self loadLive2D];
     [self loadUI];
-    [self downLoadModelFiles];
+    
+    if (!OBJ_IS_NIL(self.detailData)) {
+        if (self.detailData.showType.integerValue == Model_Show_Type_2D) {
+            self.type = Model_Show_Type_2D;
+            [self downLoadModelFiles];
+        } else if (self.detailData.showType.integerValue == Model_Show_Type_3D) {
+            self.type = Model_Show_Type_3D;
+            [self downLoadModelFiles];
+        } else {
+            [self.defaultShowImageView sd_setImageWithURL:[NSURL URLWithString:self.detailData.showUrl] placeholderImage:[UIImage imageNamed:@"default_model_Image"]];
+        }
+    }
 }
 
 - (void)downLoadModelFiles {
@@ -48,15 +64,20 @@
     [AApiModel downloadFileFromServer:self.detailData.showUrl fileName:self.detailData.fileName block:^(BOOL result) {
         if (result) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf loadLive2D];
+                if (weakSelf.type == Model_Show_Type_2D) {
+                    [weakSelf loadLive2D];
+                } else if (weakSelf.type == Model_Show_Type_3D) {
+                    
+                }
+                weakSelf.bgImageView.hidden = YES;
+                weakSelf.defaultShowImageView.hidden = YES;
             });
         } else {
             
         }
     } progress:^(double fractionCompleted) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"进度条毁掉");
-            //weakProgressView.progress =fractionCompleted;
+            NSLog(@"进度条进度更新");
             [weakProgressView setProgress:fractionCompleted animated:YES];
         });
         
@@ -129,15 +150,21 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    if (LAppDefine::DEBUG_LOG) NSLog(@"viewDidUnload @ViewController");
-    delete live2DMgr;
-    live2DMgr=nil;
+    if (self.type == Model_Show_Type_2D) {
+        if (LAppDefine::DEBUG_LOG) NSLog(@"viewDidUnload @ViewController");
+        delete live2DMgr;
+        live2DMgr=nil;
+    }
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    if (LAppDefine::DEBUG_LOG) NSLog(@"viewWillDisappear @ViewController");
-    live2DMgr->onPause();
+    if (self.type == Model_Show_Type_2D) {
+        if (LAppDefine::DEBUG_LOG) NSLog(@"viewWillDisappear @ViewController");
+        live2DMgr->onPause();
+    }
+
     [super viewWillDisappear:animated];
 }
 
@@ -148,12 +175,27 @@
 }
 
 - (void)loadUI {
+    [self.view addSubview:self.bgImageView];
+    [self.view addSubview:self.defaultShowImageView];
     [self.view addSubview:self.progressView];
     [self.view addSubview:self.bottomView];
     [self.view addSubview:self.leftView];
     [self.view addSubview:self.rightView];
     self.progressView.backgroundColor = [UIColor blackColor];
     self.progressView.alpha = .5;
+    
+    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view).mas_offset(0);
+        make.bottom.mas_equalTo(self.view).mas_offset(0);
+        make.top.mas_equalTo(self.view).mas_offset(0);
+    }];
+    [self.defaultShowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view.mas_left).mas_offset(16);
+        make.right.mas_equalTo(self.view.mas_right).mas_offset(-16);
+        make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-[ATools setViewFrameBottomForIPhoneX:30]);
+        make.top.mas_equalTo(self.view).mas_offset(130);
+    }];
+    
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view).mas_offset(0);
         make.bottom.mas_equalTo(self.view).mas_offset(0);
@@ -233,6 +275,22 @@
         }
         [rV addSubview:btn];
     }
+}
+
+- (UIImageView *)bgImageView {
+    if (_bgImageView == nil) {
+        _bgImageView = [[UIImageView alloc] init];
+        _bgImageView.image = [UIImage imageNamed:@"ms_back_view"];
+    }
+    return _bgImageView;
+}
+
+- (UIImageView *)defaultShowImageView {
+    if (_defaultShowImageView == nil) {
+        _defaultShowImageView = [[UIImageView alloc] init];
+        _defaultShowImageView.image = [UIImage imageNamed:@"default_model_Image"];
+    }
+    return _defaultShowImageView;
 }
 
 - (UIView *)leftView {

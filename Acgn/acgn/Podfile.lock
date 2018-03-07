@@ -34,13 +34,14 @@ PODS:
   - MJExtension (3.0.13)
   - MJRefresh (3.1.15.3)
   - Reachability (3.1.1)
-  - SDWebImage (4.3.0):
-    - SDWebImage/Core (= 4.3.0)
-  - SDWebImage/Core (4.3.0)
-  - SDWebImage/GIF (4.3.0):
+  - SDWebImage (4.3.2):
+    - SDWebImage/Core (= 4.3.2)
+  - SDWebImage/Core (4.3.2)
+  - SDWebImage/GIF (4.3.2):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
-  - SVProgressHUD (2.2.3)
+  - SSZipArchive (2.1.1)
+  - SVProgressHUD (2.2.5)
   - Toast (3.1.0)
   - UMengUShare/Core (6.4.8.2):
     - UMengUShare/Network
@@ -73,6 +74,7 @@ DEPENDENCIES:
   - Reachability (~> 3.1.1)
   - SDWebImage (~> 4.0)
   - SDWebImage/GIF
+  - SSZipArchive
   - SVProgressHUD
   - Toast (~> 3.1.0)
   - UMengUShare/Social/QQ
@@ -90,12 +92,13 @@ SPEC CHECKSUMS:
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
-  SDWebImage: 6da6c8bca115addc4de8613362e1b15f66333825
-  SVProgressHUD: a5eaeff664a82dda89809c409ace40183ce91523
+  SDWebImage: 29bd3c0bc1f01e5eb59720847c64ad4c4ca1af5d
+  SSZipArchive: 14401ade5f8e82aba1ff03e9f88e9de60937ae60
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
   UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
   ZFDownload: a52f94ebb080833b8a8ceb19a409f2941343fe7f
 
-PODFILE CHECKSUM: b4c6d03b2a0e2690c0123b70de78d94ad12bdf17
+PODFILE CHECKSUM: a998319bef5cb4547bff8837d574489597751e3b
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.4.0
