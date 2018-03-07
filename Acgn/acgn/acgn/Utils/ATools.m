@@ -314,6 +314,18 @@
     }
     return url.path;
 }
+
++ (NSString *)getCachesHaveFile:(NSString *)fileName {
+    NSString *path = [NSString stringWithFormat:@"%@",
+                      NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]];
+    if (![@"" isEqualToString:fileName] && fileName != nil) {
+        path = [NSString stringWithFormat:@"%@/\%@",
+                NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0],
+                fileName];
+    }
+    return path;
+}
+
 //删除文件
 +(void)deleteFile:(NSString *)filePath {
     
@@ -332,7 +344,11 @@
     }
 }
 
-
+//是否已经有此文件
++ (BOOL)fileExistsAtPathForLocal:(NSString *)filePath {
+    BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:filePath];
+    return blHave;
+}
 
 
 

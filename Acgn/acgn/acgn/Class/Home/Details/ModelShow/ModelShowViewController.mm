@@ -65,6 +65,13 @@
 }
 - (void)downLoadModelFiles {
     WS(weakSelf);
+
+    NSString *tPath = [ATools getCachesHaveFile:[NSString stringWithFormat:@"%@/%@", self.detailData.fileName, self.detailData.showJson]];
+    BOOL isHave = [ATools fileExistsAtPathForLocal:tPath];
+    if (isHave) {
+        [self load2DModelOr3DMoel];
+        return;
+    }
     [self showWaitingPop];
     
     __weak __typeof(&*self.bottomProgressView) weakProgressView = self.bottomProgressView;
@@ -74,13 +81,7 @@
             if (!STR_IS_NIL(unzipPath)) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [SVProgressHUD dismiss];
-                    if (weakSelf.type == Model_Show_Type_2D) {
-                        [weakSelf loadLive2D];
-                    } else if (weakSelf.type == Model_Show_Type_3D) {
-                        
-                    }
-                    weakSelf.bgImageView.hidden = YES;
-                    weakSelf.defaultShowImageView.hidden = YES;
+                    [weakSelf load2DModelOr3DMoel];
                 });
             } else {
                 [SVProgressHUD dismiss];
@@ -97,6 +98,16 @@
         });
         
     }];
+}
+
+- (void)load2DModelOr3DMoel {
+    if (self.type == Model_Show_Type_2D) {
+        [self loadLive2D];
+    } else if (self.type == Model_Show_Type_3D) {
+        
+    }
+    self.bgImageView.hidden = YES;
+    self.defaultShowImageView.hidden = YES;
 }
 
 - (void)faileErrorShowModel {

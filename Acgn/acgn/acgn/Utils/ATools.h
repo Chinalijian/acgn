@@ -58,8 +58,12 @@
 + (NSString *)autoUnZipFile:(NSString *)zipFilePath fileName:(NSString *)fileName;
 //临时路径
 + (NSString *)tempUnzipPath:(NSString *)fileName;
+//获取Caches文件路径
++ (NSString *)getCachesHaveFile:(NSString *)fileName;
 //删除文件
 +(void)deleteFile:(NSString *)filePath;
+//是否已经有此文件
++ (BOOL)fileExistsAtPathForLocal:(NSString *)filePath;
 
 @end
 
