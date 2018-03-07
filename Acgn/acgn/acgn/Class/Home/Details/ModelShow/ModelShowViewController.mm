@@ -58,11 +58,13 @@
         }
     }
 }
+
 - (void)showWaitingPop {
     [SVProgressHUD setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];//背景颜色
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD show];
 }
+
 - (void)downLoadModelFiles {
     WS(weakSelf);
 
