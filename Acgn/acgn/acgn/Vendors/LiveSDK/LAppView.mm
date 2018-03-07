@@ -155,10 +155,8 @@ using namespace live2d::framework;
 //==================================================
 //	DRAW
 //==================================================
-- (void) drawView:(id)sender
-{
-	
-	    [accelHelper update];
+- (void) drawView:(id)sender {
+    [accelHelper update];
 	
 	if( [accelHelper getShake] > 0.8f )
 	{
@@ -167,11 +165,8 @@ using namespace live2d::framework;
 		delegate->shakeEvent() ;
 		[accelHelper resetShake] ;
 	}
-	
-    
+
     delegate->setAccel([accelHelper getAccelX], [accelHelper getAccelY], [accelHelper getAccelZ]);
-	
-	
 	delegate->update();
     [renderer render];
 }

@@ -612,14 +612,14 @@
     }];
 }
 //下载文件
-+ (void)downloadFileFromServer:(NSString *)fileUrl fileName:(NSString *)fileName block:(void(^)(BOOL result))block progress:(void(^)(double fractionCompleted)) progressDownload {
++ (void)downloadFileFromServer:(NSString *)fileUrl fileName:(NSString *)fileName block:(void(^)(BOOL result, NSString *filePathUrl))block progress:(void(^)(double fractionCompleted)) progressDownload {
     if (!STR_IS_NIL(fileUrl)) {
         NSURL *fileUrls = [NSURL URLWithString:fileUrl];
         [[DMHttpClient sharedInstance] downLoadFileRequest:fileUrls fileName:fileName success:^(id responseObject){
             NSURL *responseUrl = (NSURL *)responseObject;
-            block(YES);
+            block(YES, responseUrl.path);
         } failure:^(NSError *error) {
-            block(NO);
+            block(NO, nil);
         } progress:^(double fractionCompleted) {
             progressDownload(fractionCompleted);
         }];

@@ -232,6 +232,108 @@
     return attributedStr;
 }
 
+//自动解压zip
++ (NSString *)autoUnZipFile:(NSString *)zipFilePath fileName:(NSString *)fileName {
+    if (!zipFilePath) {
+        return nil;
+    }
+    NSLog(@"待解压的文件路径 = %@", zipFilePath);
+    // NSLog(@"9=%@",[[index lastPathComponent] stringByDeletingPathExtension]);
+    NSString *unzipPath = [self tempUnzipPath:fileName];
+    NSLog(@"解压的路径 = %@", unzipPath);
+    if (!unzipPath) {
+        return nil;
+    }
+    BOOL success = [SSZipArchive unzipFileAtPath:zipFilePath
+                                   toDestination:unzipPath
+                              preserveAttributes:YES
+                                       overwrite:YES
+                                  nestedZipLevel:0
+                                        password:nil
+                                           error:nil
+                                        delegate:nil
+                                 progressHandler:nil
+                               completionHandler:nil];
+    if (success) {
+        NSLog(@"Success unzip");
+        [self deleteFile:zipFilePath];
+    } else {
+        NSLog(@"No success unzip");
+        return nil;
+    }
+    return unzipPath;
+    //    NSError *error = nil;
+    //    NSMutableArray<NSString *> *items = [[[NSFileManager defaultManager]
+    //                                          contentsOfDirectoryAtPath:unzipPath
+    //                                          error:&error] mutableCopy];
+    //    if (error) {
+    //        return;
+    //    }
+    //    [items enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    //        switch (idx) {
+    //            case 0: {
+    //
+    //                break;
+    //            }
+    //            case 1: {
+    //
+    //                break;
+    //            }
+    //            case 2: {
+    //
+    //                break;
+    //            }
+    //            default: {
+    //                NSLog(@"Went beyond index of assumed files");
+    //                break;
+    //            }
+    //        }
+    //    }];
+    
+}
+//临时路径
++ (NSString *)tempUnzipPath:(NSString *)fileName {
+    //    NSString *path = [NSString stringWithFormat:@"%@/\%@",
+    //                      NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0],
+    //                      fileName];
+    NSString *path = [NSString stringWithFormat:@"%@",
+                      NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]];
+    if (![@"" isEqualToString:fileName] && fileName != nil) {
+        path = [NSString stringWithFormat:@"%@/\%@",
+                NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0],
+                fileName];
+    }
+    NSURL *url = [NSURL fileURLWithPath:path];
+    NSError *error = nil;
+    [[NSFileManager defaultManager] createDirectoryAtURL:url
+                             withIntermediateDirectories:YES
+                                              attributes:nil
+                                                   error:&error];
+    if (error) {
+        return nil;
+    }
+    return url.path;
+}
+//删除文件
++(void)deleteFile:(NSString *)filePath {
+    
+    BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:filePath];
+    if (!blHave) {
+        NSLog(@"no  have");
+        return ;
+    }else {
+        NSLog(@" have");
+        BOOL blDele= [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        if (blDele) {
+            NSLog(@"dele success");
+        }else {
+            NSLog(@"dele fail");
+        }
+    }
+}
+
+
+
 
 
 @end

@@ -24,6 +24,7 @@
 		2A23AA20203479CA00F6E7D2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA1F203479CA00F6E7D2 /* libz.tbd */; };
 		2A23AA22203479D600F6E7D2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA21203479D600F6E7D2 /* CoreTelephony.framework */; };
 		2A23AA24203479E400F6E7D2 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23AA23203479E400F6E7D2 /* libsqlite3.tbd */; };
+		2A570E67204FDEA500AD8A95 /* ModelFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A570E66204FDEA500AD8A95 /* ModelFileManager.m */; };
 		2A65145E20284B7D00737DEF /* MulCategoryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */; };
 		2A6514612028571C00737DEF /* ContentBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6514602028571C00737DEF /* ContentBaseViewController.m */; };
 		2A684789202C3B1E00D189D5 /* ContentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A684788202C3B1E00D189D5 /* ContentListView.m */; };
@@ -186,6 +187,8 @@
 		2A23AA1F203479CA00F6E7D2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2A23AA21203479D600F6E7D2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		2A23AA23203479E400F6E7D2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		2A570E65204FDEA500AD8A95 /* ModelFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelFileManager.h; sourceTree = "<group>"; };
+		2A570E66204FDEA500AD8A95 /* ModelFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelFileManager.m; sourceTree = "<group>"; };
 		2A65145A20284B7D00737DEF /* MulCategoryScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulCategoryScrollView.h; sourceTree = "<group>"; };
 		2A65145C20284B7D00737DEF /* MulCategoryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulCategoryScrollView.m; sourceTree = "<group>"; };
 		2A65145F2028571C00737DEF /* ContentBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBaseViewController.h; sourceTree = "<group>"; };
@@ -767,6 +770,8 @@
 			children = (
 				2A80CBAF204E411100E6365A /* ModelShowViewController.h */,
 				2A80CBB0204E411100E6365A /* ModelShowViewController.mm */,
+				2A570E65204FDEA500AD8A95 /* ModelFileManager.h */,
+				2A570E66204FDEA500AD8A95 /* ModelFileManager.m */,
 			);
 			path = ModelShow;
 			sourceTree = "<group>";
@@ -1565,6 +1570,7 @@
 				2A89A2E22019E5880021B844 /* main.m in Sources */,
 				30F58AF62040497600997AB9 /* DMAlertMananger.m in Sources */,
 				309D903D2025943C002F414F /* UserDataModel.m in Sources */,
+				2A570E67204FDEA500AD8A95 /* ModelFileManager.m in Sources */,
 				2A89A2D42019E5880021B844 /* AppDelegate.m in Sources */,
 				2ADF21BC2022C3A600559427 /* UserViewController.m in Sources */,
 				30C586F6202F753A00CB1EC0 /* PeopleDetailsViewController.m in Sources */,

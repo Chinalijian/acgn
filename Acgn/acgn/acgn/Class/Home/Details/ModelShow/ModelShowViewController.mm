@@ -11,7 +11,8 @@
 #import "LAppModel.h"
 #import "LAppDefine.h"
 #include "LAppLive2DManager.h"
-
+#import <ZipArchive.h>
+#import "ModelFileManager.h"
 @interface ModelShowViewController ()
 
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -57,23 +58,37 @@
         }
     }
 }
-
+- (void)showWaitingPop {
+    [SVProgressHUD setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];//背景颜色
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD show];
+}
 - (void)downLoadModelFiles {
     WS(weakSelf);
+    [self showWaitingPop];
+    
     __weak __typeof(&*self.bottomProgressView) weakProgressView = self.bottomProgressView;
-    [AApiModel downloadFileFromServer:self.detailData.showUrl fileName:self.detailData.fileName block:^(BOOL result) {
+    [AApiModel downloadFileFromServer:self.detailData.showUrl fileName:self.detailData.fileName block:^(BOOL result, NSString *filePathUrl) {
         if (result) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (weakSelf.type == Model_Show_Type_2D) {
-                    [weakSelf loadLive2D];
-                } else if (weakSelf.type == Model_Show_Type_3D) {
-                    
-                }
-                weakSelf.bgImageView.hidden = YES;
-                weakSelf.defaultShowImageView.hidden = YES;
-            });
+            NSString*unzipPath = [ATools autoUnZipFile:filePathUrl fileName:@""];
+            if (!STR_IS_NIL(unzipPath)) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SVProgressHUD dismiss];
+                    if (weakSelf.type == Model_Show_Type_2D) {
+                        [weakSelf loadLive2D];
+                    } else if (weakSelf.type == Model_Show_Type_3D) {
+                        
+                    }
+                    weakSelf.bgImageView.hidden = YES;
+                    weakSelf.defaultShowImageView.hidden = YES;
+                });
+            } else {
+                [SVProgressHUD dismiss];
+                [weakSelf performSelector:@selector(faileErrorShowModel) withObject:nil afterDelay:1];
+            }
         } else {
-            
+            [SVProgressHUD dismiss];
+            [weakSelf performSelector:@selector(faileErrorShowModel) withObject:nil afterDelay:1];
         }
     } progress:^(double fractionCompleted) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -82,6 +97,10 @@
         });
         
     }];
+}
+
+- (void)faileErrorShowModel {
+    [ATools showSVProgressHudCustom:@"" title:@"加载失败"];
 }
 
 - (void)loadLive2D {
@@ -151,6 +170,9 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     if (self.type == Model_Show_Type_2D) {
+        if (live2DMgr == nil) {
+            return;
+        }
         if (LAppDefine::DEBUG_LOG) NSLog(@"viewDidUnload @ViewController");
         delete live2DMgr;
         live2DMgr=nil;
@@ -161,6 +183,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     if (self.type == Model_Show_Type_2D) {
+        if (live2DMgr == nil) {
+            return;
+        }
         if (LAppDefine::DEBUG_LOG) NSLog(@"viewWillDisappear @ViewController");
         live2DMgr->onPause();
     }

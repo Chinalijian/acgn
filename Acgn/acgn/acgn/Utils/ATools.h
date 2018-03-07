@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <ZipArchive.h>
 @interface ATools : NSObject
 + (NSString*)MD5:(NSString*)s;
 //按钮图片在上，文字再下
@@ -52,6 +52,15 @@
 +(NSMutableAttributedString *)attributedStringFromStingWithFont:(UIFont *)font
                                                 withLineSpacing:(CGFloat)lineSpacing
                                                            text:(NSString *)text;
+
+
+//自动解压zip
++ (NSString *)autoUnZipFile:(NSString *)zipFilePath fileName:(NSString *)fileName;
+//临时路径
++ (NSString *)tempUnzipPath:(NSString *)fileName;
+//删除文件
++(void)deleteFile:(NSString *)filePath;
+
 @end
 
 

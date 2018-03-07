@@ -97,7 +97,7 @@ void LAppLive2DManager::update()
 			case 0:// ハル
 				releaseModel();
 				models.push_back(new LAppModel());
-				models[0]->load( MODEL_HARU) ;
+				models[0]->load(MODEL_HARU) ;
 				models[0]->feedIn();
 				break;
 //            case 1:// しずく
