@@ -101,12 +101,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    NSString *hasCollection = [AccountInfo getHasFollowStatus];
-//    if (STR_IS_NIL([AccountInfo getUserID]) || hasCollection.integerValue <= 0) {
-//        //显示关注人物列表
-//    } else {
-//
-//    }
 }
 
 - (void)addRefreshLoadMore:(UITableView *)tableView {
@@ -139,8 +133,11 @@
 
 - (void)loadMore {
     if (!STR_IS_NIL([AccountInfo getUserID])) {
-        [self attentDynamicList];
-        return;
+        NSString *hasCollection = [AccountInfo getHasFollowStatus];
+        if (hasCollection.intValue > 0) {
+            [self attentDynamicList];
+            return;
+        }
     }
     [self getRoleListData];
 }
@@ -370,7 +367,7 @@
 }
 
 - (void)clickVideoListPlay:(Info_Type)type videoUrl:(NSString *)videoUrl {
-    videoUrl = @"http://120.25.226.186:32812/resources/videos/minion_01.mp4";
+    //videoUrl = @"http://120.25.226.186:32812/resources/videos/minion_01.mp4";
     if (STR_IS_NIL(videoUrl)) {
         [ATools showSVProgressHudCustom:@"" title:@"视频资源不存在"];
     } else {
