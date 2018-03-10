@@ -72,6 +72,7 @@
     BOOL isHave = [ATools fileExistsAtPathForLocal:tPath];
     if (isHave) {
         [self load2DModelOr3DMoel];
+        self.bottomProgressView.progress = 1.0;
         return;
     }
     [self showWaitingPop];
