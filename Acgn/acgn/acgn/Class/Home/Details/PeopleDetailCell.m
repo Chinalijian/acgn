@@ -21,7 +21,7 @@
 #define Pic_Height (Content_With)*(0.64)+5
 #define Small_Image_W_H 63
 #define Small_Image_Space 4
-@interface PeopleDetailCell ()
+@interface PeopleDetailCell () <ImageComDelegate>
 
 @property (nonatomic, strong) UILabel *bigTimeLabel;
 @property (nonatomic, strong) UILabel *smallTimeLabel;
@@ -151,6 +151,12 @@
     }
 }
 
+- (void)clickVideoImagePlay:(Info_Type)type videoUrl:(NSString *)videoUrl {
+    if ([self.delegate respondsToSelector:@selector(userClickVideo:videoUrl:)]) {
+        [self.delegate userClickVideo:type videoUrl:videoUrl];
+    }
+}
+
 - (void)cleanObjSubView {
     self.bigTimeLabel.text = @"";
     self.smallTimeLabel.text = @"";
@@ -258,6 +264,7 @@
 - (ImageCom *)imageCom {
     if (_imageCom == nil) {
         _imageCom = [[ImageCom alloc] initWithBigImage:Content_With-10 bigImageHeight:Pic_Height-10 smallImageWidth:Small_Image_W_H samllImageHeight:Small_Image_W_H smallSpace:Small_Image_Space frameW:Content_With frameH:0];
+        _imageCom.delegate = self;
         _imageCom.backgroundColor = [UIColor clearColor];
     }
     return _imageCom;

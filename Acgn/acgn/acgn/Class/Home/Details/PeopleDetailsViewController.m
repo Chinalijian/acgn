@@ -202,6 +202,20 @@
     return cell;
 }
 
+- (void)userClickVideo:(Info_Type)type videoUrl:(NSString *)videoUrl {
+    if (STR_IS_NIL(videoUrl)) {
+        [ATools showSVProgressHudCustom:@"" title:@"视频资源不存在"];
+    } else {
+        if (type == Info_Type_Video) {
+            MoviePlayerViewController *moviePlayerVC = [[MoviePlayerViewController alloc] init];
+            moviePlayerVC.videoURL = [NSURL URLWithString:videoUrl];
+            [self.navigationController pushViewController:moviePlayerVC animated:YES];
+        } else if (type == Info_Type_Url_Video) {
+            
+        }
+    }
+}
+
 #pragma mark UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y;

@@ -10,6 +10,7 @@
 @protocol PeopleDetailCellDelegate <NSObject>
 @optional
 - (void)userClickFabulousPraise:(id)sender;
+- (void)userClickVideo:(Info_Type)type videoUrl:(NSString *)videoUrl;
 @end
 @interface PeopleDetailCell : UITableViewCell
 @property (nonatomic, weak) id <PeopleDetailCellDelegate> delegate;
