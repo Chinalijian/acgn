@@ -148,6 +148,13 @@
     CGSize size = [title boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font,NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
     CGFloat height = size.height;
     return height;
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
+//    label.text = title;
+//    label.font = font;
+//    label.numberOfLines = 0;
+//    [label sizeToFit];
+//    CGFloat height = label.frame.size.height;
+//    return height;
 }
 
 //获取Label的高度和宽度，根据文字
@@ -220,12 +227,17 @@
  */
 +(NSMutableAttributedString *)attributedStringFromStingWithFont:(UIFont *)font
                                                 withLineSpacing:(CGFloat)lineSpacing
-                                                           text:(NSString *)text {
+                                                           text:(NSString *)text isEllipsis:(BOOL)isEllipsis {
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName:font}];
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:lineSpacing];
-    [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail]; //截断方式，"abcd..."
+    if (isEllipsis) {
+        [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+    } else {
+        [paragraphStyle setLineBreakMode:NSLineBreakByCharWrapping];
+    }
+    //[paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail]; //截断方式，"abcd..."
     [attributedStr addAttribute:NSParagraphStyleAttributeName
                           value:paragraphStyle
                           range:NSMakeRange(0, [text length])];

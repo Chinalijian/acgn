@@ -51,7 +51,8 @@
  */
 +(NSMutableAttributedString *)attributedStringFromStingWithFont:(UIFont *)font
                                                 withLineSpacing:(CGFloat)lineSpacing
-                                                           text:(NSString *)text;
+                                                           text:(NSString *)text
+                                                     isEllipsis:(BOOL)isEllipsis ;
 @end
 
 

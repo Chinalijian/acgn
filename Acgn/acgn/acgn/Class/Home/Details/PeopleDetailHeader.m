@@ -84,7 +84,7 @@
     self.dynamicObj = obj;
     self.nameLabel.text = self.dynamicObj.userName;
     self.sourceLabel.text = self.dynamicObj.source;
-    self.introduceLabel.attributedText = [ATools attributedStringFromStingWithFont:Commit_Font withLineSpacing:5 text:self.dynamicObj.introduce];
+    self.introduceLabel.attributedText = [ATools attributedStringFromStingWithFont:Commit_Font withLineSpacing:5 text:self.dynamicObj.introduce isEllipsis:NO];
     //self.introduceLabel.text = self.dynamicObj.introduce;
     //[ATools changeLineSpaceForLabel:self.introduceLabel WithSpace:5];
     NSString * imageUrl = [self.dynamicObj.imageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];

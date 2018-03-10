@@ -45,7 +45,7 @@
 
 #define Content_Label_Space_Y 16
 #define Content_Label_H 72
-#define Content_Label_Widht DMScreenWidth-Space_Left_X*2-PeopleImage_Width
+#define Content_Label_Widht DMScreenWidth-Space_Left_X*2-PeopleImage_Width-10
 
 #define Image_Height (Content_Label_Widht)*(0.64)+5
 #define Image_Width (Content_Label_Widht)-10
@@ -182,7 +182,16 @@
     self.nameLabel.text = obj.userName;
     self.timeLabel.text = obj.postTime;
     self.fromLabel.text = [NSString stringWithFormat:@"发自：%@", obj.postSource];
-    self.contentLabel.attributedText = [ATools attributedStringFromStingWithFont:Commit_Font withLineSpacing:5 text:obj.postContext];
+    CGFloat contentH = [ContentCom getContentMaxHeight:obj];
+    self.contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    BOOL isEllipsis = YES;
+    if (self.ccType != ContentCom_Type_All) {
+        if (contentH < Content_Label_H) {
+            self.contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
+            isEllipsis = NO;
+        }
+    }
+    self.contentLabel.attributedText = [ATools attributedStringFromStingWithFont:Commit_Font withLineSpacing:5 text:obj.postContext isEllipsis:isEllipsis];
 //    self.contentLabel.text = obj.postContext;
 //    [ATools changeLineSpaceForLabel:self.contentLabel WithSpace:5];
     NSString * imageUrl = [obj.imageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -224,7 +233,6 @@
         make.left.mas_offset(Space_Left_X+nameW+10);
     }];
     
-    CGFloat contentH = [ContentCom getContentMaxHeight:obj];
     if (self.ccType != ContentCom_Type_All) {
         if (contentH < Content_Label_H) {
             [_contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -445,11 +453,12 @@
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         _contentLabel.textColor = UIColorFromRGB(0x000000);
         _contentLabel.font = [UIFont systemFontOfSize:13];
-        _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _contentLabel.numberOfLines = 3;
         if (self.ccType == ContentCom_Type_All) {
             _contentLabel.numberOfLines = 0;
         }
+         [_contentLabel sizeToFit];
         //_contentLabel.backgroundColor = [UIColor redColor];
     }
     return _contentLabel;
