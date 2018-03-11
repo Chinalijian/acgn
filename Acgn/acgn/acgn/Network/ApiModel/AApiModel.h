@@ -85,6 +85,9 @@
 //绑定手机号
 + (void)bindPhoneForUser:(NSString *)phone psd:(NSString *)password code:(NSString *)code block:(void(^)(BOOL result))block;
 
+//下载文件
++ (void)downloadFileFromServer:(NSString *)fileUrl fileName:(NSString *)fileName block:(void(^)(BOOL result, NSString *filePathUrl))block progress:(void(^)(double fractionCompleted)) progressDownload;
+
 @end
 
 

@@ -84,7 +84,11 @@
 		<key>SSZipArchive.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< HEAD
 			<integer>14</integer>
+=======
+			<integer>15</integer>
+>>>>>>> 54f8dd81724cc1ea94faeca9ab0c83e39d7db7fb
 		</dict>
 		<key>SVProgressHUD.xcscheme</key>
 		<dict>

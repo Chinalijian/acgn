@@ -9,6 +9,7 @@
 #import "PeopleDetailsViewController.h"
 #import "PeopleDetailCell.h"
 #import "PeopleDetailHeader.h"
+#import "ModelShowViewController.h"
 @interface PeopleDetailsViewController ()<UITableViewDelegate, UITableViewDataSource, PeopleDetailHeaderDelegate, PeopleDetailCellDelegate>
 @property (nonatomic, strong) UITableView *pTableView;
 @property (nonatomic, strong) PeopleDetailHeader *headerView;
@@ -155,6 +156,12 @@
         }];
         
     }
+}
+
+- (void)clickGotoModeShow:(id)sender {
+    ModelShowViewController *msVC = [[ModelShowViewController alloc] init];
+    msVC.detailData = self.detailData;
+    [self.navigationController pushViewController:msVC animated:YES];
 }
 
 #pragma mark UITableView Delegate
