@@ -51,11 +51,8 @@
  */
 +(NSMutableAttributedString *)attributedStringFromStingWithFont:(UIFont *)font
                                                 withLineSpacing:(CGFloat)lineSpacing
-<<<<<<< HEAD
                                                            text:(NSString *)text
                                                      isEllipsis:(BOOL)isEllipsis ;
-=======
-                                                           text:(NSString *)text;
 
 
 //自动解压zip
@@ -69,7 +66,6 @@
 //是否已经有此文件
 + (BOOL)fileExistsAtPathForLocal:(NSString *)filePath;
 
->>>>>>> feature/liveSDK
 @end
 
 
