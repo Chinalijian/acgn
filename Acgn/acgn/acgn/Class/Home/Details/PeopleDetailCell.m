@@ -52,7 +52,7 @@
         
     } else if (obj.postType.integerValue == Info_Type_Video || obj.postType.integerValue == Info_Type_Url_Video) {
         //视频
-        picHeight = Video_Height +50;
+        picHeight = Video_Height + 50+30;
     }
     CGFloat totalHeight = contentHeight + picHeight + Button_View_ + Space_Bottom_Cell + Space_Content_;
     return totalHeight;
