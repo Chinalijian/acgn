@@ -51,12 +51,8 @@
  */
 +(NSMutableAttributedString *)attributedStringFromStingWithFont:(UIFont *)font
                                                 withLineSpacing:(CGFloat)lineSpacing
-<<<<<<< HEAD
                                                            text:(NSString *)text
                                                      isEllipsis:(BOOL)isEllipsis ;
-=======
-                                                           text:(NSString *)text;
-
 
 //自动解压zip
 + (NSString *)autoUnZipFile:(NSString *)zipFilePath fileName:(NSString *)fileName;
@@ -68,8 +64,6 @@
 +(void)deleteFile:(NSString *)filePath;
 //是否已经有此文件
 + (BOOL)fileExistsAtPathForLocal:(NSString *)filePath;
-
->>>>>>> 54f8dd81724cc1ea94faeca9ab0c83e39d7db7fb
 @end
 
 
