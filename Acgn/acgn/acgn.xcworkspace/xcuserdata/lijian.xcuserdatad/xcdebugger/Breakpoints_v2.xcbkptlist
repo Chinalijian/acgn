@@ -36,7 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "acgn/Class/Home/Details/PeopleDetailCell.m"
+<<<<<<< HEAD
             timestampString = "542456482.118668"
+=======
+            timestampString = "542456654.6513"
+>>>>>>> feature/liveSDK
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"

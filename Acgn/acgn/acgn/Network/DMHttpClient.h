@@ -41,7 +41,10 @@ typedef void (^BlockSuccessMsg)(NSString *msg);//成功的提示消息
                  success:(void (^)(id responseObject))success
                  failure:(void (^)( NSError *error))failure;
 
-
+- (void)downLoadFileRequest:(NSURL *)fileUrl fileName:(NSString *)fileName
+                    success:(void (^)(id responseObject))success
+                    failure:(void (^)( NSError *error))failure
+                   progress:(void (^)(double fractionCompleted))progressDownload;
 //请求合法性校验
 -(BOOL)isRequestValid;
 - (void)cancleAllHttpRequestOperations;

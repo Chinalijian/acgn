@@ -37,5 +37,15 @@ typedef NS_ENUM(NSInteger, ContentCom_Type) {
     ContentCom_Type_All          = 1, // 全部，没有行数限制
 };
 
+typedef NS_ENUM(NSInteger, Model_Show_Type) {
+    Model_Show_Type_Default = 1, // 默认
+    Model_Show_Type_2D      = 2, // 2d形象
+    Model_Show_Type_3D      = 3, // 3d形象
+};
 
 #endif /* AEnums_h */
+
+
+
+
+
