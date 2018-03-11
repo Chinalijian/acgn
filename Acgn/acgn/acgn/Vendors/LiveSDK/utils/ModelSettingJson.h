@@ -149,7 +149,9 @@ public:
     // モーションについて
 	int getMotionNum(const char* name)       
     {
-        if(!existMotionGroup(name))return 0;
+        if(!existMotionGroup(name)) {
+            return 0;
+        }
         return json->getRoot()[MOTION_GROUPS][name].size();
     }
     

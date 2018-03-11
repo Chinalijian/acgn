@@ -230,12 +230,12 @@ using namespace live2d::framework;
 - (void) setupBackground
 {
     
-    NSString* path=[NSString stringWithCString:BACK_IMAGE_NAME encoding:NSUTF8StringEncoding ] ;
+    NSString* path=[NSString stringWithCString:BACK_IMAGE_NAME encoding:NSUTF8StringEncoding] ;
     
     
     if(LAppDefine::DEBUG_LOG)NSLog( @"background : %@",path);
     
-    bg= [[SimpleImage alloc]initWithPath:path];
+    bg = [[SimpleImage alloc] initWithPath:path];
     
     // 描画範囲。画面の最大表示範囲に合わせる
     [bg setDrawRect:

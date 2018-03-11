@@ -48,7 +48,7 @@ public:
 	virtual const char* getExpressionFile(int n) =0 ;
 	
 	// モーションについて
-	virtual int getMotionNum(const char* name)  =0;
+	virtual int getMotionNum(const char* name)  = 0;
 	virtual int getMotionGroupNum() =0;
 	virtual const char* getMotionGroupName(int n) =0;
 	virtual const char* getMotionFile(const char* name,int n) =0   ;

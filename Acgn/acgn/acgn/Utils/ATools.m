@@ -297,10 +297,10 @@
     //                      NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0],
     //                      fileName];
     NSString *path = [NSString stringWithFormat:@"%@",
-                      NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]];
+                      NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]];
     if (![@"" isEqualToString:fileName] && fileName != nil) {
         path = [NSString stringWithFormat:@"%@/\%@",
-                NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0],
+                NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],
                 fileName];
     }
     NSURL *url = [NSURL fileURLWithPath:path];
@@ -317,10 +317,10 @@
 
 + (NSString *)getCachesHaveFile:(NSString *)fileName {
     NSString *path = [NSString stringWithFormat:@"%@",
-                      NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]];
+                      NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]];
     if (![@"" isEqualToString:fileName] && fileName != nil) {
         path = [NSString stringWithFormat:@"%@/\%@",
-                NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0],
+                NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],
                 fileName];
     }
     return path;

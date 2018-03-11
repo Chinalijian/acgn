@@ -53,17 +53,20 @@ LAppModel::~LAppModel(void)
  */
 void LAppModel::load(const char path[])
 {
-    string modelSettingPath=path;
-	NSString* dir=[NSString stringWithCString:path encoding:NSUTF8StringEncoding];
+    string modelSettingPath = path;
+	NSString* dir = [NSString stringWithCString:path encoding:NSUTF8StringEncoding];
 	
     modelHomeDir = [[dir stringByDeletingLastPathComponent] UTF8String];
-	modelHomeDir+="/";
+	modelHomeDir += "/";
     
     if(LAppDefine::DEBUG_LOG)NSLog( @"create model : %s",path);	
     updating=true;
     initialized=false;
     
-    NSData* data=[FileManager openBundleWithCString: modelSettingPath.c_str() ];
+    //NSData* data=[FileManager openBundleWithCString: modelSettingPath.c_str() ];
+    
+    NSData *data = [FileManager openDocumentsWithCString:modelSettingPath.c_str()];
+    
     
     modelSetting=new ModelSettingJson((const char*)[data bytes], [data length]);
     
@@ -71,16 +74,16 @@ void LAppModel::load(const char path[])
     if( strcmp( modelSetting->getModelFile() , "" ) != 0 )
     {
 		string path=modelSetting->getModelFile();
-		path=modelHomeDir + path;
+		path = modelHomeDir + path;
         loadModelData(path.c_str());
 		
-		int len=modelSetting->getTextureNum();
+		int len = modelSetting->getTextureNum();
 		textures.resize(len);
 		
 		for (int i=0; i<len; i++)
 		{
-			string texturePath=modelSetting->getTextureFile(i);
-			texturePath=modelHomeDir+texturePath;
+			string texturePath = modelSetting->getTextureFile(i);
+			texturePath = modelHomeDir+texturePath;
 			loadTexture(i,texturePath.c_str());
 		}
     }
@@ -101,8 +104,8 @@ void LAppModel::load(const char path[])
 	//Physics
 	if( strcmp( modelSetting->getPhysicsFile(), "" ) != 0 )
     {
-		string path=modelSetting->getPhysicsFile();
-		path=modelHomeDir+path;
+		string path = modelSetting->getPhysicsFile();
+		path = modelHomeDir+path;
         loadPhysics(path.c_str());
     }
 	
@@ -153,7 +156,7 @@ void LAppModel::preloadMotionGroup(const char name[])
     for (int i = 0; i < len; i++)
 	{
 		string motionFile = modelSetting->getMotionFile(name,i);
-		string path=modelHomeDir+motionFile;
+		string path = modelHomeDir + motionFile;
         
         if(LAppDefine::DEBUG_LOG)NSLog(@"load motion name:%s",motionFile.c_str());
         
@@ -356,8 +359,11 @@ int LAppModel::startMotion(const char name[],int no,int priority)
 
 int LAppModel::startRandomMotion(const char name[],int priority)
 {
-	if(modelSetting->getMotionNum(name)==0)return -1;
-    int no = rand() % modelSetting->getMotionNum(name); 
+    if(modelSetting->getMotionNum(name)==0){
+        return -1;
+    }
+    int tapIndex = modelSetting->getMotionNum(name);
+    int no = rand() % tapIndex;
     
     return startMotion(name,no,priority);
 }

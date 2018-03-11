@@ -15,7 +15,7 @@
 
 - (id)initWithPath:(NSString*) path {
     if(self == [super init]) {
-        texture=[FileManager loadGLTexture:path];
+        texture=[FileManager loadBGLTexture:path];
         
         // 初期設定
         uvLeft=0;

@@ -21,4 +21,5 @@
 + (const char*) pathForResource:(const char*)fileName;
 + (NSURL*) getFileURLWithCString:(const char*)fileName;
 + (GLuint)loadGLTexture:(NSString*)fileName;
++ (GLuint) loadBGLTexture:(NSString*)fileName;
 @end

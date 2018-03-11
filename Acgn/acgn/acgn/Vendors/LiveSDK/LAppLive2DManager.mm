@@ -97,6 +97,7 @@ void LAppLive2DManager::update()
 			case 0:// ハル
 				releaseModel();
 				models.push_back(new LAppModel());
+//                NSString *tPath = [ATools getCachesHaveFile:[NSString stringWithFormat:@"%@/%@", self.detailData.fileName, self.detailData.showJson]];
 				models[0]->load(MODEL_HARU) ;
 				models[0]->feedIn();
 				break;
@@ -158,7 +159,7 @@ bool LAppLive2DManager::tapEvent(float x,float y)
 			if(LAppDefine::DEBUG_LOG)NSLog( @"tap face");
             NSLog(@"Ares Modify");
             //models[i]->setRandomExpression();
-            models[i]->startRandomMotion(MOTION_GROUP_TAP_BODY, PRIORITY_NORMAL );
+            models[i]->startRandomMotion(MOTION_GROUP_FLICK_HEAD, PRIORITY_NORMAL );
 		}
 		else if(models[i]->hitTest( HIT_AREA_BODY,x, y))
 		{

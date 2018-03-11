@@ -26,9 +26,12 @@ PlatformManager::~PlatformManager(void)
 unsigned char* PlatformManager::loadBytes(const char* path,size_t* size)
 {
 	NSString* _path=[NSString stringWithFormat:@"%s",path];
-	NSData* data=[FileManager openBundle:_path];
+
+    // Ares modify
+    //    NSData* data=[FileManager openBundle:_path];
+	NSData* data=[FileManager openDocuments:_path];
 	
-	*size=[data length];
+    *size=[data length];
 	unsigned char* buf = (unsigned char*)[data bytes];
 	return buf;
 }
